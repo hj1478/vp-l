@@ -1,0 +1,5 @@
+voteparty.log
+voteparty.jsonl
+*.log
+*.jsonl
+__pycache__/
