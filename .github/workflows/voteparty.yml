@@ -1,0 +1,57 @@
+name: Vote Party Tracker
+
+# Polls the EarthMC vote party endpoint on a schedule and commits each
+# snapshot back to the repo under data/, building a time series over time.
+
+on:
+  # Run every 30 minutes. Adjust the cron expression to change frequency.
+  # Note: GitHub may delay scheduled runs during high load.
+  schedule:
+    - cron: "*/30 * * * *"
+  # Allow manual runs from the Actions tab.
+  workflow_dispatch:
+
+# Never let two runs commit at the same time.
+concurrency:
+  group: voteparty-tracker
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Poll vote party endpoint
+        run: |
+          mkdir -p data
+          python3 voteparty_tracker.py --once \
+            -f data/voteparty.log \
+            --json data/voteparty.jsonl
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/voteparty.log data/voteparty.jsonl
+          if git diff --cached --quiet; then
+            echo "No new data to commit."
+            exit 0
+          fi
+          git commit -m "chore: vote party snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Rebase onto any commits added by an earlier run, then push.
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && \
+            git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            echo "Push attempt $attempt failed, retrying..."
+            sleep $((attempt * 2))
+          done

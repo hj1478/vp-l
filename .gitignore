@@ -3,3 +3,8 @@ voteparty.jsonl
 *.log
 *.jsonl
 __pycache__/
+
+# ...but keep scheduled-run snapshots committed by the workflow.
+!data/
+!data/*.log
+!data/*.jsonl
