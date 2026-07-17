@@ -6,3 +6,4 @@
 {"timestamp": "2026-07-17T15:57:38Z", "target": 5000, "remaining": 2421, "collected": 2579, "percent": 51.6, "players_online": 531, "max_players": 800, "moon_phase": "WANING_GIBBOUS", "num_towns": 5314, "num_nations": 189, "num_residents": 65678}
 {"timestamp": "2026-07-17T17:13:57Z", "target": 5000, "remaining": 1912, "collected": 3088, "percent": 61.8, "players_online": 537, "max_players": 800, "moon_phase": "NEW_MOON", "num_towns": 5314, "num_nations": 189, "num_residents": 65756}
 {"timestamp": "2026-07-17T18:33:07Z", "target": 5000, "remaining": 1362, "collected": 3638, "percent": 72.8, "players_online": 577, "max_players": 800, "moon_phase": "FULL_MOON", "num_towns": 5317, "num_nations": 189, "num_residents": 65844}
+{"timestamp": "2026-07-17T20:01:43Z", "target": 5000, "remaining": 889, "collected": 4111, "percent": 82.2, "players_online": 561, "max_players": 800, "moon_phase": "WAXING_CRESCENT", "num_towns": 5316, "num_nations": 189, "num_residents": 65933}
