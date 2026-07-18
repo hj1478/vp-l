@@ -4,10 +4,10 @@ name: Vote Party Tracker
 # snapshot back to the repo under data/, building a time series over time.
 
 on:
-  # Run every 30 minutes. Adjust the cron expression to change frequency.
-  # Note: GitHub may delay scheduled runs during high load.
+  # Run every 5 minutes. Adjust the cron expression to change frequency.
+  # Note: GitHub may delay or skip scheduled runs during high load.
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/5 * * * *"
   # Allow manual runs from the Actions tab.
   workflow_dispatch:
 
