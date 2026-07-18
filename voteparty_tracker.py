@@ -10,9 +10,9 @@ us (HTTP 429), backs off â€” honouring the ``Retry-After`` header when present â
 then gradually speeds back up once requests succeed again (AIMD control).
 
 Usage:
-    python3 voteparty_tracker.py                 # adaptive, base 5 min
-    python3 voteparty_tracker.py -i 600          # base 10 min
-    python3 voteparty_tracker.py --max-interval 7200
+    python3 voteparty_tracker.py                 # adaptive, base 60s
+    python3 voteparty_tracker.py -i 30           # base 30s
+    python3 voteparty_tracker.py --max-interval 1800
     python3 voteparty_tracker.py -f party.log    # custom log file
     python3 voteparty_tracker.py --once          # single poll then exit
     python3 voteparty_tracker.py --json          # also write machine-readable JSONL
@@ -31,7 +31,7 @@ from datetime import datetime, timezone
 
 DEFAULT_URL = "https://api.earthmc.net/v4/"
 DEFAULT_LOGFILE = "voteparty.log"
-DEFAULT_BASE_INTERVAL = 300     # fastest poll spacing, seconds (5 minutes)
+DEFAULT_BASE_INTERVAL = 60      # fastest poll spacing, seconds (1 minute)
 DEFAULT_MAX_INTERVAL = 3600     # slowest poll spacing under heavy throttling (1 hour)
 
 _running = True
@@ -221,7 +221,7 @@ def main(argv=None) -> int:
     parser.add_argument("-f", "--logfile", default=DEFAULT_LOGFILE, help="log file path")
     parser.add_argument(
         "-i", "--interval", type=float, default=DEFAULT_BASE_INTERVAL,
-        help="base (fastest) seconds between polls (default 300 = 5 min)",
+        help="base (fastest) seconds between polls (default 60)",
     )
     parser.add_argument(
         "--max-interval", type=float, default=DEFAULT_MAX_INTERVAL,
