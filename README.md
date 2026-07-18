@@ -110,3 +110,26 @@ Outputs (under `data/`):
 
 The scheduled workflow runs this after each polling window, so the committed
 prediction always reflects the latest data.
+
+## Accuracy backtest (`accuracy.py`)
+
+`accuracy.py` measures how good the predictor is **at each stage of a cycle**.
+For every completed cycle it replays the cycle point by point and, at each
+stage, predicts the firing time using only the data available up to that
+point — then compares to when the party actually fired.
+
+- **Ground truth:** the exact 5,000 crossing is never logged (the counter
+  resets first), so each cycle's reference firing time is estimated by
+  extrapolating its final observed segment to target. Cycles whose last
+  observation is well below target have a looser reference (reported).
+- **No leakage:** ensemble weights are computed **leave-one-cycle-out** — a
+  cycle is never scored using knowledge of itself.
+
+```bash
+python3 accuracy.py                 # reads data/voteparty.jsonl
+```
+
+Outputs `data/accuracy.png` (|ETA error| vs cycle progress, per cycle and per
+model) and `data/accuracy.json` (raw stage errors + a stage-bucket summary).
+The headline finding: error shrinks as the cycle fills — roughly a couple of
+hours off at ~30% complete, down to ~15–20 minutes past 75%.
