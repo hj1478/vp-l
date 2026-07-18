@@ -229,6 +229,10 @@ def main(argv=None) -> int:
     )
     parser.add_argument("--once", action="store_true", help="poll once then exit")
     parser.add_argument(
+        "--duration", type=float, default=None,
+        help="stop cleanly after this many seconds (default: run until interrupted)",
+    )
+    parser.add_argument(
         "--json", dest="jsonfile", nargs="?", const="voteparty.jsonl", default=None,
         help="also append machine-readable JSONL (default voteparty.jsonl)",
     )
@@ -251,13 +255,21 @@ def main(argv=None) -> int:
         f"=== tracker started (adaptive {args.interval}s..{args.max_interval}s, url={args.url}) ===",
     )
 
+    deadline = None if args.duration is None else time.monotonic() + args.duration
+
     prev = None
     while _running:
         prev, wait_override = poll_once(args.url, args.logfile, args.jsonfile, prev, interval)
+        if deadline is not None and time.monotonic() >= deadline:
+            break
         wait = wait_override if wait_override is not None else interval.current
+        # Don't sleep past the deadline.
+        if deadline is not None:
+            wait = min(wait, max(0, deadline - time.monotonic()))
         _sleep_responsive(wait)
 
-    log_line(args.logfile, "=== tracker stopped ===")
+    reason = "duration reached" if (deadline is not None and _running) else "stopped"
+    log_line(args.logfile, f"=== tracker {reason} ===")
     return 0
 
 
