@@ -1,17 +1,21 @@
 name: Vote Party Tracker
 
-# Polls the EarthMC vote party endpoint on a schedule and commits each
-# snapshot back to the repo under data/, building a time series over time.
+# Collects EarthMC vote party data and commits it to the repo under data/.
+#
+# GitHub's scheduled cron is best-effort and gets heavily delayed, so instead
+# of one poll per firing we fire ~hourly and let each run poll continuously for
+# a 55-minute window (every 5 min). That gives near-continuous 5-minute data
+# regardless of exactly when GitHub actually starts the run.
 
 on:
-  # Run every 5 minutes. Adjust the cron expression to change frequency.
-  # Note: GitHub may delay or skip scheduled runs during high load.
+  # Fire roughly hourly. Each run covers ~55 minutes, so back-to-back firings
+  # give near-continuous coverage.
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
   # Allow manual runs from the Actions tab.
   workflow_dispatch:
 
-# Never let two runs commit at the same time.
+# Never let two runs commit at the same time; queue a delayed run instead.
 concurrency:
   group: voteparty-tracker
   cancel-in-progress: false
@@ -22,6 +26,7 @@ permissions:
 jobs:
   track:
     runs-on: ubuntu-latest
+    timeout-minutes: 65
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,14 +36,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Poll vote party endpoint
+      - name: Poll vote party endpoint for a 55-minute window
         run: |
           mkdir -p data
-          python3 voteparty_tracker.py --once \
+          # 3300s = 55 min, polling every 5 min (-i 300) -> ~11 points per run.
+          python3 voteparty_tracker.py --duration 3300 -i 300 \
             -f data/voteparty.log \
             --json data/voteparty.jsonl
 
-      - name: Commit snapshot
+      - name: Commit snapshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -47,7 +53,7 @@ jobs:
             echo "No new data to commit."
             exit 0
           fi
-          git commit -m "chore: vote party snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git commit -m "chore: vote party data window ending $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           # Rebase onto any commits added by an earlier run, then push.
           for attempt in 1 2 3 4; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && \
