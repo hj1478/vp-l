@@ -72,3 +72,41 @@ Network or parse errors are logged and the tracker keeps running.
 
 The optional JSONL file captures the full snapshot per poll (target, remaining,
 collected, percent, players, towns, nations, residents) for later analysis.
+
+## Prediction model (`predict.py`)
+
+`predict.py` reads the collected time series, splits it into vote-party
+**cycles** (a cycle ends when the counter resets after a party fires), and
+forecasts when the *next* party will fire. It is recomputed on every data
+update, so the prediction constantly changes as new points arrive.
+
+It runs **six independent models** and **ensembles** them:
+
+| Model | Idea |
+|-------|------|
+| `linear` | OLS regression over the whole cycle |
+| `recent` | slope of the last k points (short-term rate) |
+| `ewma` | exponentially-weighted average of per-interval rates |
+| `theilsen` | Theil–Sen robust median-slope regression |
+| `wls` | least squares with exponential recency weights |
+| `quadratic` | 2nd-order fit, solves for the target crossing (accel/decel) |
+
+Each model's ETA is weighted by a **rolling-origin backtest** on the *completed*
+historical cycles: models are scored by inverse mean-squared extrapolation
+error, so consistently-accurate models dominate and outliers are down-weighted
+automatically.
+
+```bash
+pip install -r requirements.txt
+python3 predict.py                 # reads data/voteparty.jsonl
+python3 predict.py --no-graph      # text/JSON only, skip the PNG
+```
+
+Outputs (under `data/`):
+- **`prediction.png`** — current cycle, each model's projection, the ensemble
+  ETA with its spread band, weight bars, and historical cycle fill curves.
+- **`prediction.json`** — machine-readable per-model + ensemble prediction.
+- **`PREDICTION.md`** — human-readable summary, regenerated every run.
+
+The scheduled workflow runs this after each polling window, so the committed
+prediction always reflects the latest data.
