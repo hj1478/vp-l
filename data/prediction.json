@@ -1,38 +1,38 @@
 {
-  "generated_at": "2026-07-18T16:40:44Z",
+  "generated_at": "2026-07-18T17:40:22Z",
   "target": 5000.0,
   "current": {
-    "collected": 2086,
-    "remaining": 2914,
-    "percent": 41.7,
-    "last_ts": "2026-07-18T16:40:44Z",
+    "collected": 2438,
+    "remaining": 2562,
+    "percent": 48.8,
+    "last_ts": "2026-07-18T17:40:22Z",
     "cycle_start_ts": "2026-07-18T11:51:06Z",
-    "num_points": 48,
-    "players_online": 545
+    "num_points": 60,
+    "players_online": 559
   },
   "models": {
     "linear": {
-      "eta": "2026-07-19T00:42:39Z",
+      "eta": "2026-07-19T01:01:23Z",
       "weight": 0.1704,
       "backtest_rmse": 0.0736
     },
     "recent": {
-      "eta": "2026-07-18T23:51:13Z",
+      "eta": "2026-07-19T02:04:21Z",
       "weight": 0.1961,
       "backtest_rmse": 0.06861
     },
     "ewma": {
-      "eta": "2026-07-19T00:17:10Z",
+      "eta": "2026-07-19T01:11:20Z",
       "weight": 0.2147,
       "backtest_rmse": 0.06557
     },
     "theilsen": {
-      "eta": "2026-07-19T00:04:57Z",
+      "eta": "2026-07-19T00:45:20Z",
       "weight": 0.1772,
       "backtest_rmse": 0.07219
     },
     "wls": {
-      "eta": "2026-07-19T03:09:00Z",
+      "eta": "2026-07-19T01:10:43Z",
       "weight": 0.1756,
       "backtest_rmse": 0.07251
     },
@@ -43,10 +43,10 @@
     }
   },
   "ensemble": {
-    "eta": "2026-07-19T00:46:21Z",
-    "eta_epoch": 1784421981.7733855,
-    "spread_seconds": 4237,
-    "range_low": "2026-07-18T23:51:13Z",
-    "range_high": "2026-07-19T03:09:00Z"
+    "eta": "2026-07-19T01:15:36Z",
+    "eta_epoch": 1784423736.648676,
+    "spread_seconds": 1608,
+    "range_low": "2026-07-19T00:45:20Z",
+    "range_high": "2026-07-19T02:04:21Z"
   }
 }
