@@ -16,9 +16,9 @@ each poll.
 ## Usage
 
 ```bash
-python3 voteparty_tracker.py            # adaptive, as fast as every 5s
-python3 voteparty_tracker.py -i 2       # poll as fast as every 2 seconds
-python3 voteparty_tracker.py --max-interval 120
+python3 voteparty_tracker.py            # adaptive, as fast as every 5 min
+python3 voteparty_tracker.py -i 600     # base 10 minutes
+python3 voteparty_tracker.py --max-interval 7200
 python3 voteparty_tracker.py -f my.log  # custom log file
 python3 voteparty_tracker.py --once     # single poll then exit
 python3 voteparty_tracker.py --json     # also write machine-readable JSONL
@@ -31,7 +31,7 @@ Stop a running tracker with `Ctrl+C` (or `SIGTERM`); it logs a clean shutdown li
 The interval is not fixed — it uses **AIMD** (additive-increase / multiplicative-decrease)
 control so it collects as fast as the API tolerates without hammering it:
 
-- Starts at the **base** interval (`-i`, default 5s) for fast collection.
+- Starts at the **base** interval (`-i`, default 300s = 5 min).
 - On an HTTP **429 (rate limited)** it **doubles** the interval and honours the
   server's `Retry-After` header when present, up to `--max-interval`.
 - On each successful poll it **eases back down** toward the base interval.
@@ -49,8 +49,8 @@ The current "next poll" spacing is shown on every log line and stored in the JSO
 |------|---------|-------------|
 | `-u`, `--url` | `https://api.earthmc.net/v4/` | Server endpoint to poll |
 | `-f`, `--logfile` | `voteparty.log` | Human-readable log file |
-| `-i`, `--interval` | `5` | Base (fastest) seconds between polls |
-| `--max-interval` | `300` | Slowest interval under throttling |
+| `-i`, `--interval` | `300` | Base (fastest) seconds between polls (5 min) |
+| `--max-interval` | `3600` | Slowest interval under throttling (1 hr) |
 | `--once` | off | Poll once and exit |
 | `--json [FILE]` | off (`voteparty.jsonl`) | Also append one JSON object per poll |
 
