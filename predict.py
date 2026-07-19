@@ -163,6 +163,49 @@ def pooled_rate(train_cycles):
     return float(np.average(rates, weights=wts))
 
 
+def diurnal_profile(train_cycles, nbins=24, smooth=1):
+    """Average vote rate (votes/sec) as a function of UTC hour-of-day, learned
+    from history. Each observed interval contributes its rate to every hour it
+    overlaps, weighted by overlap duration, so long sparse intervals still
+    inform the profile. Circularly smoothed. Returns (profile[nbins], mean_rate)
+    or (None, None) if there is not enough data."""
+    binsecs = 86400.0 / nbins
+    num = np.zeros(nbins)
+    den = np.zeros(nbins)
+    all_rates = []
+    for c in train_cycles or []:
+        for a, b in zip(c[:-1], c[1:]):
+            dt = b["_t"] - a["_t"]
+            if dt <= 0 or b["collected"] < a["collected"]:
+                continue
+            rate = (b["collected"] - a["collected"]) / dt  # votes/sec
+            all_rates.append((rate, dt))
+            # distribute over the hour-bins the interval spans
+            tcur = a["_t"]
+            remaining = dt
+            while remaining > 1e-6:
+                sod = tcur % 86400.0
+                b_idx = int(sod // binsecs) % nbins
+                edge = (b_idx + 1) * binsecs
+                seg = min(edge - sod, remaining)
+                num[b_idx] += rate * seg
+                den[b_idx] += seg
+                tcur += seg
+                remaining -= seg
+    if den.sum() <= 0:
+        return None, None
+    mean_rate = float(np.average([r for r, _ in all_rates],
+                                 weights=[w for _, w in all_rates]))
+    prof = np.where(den > 0, num / np.maximum(den, 1e-9), mean_rate)
+    # circular smoothing
+    if smooth > 0:
+        k = 2 * smooth + 1
+        prof = np.array([prof[(i + o) % nbins]
+                         for i in range(nbins)
+                         for o in range(-smooth, smooth + 1)]).reshape(nbins, k).mean(axis=1)
+    return prof, mean_rate
+
+
 def shrink_rate(t, y, target, ctx, w_prior=None):
     """Precision-weighted blend of historical prior and observed rate.
 
@@ -282,8 +325,55 @@ def model_shrinkage(t, y, target, ctx=None):
     return t[-1] + (target - y[-1]) / rate
 
 
+def model_diurnal(t, y, target, ctx=None, nbins=24):
+    """Integrate the historical time-of-day rate profile forward from the
+    current point until it reaches target — predicting each stage with its own
+    time-of-day rate instead of one flat rate. Scaled so the profile matches
+    this cycle's recently observed level."""
+    if ctx is None or len(t) < 2:
+        return None
+    prof, mean_rate = diurnal_profile(ctx.get("train_cycles"), nbins=nbins)
+    if prof is None or mean_rate is None or mean_rate <= 1e-9:
+        return None
+    t0 = ctx["t0"]
+    binsecs = 86400.0 / nbins
+
+    def prof_rate(epoch):
+        return prof[int((epoch % 86400.0) // binsecs) % nbins]
+
+    # Level scale: recent observed rate ÷ profile's average rate over the same
+    # recent window (blended toward 1 so a short noisy window can't dominate).
+    k = min(6, len(t))
+    obs = robust_slope(t[-k:], y[-k:])
+    scale = 1.0
+    if obs is not None and obs > 1e-9:
+        span0, span1 = t0 + t[-k], t0 + t[-1]
+        samples = max(2, int((span1 - span0) // binsecs) + 1)
+        prof_recent = np.mean([prof_rate(span0 + i * (span1 - span0) / (samples - 1))
+                               for i in range(samples)]) if span1 > span0 else prof_rate(span1)
+        if prof_recent > 1e-9:
+            raw = obs / prof_recent
+            frac = min(max(float(y[-1]) / target, 0.0), 1.0)
+            scale = (1.0 + frac * raw) / (1.0 + frac)  # shrink toward 1 early
+
+    # Integrate forward.
+    epoch = t0 + t[-1]
+    collected = float(y[-1])
+    step = 300.0
+    guard = 0
+    while collected < target and guard < int(4 * 86400 / step):
+        rate = prof_rate(epoch) * scale
+        collected += rate * step
+        epoch += step
+        guard += 1
+    if collected < target:
+        return None
+    return epoch - t0
+
+
 MODELS = {
     "shrinkage": model_shrinkage,
+    "diurnal": model_diurnal,
     "linear": model_linear,
     "recent": model_recent,
     "ewma": model_ewma,
