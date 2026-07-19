@@ -214,3 +214,18 @@
 [2026-07-19T12:39:05Z] vote party 4650/5000 (93.0%) | 350 remaining | players 620/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-07-19T12:44:02Z] vote party 4688/5000 (93.8%) | 312 remaining | players 639/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-07-19T12:44:02Z] === tracker duration reached ===
+[2026-07-19T12:57:00Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-07-19T12:57:00Z] vote party 4783/5000 (95.7%) | 217 remaining | players 639/800 | moon FULL_MOON | next poll ~300s
+[2026-07-19T13:02:00Z] vote party 4836/5000 (96.7%) | 164 remaining | players 638/800 | moon FULL_MOON | next poll ~300s
+[2026-07-19T13:07:00Z] vote party 4889/5000 (97.8%) | 111 remaining | players 674/800 | moon FULL_MOON | next poll ~300s
+[2026-07-19T13:12:01Z] vote party 4970/5000 (99.4%) | 30 remaining | players 698/800 | moon FULL_MOON | next poll ~300s
+[2026-07-19T13:17:01Z] *** VOTE PARTY FIRED! remaining reset 30 -> 4956 (+4926) ***
+[2026-07-19T13:17:01Z] vote party 44/5000 (0.9%) | 4956 remaining | players 662/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-19T13:22:01Z] vote party 103/5000 (2.1%) | 4897 remaining | players 654/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-19T13:27:01Z] vote party 158/5000 (3.2%) | 4842 remaining | players 636/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-19T13:32:01Z] vote party 202/5000 (4.0%) | 4798 remaining | players 634/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-19T13:37:01Z] vote party 238/5000 (4.8%) | 4762 remaining | players 629/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-19T13:42:02Z] vote party 283/5000 (5.7%) | 4717 remaining | players 601/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-19T13:47:02Z] vote party 330/5000 (6.6%) | 4670 remaining | players 604/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-19T13:52:00Z] vote party 355/5000 (7.1%) | 4645 remaining | players 589/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-19T13:52:00Z] === tracker duration reached ===
