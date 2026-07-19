@@ -80,10 +80,11 @@ collected, percent, players, towns, nations, residents) for later analysis.
 forecasts when the *next* party will fire. It is recomputed on every data
 update, so the prediction constantly changes as new points arrive.
 
-It runs **six independent models** and **ensembles** them:
+It runs **seven independent models** and **ensembles** them:
 
 | Model | Idea |
 |-------|------|
+| `shrinkage` | **Bayesian blend of the historical rate prior and the observed rate** — leans on history early, on live data late |
 | `linear` | OLS regression over the whole cycle |
 | `recent` | slope of the last k points (short-term rate) |
 | `ewma` | exponentially-weighted average of per-interval rates |
@@ -91,10 +92,23 @@ It runs **six independent models** and **ensembles** them:
 | `wls` | least squares with exponential recency weights |
 | `quadratic` | 2nd-order fit, solves for the target crossing (accel/decel) |
 
-Each model's ETA is weighted by a **rolling-origin backtest** on the *completed*
-historical cycles: models are scored by inverse mean-squared extrapolation
-error, so consistently-accurate models dominate and outliers are down-weighted
-automatically.
+**Why shrinkage matters:** the vote process is nearly stationary across cycles
+(historical cycles average ~390–410 votes/hr, and player count only weakly
+predicts rate, r≈0.1). So the historical rate is a strong prior. Early in a
+cycle the pure-extrapolation models wildly over/under-shoot from a few noisy
+points; shrinkage anchors to the prior and is measurably the most accurate
+model at every early/mid stage (see the accuracy backtest).
+
+**Weighting:** each model's ETA is weighted by a **rolling-origin backtest** on
+the completed historical cycles, scored by **inverse mean-squared ETA error**
+(how far its predicted *firing time* lands from the actual firing time) — not
+just next-point accuracy. Weights are **stage-aware**: computed per
+cycle-progress bucket, so the ensemble trusts shrinkage early and the reactive
+models late.
+
+The live prediction also carries a **calibrated confidence band**: ± the
+ensemble's *measured* error at the current cycle stage (from the same backtest),
+so the ETA comes with an honest uncertainty that narrows as the cycle fills.
 
 ```bash
 pip install -r requirements.txt
@@ -131,5 +145,15 @@ python3 accuracy.py                 # reads data/voteparty.jsonl
 
 Outputs `data/accuracy.png` (|ETA error| vs cycle progress, per cycle and per
 model) and `data/accuracy.json` (raw stage errors + a stage-bucket summary).
-The headline finding: error shrinks as the cycle fills — roughly a couple of
-hours off at ~30% complete, down to ~15–20 minutes past 75%.
+
+Measured mean |ETA error| by stage (current data, 3 completed cycles):
+
+| Stage | Ensemble | Shrinkage (best) |
+|-------|----------|------------------|
+| 25–50% | ~120 min | **~70 min** |
+| 50–75% | ~40 min | ~45 min |
+| 75–100% | ~15 min | ~16 min |
+
+Error shrinks as the cycle fills. Shrinkage is the standout early; the ensemble
+matches or edges it from mid-cycle on. Estimates will tighten as more completed
+cycles accumulate.

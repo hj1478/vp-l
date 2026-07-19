@@ -35,34 +35,15 @@ import numpy as np
 
 from predict import (
     MODELS, load_points, split_cycles, cycle_arrays,
-    backtest_weights, fmt_ts,
+    backtest_staged, weights_for_progress, fmt_ts, make_ctx, cycle_fire_time,
 )
 
 MIN_FIT = 3  # need at least this many points before a stage is predictable
 
 
-def cycle_fire_time(cycle, target, seg=3):
-    """Estimate the epoch at which this completed cycle actually hit target.
-
-    Extrapolates the last `seg` observed points to the target line. Returns
-    (epoch, quality) where quality is the last observed percent of target
-    (higher = tighter reference).
-    """
-    t, y = cycle_arrays(cycle)
-    t0 = cycle[0]["_t"]
-    k = min(seg, len(t))
-    if k < 2:
-        return None, 0.0
-    b, a = np.polyfit(t[-k:], y[-k:], 1)
-    if b <= 1e-9:
-        return None, 0.0
-    t_cross = (target - a) / b
-    return t0 + max(t_cross, t[-1]), float(y[-1] / target * 100.0)
-
-
-def model_eta_epoch(name, t, y, target, t0):
+def model_eta_epoch(name, t, y, target, t0, ctx=None):
     """Predicted firing epoch for one model given partial (t, y). None if n/a."""
-    t_cross = MODELS[name](t, y, target)
+    t_cross = MODELS[name](t, y, target, ctx)
     return (t0 + t_cross) if t_cross is not None else None
 
 
@@ -84,9 +65,10 @@ def evaluate(points, target):
         fire = fires[ci]["epoch"]
         if fire is None:
             continue
-        # Leave-one-cycle-out weights.
+        # Leave-one-cycle-out weights and history context.
         others = [c for cj, c in enumerate(completed) if cj != ci]
-        weights, _ = backtest_weights(others if others else completed, target)
+        staged = backtest_staged(others if others else completed, target)
+        ctx = make_ctx(cyc, others)
 
         t, y = cycle_arrays(cyc)
         t0 = cyc[0]["_t"]
@@ -94,17 +76,13 @@ def evaluate(points, target):
         for i in range(MIN_FIT, n + 1):
             t_fit, y_fit = t[:i], y[:i]
             progress = float(y_fit[-1] / target * 100.0)
+            weights = weights_for_progress(staged, progress)
 
             per_model = {}
-            for name in MODELS:
-                eta = model_eta_epoch(name, t_fit, y_fit, target, t0)
-                err_min = ((eta - fire) / 60.0) if eta is not None else None
-                per_model[name] = err_min
-
-            # Weighted ensemble over models with a finite ETA.
             etas, ws = [], []
             for name in MODELS:
-                eta = model_eta_epoch(name, t_fit, y_fit, target, t0)
+                eta = model_eta_epoch(name, t_fit, y_fit, target, t0, ctx)
+                per_model[name] = ((eta - fire) / 60.0) if eta is not None else None
                 if eta is not None and np.isfinite(eta):
                     etas.append(eta)
                     ws.append(weights.get(name, 0.0))
