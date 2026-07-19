@@ -1,60 +1,60 @@
 {
-  "generated_at": "2026-07-18T12:46:06Z",
+  "generated_at": "2026-07-18T22:46:27Z",
   "target": 5000.0,
   "current": {
-    "collected": 748,
-    "remaining": 4252,
-    "percent": 15.0,
-    "last_ts": "2026-07-18T12:46:06Z",
+    "collected": 4038,
+    "remaining": 962,
+    "percent": 80.8,
+    "last_ts": "2026-07-18T22:46:27Z",
     "cycle_start_ts": "2026-07-18T11:51:06Z",
-    "num_points": 12,
-    "players_online": 601
+    "num_points": 108,
+    "players_online": 546
   },
   "models": {
     "shrinkage": {
-      "eta": "2026-07-18T23:02:49Z",
-      "weight": 0.3611,
+      "eta": "2026-07-19T01:21:42Z",
+      "weight": 0.2102,
       "backtest_rmse": 0.77396
     },
     "linear": {
-      "eta": "2026-07-18T21:19:24Z",
-      "weight": 0.0973,
+      "eta": "2026-07-19T01:23:33Z",
+      "weight": 0.0704,
       "backtest_rmse": 1.33777
     },
     "recent": {
-      "eta": "2026-07-18T21:02:10Z",
-      "weight": 0.1072,
+      "eta": "2026-07-19T02:31:03Z",
+      "weight": 0.1397,
       "backtest_rmse": 1.23207
     },
     "ewma": {
-      "eta": "2026-07-18T21:41:56Z",
-      "weight": 0.1199,
+      "eta": "2026-07-19T02:23:39Z",
+      "weight": 0.1678,
       "backtest_rmse": 1.15774
     },
     "theilsen": {
-      "eta": "2026-07-18T21:23:51Z",
-      "weight": 0.1,
+      "eta": "2026-07-19T01:21:03Z",
+      "weight": 0.0689,
       "backtest_rmse": 1.31598
     },
     "wls": {
-      "eta": "2026-07-18T21:12:11Z",
-      "weight": 0.0975,
+      "eta": "2026-07-19T02:04:05Z",
+      "weight": 0.0806,
       "backtest_rmse": 1.31572
     },
     "quadratic": {
-      "eta": "2026-07-18T17:30:32Z",
-      "weight": 0.1169,
+      "eta": "2026-07-19T02:09:11Z",
+      "weight": 0.2624,
       "backtest_rmse": 1.05846
     }
   },
   "ensemble": {
-    "eta": "2026-07-18T21:30:35Z",
-    "eta_epoch": 1784410235.3884397,
-    "spread_seconds": 5988,
-    "range_low": "2026-07-18T17:30:32Z",
-    "range_high": "2026-07-18T23:02:49Z",
-    "calibrated_band_min": 120,
-    "calibrated_low": "2026-07-18T19:30:52Z",
-    "calibrated_high": "2026-07-18T23:30:18Z"
+    "eta": "2026-07-19T01:57:45Z",
+    "eta_epoch": 1784426265.4393754,
+    "spread_seconds": 1647,
+    "range_low": "2026-07-19T01:21:03Z",
+    "range_high": "2026-07-19T02:31:03Z",
+    "calibrated_band_min": 15,
+    "calibrated_low": "2026-07-19T01:43:07Z",
+    "calibrated_high": "2026-07-19T02:12:23Z"
   }
 }
