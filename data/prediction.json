@@ -1,60 +1,60 @@
 {
-  "generated_at": "2026-07-19T02:45:55Z",
+  "generated_at": "2026-07-19T06:09:08Z",
   "target": 5000.0,
   "current": {
-    "collected": 496,
-    "remaining": 4504,
-    "percent": 9.9,
-    "last_ts": "2026-07-19T02:45:55Z",
+    "collected": 1670,
+    "remaining": 3330,
+    "percent": 33.4,
+    "last_ts": "2026-07-19T06:09:08Z",
     "cycle_start_ts": "2026-07-19T01:50:55Z",
-    "num_points": 12,
-    "players_online": 517
+    "num_points": 24,
+    "players_online": 431
   },
   "models": {
     "shrinkage": {
-      "eta": "2026-07-19T14:59:49Z",
+      "eta": "2026-07-19T15:14:39Z",
       "weight": 0.2484,
       "backtest_rmse": 2.12742
     },
     "linear": {
-      "eta": "2026-07-19T21:00:27Z",
+      "eta": "2026-07-19T16:33:16Z",
       "weight": 0.1631,
       "backtest_rmse": 2.53637
     },
     "recent": {
-      "eta": "2026-07-19T19:29:56Z",
+      "eta": "2026-07-19T13:31:39Z",
       "weight": 0.0784,
       "backtest_rmse": 3.63121
     },
     "ewma": {
-      "eta": "2026-07-19T20:50:58Z",
+      "eta": "2026-07-19T14:20:59Z",
       "weight": 0.1334,
       "backtest_rmse": 2.78818
     },
     "theilsen": {
-      "eta": "2026-07-19T20:56:28Z",
+      "eta": "2026-07-19T16:33:39Z",
       "weight": 0.1505,
       "backtest_rmse": 2.64368
     },
     "wls": {
-      "eta": "2026-07-19T20:39:22Z",
+      "eta": "2026-07-19T16:08:08Z",
       "weight": 0.1825,
       "backtest_rmse": 2.39243
     },
     "quadratic": {
-      "eta": "2026-07-19T11:31:20Z",
+      "eta": "2026-07-19T11:57:03Z",
       "weight": 0.0437,
       "backtest_rmse": 4.44793
     }
   },
   "ensemble": {
-    "eta": "2026-07-19T18:53:12Z",
-    "eta_epoch": 1784487192.9790547,
-    "spread_seconds": 10564,
-    "range_low": "2026-07-19T11:31:20Z",
-    "range_high": "2026-07-19T21:00:27Z",
+    "eta": "2026-07-19T15:25:15Z",
+    "eta_epoch": 1784474715.9325464,
+    "spread_seconds": 4360,
+    "range_low": "2026-07-19T11:57:03Z",
+    "range_high": "2026-07-19T16:33:39Z",
     "calibrated_band_min": 162,
-    "calibrated_low": "2026-07-19T16:11:14Z",
-    "calibrated_high": "2026-07-19T21:35:11Z"
+    "calibrated_low": "2026-07-19T12:43:17Z",
+    "calibrated_high": "2026-07-19T18:07:14Z"
   }
 }
