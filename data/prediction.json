@@ -1,65 +1,65 @@
 {
-  "generated_at": "2026-07-19T06:09:08Z",
+  "generated_at": "2026-07-19T11:14:26Z",
   "target": 5000.0,
   "current": {
-    "collected": 1670,
-    "remaining": 3330,
-    "percent": 33.4,
-    "last_ts": "2026-07-19T06:09:08Z",
+    "collected": 4039,
+    "remaining": 961,
+    "percent": 80.8,
+    "last_ts": "2026-07-19T11:14:26Z",
     "cycle_start_ts": "2026-07-19T01:50:55Z",
-    "num_points": 24,
-    "players_online": 431
+    "num_points": 36,
+    "players_online": 510
   },
   "models": {
     "shrinkage": {
-      "eta": "2026-07-19T15:14:39Z",
-      "weight": 0.1452,
+      "eta": "2026-07-19T13:41:48Z",
+      "weight": 0.0752,
       "backtest_rmse": 2.12742
     },
     "diurnal": {
-      "eta": "2026-07-19T13:44:08Z",
-      "weight": 0.415,
+      "eta": "2026-07-19T13:24:26Z",
+      "weight": 0.2364,
       "backtest_rmse": 1.23859
     },
     "linear": {
-      "eta": "2026-07-19T16:33:16Z",
-      "weight": 0.0954,
+      "eta": "2026-07-19T13:51:49Z",
+      "weight": 0.0555,
       "backtest_rmse": 2.53637
     },
     "recent": {
-      "eta": "2026-07-19T13:31:39Z",
-      "weight": 0.0459,
+      "eta": "2026-07-19T13:08:13Z",
+      "weight": 0.0412,
       "backtest_rmse": 3.63121
     },
     "ewma": {
-      "eta": "2026-07-19T14:20:59Z",
-      "weight": 0.0781,
+      "eta": "2026-07-19T13:12:56Z",
+      "weight": 0.0748,
       "backtest_rmse": 2.78818
     },
     "theilsen": {
-      "eta": "2026-07-19T16:33:39Z",
-      "weight": 0.0881,
+      "eta": "2026-07-19T13:47:29Z",
+      "weight": 0.0508,
       "backtest_rmse": 2.64368
     },
     "wls": {
-      "eta": "2026-07-19T16:08:08Z",
-      "weight": 0.1068,
+      "eta": "2026-07-19T13:25:03Z",
+      "weight": 0.0853,
       "backtest_rmse": 2.39243
     },
     "quadratic": {
-      "eta": "2026-07-19T11:57:03Z",
-      "weight": 0.0256,
+      "eta": "2026-07-19T12:51:43Z",
+      "weight": 0.3807,
       "backtest_rmse": 4.44793
     }
   },
   "ensemble": {
-    "eta": "2026-07-19T14:43:16Z",
-    "eta_epoch": 1784472196.837137,
-    "spread_seconds": 4479,
-    "range_low": "2026-07-19T11:57:03Z",
-    "range_high": "2026-07-19T16:33:39Z",
-    "calibrated_band_min": 135,
-    "calibrated_low": "2026-07-19T12:28:22Z",
-    "calibrated_high": "2026-07-19T16:58:10Z"
+    "eta": "2026-07-19T13:14:30Z",
+    "eta_epoch": 1784466870.1988235,
+    "spread_seconds": 1231,
+    "range_low": "2026-07-19T12:51:43Z",
+    "range_high": "2026-07-19T13:51:49Z",
+    "calibrated_band_min": 15,
+    "calibrated_low": "2026-07-19T12:59:48Z",
+    "calibrated_high": "2026-07-19T13:29:11Z"
   }
 }
