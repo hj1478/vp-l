@@ -161,3 +161,20 @@ Measured mean |ETA error| by stage (current data, 4 completed cycles):
 Error shrinks as the cycle fills. The `diurnal` model is now the standout at
 every stage, which is why the backtest gives it the top weight (~0.4). These
 numbers move as cycles accumulate — the ensemble re-weights automatically.
+
+## Model performance report (`model_report.py`)
+
+`model_report.py` produces a detailed per-model scorecard from the same
+leave-one-out backtest: overall MAE / RMSE / median / P90, **bias** (does the
+model predict too early or too late?), coverage, current weight, and a per-stage
+MAE breakdown.
+
+```bash
+python3 model_report.py                 # reads data/voteparty.jsonl
+```
+
+Outputs `data/model_report.png` (MAE heatmap by model × stage, ranked MAE, and
+bias chart) plus `data/model_report.md` / `.json` with the full tables. A
+current finding: every model has a **negative bias** — they all tend to predict
+the party a bit *earlier* than it actually fires — which is a candidate for a
+future bias-correction term.
