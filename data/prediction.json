@@ -13,48 +13,53 @@
   "models": {
     "shrinkage": {
       "eta": "2026-07-19T15:14:39Z",
-      "weight": 0.2484,
+      "weight": 0.1452,
       "backtest_rmse": 2.12742
+    },
+    "diurnal": {
+      "eta": "2026-07-19T13:44:08Z",
+      "weight": 0.415,
+      "backtest_rmse": 1.23859
     },
     "linear": {
       "eta": "2026-07-19T16:33:16Z",
-      "weight": 0.1631,
+      "weight": 0.0954,
       "backtest_rmse": 2.53637
     },
     "recent": {
       "eta": "2026-07-19T13:31:39Z",
-      "weight": 0.0784,
+      "weight": 0.0459,
       "backtest_rmse": 3.63121
     },
     "ewma": {
       "eta": "2026-07-19T14:20:59Z",
-      "weight": 0.1334,
+      "weight": 0.0781,
       "backtest_rmse": 2.78818
     },
     "theilsen": {
       "eta": "2026-07-19T16:33:39Z",
-      "weight": 0.1505,
+      "weight": 0.0881,
       "backtest_rmse": 2.64368
     },
     "wls": {
       "eta": "2026-07-19T16:08:08Z",
-      "weight": 0.1825,
+      "weight": 0.1068,
       "backtest_rmse": 2.39243
     },
     "quadratic": {
       "eta": "2026-07-19T11:57:03Z",
-      "weight": 0.0437,
+      "weight": 0.0256,
       "backtest_rmse": 4.44793
     }
   },
   "ensemble": {
-    "eta": "2026-07-19T15:25:15Z",
-    "eta_epoch": 1784474715.9325464,
-    "spread_seconds": 4360,
+    "eta": "2026-07-19T14:43:16Z",
+    "eta_epoch": 1784472196.8371372,
+    "spread_seconds": 4479,
     "range_low": "2026-07-19T11:57:03Z",
     "range_high": "2026-07-19T16:33:39Z",
-    "calibrated_band_min": 162,
-    "calibrated_low": "2026-07-19T12:43:17Z",
-    "calibrated_high": "2026-07-19T18:07:14Z"
+    "calibrated_band_min": 135,
+    "calibrated_low": "2026-07-19T12:28:22Z",
+    "calibrated_high": "2026-07-19T16:58:10Z"
   }
 }

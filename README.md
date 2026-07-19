@@ -80,11 +80,12 @@ collected, percent, players, towns, nations, residents) for later analysis.
 forecasts when the *next* party will fire. It is recomputed on every data
 update, so the prediction constantly changes as new points arrive.
 
-It runs **seven independent models** and **ensembles** them:
+It runs **eight independent models** and **ensembles** them:
 
 | Model | Idea |
 |-------|------|
-| `shrinkage` | **Bayesian blend of the historical rate prior and the observed rate** — leans on history early, on live data late |
+| `diurnal` | **Predict each stage separately** — learns the vote rate as a function of UTC time-of-day and integrates that profile forward to target (budgets for the overnight lull and evening peak instead of assuming one flat rate) |
+| `shrinkage` | Bayesian blend of the historical rate prior and the observed rate — leans on history early, on live data late |
 | `linear` | OLS regression over the whole cycle |
 | `recent` | slope of the last k points (short-term rate) |
 | `ewma` | exponentially-weighted average of per-interval rates |
@@ -92,12 +93,14 @@ It runs **seven independent models** and **ensembles** them:
 | `wls` | least squares with exponential recency weights |
 | `quadratic` | 2nd-order fit, solves for the target crossing (accel/decel) |
 
-**Why shrinkage matters:** the vote process is nearly stationary across cycles
-(historical cycles average ~390–410 votes/hr, and player count only weakly
-predicts rate, r≈0.1). So the historical rate is a strong prior. Early in a
-cycle the pure-extrapolation models wildly over/under-shoot from a few noisy
-points; shrinkage anchors to the prior and is measurably the most accurate
-model at every early/mid stage (see the accuracy backtest).
+**Why these two lead:** the vote process is nearly stationary across cycles
+(historical cycles average ~390–410 votes/hr, player count only weakly predicts
+rate, r≈0.1), so the historical rate is a strong prior — which `shrinkage`
+exploits. But the rate is *not* flat within a cycle: it rises and falls with the
+time of day. `diurnal` captures that shape and, once a few cycles have
+accumulated, becomes the most accurate model at every stage — it predicts each
+remaining portion of the cycle with its own time-of-day rate instead of
+extrapolating one rate across the overnight lull it hasn't reached yet.
 
 **Weighting:** each model's ETA is weighted by a **rolling-origin backtest** on
 the completed historical cycles, scored by **inverse mean-squared ETA error**
@@ -146,14 +149,15 @@ python3 accuracy.py                 # reads data/voteparty.jsonl
 Outputs `data/accuracy.png` (|ETA error| vs cycle progress, per cycle and per
 model) and `data/accuracy.json` (raw stage errors + a stage-bucket summary).
 
-Measured mean |ETA error| by stage (current data, 3 completed cycles):
+Measured mean |ETA error| by stage (current data, 4 completed cycles):
 
-| Stage | Ensemble | Shrinkage (best) |
-|-------|----------|------------------|
-| 25–50% | ~120 min | **~70 min** |
-| 50–75% | ~40 min | ~45 min |
-| 75–100% | ~15 min | ~16 min |
+| Stage | Ensemble | Diurnal (best) | Shrinkage |
+|-------|----------|----------------|-----------|
+| 0–25% | ~208 min | **~131 min** | ~184 min |
+| 25–50% | ~94 min | **~63 min** | ~140 min |
+| 50–75% | ~44 min | **~36 min** | ~85 min |
+| 75–100% | ~15 min | **~15 min** | ~45 min |
 
-Error shrinks as the cycle fills. Shrinkage is the standout early; the ensemble
-matches or edges it from mid-cycle on. Estimates will tighten as more completed
-cycles accumulate.
+Error shrinks as the cycle fills. The `diurnal` model is now the standout at
+every stage, which is why the backtest gives it the top weight (~0.4). These
+numbers move as cycles accumulate — the ensemble re-weights automatically.
