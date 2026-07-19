@@ -59,6 +59,9 @@ jobs:
       - name: Update stage-by-stage replay
         run: python3 replay.py -i data/voteparty.jsonl -o data/replay.png || true
 
+      - name: Update out-of-sample prediction track record
+        run: python3 predlog.py -i data/voteparty.jsonl -o data || true
+
       - name: Commit snapshots
         run: |
           git config user.name "github-actions[bot]"
@@ -67,7 +70,8 @@ jobs:
             data/prediction.png data/prediction.json data/PREDICTION.md \
             data/accuracy.png data/accuracy.json \
             data/model_report.png data/model_report.json data/model_report.md \
-            data/replay.png
+            data/replay.png \
+            data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md
           if git diff --cached --quiet; then
             echo "No new data to commit."
             exit 0
