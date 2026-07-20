@@ -128,6 +128,26 @@ def cycle_fire_time(cycle, target, seg=3):
     return t0 + max(t_cross, t[-1]), float(y[-1] / target * 100.0)
 
 
+# Label quality: a completed cycle's firing time is only known to within the
+# gap between its last sub-target sample and the first sample after reset. Only
+# cycles bracketed tighter than this (minutes) have a trustworthy label.
+TIGHT_BRACKET_MIN = 15.0
+
+
+def fire_bracket_min(cycles, ci):
+    """Minutes between the last pre-reset sample and the first post-reset sample
+    — the window the true firing time is known to lie in. None if not completed."""
+    if ci >= len(cycles) - 1:
+        return None
+    return (cycles[ci + 1][0]["_t"] - cycles[ci][-1]["_t"]) / 60.0
+
+
+def tight_cycle_indices(cycles, max_bracket=TIGHT_BRACKET_MIN):
+    """Indices of completed cycles whose firing was tightly bracketed."""
+    return [ci for ci in range(len(cycles) - 1)
+            if (fire_bracket_min(cycles, ci) or 1e9) <= max_bracket]
+
+
 # ----------------------------------------------------------------------------
 # Shared rate helpers
 # ----------------------------------------------------------------------------
@@ -535,12 +555,23 @@ def ensemble_eta_at(cycle, ctx, staged, target, up_to):
     return float(np.sum(np.array(etas) * ws))
 
 
-def calibrated_stage_mae(completed, target, min_fit=3):
-    """Measured ensemble |ETA error| (seconds) per progress bucket, via
-    leave-one-cycle-out over the completed cycles. Used to attach an honest,
-    stage-appropriate confidence band to the live prediction."""
+def empirical_stage_error(completed, target, predictor="diurnal", min_fit=3,
+                          tight_indices=None):
+    """Measured |ETA error| (seconds) per progress bucket for a given predictor,
+    via leave-one-cycle-out over completed cycles.
+
+    NOT a calibrated interval — it is a raw empirical error estimate from a tiny
+    sample. When ``tight_indices`` is given, only those (tightly-bracketed)
+    cycles contribute; loosely-bracketed cycles are excluded because their label
+    error (tens to hundreds of minutes) would swamp the estimate.
+
+    Returns {bucket: {"mae": sec|None, "std": sec|None, "n": int}}.
+    """
+    tight = set(tight_indices) if tight_indices is not None else set(range(len(completed)))
     buckets = {b: [] for b in BUCKETS}
     for ci, cyc in enumerate(completed):
+        if ci not in tight:
+            continue
         fire, _ = cycle_fire_time(cyc, target)
         if fire is None or len(cyc) < min_fit + 1:
             continue
@@ -548,12 +579,22 @@ def calibrated_stage_mae(completed, target, min_fit=3):
         staged = backtest_staged(others if others else completed, target)
         ctx = make_ctx(cyc, others)
         t, y = cycle_arrays(cyc)
+        t0 = cyc[0]["_t"]
         for i in range(min_fit, len(t) + 1):
-            ens = ensemble_eta_at(cyc, ctx, staged, target, i)
-            if ens is None:
+            if predictor == "ensemble":
+                pred = ensemble_eta_at(cyc, ctx, staged, target, i)
+            else:
+                tc = MODELS[predictor](t[:i], y[:i], target, ctx)
+                pred = (t0 + tc) if tc is not None else None
+            if pred is None:
                 continue
-            buckets[_bucket(float(y[i - 1]) / target * 100.0)].append(abs(ens - fire))
-    return {b: (float(np.mean(v)) if v else None) for b, v in buckets.items()}
+            buckets[_bucket(float(y[i - 1]) / target * 100.0)].append(abs(pred - fire))
+    out = {}
+    for b, v in buckets.items():
+        out[b] = {"mae": float(np.mean(v)) if v else None,
+                  "std": float(np.std(v)) if len(v) > 1 else None,
+                  "n": len(v)}
+    return out
 
 
 # ----------------------------------------------------------------------------
@@ -588,16 +629,25 @@ def predict(cycles, target):
         ws = np.array([v[1] for v in valid])
         ws = ws / ws.sum() if ws.sum() > 0 else np.ones_like(ws) / len(ws)
         ensemble_eta = float(np.sum(etas * ws))
-        spread = float(np.sqrt(np.sum(ws * (etas - ensemble_eta) ** 2)))
         lo, hi = float(etas.min()), float(etas.max())
     else:
-        ensemble_eta = spread = lo = hi = None
+        ensemble_eta = lo = hi = None
 
-    # Calibrated band: measured ensemble error at the current cycle stage.
-    band = None
-    if ensemble_eta is not None and len(completed) >= 1:
-        mae = calibrated_stage_mae(completed, target)
-        band = mae.get(_bucket(cur_progress))
+    # PRIMARY predictor = diurnal (it beats the ensemble out-of-sample). Fall
+    # back to the ensemble only when diurnal cannot produce an estimate.
+    primary_name = "diurnal" if per_model.get("diurnal", {}).get("eta_epoch") else "ensemble"
+    primary_eta = per_model["diurnal"]["eta_epoch"] if primary_name == "diurnal" else ensemble_eta
+
+    # Empirical error estimate (NOT a calibrated interval): measured error of the
+    # primary predictor at this stage, from tightly-bracketed cycles only.
+    # Tightness is computed from the FULL cycle list so the last completed cycle
+    # can see the current cycle as its successor.
+    tight_idx = tight_cycle_indices(cycles)
+    n_tight = len(tight_idx)
+    emp = empirical_stage_error(completed, target, predictor=primary_name,
+                                tight_indices=tight_idx)
+    bucket_err = emp.get(_bucket(cur_progress), {"mae": None, "std": None, "n": 0})
+    band = bucket_err["mae"]
 
     return {
         "generated_at": None,
@@ -611,20 +661,32 @@ def predict(cycles, target):
             "num_points": len(cur),
             "players_online": cur[-1].get("players_online"),
         },
+        "primary": {
+            "model": primary_name,
+            "eta": fmt_ts(primary_eta) if primary_eta else None,
+            "eta_epoch": primary_eta,
+            "empirical_error_min": round(band / 60) if band is not None else None,
+            "empirical_error_std_min": round(bucket_err["std"] / 60)
+                if bucket_err["std"] is not None else None,
+            "error_estimate_n": bucket_err["n"],
+            "n_tight_labeled_cycles": n_tight,
+            "note": ("empirical error from tightly-labeled cycles; "
+                     f"n={bucket_err['n']} at this stage — treat as a rough "
+                     "spread, NOT a calibrated interval"
+                     if bucket_err["n"] else
+                     "no tightly-labeled cycles at this stage yet — "
+                     "uncertainty is UNKNOWN (likely wide)"),
+        },
         "models": {n: {
             "eta": fmt_ts(m["eta_epoch"]) if m["eta_epoch"] else None,
             "weight": round(m["weight"], 4),
             "backtest_rmse": round(m["rmse"], 5) if m["rmse"] is not None else None,
         } for n, m in per_model.items()},
-        "ensemble": {
+        "ensemble": {  # kept as a diagnostic only — does NOT beat diurnal OOS
             "eta": fmt_ts(ensemble_eta) if ensemble_eta else None,
             "eta_epoch": ensemble_eta,
-            "spread_seconds": round(spread) if spread is not None else None,
             "range_low": fmt_ts(lo) if lo else None,
             "range_high": fmt_ts(hi) if hi else None,
-            "calibrated_band_min": round(band / 60) if band is not None else None,
-            "calibrated_low": fmt_ts(ensemble_eta - band) if band is not None else None,
-            "calibrated_high": fmt_ts(ensemble_eta + band) if band is not None else None,
         },
         "_per_model_epoch": {n: m["eta_epoch"] for n, m in per_model.items()},
         "_cycles": cycles,
@@ -664,23 +726,26 @@ def make_graph(result, target, out_png):
         ax.scatter([eta_dt], [target], color=col, s=30 + 400 * w, alpha=0.85,
                    zorder=6, label=f"{name} (w={w:.2f})")
 
+    prim = result["primary"]
+    if prim["eta_epoch"]:
+        p_dt = datetime.fromtimestamp(prim["eta_epoch"], tz=timezone.utc)
+        ax.axvline(p_dt, color="crimson", lw=2.5,
+                   label=f"PRIMARY = {prim['model']}")
+        band = prim.get("empirical_error_min")
+        if band and prim["error_estimate_n"]:
+            lo = datetime.fromtimestamp(prim["eta_epoch"] - band * 60, tz=timezone.utc)
+            hi = datetime.fromtimestamp(prim["eta_epoch"] + band * 60, tz=timezone.utc)
+            ax.axvspan(lo, hi, color="crimson", alpha=0.12,
+                       label=f"empirical ±{band}m (n={prim['error_estimate_n']})")
     ens = result["ensemble"]
     if ens["eta_epoch"]:
         ens_dt = datetime.fromtimestamp(ens["eta_epoch"], tz=timezone.utc)
-        ax.axvline(ens_dt, color="crimson", lw=2.5, label="ENSEMBLE ETA")
-        if ens.get("calibrated_low") and ens.get("calibrated_high"):
-            lo = datetime.fromtimestamp(parse_ts(ens["calibrated_low"]), tz=timezone.utc)
-            hi = datetime.fromtimestamp(parse_ts(ens["calibrated_high"]), tz=timezone.utc)
-            ax.axvspan(lo, hi, color="crimson", alpha=0.12,
-                       label=f"calibrated ±{ens['calibrated_band_min']} min")
-        elif ens["range_low"] and ens["range_high"]:
-            lo = datetime.fromtimestamp(parse_ts(ens["range_low"]), tz=timezone.utc)
-            hi = datetime.fromtimestamp(parse_ts(ens["range_high"]), tz=timezone.utc)
-            ax.axvspan(lo, hi, color="crimson", alpha=0.08, label="model spread")
+        ax.axvline(ens_dt, color="gray", lw=1.2, ls=":", label="ensemble (diagnostic)")
 
-    ax.set_title(f"EarthMC vote party — current cycle & ensemble prediction\n"
-                 f"{result['current']['percent']}% ({result['current']['collected']}/{target}), "
-                 f"ETA {ens['eta'] or 'n/a'}", fontsize=13, fontweight="bold")
+    ax.set_title(f"EarthMC vote party — {result['current']['percent']}% "
+                 f"({result['current']['collected']}/{int(target)})  |  "
+                 f"PRIMARY ({prim['model']}) ETA {prim['eta'] or 'n/a'}",
+                 fontsize=12, fontweight="bold")
     ax.set_ylabel("votes collected")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M", tz=timezone.utc))
     ax.legend(fontsize=8, ncol=2, loc="upper left")
@@ -720,6 +785,7 @@ def make_graph(result, target, out_png):
 
 def write_markdown(result, path):
     c = result["current"]
+    prim = result["primary"]
     ens = result["ensemble"]
     lines = [
         "# Vote Party Prediction",
@@ -732,17 +798,26 @@ def write_markdown(result, path):
         f"**Cycle started:** {c['cycle_start_ts']}  |  "
         f"**Data points this cycle:** {c['num_points']}",
         "",
-        "## 🎯 Ensemble prediction",
+        f"## 🎯 Prediction (primary model: `{prim['model']}`)",
         "",
-        f"**Vote party fires ≈ `{ens['eta'] or 'n/a'}`**",
+        f"**Vote party fires ≈ `{prim['eta'] or 'n/a'}`**",
     ]
-    if ens.get("calibrated_band_min") is not None:
-        lines.append(f"Calibrated confidence: **±{ens['calibrated_band_min']} min** "
-                     f"(`{ens['calibrated_low']}` → `{ens['calibrated_high']}`) — "
-                     f"the ensemble's measured error at this cycle stage.")
-    if ens["range_low"]:
-        lines.append(f"Model spread: `{ens['range_low']}` → `{ens['range_high']}`")
+    band = prim.get("empirical_error_min")
+    if band is not None and prim["error_estimate_n"]:
+        lines.append(f"Empirical error at this stage: **±{band} min** "
+                     f"(n={prim['error_estimate_n']} tightly-labeled predictions"
+                     + (f", spread ±{prim['empirical_error_std_min']}m" if prim.get('empirical_error_std_min') else "")
+                     + "). This is a raw error estimate from a tiny sample, "
+                     "**not a calibrated interval** — real uncertainty is likely wider.")
+    else:
+        lines.append(f"⚠️ Uncertainty **unknown** at this stage: only "
+                     f"{prim['n_tight_labeled_cycles']} tightly-labeled cycle(s) "
+                     "so far. Treat the ETA as a point estimate with wide, "
+                     "unquantified error.")
     lines += [
+        "",
+        f"_Diagnostic — ensemble ETA (does **not** beat `{prim['model']}` "
+        f"out-of-sample): `{ens['eta'] or 'n/a'}`._",
         "",
         "## Individual models",
         "",
@@ -754,9 +829,13 @@ def write_markdown(result, path):
                      f"{m['backtest_rmse'] if m['backtest_rmse'] is not None else 'n/a'} |")
     lines += [
         "",
-        "Weights come from a rolling-origin backtest on completed cycles "
-        "(leave-one-out for history-aware models): each model's inverse "
-        "mean-squared extrapolation error, normalised. See `prediction.png`.",
+        "**Caveats:** weights are unstable at this sample size (dropping one "
+        "cycle can swing the top weight by ±0.4), so the ensemble is a diagnostic "
+        "only — the reported prediction is the single best model (`diurnal`), "
+        "which beats the ensemble out-of-sample. Firing-time labels for "
+        "loosely-sampled cycles are uncertain by tens of minutes and are excluded "
+        "from the error estimate. See `prediction_track.png` for the honest "
+        "out-of-sample record.",
         "",
     ]
     with open(path, "w", encoding="utf-8") as fh:
@@ -791,12 +870,16 @@ def main(argv=None) -> int:
     if not args.no_graph:
         make_graph(result, target, os.path.join(args.outdir, "prediction.png"))
 
-    ens = result["ensemble"]
-    print(f"Cycles found: {len(cycles)} | current cycle points: {result['current']['num_points']}")
-    band = ens.get("calibrated_band_min")
-    print(f"Ensemble ETA: {ens['eta']}" + (f" (calibrated ±{band} min)" if band is not None else ""))
+    prim = result["primary"]
+    print(f"Cycles: {len(cycles)} | current points: {result['current']['num_points']} "
+          f"| tightly-labeled cycles: {prim['n_tight_labeled_cycles']}")
+    band = prim.get("empirical_error_min")
+    band_s = (f" ±{band}m (n={prim['error_estimate_n']}, empirical not calibrated)"
+              if band is not None and prim["error_estimate_n"] else " (uncertainty unknown)")
+    print(f"PRIMARY ({prim['model']}) ETA: {prim['eta']}{band_s}")
+    print(f"ensemble ETA (diagnostic only): {result['ensemble']['eta']}")
     for name, m in sorted(result["models"].items(), key=lambda kv: -kv[1]["weight"]):
-        print(f"  {name:10s} eta={m['eta']}  w={m['weight']:.3f}  rmse={m['backtest_rmse']}")
+        print(f"  {name:10s} eta={m['eta']}  w={m['weight']:.3f}")
     return 0
 
 

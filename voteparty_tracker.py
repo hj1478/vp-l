@@ -233,6 +233,14 @@ def main(argv=None) -> int:
         help="stop cleanly after this many seconds (default: run until interrupted)",
     )
     parser.add_argument(
+        "--endgame-pct", type=float, default=90.0,
+        help="above this %% of target, poll every --endgame-interval (default 90)",
+    )
+    parser.add_argument(
+        "--endgame-interval", type=float, default=60.0,
+        help="poll spacing (s) once past --endgame-pct, to tightly bracket firing (default 60)",
+    )
+    parser.add_argument(
         "--json", dest="jsonfile", nargs="?", const="voteparty.jsonl", default=None,
         help="also append machine-readable JSONL (default voteparty.jsonl)",
     )
@@ -263,6 +271,11 @@ def main(argv=None) -> int:
         if deadline is not None and time.monotonic() >= deadline:
             break
         wait = wait_override if wait_override is not None else interval.current
+        # Endgame: poll fast near the target so the firing is tightly bracketed
+        # (a tight label is essential for honest accuracy measurement).
+        if (wait_override is None and prev and prev.get("percent") is not None
+                and prev["percent"] >= args.endgame_pct):
+            wait = min(wait, args.endgame_interval)
         # Don't sleep past the deadline.
         if deadline is not None:
             wait = min(wait, max(0, deadline - time.monotonic()))

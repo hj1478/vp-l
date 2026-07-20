@@ -10,6 +10,16 @@
     "num_points": 116,
     "players_online": 514
   },
+  "primary": {
+    "model": "diurnal",
+    "eta": "2026-07-20T03:54:34Z",
+    "eta_epoch": 1784519674.0,
+    "empirical_error_min": 10,
+    "empirical_error_std_min": 6,
+    "error_estimate_n": 23,
+    "n_tight_labeled_cycles": 1,
+    "note": "empirical error from tightly-labeled cycles; n=23 at this stage \u2014 treat as a rough spread, NOT a calibrated interval"
+  },
   "models": {
     "shrinkage": {
       "eta": "2026-07-20T03:53:52Z",
@@ -54,12 +64,8 @@
   },
   "ensemble": {
     "eta": "2026-07-20T03:47:24Z",
-    "eta_epoch": 1784519244.6304352,
-    "spread_seconds": 1170,
+    "eta_epoch": 1784519244.6304348,
     "range_low": "2026-07-20T03:16:22Z",
-    "range_high": "2026-07-20T04:24:47Z",
-    "calibrated_band_min": 9,
-    "calibrated_low": "2026-07-20T03:38:54Z",
-    "calibrated_high": "2026-07-20T03:55:55Z"
+    "range_high": "2026-07-20T04:24:47Z"
   }
 }

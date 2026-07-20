@@ -32,6 +32,7 @@ import numpy as np
 from predict import (
     MODELS, load_points, split_cycles, cycle_arrays, cycle_fire_time,
     make_ctx, backtest_staged, weights_for_progress, fmt_ts,
+    fire_bracket_min, TIGHT_BRACKET_MIN,
 )
 
 MIN_FIT = 3
@@ -53,6 +54,8 @@ def build_log(points, target):
         prior = cycles[:ci]                      # only cycles that finished earlier
         completed = ci < len(cycles) - 1         # a later cycle exists → this one fired
         fire = cycle_fire_time(cyc, target)[0] if completed else None
+        bracket = fire_bracket_min(cycles, ci)   # label uncertainty (minutes)
+        tight = bracket is not None and bracket <= TIGHT_BRACKET_MIN
         staged = backtest_staged(prior, target) if prior else None
         ctx = make_ctx(cyc, prior)
         t, y = cycle_arrays(cyc)
@@ -91,26 +94,41 @@ def build_log(points, target):
                 "actual_fire": fmt_ts(fire) if fire is not None else None,
                 "error_min": round(err, 1) if err is not None else None,
                 "resolved": fire is not None,
+                "label_bracket_min": round(bracket) if bracket is not None else None,
+                "label_tight": tight,
             })
     return entries, cycles
 
 
+def _stage_mae(res):
+    out = {}
+    for lo, hi in STAGES:
+        lbl = f"{lo}-{hi}%"
+        v = [abs(e["error_min"]) for e in res if e["stage"] == lbl]
+        out[lbl] = round(float(np.mean(v)), 1) if v else None
+    return out
+
+
 def summarize(entries):
-    """Out-of-sample stats over resolved entries that had ≥1 prior cycle."""
+    """Out-of-sample stats over resolved entries that had ≥1 prior cycle.
+
+    The headline uses only **tightly-labeled** cycles (trustworthy firing time);
+    the loose-label set is reported separately and flagged as contaminated.
+    """
     res = [e for e in entries if e["resolved"] and e["n_prior_cycles"] >= 1
            and e["error_min"] is not None]
-    stats = {"n_resolved": len(res)}
+    tight = [e for e in res if e.get("label_tight")]
+    n_tight_cycles = len({e["cycle"] for e in tight})
+    stats = {"n_resolved": len(res), "n_tight_labeled": len(tight),
+             "n_tight_cycles": n_tight_cycles}
+    if tight:
+        ae = np.abs([e["error_min"] for e in tight])
+        stats["tight_overall_mae_min"] = round(float(np.mean(ae)), 1)
+        stats["tight_stage_mae_min"] = _stage_mae(tight)
     if res:
-        ae = np.abs([e["error_min"] for e in res])
-        stats["overall_mae_min"] = round(float(np.mean(ae)), 1)
-        stats["overall_bias_min"] = round(float(np.mean([e["error_min"] for e in res])), 1)
-        per_stage = {}
-        for lo, hi in STAGES:
-            lbl = f"{lo}-{hi}%"
-            v = [abs(e["error_min"]) for e in res if e["stage"] == lbl]
-            per_stage[lbl] = round(float(np.mean(v)), 1) if v else None
-        stats["stage_mae_min"] = per_stage
-    return stats, res
+        stats["all_overall_mae_min"] = round(float(np.mean(np.abs([e["error_min"] for e in res]))), 1)
+        stats["all_stage_mae_min"] = _stage_mae(res)
+    return stats, res, tight
 
 
 def make_graph(entries, res, out_png):
@@ -177,30 +195,40 @@ def make_graph(entries, res, out_png):
     plt.close(fig)
 
 
-def write_markdown(entries, res, stats, path):
+def write_markdown(entries, res, tight, stats, path):
     L = ["# Prediction Track Record (out-of-sample)", "",
          "Causal reconstruction — each prediction used only cycles that finished "
-         "*before* its cycle began. This is the honest real-world scorecard.", ""]
-    if "overall_mae_min" in stats:
-        L += [f"**Resolved predictions:** {stats['n_resolved']}  |  "
-              f"**Overall MAE:** {stats['overall_mae_min']} min  |  "
-              f"**Bias:** {stats['overall_bias_min']:+} min", "",
-              "**MAE by stage:** " + "  ·  ".join(
-                  f"{k} = {v}min" for k, v in stats["stage_mae_min"].items()
+         "*before* its cycle began. Predictions are the **primary model "
+         "(`diurnal`)**, not the ensemble.", "",
+         f"⚠️ **Label caveat:** only **{stats.get('n_tight_cycles', 0)} cycle(s)** "
+         "have a firing time known to within "
+         f"{int(__import__('predict').TIGHT_BRACKET_MIN)} min. Numbers over "
+         "loosely-sampled cycles are contaminated by label error of tens of "
+         "minutes, so the **tight-label** row is the trustworthy one.", ""]
+    if "tight_overall_mae_min" in stats:
+        L += [f"**Tight-label OOS MAE:** {stats['tight_overall_mae_min']} min "
+              f"(n={stats['n_tight_labeled']} predictions, "
+              f"{stats['n_tight_cycles']} cycle(s))",
+              "**Tight-label MAE by stage:** " + "  ·  ".join(
+                  f"{k}={v}m" for k, v in stats["tight_stage_mae_min"].items()
                   if v is not None), ""]
+    if "all_overall_mae_min" in stats:
+        L += [f"_All-cycle (contaminated) MAE: {stats['all_overall_mae_min']} min "
+              f"over {stats['n_resolved']} predictions — do not trust._", ""]
     # Per-cycle snapshot at ~50/75/90%.
     L += ["## Per-cycle snapshots", "",
-          "| Cycle | Actual fire | @~50% | @~75% | @~90% |",
-          "|-------|-------------|------:|------:|------:|"]
+          "| Cycle | Actual fire | Label | @~50% | @~75% | @~90% |",
+          "|-------|-------------|-------|------:|------:|------:|"]
     for cyc in sorted({e["cycle"] for e in res}):
         rows = [e for e in res if e["cycle"] == cyc]
         fire = rows[0]["actual_fire"]
+        lbl = "tight" if rows[0].get("label_tight") else f"±{rows[0].get('label_bracket_min','?')}m"
 
         def at(target_pct):
             cand = min(rows, key=lambda e: abs(e["progress_pct"] - target_pct))
             return f"{cand['error_min']:+.0f}m" if abs(cand["progress_pct"] - target_pct) < 15 else "—"
-        L.append(f"| {cyc} | {fire} | {at(50)} | {at(75)} | {at(90)} |")
-    L += ["", "Values are ensemble error (predicted − actual firing), minutes; "
+        L.append(f"| {cyc} | {fire} | {lbl} | {at(50)} | {at(75)} | {at(90)} |")
+    L += ["", "Values are primary-model error (predicted − actual firing), minutes; "
           "+ = predicted too late. See `prediction_track.png`.", ""]
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(L))
@@ -216,24 +244,28 @@ def main(argv=None) -> int:
     points = load_points(args.input)
     target = float(points[-1]["target"])
     entries, cycles = build_log(points, target)
-    stats, res = summarize(entries)
+    stats, res, tight = summarize(entries)
 
     os.makedirs(args.outdir, exist_ok=True)
     with open(os.path.join(args.outdir, "predictions_log.jsonl"), "w", encoding="utf-8") as fh:
         for e in entries:
             fh.write(json.dumps(e) + "\n")
-    write_markdown(entries, res, stats,
+    write_markdown(entries, res, tight, stats,
                    os.path.join(args.outdir, "PREDICTION_LOG.md"))
     if not args.no_graph and res:
         make_graph(entries, res, os.path.join(args.outdir, "prediction_track.png"))
 
     print(f"Logged {len(entries)} predictions across {len(cycles)} cycles.")
-    print(f"Resolved (out-of-sample): {stats.get('n_resolved', 0)}")
-    if "overall_mae_min" in stats:
-        print(f"Overall OOS MAE: {stats['overall_mae_min']} min | bias {stats['overall_bias_min']:+} min")
-        for k, v in stats["stage_mae_min"].items():
+    print(f"Resolved: {stats.get('n_resolved', 0)} | "
+          f"tightly-labeled: {stats.get('n_tight_labeled', 0)} "
+          f"({stats.get('n_tight_cycles', 0)} cycle(s))")
+    if "tight_overall_mae_min" in stats:
+        print(f"TIGHT-LABEL OOS MAE: {stats['tight_overall_mae_min']} min (trustworthy)")
+        for k, v in stats["tight_stage_mae_min"].items():
             if v is not None:
-                print(f"  {k:8s} MAE {v} min")
+                print(f"  {k:8s} {v} min")
+    if "all_overall_mae_min" in stats:
+        print(f"all-cycle MAE (contaminated): {stats['all_overall_mae_min']} min")
     return 0
 
 
