@@ -1,27 +1,27 @@
 # Vote Party Prediction
 
-_Generated 2026-07-19T23:37:05Z — recomputed every data update._
+_Generated 2026-07-20T00:44:34Z — recomputed every data update._
 
-**Progress:** 3391 / 5000.0 (67.8%) — 1609 remaining
-**Players online:** 533  |  **Cycle started:** 2026-07-19T13:17:01Z  |  **Data points this cycle:** 104
+**Progress:** 3888 / 5000.0 (77.8%) — 1112 remaining
+**Players online:** 514  |  **Cycle started:** 2026-07-19T13:17:01Z  |  **Data points this cycle:** 116
 
 ## 🎯 Ensemble prediction
 
-**Vote party fires ≈ `2026-07-20T05:40:27Z`**
-Calibrated confidence: **±40 min** (`2026-07-20T05:00:20Z` → `2026-07-20T06:20:35Z`) — the ensemble's measured error at this cycle stage.
-Model spread: `2026-07-20T04:06:40Z` → `2026-07-20T08:25:39Z`
+**Vote party fires ≈ `2026-07-20T03:47:24Z`**
+Calibrated confidence: **±9 min** (`2026-07-20T03:38:54Z` → `2026-07-20T03:55:55Z`) — the ensemble's measured error at this cycle stage.
+Model spread: `2026-07-20T03:16:22Z` → `2026-07-20T04:24:47Z`
 
 ## Individual models
 
 | Model | Predicted ETA | Weight | Backtest RMSE |
 |-------|---------------|--------|---------------|
-| diurnal | 2026-07-20T05:22:05Z | 0.394 | 1.06707 |
-| wls | 2026-07-20T06:16:08Z | 0.117 | 2.93923 |
-| ewma | 2026-07-20T07:37:27Z | 0.113 | 3.16131 |
-| shrinkage | 2026-07-20T04:06:40Z | 0.105 | 1.98583 |
-| linear | 2026-07-20T04:10:50Z | 0.091 | 3.05697 |
-| recent | 2026-07-20T08:25:39Z | 0.081 | 3.69949 |
-| theilsen | 2026-07-20T04:07:39Z | 0.060 | 3.25194 |
-| quadratic | n/a | 0.037 | 3.68622 |
+| diurnal | 2026-07-20T03:54:34Z | 0.355 | 1.06707 |
+| quadratic | n/a | 0.146 | 3.68622 |
+| ewma | 2026-07-20T03:16:54Z | 0.123 | 3.16131 |
+| wls | 2026-07-20T03:45:50Z | 0.122 | 2.93923 |
+| shrinkage | 2026-07-20T03:53:52Z | 0.092 | 1.98583 |
+| recent | 2026-07-20T03:16:22Z | 0.075 | 3.69949 |
+| linear | 2026-07-20T04:23:06Z | 0.047 | 3.05697 |
+| theilsen | 2026-07-20T04:24:47Z | 0.040 | 3.25194 |
 
 Weights come from a rolling-origin backtest on completed cycles (leave-one-out for history-aware models): each model's inverse mean-squared extrapolation error, normalised. See `prediction.png`.
