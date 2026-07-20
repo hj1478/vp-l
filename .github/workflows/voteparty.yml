@@ -2,20 +2,28 @@ name: Vote Party Tracker
 
 # Collects EarthMC vote party data and commits it to the repo under data/.
 #
-# GitHub's scheduled cron is best-effort and gets heavily delayed, so instead
-# of one poll per firing we fire ~hourly and let each run poll continuously for
-# a 55-minute window (every 5 min). That gives near-continuous 5-minute data
-# regardless of exactly when GitHub actually starts the run.
+# SELF-CHAINING: GitHub's scheduled cron is best-effort and skips multi-hour
+# stretches (we measured only ~33% time coverage from cron alone). To close the
+# gaps, each run polls for a 55-minute window and then **dispatches the next run
+# itself**, so windows run back-to-back with ~100% coverage instead of waiting
+# on the scheduler.
+#
+# The default GITHUB_TOKEN is blocked from triggering workflows (GitHub's loop
+# guard), so the self-dispatch needs a Personal Access Token in the repo secret
+# WORKFLOW_PAT (fine-grained, this repo, Actions: read+write). Without it the
+# workflow still runs — it just falls back to the hourly cron (with gaps).
+#
+# To STOP the chain: disable the workflow in the Actions tab (or remove the PAT).
 
 on:
-  # Fire roughly hourly. Each run covers ~55 minutes, so back-to-back firings
-  # give near-continuous coverage.
+  # Safety-net / bootstrap. The real cadence comes from self-chaining; this
+  # restarts the chain if a run ever dies before dispatching the next.
   schedule:
     - cron: "0 * * * *"
-  # Allow manual runs from the Actions tab.
   workflow_dispatch:
 
-# Never let two runs commit at the same time; queue a delayed run instead.
+# Serialize runs: a dispatched/queued run waits for the current one, then starts
+# immediately when it ends — giving seamless back-to-back windows.
 concurrency:
   group: voteparty-tracker
   cancel-in-progress: false
@@ -27,9 +35,24 @@ jobs:
   track:
     runs-on: ubuntu-latest
     timeout-minutes: 65
+    env:
+      WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Chain next run (self-chaining; needs WORKFLOW_PAT)
+        # Dispatch early so the next window is queued even if a later step fails;
+        # concurrency makes it wait until THIS run finishes, then start at once.
+        if: ${{ env.WORKFLOW_PAT != '' }}
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer $WORKFLOW_PAT" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/voteparty.yml/dispatches" \
+            -d "{\"ref\":\"${GITHUB_REF_NAME}\"}") || true
+          echo "self-dispatch HTTP $code (204 = queued OK; else falling back to cron)"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -39,7 +62,8 @@ jobs:
       - name: Poll vote party endpoint for a 55-minute window
         run: |
           mkdir -p data
-          # 3300s = 55 min, polling every 5 min (-i 300) -> ~11 points per run.
+          # 55-min window, 5-min polling; tracker auto-drops to 60s above 90%
+          # so a firing inside the window is tightly bracketed.
           python3 voteparty_tracker.py --duration 3300 -i 300 \
             -f data/voteparty.log \
             --json data/voteparty.jsonl
@@ -47,7 +71,7 @@ jobs:
       - name: Install prediction dependencies
         run: pip install -r requirements.txt
 
-      - name: Update ensemble prediction & graph
+      - name: Update prediction & graph
         run: python3 predict.py -i data/voteparty.jsonl -o data
 
       - name: Update stage-wise accuracy backtest
@@ -77,7 +101,6 @@ jobs:
             exit 0
           fi
           git commit -m "chore: vote party data window ending $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          # Rebase onto any commits added by an earlier run, then push.
           for attempt in 1 2 3 4; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && \
             git push origin "HEAD:${GITHUB_REF_NAME}" && break
