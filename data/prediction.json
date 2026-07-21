@@ -1,93 +1,94 @@
 {
-  "generated_at": "2026-07-21T16:06:28Z",
+  "generated_at": "2026-07-21T17:59:21Z",
   "target": 5000.0,
   "current": {
-    "collected": 4445,
-    "remaining": 555,
-    "percent": 88.9,
-    "last_ts": "2026-07-21T16:06:28Z",
-    "cycle_start_ts": "2026-07-21T05:37:06Z",
-    "num_points": 44,
-    "players_online": 553
+    "collected": 321,
+    "remaining": 4679,
+    "percent": 6.4,
+    "last_ts": "2026-07-21T17:59:21Z",
+    "cycle_start_ts": "2026-07-21T17:14:23Z",
+    "num_points": 10,
+    "players_online": 591
   },
   "primary": {
     "model": "analogue",
-    "eta": "2026-07-21T17:13:16Z",
-    "eta_epoch": 1784653996.7487416,
-    "eta_display": "2026-07-21 17:15Z",
-    "display_granularity_min": 15,
+    "eta": "2026-07-22T07:34:22Z",
+    "eta_epoch": 1784705662.8135133,
+    "eta_display": "2026-07-22 07:30Z",
+    "display_granularity_min": 30,
     "interval_80": [
-      "2026-07-21T17:04:16Z",
-      "2026-07-21T17:57:32Z"
+      "2026-07-22T04:59:42Z",
+      "2026-07-22T08:42:16Z"
     ],
     "interval_90": [
-      "2026-07-21T17:02:36Z",
-      "2026-07-21T18:18:27Z"
+      "2026-07-22T03:10:17Z",
+      "2026-07-22T08:52:57Z"
     ],
-    "half_width_80_min": 27,
-    "n_library_cycles": 8,
-    "n_tight_labeled_cycles": 5,
-    "note": "Point and interval are both the analogue curve-library (measured ~75% coverage OOS), over 8 library cycles (5 tightly labeled). Sample is small \u2014 treat the width as approximate. Wide early by design; tightens as the cycle fills."
+    "half_width_80_min": 111,
+    "n_library_cycles": 9,
+    "n_tight_labeled_cycles": 6,
+    "note": "Point and interval are both the analogue curve-library (measured ~75% coverage OOS), over 9 library cycles (6 tightly labeled). Sample is small \u2014 treat the width as approximate. Wide early by design; tightens as the cycle fills."
   },
   "models": {
     "shrinkage": {
-      "eta": "2026-07-21T17:31:03Z",
-      "weight": 0.1002,
-      "backtest_rmse": 1.53546
+      "eta": "2026-07-22T06:20:38Z",
+      "weight": 0.0891,
+      "backtest_rmse": 1.50997
     },
     "diurnal": {
-      "eta": "2026-07-21T17:36:28Z",
-      "weight": 0.1949,
-      "backtest_rmse": 0.70926
+      "eta": "2026-07-22T07:29:21Z",
+      "weight": 0.2575,
+      "backtest_rmse": 0.70155
     },
     "diurnal_dow": {
-      "eta": "2026-07-21T17:36:28Z",
-      "weight": 0.213,
-      "backtest_rmse": 0.68005
+      "eta": "2026-07-22T07:14:21Z",
+      "weight": 0.2836,
+      "backtest_rmse": 0.65488
     },
     "linear": {
-      "eta": "2026-07-21T17:29:48Z",
-      "weight": 0.0805,
-      "backtest_rmse": 2.47523
+      "eta": "2026-07-22T05:44:32Z",
+      "weight": 0.0635,
+      "backtest_rmse": 2.3856
     },
     "recent": {
-      "eta": "2026-07-21T17:19:46Z",
-      "weight": 0.0797,
-      "backtest_rmse": 3.00585
+      "eta": "2026-07-22T05:42:36Z",
+      "weight": 0.0591,
+      "backtest_rmse": 2.8889
     },
     "ewma": {
-      "eta": "2026-07-21T17:17:57Z",
-      "weight": 0.0954,
-      "backtest_rmse": 2.59645
+      "eta": "2026-07-22T06:54:47Z",
+      "weight": 0.0626,
+      "backtest_rmse": 2.49938
     },
     "theilsen": {
-      "eta": "2026-07-21T17:29:19Z",
-      "weight": 0.0752,
-      "backtest_rmse": 2.60587
+      "eta": "2026-07-22T06:23:38Z",
+      "weight": 0.0623,
+      "backtest_rmse": 2.50419
     },
     "wls": {
-      "eta": "2026-07-21T17:27:40Z",
-      "weight": 0.0945,
-      "backtest_rmse": 2.39366
+      "eta": "2026-07-22T06:11:24Z",
+      "weight": 0.0648,
+      "backtest_rmse": 2.30508
     },
     "quadratic": {
-      "eta": "2026-07-21T17:26:49Z",
-      "weight": 0.0666,
-      "backtest_rmse": 2.77109
+      "eta": null,
+      "weight": 0.0575,
+      "backtest_rmse": 2.61028
     }
   },
   "ensemble": {
-    "eta": "2026-07-21T17:30:16Z",
-    "eta_epoch": 1784655016.9890883,
-    "range_low": "2026-07-21T17:17:57Z",
-    "range_high": "2026-07-21T17:36:28Z"
+    "eta": "2026-07-22T06:52:35Z",
+    "eta_epoch": 1784703155.7866845,
+    "range_low": "2026-07-22T05:42:36Z",
+    "range_high": "2026-07-22T07:29:21Z"
   },
   "model_selection": {
     "stable_winner": "diurnal_dow",
     "fold_winners": {
       "4": "diurnal_dow",
       "6": "diurnal_dow",
-      "7": "diurnal_dow"
+      "7": "diurnal_dow",
+      "8": "diurnal_dow"
     },
     "note": "Stable winner: 'diurnal_dow' wins every leave-one-cycle-out fold. Still few cycles \u2014 keep watching."
   }
