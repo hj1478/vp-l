@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-07-21T09:29:19Z",
+  "progress_pct": 32.6,
+  "median_eta": "2026-07-21T16:58:12Z",
+  "interval_80": [
+    "2026-07-21T11:58:01Z",
+    "2026-07-21T20:08:23Z"
+  ],
+  "interval_90": [
+    "2026-07-21T11:58:01Z",
+    "2026-07-21T20:44:30Z"
+  ],
+  "effective_analogues": 6.8,
+  "n_library_cycles": 8,
+  "oos_verdict": {
+    "analogue_median_mae_min": 40.9,
+    "diurnal_median_mae_min": 26.5,
+    "interval_80_measured_coverage_pct": 75,
+    "n_tight_stage_predictions": 204
+  },
+  "note": "Nonparametric: forecast is the similarity-weighted distribution of past cycles' actual remaining trajectories. Intervals reflect real historical spread; coverage measured on tight cycles above."
+}

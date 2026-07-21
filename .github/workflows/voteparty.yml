@@ -106,6 +106,9 @@ jobs:
       - name: Update experimental NHPP diagnostic
         run: python3 nhpp.py -i data/voteparty.jsonl -o data || true
 
+      - name: Update conditional analogue forecaster
+        run: python3 analogue.py -i data/voteparty.jsonl -o data || true
+
       - name: Commit snapshots
         run: |
           git config user.name "github-actions[bot]"
@@ -117,7 +120,8 @@ jobs:
             data/replay.png \
             data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md \
             data/cycles.png \
-            data/nhpp.png data/nhpp.json
+            data/nhpp.png data/nhpp.json \
+            data/analogue.png data/analogue.json
           if git diff --cached --quiet; then
             echo "No new data to commit."
             exit 0
