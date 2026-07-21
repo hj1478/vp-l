@@ -1,0 +1,29 @@
+{
+  "__status__": "EXPERIMENTAL \u2014 diagnostic only, NOT the reported prediction",
+  "generated_at": "2026-07-21T09:29:19Z",
+  "progress_pct": 32.6,
+  "median_eta": "2026-07-21T17:46:37Z",
+  "interval_80": [
+    "2026-07-21T17:16:59Z",
+    "2026-07-21T18:25:12Z"
+  ],
+  "interval_90": [
+    "2026-07-21T17:07:48Z",
+    "2026-07-21T18:38:55Z"
+  ],
+  "level_posterior": {
+    "mean": 0.964,
+    "sd": 0.021,
+    "global_mean": 1.007,
+    "global_sd": 0.05,
+    "observed": 0.954,
+    "n_prior_cycles": 8
+  },
+  "oos_verdict": {
+    "nhpp_median_mae_min": 36.3,
+    "diurnal_median_mae_min": 26.5,
+    "interval_80_measured_coverage_pct": 19,
+    "n_tight_stage_predictions": 204,
+    "verdict": "Intervals are OVERCONFIDENT \u2014 measured coverage 19% vs 80% nominal; median no better than diurnal. Dominant uncertainty is structural/within-cycle, which this process model does not capture. Do not trust the intervals; revisit with conformal calibration once more tight cycles exist."
+  }
+}
