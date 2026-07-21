@@ -44,15 +44,29 @@ jobs:
       - name: Chain next run (self-chaining; needs WORKFLOW_PAT)
         # Dispatch early so the next window is queued even if a later step fails;
         # concurrency makes it wait until THIS run finishes, then start at once.
-        if: ${{ env.WORKFLOW_PAT != '' }}
+        # The PAT check is done in-script (not in `if:`) so the log always shows
+        # exactly what happened.
+        if: ${{ always() }}
+        env:
+          WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
         run: |
-          code=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
+          if [ -z "$WORKFLOW_PAT" ]; then
+            echo "WORKFLOW_PAT secret is EMPTY/unset — self-chain disabled, relying on cron."
+            echo "Fix: add it as an *Actions repository secret* named exactly WORKFLOW_PAT."
+            exit 0
+          fi
+          echo "WORKFLOW_PAT is present (len=${#WORKFLOW_PAT}); dispatching next run..."
+          code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" -X POST \
             -H "Authorization: Bearer $WORKFLOW_PAT" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/voteparty.yml/dispatches" \
             -d "{\"ref\":\"${GITHUB_REF_NAME}\"}") || true
-          echo "self-dispatch HTTP $code (204 = queued OK; else falling back to cron)"
+          echo "self-dispatch HTTP $code (204 = queued OK)"
+          if [ "$code" != "204" ]; then
+            echo "response body:"; cat /tmp/resp.txt || true
+            echo "→ 403/404 usually means the PAT lacks 'Actions: read and write' on this repo."
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
