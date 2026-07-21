@@ -1,26 +1,26 @@
 {
   "__status__": "EXPERIMENTAL \u2014 diagnostic only, NOT the reported prediction",
-  "generated_at": "2026-07-21T19:53:10Z",
-  "progress_pct": 18.8,
-  "median_eta": "2026-07-22T07:04:36Z",
+  "generated_at": "2026-07-21T21:47:20Z",
+  "progress_pct": 29.8,
+  "median_eta": "2026-07-22T07:06:41Z",
   "interval_80": [
-    "2026-07-22T06:36:06Z",
-    "2026-07-22T07:37:53Z"
+    "2026-07-22T06:42:13Z",
+    "2026-07-22T07:36:13Z"
   ],
   "interval_90": [
-    "2026-07-22T06:29:21Z",
-    "2026-07-22T07:48:17Z"
+    "2026-07-22T06:35:39Z",
+    "2026-07-22T07:48:31Z"
   ],
   "level_posterior": {
-    "mean": 1.034,
-    "sd": 0.028,
+    "mean": 1.03,
+    "sd": 0.024,
     "global_mean": 1.007,
     "global_sd": 0.05,
-    "observed": 1.046,
+    "observed": 1.036,
     "n_prior_cycles": 9
   },
   "oos_verdict": {
-    "nhpp_median_mae_min": 35.5,
+    "nhpp_median_mae_min": 35.1,
     "diurnal_median_mae_min": 26.9,
     "interval_80_measured_coverage_pct": 21,
     "n_tight_stage_predictions": 263,
