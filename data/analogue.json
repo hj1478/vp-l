@@ -13,10 +13,18 @@
   "effective_analogues": 6.5,
   "n_library_cycles": 8,
   "oos_verdict": {
-    "analogue_median_mae_min": 40.9,
-    "diurnal_median_mae_min": 26.5,
-    "interval_80_measured_coverage_pct": 75,
-    "n_tight_stage_predictions": 204
+    "analogue_median_mae_min": 44.4,
+    "analogue_mae_95ci_min": [
+      28.5,
+      85.6
+    ],
+    "interval_80_measured_coverage_pct": 73,
+    "coverage_95ci_pct": [
+      50,
+      80
+    ],
+    "n_tight_cycles": 4,
+    "n_tight_stage_predictions": 211
   },
-  "note": "Nonparametric: forecast is the similarity-weighted distribution of past cycles' actual remaining trajectories. Intervals reflect real historical spread; coverage measured on tight cycles above."
+  "note": "Nonparametric. Every OOS metric carries a cluster-bootstrap 95% CI over the 4 tight cycles \u2014 it is deliberately wide, because a point-metric from a handful of cycles is not precise."
 }

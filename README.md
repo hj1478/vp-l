@@ -135,12 +135,21 @@ real limits, and the system is deliberately conservative as a result:
   evidence. We **do not name a "winning" model** until it wins *every*
   leave-one-cycle-out fold (`stable_winner`); right now there is none, and the
   weights are a diagnostic, not the prediction.
-- **Firing-time labels are uncertain.** A cycle's true firing time is only known
-  to within the gap between its last pre-reset sample and first post-reset
-  sample — tens to hundreds of minutes for loosely-sampled cycles. Only
-  tightly-bracketed cycles are used for error/coverage measurement; the rest are
-  flagged. Tightening these labels (endgame fast-polling, self-chaining
-  collection) is the current top priority.
+- **Firing-time labels: recovered, not binarized.** A cycle's firing time is
+  *not* as uncertain as the raw sample gap suggests — when the last sample is
+  near target, extrapolating the trajectory to 5000 pins it tightly (a cycle
+  last seen at 98% is known to ~2 min even if the collector then went dark for an
+  hour). Each cycle gets a continuous **label σ** (extrapolation uncertainty),
+  used to (a) recover cycles the raw-gap gate wrongly discarded (3 → 5 tight),
+  (b) inverse-variance weight cycles in model selection, and (c) carry each
+  borrowed analogue endpoint's uncertainty into the interval. The one genuinely
+  loose cycle (last seen at 81%, ~1000 votes out) stays down-weighted.
+- **Display precision = interval resolution.** The point is rounded to match the
+  interval width (±2h interval → "~17:00", never a false "17:30").
+- **Every OOS metric carries a cluster-bootstrap 95% CI** over cycles, and it is
+  deliberately wide (e.g. MAE 44 min, CI [28, 86]; coverage 73%, CI [50, 80]) —
+  a point-metric from ~4 cycles is not precise, and we show that rather than hide
+  it.
 
 ```bash
 pip install -r requirements.txt

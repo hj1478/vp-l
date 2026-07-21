@@ -21,9 +21,9 @@
   },
   "oos_verdict": {
     "nhpp_median_mae_min": 36.8,
-    "diurnal_median_mae_min": 26.5,
+    "diurnal_median_mae_min": 27.8,
     "interval_80_measured_coverage_pct": 19,
-    "n_tight_stage_predictions": 204,
+    "n_tight_stage_predictions": 211,
     "verdict": "Intervals are OVERCONFIDENT \u2014 measured coverage 19% vs 80% nominal; median no better than diurnal. Dominant uncertainty is structural/within-cycle, which this process model does not capture. Do not trust the intervals; revisit with conformal calibration once more tight cycles exist."
   }
 }

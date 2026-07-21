@@ -32,7 +32,7 @@ import numpy as np
 from predict import (
     MODELS, load_points, split_cycles, cycle_arrays, cycle_fire_time,
     make_ctx, backtest_staged, weights_for_progress, fmt_ts,
-    fire_bracket_min, TIGHT_BRACKET_MIN,
+    label_sigma_min, TIGHT_LABEL_MIN,
 )
 
 MIN_FIT = 3
@@ -54,8 +54,8 @@ def build_log(points, target):
         prior = cycles[:ci]                      # only cycles that finished earlier
         completed = ci < len(cycles) - 1         # a later cycle exists → this one fired
         fire = cycle_fire_time(cyc, target)[0] if completed else None
-        bracket = fire_bracket_min(cycles, ci)   # label uncertainty (minutes)
-        tight = bracket is not None and bracket <= TIGHT_BRACKET_MIN
+        bracket = label_sigma_min(cycles, ci, target)  # extrapolation label sigma (min)
+        tight = bool(bracket is not None and bracket <= TIGHT_LABEL_MIN)
         staged = backtest_staged(prior, target) if prior else None
         ctx = make_ctx(cyc, prior)
         t, y = cycle_arrays(cyc)
@@ -94,7 +94,7 @@ def build_log(points, target):
                 "actual_fire": fmt_ts(fire) if fire is not None else None,
                 "error_min": round(err, 1) if err is not None else None,
                 "resolved": fire is not None,
-                "label_bracket_min": round(bracket) if bracket is not None else None,
+                "label_bracket_min": int(round(bracket)) if bracket is not None else None,
                 "label_tight": tight,
             })
     return entries, cycles
@@ -198,13 +198,11 @@ def make_graph(entries, res, out_png):
 def write_markdown(entries, res, tight, stats, path):
     L = ["# Prediction Track Record (out-of-sample)", "",
          "Causal reconstruction — each prediction used only cycles that finished "
-         "*before* its cycle began. Predictions are the **primary model "
-         "(`diurnal`)**, not the ensemble.", "",
-         f"⚠️ **Label caveat:** only **{stats.get('n_tight_cycles', 0)} cycle(s)** "
-         "have a firing time known to within "
-         f"{int(__import__('predict').TIGHT_BRACKET_MIN)} min. Numbers over "
-         "loosely-sampled cycles are contaminated by label error of tens of "
-         "minutes, so the **tight-label** row is the trustworthy one.", ""]
+         "*before* its cycle began. Predictions are the **analogue** model.", "",
+         f"⚠️ **Label caveat:** **{stats.get('n_tight_cycles', 0)} cycle(s)** have a "
+         "firing time known (by extrapolation to target) to within "
+         f"{int(__import__('predict').TIGHT_LABEL_MIN)} min. The **tight-label** "
+         "row is the trustworthy one; looser cycles carry larger label error.", ""]
     if "tight_overall_mae_min" in stats:
         L += [f"**Tight-label OOS MAE:** {stats['tight_overall_mae_min']} min "
               f"(n={stats['n_tight_labeled']} predictions, "

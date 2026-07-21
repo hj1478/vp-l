@@ -12,20 +12,22 @@
   },
   "primary": {
     "model": "analogue",
-    "eta": "2026-07-21T16:56:15Z",
-    "eta_epoch": 1784652975.2935853,
+    "eta": "2026-07-21T17:00:32Z",
+    "eta_epoch": 1784653232.5827725,
+    "eta_display": "2026-07-21 17:00Z",
+    "display_granularity_min": 60,
     "interval_80": [
-      "2026-07-21T14:48:00Z",
-      "2026-07-21T19:04:10Z"
+      "2026-07-21T14:49:16Z",
+      "2026-07-21T19:04:31Z"
     ],
     "interval_90": [
-      "2026-07-21T14:48:00Z",
-      "2026-07-21T19:19:02Z"
+      "2026-07-21T14:47:02Z",
+      "2026-07-21T19:28:02Z"
     ],
     "half_width_80_min": 128,
     "n_library_cycles": 8,
-    "n_tight_labeled_cycles": 3,
-    "note": "Point and interval are both the analogue curve-library (measured ~75% coverage OOS), over 8 library cycles (3 tightly labeled). Sample is small \u2014 treat the width as approximate. Wide early by design; tightens as the cycle fills."
+    "n_tight_labeled_cycles": 5,
+    "note": "Point and interval are both the analogue curve-library (measured ~75% coverage OOS), over 8 library cycles (5 tightly labeled). Sample is small \u2014 treat the width as approximate. Wide early by design; tightens as the cycle fills."
   },
   "models": {
     "shrinkage": {
@@ -81,16 +83,12 @@
     "range_high": "2026-07-21T17:48:05Z"
   },
   "model_selection": {
-    "stable_winner": null,
+    "stable_winner": "diurnal_dow",
     "fold_winners": {
-      "1": "shrinkage",
-      "2": "diurnal",
-      "3": "diurnal_dow",
       "4": "diurnal_dow",
-      "5": "quadratic",
       "6": "diurnal_dow",
       "7": "diurnal_dow"
     },
-    "note": "No stable winner: fold winners differ (['diurnal', 'diurnal_dow', 'quadratic', 'shrinkage']); weights are shrunk toward uniform. Reporting a 'leading model' at this sample size would be sampling noise."
+    "note": "Stable winner: 'diurnal_dow' wins every leave-one-cycle-out fold. Still few cycles \u2014 keep watching."
   }
 }

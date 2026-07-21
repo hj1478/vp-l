@@ -7,15 +7,15 @@ _Generated 2026-07-21T12:19:18Z — recomputed every data update._
 
 ## 🎯 Prediction
 
-**Vote party fires ≈ `2026-07-21T16:56:15Z`**  (model: `analogue`)
-**80% window:** `2026-07-21T14:48:00Z` → `2026-07-21T19:04:10Z`  (90%: `2026-07-21T14:48:00Z` → `2026-07-21T19:19:02Z`)
-_Interval from the analogue curve-library (measured ~75% coverage OOS) over 8 cycles (3 tightly labeled). Wide early by design; tightens as the cycle fills._
+**Vote party fires ≈ `2026-07-21 17:00Z`**  (model: `analogue`, rounded to interval resolution)
+**80% window:** `2026-07-21 15:00Z` → `2026-07-21 19:00Z`
+_Interval from the analogue curve-library (measured ~73% coverage OOS, endpoint label-uncertainty propagated) over 8 cycles (5 tightly labeled). Point rounded to match interval width; wide early by design._
 
 _Diagnostic ensemble ETA: `2026-07-21T17:03:34Z`._
 
 ## Model diagnostics (not the prediction)
 
-**No stable winner** — the lowest-error model differs across leave-one-cycle-out folds, so we name none and keep the (diagnostic) weights shrunk toward uniform.
+**Stable winner:** `diurnal_dow` wins every leave-one-cycle-out fold (still few cycles).
 
 | Model | Predicted ETA | Weight (shrunk) |
 |-------|---------------|-----------------|

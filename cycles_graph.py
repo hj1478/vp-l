@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 import numpy as np
 
 from predict import (load_points, split_cycles, cycle_arrays, cycle_fire_time,
-                     fire_bracket_min, TIGHT_BRACKET_MIN)
+                     label_sigma_min, TIGHT_LABEL_MIN)
 
 
 def dt(e):
@@ -43,8 +43,8 @@ def main(argv=None):
         xs = [dt(p["_t"]) for p in cyc]
         ys = [p["collected"] for p in cyc]
         completed = i < ncyc - 1
-        bracket = fire_bracket_min(cycles, i)
-        tight = bracket is not None and bracket <= TIGHT_BRACKET_MIN
+        bracket = label_sigma_min(cycles, i, target)
+        tight = bracket is not None and bracket <= TIGHT_LABEL_MIN
         lbl = f"cycle {i+1} ({len(cyc)}pts"
         lbl += ", current)" if not completed else (", tight)" if tight else f", ±{round(bracket)}m)")
         ax1.plot(xs, ys, "-o", color=col, ms=2.5, lw=1.4, label=lbl)
@@ -86,9 +86,9 @@ def main(argv=None):
     # summary
     print(f"{ncyc} cycles:")
     for i, cyc in enumerate(cycles):
-        b = fire_bracket_min(cycles, i)
+        b = label_sigma_min(cycles, i, target)
         dur = (cyc[-1]["_t"] - cyc[0]["_t"]) / 3600.0
-        tag = "current" if i == ncyc - 1 else ("tight" if (b and b <= TIGHT_BRACKET_MIN) else f"loose ±{round(b)}m")
+        tag = "current" if i == ncyc - 1 else ("tight" if (b and b <= TIGHT_LABEL_MIN) else f"loose σ±{round(b)}m")
         print(f"  cycle {i+1}: {len(cyc):3d} pts, spans {dur:4.1f}h, last {cyc[-1]['percent']:.0f}%  [{tag}]")
 
 

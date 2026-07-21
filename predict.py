@@ -62,6 +62,30 @@ def fmt_ts(epoch: float) -> str:
     return datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def display_granularity_min(half_width_min):
+    """Round display precision to match interval resolution. Quoting a to-the-
+    minute time when the interval is ±hours is a lie of format."""
+    hw = abs(half_width_min or 0)
+    if hw >= 120:
+        return 60
+    if hw >= 45:
+        return 30
+    if hw >= 20:
+        return 15
+    if hw >= 8:
+        return 5
+    return 1
+
+
+def fmt_ts_rounded(epoch, gran_min):
+    """Format an epoch rounded to `gran_min` minutes, as UTC HH:MM (or a date+HH:MM
+    if it helps). Point precision = interval precision."""
+    g = gran_min * 60
+    e = round(epoch / g) * g
+    d = datetime.fromtimestamp(e, tz=timezone.utc)
+    return d.strftime("%Y-%m-%d %H:%MZ")
+
+
 def load_points(path: str) -> list[dict]:
     pts = []
     with open(path, encoding="utf-8") as fh:
@@ -128,24 +152,69 @@ def cycle_fire_time(cycle, target, seg=3):
     return t0 + max(t_cross, t[-1]), float(y[-1] / target * 100.0)
 
 
-# Label quality: a completed cycle's firing time is only known to within the
-# gap between its last sub-target sample and the first sample after reset. Only
-# cycles bracketed tighter than this (minutes) have a trustworthy label.
-TIGHT_BRACKET_MIN = 15.0
+# Label quality. A completed cycle's firing time is bracketed by the gap between
+# its last sub-target sample and the first post-reset sample — but that gap
+# OVERSTATES the uncertainty: when the last sample is near target, extrapolating
+# the trajectory to 5000 pins the firing much tighter (a cycle last seen at 98%
+# with 92 votes to go is known to ~2 min even if the raw gap is 86 min). So the
+# real label uncertainty is the *extrapolation* sigma, not the sample gap.
+TIGHT_LABEL_MIN = 15.0          # a cycle is "tight" if its label sigma <= this (min)
+LABEL_RATE_UNCERT = 0.20        # relative rate uncertainty over the remaining extrapolation
+SAMPLING_FLOOR_MIN = 2.5        # +/- half the 5-min poll interval
 
 
 def fire_bracket_min(cycles, ci):
-    """Minutes between the last pre-reset sample and the first post-reset sample
-    — the window the true firing time is known to lie in. None if not completed."""
+    """Raw sample-gap bracket (minutes) between last pre-reset and first
+    post-reset sample. Upper bound on label uncertainty. None if not completed."""
     if ci >= len(cycles) - 1:
         return None
     return (cycles[ci + 1][0]["_t"] - cycles[ci][-1]["_t"]) / 60.0
 
 
-def tight_cycle_indices(cycles, max_bracket=TIGHT_BRACKET_MIN):
-    """Indices of completed cycles whose firing was tightly bracketed."""
+def label_sigma_min(cycles, ci, target):
+    """Uncertainty (minutes) of a completed cycle's firing time, from
+    extrapolating its final trajectory to target. = (votes remaining at the last
+    sample / end-rate) x rate uncertainty, floored at the sampling resolution and
+    capped by the raw bracket. None for the (unfinished) current cycle.
+
+    This recovers cycles the raw-bracket gate wrongly discarded: a cycle sampled
+    to 98% has a tiny label sigma even if the collector then went dark for an hour.
+    """
+    if ci >= len(cycles) - 1:
+        return None
+    c = cycles[ci]
+    t, y = cycle_arrays(c)
+    left = target - y[-1]
+    raw = fire_bracket_min(cycles, ci)
+    if left <= 0:
+        return SAMPLING_FLOOR_MIN
+    k = min(4, len(t))
+    if len(t) < 2 or t[-1] <= t[-k]:
+        return raw
+    r = (y[-1] - y[-k]) / (t[-1] - t[-k])           # end-rate, votes/sec
+    if r <= 0:
+        return raw
+    extrap_min = (left / r) / 60.0                  # minutes to extrapolate to target
+    sigma = extrap_min * LABEL_RATE_UNCERT
+    if raw is not None:
+        sigma = min(sigma, raw)                     # can't beat the hard bracket
+    return max(sigma, SAMPLING_FLOOR_MIN)
+
+
+def label_weight(cycles, ci, target):
+    """Inverse-variance weight for a cycle in scoring/selection: 1/sigma^2,
+    normalised so a tight (sampling-floor) cycle has weight 1.0."""
+    s = label_sigma_min(cycles, ci, target)
+    if s is None:
+        return 0.0
+    return (SAMPLING_FLOOR_MIN ** 2) / (s ** 2)
+
+
+def tight_cycle_indices(cycles, target=5000.0, max_sigma=TIGHT_LABEL_MIN):
+    """Indices of completed cycles whose firing time is known tightly (by the
+    extrapolation sigma, not the raw sample gap)."""
     return [ci for ci in range(len(cycles) - 1)
-            if (fire_bracket_min(cycles, ci) or 1e9) <= max_bracket]
+            if (label_sigma_min(cycles, ci, target) or 1e9) <= max_sigma]
 
 
 # ----------------------------------------------------------------------------
@@ -594,15 +663,21 @@ def weights_for_progress(staged, progress, blend=0.5):
     return {n: v / s for n, v in mixed.items()} if s > 0 else gw
 
 
-def stable_winner(completed, target, min_fit=3):
+def stable_winner(cycles, target, min_fit=3, min_label_weight=0.25):
     """The model with the lowest MAE in EVERY leave-one-cycle-out fold, or None
     if no single model wins unanimously. A "winner" that changes fold to fold is
     sampling noise, not evidence — so we only ever name one that is stable.
+    Only well-labeled cycles (label weight >= threshold) get a vote, so a
+    loosely-timed cycle can't crown a spurious winner. `cycles` is the full list
+    (so the last completed cycle can see its successor for labeling).
     Returns (winner_or_None, {cycle_index: fold_winner})."""
+    completed = cycles[:-1]
     fold_winners, per_cycle = [], {}
     for ci, cyc in enumerate(completed):
         if len(cyc) < min_fit + 1:
             continue
+        if label_weight(cycles, ci, target) < min_label_weight:
+            continue  # too loosely labeled to vote
         fire, _ = cycle_fire_time(cyc, target)
         if fire is None:
             continue
@@ -659,9 +734,13 @@ def time_at_collected(cyc, c, target, fire):
 
 def analogue_forecast(cycles, lib_indices, target, now_epoch, collected,
                       h_hours=ANALOGUE_H_HOURS, alpha=ANALOGUE_ALPHA):
-    """Similarity-weighted predictive firing epochs from the curve library."""
+    """Similarity-weighted predictive firing epochs from the curve library.
+
+    Also returns per-analogue label sigma (seconds): the uncertainty of the
+    borrowed cycle's own firing time, so the interval can carry it forward rather
+    than treating each borrowed endpoint as exact."""
     utc_now = now_epoch % 86400.0
-    preds, wts = [], []
+    preds, wts, sig = [], [], []
     for li in lib_indices:
         L = cycles[li]
         fire, _ = cycle_fire_time(L, target)
@@ -678,6 +757,7 @@ def analogue_forecast(cycles, lib_indices, target, now_epoch, collected,
         w = np.exp(-0.5 * (d / (h_hours * 3600.0)) ** 2)
         preds.append(now_epoch + max(remaining, 0.0))
         wts.append(w)
+        sig.append((label_sigma_min(cycles, li, target) or SAMPLING_FLOOR_MIN) * 60.0)
     if not preds:
         return None
     preds = np.array(preds)
@@ -686,7 +766,7 @@ def analogue_forecast(cycles, lib_indices, target, now_epoch, collected,
     wc = wts / wts.sum() if wts.sum() > 0 else unif
     w = alpha * wc + (1 - alpha) * unif
     w /= w.sum()
-    return {"preds": preds, "w": w}
+    return {"preds": preds, "w": w, "sigma": np.array(sig)}
 
 
 def wquantile(vals, w, qs):
@@ -697,13 +777,21 @@ def wquantile(vals, w, qs):
     return np.interp(qs, cw, v)
 
 
-def analogue_interval(cycles, target, now_epoch, collected):
-    """Predictive quantile interval for the current cycle's firing time."""
+def analogue_interval(cycles, target, now_epoch, collected, nsim=6000):
+    """Predictive quantile interval for the current cycle's firing time.
+
+    Monte-Carlo so we can carry each borrowed endpoint's *label uncertainty*
+    (sigma) into the interval instead of treating it as exact: sample an analogue
+    by weight, then jitter by that analogue's firing-time sigma. Deterministic
+    (seeded)."""
     fc = analogue_forecast(cycles, list(range(len(cycles) - 1)), target,
                            now_epoch, collected)
     if fc is None:
         return None
-    p = wquantile(fc["preds"], fc["w"], [0.05, 0.1, 0.5, 0.9, 0.95])
+    rng = np.random.default_rng(1234)
+    idx = rng.choice(len(fc["preds"]), size=nsim, p=fc["w"])
+    samples = fc["preds"][idx] + rng.normal(0.0, 1.0, nsim) * fc["sigma"][idx]
+    p = np.percentile(samples, [5, 10, 50, 90, 95])
     return {"p05": p[0], "p10": p[1], "p50": p[2], "p90": p[3], "p95": p[4]}
 
 
@@ -752,7 +840,7 @@ def predict(cycles, target):
     # interval. Using one coherent distribution keeps point and interval
     # consistent, and the ~75% OOS coverage is measured around this very median.
     # (diurnal remains in the models table as a diagnostic.)
-    n_tight = len(tight_cycle_indices(cycles))
+    n_tight = len(tight_cycle_indices(cycles, target))
     interval = analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
     if interval:
         primary_name, primary_eta = "analogue", interval["p50"]
@@ -763,7 +851,7 @@ def predict(cycles, target):
 
     # Model-selection stability: only name a "best" model if it wins every LOO
     # fold. Otherwise the leaderboard is noise and weights stay near-uniform.
-    winner, fold_winners = stable_winner(completed, target)
+    winner, fold_winners = stable_winner(cycles, target)
 
     return {
         "generated_at": None,
@@ -781,6 +869,12 @@ def predict(cycles, target):
             "model": primary_name,
             "eta": fmt_ts(primary_eta) if primary_eta else None,
             "eta_epoch": primary_eta,
+            "eta_display": (fmt_ts_rounded(
+                primary_eta, display_granularity_min(
+                    (interval["p90"] - interval["p10"]) / 120 if interval else 999))
+                if primary_eta else None),
+            "display_granularity_min": (display_granularity_min(
+                (interval["p90"] - interval["p10"]) / 120) if interval else None),
             "interval_80": [fmt_ts(interval["p10"]), fmt_ts(interval["p90"])]
                 if interval else None,
             "interval_90": [fmt_ts(interval["p05"]), fmt_ts(interval["p95"])]
@@ -876,7 +970,7 @@ def make_graph(result, target, out_png):
 
     ax.set_title(f"EarthMC vote party — {result['current']['percent']}% "
                  f"({result['current']['collected']}/{int(target)})  |  "
-                 f"PRIMARY ({prim['model']}) ETA {prim['eta'] or 'n/a'}",
+                 f"fires ~{prim.get('eta_display') or prim['eta'] or 'n/a'}",
                  fontsize=12, fontweight="bold")
     ax.set_ylabel("votes collected")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M", tz=timezone.utc))
@@ -932,16 +1026,19 @@ def write_markdown(result, path):
         "",
         "## 🎯 Prediction",
         "",
-        f"**Vote party fires ≈ `{prim['eta'] or 'n/a'}`**  (model: `{prim['model']}`)",
+        f"**Vote party fires ≈ `{prim.get('eta_display') or prim['eta'] or 'n/a'}`**  "
+        f"(model: `{prim['model']}`, rounded to interval resolution)",
     ]
     if prim.get("interval_80"):
-        lines.append(f"**80% window:** `{prim['interval_80'][0]}` → "
-                     f"`{prim['interval_80'][1]}`  "
-                     f"(90%: `{prim['interval_90'][0]}` → `{prim['interval_90'][1]}`)")
-        lines.append(f"_Interval from the analogue curve-library (measured ~75% "
-                     f"coverage OOS) over {prim['n_library_cycles']} cycles "
-                     f"({prim['n_tight_labeled_cycles']} tightly labeled). Wide "
-                     "early by design; tightens as the cycle fills._")
+        g = prim.get("display_granularity_min") or 1
+        lo = fmt_ts_rounded(parse_ts(prim["interval_80"][0]), g)
+        hi = fmt_ts_rounded(parse_ts(prim["interval_80"][1]), g)
+        lines.append(f"**80% window:** `{lo}` → `{hi}`")
+        lines.append(f"_Interval from the analogue curve-library (measured ~73% "
+                     f"coverage OOS, endpoint label-uncertainty propagated) over "
+                     f"{prim['n_library_cycles']} cycles "
+                     f"({prim['n_tight_labeled_cycles']} tightly labeled). Point "
+                     "rounded to match interval width; wide early by design._")
     else:
         lines.append("⚠️ Interval unavailable — treat the ETA as a point estimate "
                      "with wide, unquantified error.")
@@ -1009,9 +1106,13 @@ def main(argv=None) -> int:
     prim = result["primary"]
     print(f"Cycles: {len(cycles)} | current points: {result['current']['num_points']} "
           f"| tightly-labeled cycles: {prim['n_tight_labeled_cycles']}")
-    iv = (f" | 80% [{prim['interval_80'][0]} .. {prim['interval_80'][1]}]"
-          if prim.get("interval_80") else " (interval unavailable)")
-    print(f"PREDICTION: {prim['model']} point {prim['eta']}{iv}")
+    if prim.get("interval_80"):
+        g = prim.get("display_granularity_min") or 1
+        iv = (f" | 80% [{fmt_ts_rounded(parse_ts(prim['interval_80'][0]), g)} .. "
+              f"{fmt_ts_rounded(parse_ts(prim['interval_80'][1]), g)}]")
+    else:
+        iv = " (interval unavailable)"
+    print(f"PREDICTION: {prim['model']} ~{prim.get('eta_display') or prim['eta']}{iv}")
     print(f"ensemble ETA (diagnostic only): {result['ensemble']['eta']}")
     sel = result["model_selection"]
     print("model selection: " + ("NO stable winner — weights ~uniform (Occam)"

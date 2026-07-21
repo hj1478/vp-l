@@ -188,7 +188,7 @@ def main(argv=None):
 
     # Out-of-sample check vs diurnal on TIGHT cycles, causal (prior-only).
     from predict import make_ctx, MODELS
-    tight = set(tight_cycle_indices(cycles))
+    tight = set(tight_cycle_indices(cycles, target))
     nhpp_err, diur_err, covered, ncov = [], [], 0, 0
     for ci in tight:
         prior = cycles[:ci]
