@@ -29,7 +29,6 @@ Usage:
 import argparse
 import json
 import os
-from datetime import datetime, timezone
 
 import numpy as np
 

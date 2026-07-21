@@ -183,12 +183,26 @@ def pooled_rate(train_cycles):
     return float(np.average(rates, weights=wts))
 
 
+# Content-keyed memo for the profile builders. Inside a backtest the same
+# training set is used at every stage-point of a cycle, so without this the
+# (identical) profile is rebuilt hundreds of times per run.
+_PROFILE_CACHE = {}
+
+
+def _cycles_key(train_cycles):
+    return tuple((round(c[0]["_t"]), round(c[-1]["_t"]), len(c))
+                 for c in (train_cycles or []))
+
+
 def diurnal_profile(train_cycles, nbins=24, smooth=1):
     """Average vote rate (votes/sec) as a function of UTC hour-of-day, learned
     from history. Each observed interval contributes its rate to every hour it
     overlaps, weighted by overlap duration, so long sparse intervals still
     inform the profile. Circularly smoothed. Returns (profile[nbins], mean_rate)
-    or (None, None) if there is not enough data."""
+    or (None, None) if there is not enough data. Memoized on training-set content."""
+    ckey = ("d", nbins, smooth, _cycles_key(train_cycles))
+    if ckey in _PROFILE_CACHE:
+        return _PROFILE_CACHE[ckey]
     binsecs = 86400.0 / nbins
     num = np.zeros(nbins)
     den = np.zeros(nbins)
@@ -213,6 +227,7 @@ def diurnal_profile(train_cycles, nbins=24, smooth=1):
                 tcur += seg
                 remaining -= seg
     if den.sum() <= 0:
+        _PROFILE_CACHE[ckey] = (None, None)
         return None, None
     mean_rate = float(np.average([r for r, _ in all_rates],
                                  weights=[w for _, w in all_rates]))
@@ -223,6 +238,7 @@ def diurnal_profile(train_cycles, nbins=24, smooth=1):
         prof = np.array([prof[(i + o) % nbins]
                          for i in range(nbins)
                          for o in range(-smooth, smooth + 1)]).reshape(nbins, k).mean(axis=1)
+    _PROFILE_CACHE[ckey] = (prof, mean_rate)
     return prof, mean_rate
 
 
@@ -240,7 +256,11 @@ def diurnal_profile_grouped(train_cycles, nbins=24):
     NOTE on timezones: everything is UTC. The vote rate is a global-playerbase
     phenomenon whose peaks/lulls sit at fixed UTC hours, so UTC hour-of-day is
     the correct shared frame — no per-user timezone conversion is meaningful.
+    Memoized on training-set content.
     """
+    ckey = ("g", nbins, _cycles_key(train_cycles))
+    if ckey in _PROFILE_CACHE:
+        return _PROFILE_CACHE[ckey]
     binsecs = 86400.0 / nbins
     groups = ["weekday", "weekend"]
     num = {g: np.zeros(nbins) for g in groups}
@@ -268,6 +288,7 @@ def diurnal_profile_grouped(train_cycles, nbins=24):
                 tcur += seg
                 remaining -= seg
     if gden.sum() <= 0:
+        _PROFILE_CACHE[ckey] = None
         return None
     mean_rate = float(np.average([r for r, _ in all_rates],
                                  weights=[w for _, w in all_rates]))
@@ -275,7 +296,9 @@ def diurnal_profile_grouped(train_cycles, nbins=24):
     profs = {g: np.where(den[g] > 0, num[g] / np.maximum(den[g], 1e-9), gprof)
              for g in groups}
     counts = {g: den[g] / 3600.0 for g in groups}  # bin sample weight in hours
-    return {"groups": profs, "counts": counts, "global": gprof, "mean": mean_rate}
+    res = {"groups": profs, "counts": counts, "global": gprof, "mean": mean_rate}
+    _PROFILE_CACHE[ckey] = res
+    return res
 
 
 def shrink_rate(t, y, target, ctx, w_prior=None):
@@ -478,55 +501,6 @@ MODELS = {
 # Weight each model by inverse mean squared extrapolation error.
 # ----------------------------------------------------------------------------
 
-def _predict_y_at(name, t_fit, y_fit, t_query, target, ctx):
-    """Predict collected at a future time using a model's underlying fit."""
-    if len(t_fit) < 2:
-        return None
-    if name == "shrinkage":
-        rate = shrink_rate(t_fit, y_fit, target, ctx)
-        return None if rate is None else y_fit[-1] + rate * (t_query - t_fit[-1])
-    if name == "quadratic" and len(t_fit) >= 3:
-        c, b, a = np.polyfit(t_fit, y_fit, 2)
-        return c * t_query ** 2 + b * t_query + a
-    if name == "recent":
-        k = min(6, len(t_fit))
-        tt, yy = t_fit[-k:], y_fit[-k:]
-        if tt[-1] - tt[0] <= 0:
-            return None
-        slope = (yy[-1] - yy[0]) / (tt[-1] - tt[0])
-        return yy[-1] + slope * (t_query - tt[-1])
-    if name == "ewma":
-        dt, dy = np.diff(t_fit), np.diff(y_fit)
-        ok = dt > 0
-        if not ok.any():
-            return None
-        rates = dy[ok] / dt[ok]
-        n = len(rates)
-        decay = 0.5 ** (1.0 / 3)
-        w = decay ** np.arange(n - 1, -1, -1)
-        rate = np.sum(w * rates) / np.sum(w)
-        return y_fit[-1] + rate * (t_query - t_fit[-1])
-    if name == "theilsen":
-        slope = robust_slope(t_fit, y_fit)
-        if slope is None:
-            return None
-        intercept = float(np.median(y_fit - slope * t_fit))
-        return slope * t_query + intercept
-    if name == "wls":
-        n = len(t_fit)
-        decay = 0.5 ** (1.0 / 4)
-        w = decay ** np.arange(n - 1, -1, -1)
-        W = np.diag(w)
-        X = np.vstack([t_fit, np.ones_like(t_fit)]).T
-        try:
-            beta = np.linalg.solve(X.T @ W @ X, X.T @ W @ y_fit)
-        except np.linalg.LinAlgError:
-            return None
-        return beta[0] * t_query + beta[1]
-    b, a = np.polyfit(t_fit, y_fit, 1)  # default: linear
-    return b * t_query + a
-
-
 def _bucket(progress):
     for lo, hi in BUCKETS:
         if lo <= progress < hi:
@@ -598,11 +572,6 @@ def weights_for_progress(staged, progress, blend=0.5):
     mixed = {n: blend * bw.get(n, 0.0) + (1 - blend) * gw.get(n, 0.0) for n in names}
     s = sum(mixed.values())
     return {n: v / s for n, v in mixed.items()} if s > 0 else gw
-
-
-def backtest_weights(cycles: list[list[dict]], target: float, min_fit=3):
-    """Backward-compatible global weights (weights dict, rmse dict)."""
-    return backtest_staged(cycles, target, min_fit)["global"]
 
 
 def ensemble_eta_at(cycle, ctx, staged, target, up_to):

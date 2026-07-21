@@ -204,8 +204,6 @@ def make_graph(cycles, target, fc, s, out_png):
     ax1.axhline(target, color="#333", ls="--", lw=1)
 
     # Overlay each analogue's remaining trajectory, shifted to start at "now".
-    w = fc["w"]
-    wmax = w.max()
     cmap = plt.cm.viridis(np.linspace(0, 0.85, len(cycles) - 1))
     for li, col in zip(range(len(cycles) - 1), cmap):
         L = cycles[li]
