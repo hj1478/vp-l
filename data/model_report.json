@@ -1,15 +1,15 @@
 {
   "n_completed_cycles": 8,
   "weights": {
-    "shrinkage": 0.0868,
-    "diurnal": 0.3276,
-    "diurnal_dow": 0.3776,
-    "linear": 0.0534,
-    "recent": 0.0198,
-    "ewma": 0.0304,
-    "theilsen": 0.0375,
-    "wls": 0.0461,
-    "quadratic": 0.0208
+    "shrinkage": 0.098,
+    "diurnal": 0.2277,
+    "diurnal_dow": 0.2546,
+    "linear": 0.0801,
+    "recent": 0.0619,
+    "ewma": 0.0676,
+    "theilsen": 0.0715,
+    "wls": 0.0761,
+    "quadratic": 0.0625
   },
   "stats": {
     "shrinkage": {
@@ -159,17 +159,17 @@
     "ensemble": {
       "n": 479,
       "coverage_pct": 103.0,
-      "mae_min": 42.9,
-      "rmse_min": 55.3,
-      "median_min": 31.8,
-      "p90_min": 98.3,
-      "bias_min": -7.8,
+      "mae_min": 58.0,
+      "rmse_min": 78.2,
+      "median_min": 37.0,
+      "p90_min": 139.3,
+      "bias_min": -11.3,
       "per_stage_mae": {
-        "0-25%": 80.2,
-        "25-50%": 59.4,
-        "50-75%": 30.6,
-        "75-90%": 21.3,
-        "90-100%": 16.2
+        "0-25%": 130.4,
+        "25-50%": 78.7,
+        "50-75%": 36.3,
+        "75-90%": 21.1,
+        "90-100%": 16.4
       }
     }
   }

@@ -508,7 +508,25 @@ def _bucket(progress):
     return BUCKETS[-1]
 
 
-def _errs_to_weights(errs):
+# Occam / shrinkage prior. Hard inverse-error weights fit on a handful of cycles
+# are dominated by sampling noise (a single cycle swings the top weight by ±0.4),
+# so we shrink every weight vector toward uniform. The shrinkage λ = n/(n+prior)
+# grows with the number of cycles: near-uniform now, differentiating only when
+# many cycles give strong, stable evidence. This is why we no longer report a
+# "winning" model until it is stable (see stable_winner()).
+WEIGHT_PRIOR_CYCLES = 6
+
+
+def _shrink_to_uniform(weights, n_cycles, prior=WEIGHT_PRIOR_CYCLES):
+    m = len(MODELS)
+    unif = 1.0 / m
+    lam = n_cycles / (n_cycles + prior) if n_cycles > 0 else 0.0
+    mixed = {n: (1 - lam) * unif + lam * weights.get(n, 0.0) for n in MODELS}
+    s = sum(mixed.values())
+    return {n: v / s for n, v in mixed.items()} if s > 0 else {n: unif for n in MODELS}
+
+
+def _errs_to_weights(errs, n_cycles=0):
     rmse = {n: (float(np.sqrt(np.mean(e))) if e else None) for n, e in errs.items()}
     scored = {n: r for n, r in rmse.items() if r is not None and r > 0}
     if scored:
@@ -517,7 +535,7 @@ def _errs_to_weights(errs):
         weights = {n: inv[n] / s for n in inv}
     else:
         weights = {n: 1.0 / len(MODELS) for n in MODELS}
-    return weights, rmse
+    return _shrink_to_uniform(weights, n_cycles), rmse
 
 
 def backtest_staged(cycles: list[list[dict]], target: float, min_fit=3):
@@ -537,12 +555,14 @@ def backtest_staged(cycles: list[list[dict]], target: float, min_fit=3):
     """
     errs_global = {name: [] for name in MODELS}
     errs_bucket = {b: {name: [] for name in MODELS} for b in BUCKETS}
+    n_used = 0
     for ci, cyc in enumerate(cycles):
         if len(cyc) < min_fit + 1:
             continue
         fire, _ = cycle_fire_time(cyc, target)
         if fire is None:
             continue
+        n_used += 1
         others = [c for cj, c in enumerate(cycles) if cj != ci]
         ctx = make_ctx(cyc, others)
         t, y = cycle_arrays(cyc)
@@ -559,8 +579,8 @@ def backtest_staged(cycles: list[list[dict]], target: float, min_fit=3):
                     errs_global[name].append(e)
                     errs_bucket[b][name].append(e)
     return {
-        "global": _errs_to_weights(errs_global),
-        "buckets": {b: _errs_to_weights(errs_bucket[b]) for b in BUCKETS},
+        "global": _errs_to_weights(errs_global, n_used),
+        "buckets": {b: _errs_to_weights(errs_bucket[b], n_used) for b in BUCKETS},
     }
 
 
@@ -572,6 +592,39 @@ def weights_for_progress(staged, progress, blend=0.5):
     mixed = {n: blend * bw.get(n, 0.0) + (1 - blend) * gw.get(n, 0.0) for n in names}
     s = sum(mixed.values())
     return {n: v / s for n, v in mixed.items()} if s > 0 else gw
+
+
+def stable_winner(completed, target, min_fit=3):
+    """The model with the lowest MAE in EVERY leave-one-cycle-out fold, or None
+    if no single model wins unanimously. A "winner" that changes fold to fold is
+    sampling noise, not evidence — so we only ever name one that is stable.
+    Returns (winner_or_None, {cycle_index: fold_winner})."""
+    fold_winners, per_cycle = [], {}
+    for ci, cyc in enumerate(completed):
+        if len(cyc) < min_fit + 1:
+            continue
+        fire, _ = cycle_fire_time(cyc, target)
+        if fire is None:
+            continue
+        others = [c for cj, c in enumerate(completed) if cj != ci]
+        ctx = make_ctx(cyc, others)
+        t, y = cycle_arrays(cyc)
+        t0 = cyc[0]["_t"]
+        errs = {n: [] for n in MODELS}
+        for i in range(min_fit, len(t) + 1):
+            for n in MODELS:
+                tc = MODELS[n](t[:i], y[:i], target, ctx)
+                if tc is not None:
+                    errs[n].append(abs(t0 + tc - fire))
+        maes = {n: float(np.mean(v)) for n, v in errs.items() if v}
+        if maes:
+            w = min(maes, key=maes.get)
+            fold_winners.append(w)
+            per_cycle[ci] = w
+    if not fold_winners:
+        return None, {}
+    winner = fold_winners[0] if len(set(fold_winners)) == 1 else None
+    return winner, per_cycle
 
 
 # ----------------------------------------------------------------------------
@@ -708,6 +761,10 @@ def predict(cycles, target):
         primary_eta = (per_model["diurnal"]["eta_epoch"] if primary_name == "diurnal"
                        else ensemble_eta)
 
+    # Model-selection stability: only name a "best" model if it wins every LOO
+    # fold. Otherwise the leaderboard is noise and weights stay near-uniform.
+    winner, fold_winners = stable_winner(completed, target)
+
     return {
         "generated_at": None,
         "target": target,
@@ -746,11 +803,22 @@ def predict(cycles, target):
             "weight": round(m["weight"], 4),
             "backtest_rmse": round(m["rmse"], 5) if m["rmse"] is not None else None,
         } for n, m in per_model.items()},
-        "ensemble": {  # kept as a diagnostic only — does NOT beat diurnal OOS
+        "ensemble": {  # diagnostic only — weights shrunk toward uniform (Occam)
             "eta": fmt_ts(ensemble_eta) if ensemble_eta else None,
             "eta_epoch": ensemble_eta,
             "range_low": fmt_ts(lo) if lo else None,
             "range_high": fmt_ts(hi) if hi else None,
+        },
+        "model_selection": {
+            "stable_winner": winner,  # None until a model wins every LOO fold
+            "fold_winners": {str(k): v for k, v in fold_winners.items()},
+            "note": (f"No stable winner: fold winners differ "
+                     f"({sorted(set(fold_winners.values()))}); weights are shrunk "
+                     "toward uniform. Reporting a 'leading model' at this sample "
+                     "size would be sampling noise."
+                     if winner is None else
+                     f"Stable winner: '{winner}' wins every leave-one-cycle-out "
+                     "fold. Still few cycles — keep watching."),
         },
         "_per_model_epoch": {n: m["eta_epoch"] for n, m in per_model.items()},
         "_cycles": cycles,
@@ -877,28 +945,33 @@ def write_markdown(result, path):
     else:
         lines.append("⚠️ Interval unavailable — treat the ETA as a point estimate "
                      "with wide, unquantified error.")
+    sel = result["model_selection"]
+    sel_line = ("**No stable winner** — the lowest-error model differs across "
+                "leave-one-cycle-out folds, so we name none and keep the "
+                "(diagnostic) weights shrunk toward uniform."
+                if sel["stable_winner"] is None else
+                f"**Stable winner:** `{sel['stable_winner']}` wins every "
+                "leave-one-cycle-out fold (still few cycles).")
     lines += [
         "",
-        f"_Diagnostic — ensemble ETA (does **not** beat `{prim['model']}` "
-        f"out-of-sample): `{ens['eta'] or 'n/a'}`._",
+        f"_Diagnostic ensemble ETA: `{ens['eta'] or 'n/a'}`._",
         "",
-        "## Individual models",
+        "## Model diagnostics (not the prediction)",
         "",
-        "| Model | Predicted ETA | Weight | Backtest RMSE |",
-        "|-------|---------------|--------|---------------|",
+        sel_line,
+        "",
+        "| Model | Predicted ETA | Weight (shrunk) |",
+        "|-------|---------------|-----------------|",
     ]
     for name, m in sorted(result["models"].items(), key=lambda kv: -kv[1]["weight"]):
-        lines.append(f"| {name} | {m['eta'] or 'n/a'} | {m['weight']:.3f} | "
-                     f"{m['backtest_rmse'] if m['backtest_rmse'] is not None else 'n/a'} |")
+        lines.append(f"| {name} | {m['eta'] or 'n/a'} | {m['weight']:.3f} |")
     lines += [
         "",
-        "**Caveats:** weights are unstable at this sample size (dropping one "
-        "cycle can swing the top weight by ±0.4), so the ensemble is a diagnostic "
-        "only — the reported prediction is the single best model (`diurnal`), "
-        "which beats the ensemble out-of-sample. Firing-time labels for "
-        "loosely-sampled cycles are uncertain by tens of minutes and are excluded "
-        "from the error estimate. See `prediction_track.png` for the honest "
-        "out-of-sample record.",
+        "**Weights are shrunk toward uniform** by an Occam prior (λ = n/(n+6) in "
+        "cycles): near-equal now, differentiating only when many cycles give "
+        "strong, stable evidence. A shifting 'leader' at this sample size is "
+        "sampling noise, not a finding. The reported prediction (above) is the "
+        "`analogue` model, independent of these weights. See `prediction_track.png`.",
         "",
     ]
     with open(path, "w", encoding="utf-8") as fh:
@@ -940,8 +1013,12 @@ def main(argv=None) -> int:
           if prim.get("interval_80") else " (interval unavailable)")
     print(f"PREDICTION: {prim['model']} point {prim['eta']}{iv}")
     print(f"ensemble ETA (diagnostic only): {result['ensemble']['eta']}")
+    sel = result["model_selection"]
+    print("model selection: " + ("NO stable winner — weights ~uniform (Occam)"
+                                  if sel["stable_winner"] is None
+                                  else f"stable winner '{sel['stable_winner']}'"))
     for name, m in sorted(result["models"].items(), key=lambda kv: -kv[1]["weight"]):
-        print(f"  {name:10s} eta={m['eta']}  w={m['weight']:.3f}")
+        print(f"  {name:11s} eta={m['eta']}  w={m['weight']:.3f} (diagnostic)")
     return 0
 
 

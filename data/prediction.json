@@ -30,54 +30,67 @@
   "models": {
     "shrinkage": {
       "eta": "2026-07-21T17:48:05Z",
-      "weight": 0.0868,
+      "weight": 0.098,
       "backtest_rmse": 1.53546
     },
     "diurnal": {
       "eta": "2026-07-21T16:59:18Z",
-      "weight": 0.3276,
+      "weight": 0.2277,
       "backtest_rmse": 0.70926
     },
     "diurnal_dow": {
       "eta": "2026-07-21T16:44:18Z",
-      "weight": 0.3776,
+      "weight": 0.2546,
       "backtest_rmse": 0.68005
     },
     "linear": {
       "eta": "2026-07-21T17:32:14Z",
-      "weight": 0.0534,
+      "weight": 0.0801,
       "backtest_rmse": 2.47523
     },
     "recent": {
       "eta": "2026-07-21T16:03:22Z",
-      "weight": 0.0198,
+      "weight": 0.0619,
       "backtest_rmse": 3.00585
     },
     "ewma": {
       "eta": "2026-07-21T16:45:06Z",
-      "weight": 0.0304,
+      "weight": 0.0676,
       "backtest_rmse": 2.59645
     },
     "theilsen": {
       "eta": "2026-07-21T17:33:07Z",
-      "weight": 0.0375,
+      "weight": 0.0715,
       "backtest_rmse": 2.60587
     },
     "wls": {
       "eta": "2026-07-21T17:23:35Z",
-      "weight": 0.0461,
+      "weight": 0.0761,
       "backtest_rmse": 2.39366
     },
     "quadratic": {
       "eta": "2026-07-21T17:12:43Z",
-      "weight": 0.0208,
+      "weight": 0.0625,
       "backtest_rmse": 2.77109
     }
   },
   "ensemble": {
-    "eta": "2026-07-21T17:00:45Z",
-    "eta_epoch": 1784653245.6898623,
+    "eta": "2026-07-21T17:03:34Z",
+    "eta_epoch": 1784653414.9433336,
     "range_low": "2026-07-21T16:03:22Z",
     "range_high": "2026-07-21T17:48:05Z"
+  },
+  "model_selection": {
+    "stable_winner": null,
+    "fold_winners": {
+      "1": "shrinkage",
+      "2": "diurnal",
+      "3": "diurnal_dow",
+      "4": "diurnal_dow",
+      "5": "quadratic",
+      "6": "diurnal_dow",
+      "7": "diurnal_dow"
+    },
+    "note": "No stable winner: fold winners differ (['diurnal', 'diurnal_dow', 'quadratic', 'shrinkage']); weights are shrunk toward uniform. Reporting a 'leading model' at this sample size would be sampling noise."
   }
 }

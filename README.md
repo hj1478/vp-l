@@ -128,8 +128,13 @@ real limits, and the system is deliberately conservative as a result:
   on tight cycles), because its spread is the *real* historical spread of past
   cycles' remaining trajectories — not a process assumption (the NHPP's
   parametric interval was overconfident at ~19% and is shelved).
-- **Ensemble weights are unstable.** Dropping a single cycle can swing the top
-  model's weight by ±0.4, so weight movements are not yet evidence of "learning."
+- **Ensemble weights are shrunk toward uniform (Occam prior).** Hard
+  inverse-error weights fit on a few cycles swing the top weight by ±0.4 —
+  sampling noise, not skill. Weights are pulled toward equal by λ = n/(n+6)
+  (in cycles), so they only differentiate once many cycles give strong, stable
+  evidence. We **do not name a "winning" model** until it wins *every*
+  leave-one-cycle-out fold (`stable_winner`); right now there is none, and the
+  weights are a diagnostic, not the prediction.
 - **Firing-time labels are uncertain.** A cycle's true firing time is only known
   to within the gap between its last pre-reset sample and first post-reset
   sample — tens to hundreds of minutes for loosely-sampled cycles. Only
