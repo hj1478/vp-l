@@ -26,71 +26,8 @@ from datetime import datetime, timezone
 import numpy as np
 
 from predict import (load_points, split_cycles, cycle_arrays, cycle_fire_time,
-                     tight_cycle_indices, fmt_ts, make_ctx, MODELS)
-
-H_HOURS = 4.0     # UTC time-of-day kernel bandwidth
-ALPHA = 0.7       # conditional vs uniform blend (partial pooling of weights)
-
-
-def time_at_collected(cyc, c, target, fire):
-    """Wall-clock epoch when a cycle reached `c` collected (interpolated, and
-    extrapolated toward its firing time if c is above its last sample)."""
-    t = [p["_t"] for p in cyc]
-    y = [p["collected"] for p in cyc]
-    if c <= y[0]:
-        return t[0]
-    if c <= y[-1]:
-        for i in range(1, len(y)):
-            if y[i] >= c:
-                if y[i] == y[i - 1]:
-                    return t[i]
-                f = (c - y[i - 1]) / (y[i] - y[i - 1])
-                return t[i - 1] + f * (t[i] - t[i - 1])
-    # c above last observed: interpolate between last point and the firing time
-    if fire is not None and target > y[-1]:
-        f = (c - y[-1]) / (target - y[-1])
-        return t[-1] + min(max(f, 0.0), 1.0) * (fire - t[-1])
-    return None
-
-
-def analogue_forecast(cycles, lib_indices, target, now_epoch, collected,
-                      h_hours=H_HOURS, alpha=ALPHA):
-    """Similarity-weighted predictive firing epochs from the curve library."""
-    utc_now = now_epoch % 86400.0
-    preds, wts = [], []
-    for li in lib_indices:
-        L = cycles[li]
-        fire, _ = cycle_fire_time(L, target)
-        if fire is None:
-            continue
-        tc = time_at_collected(L, collected, target, fire)
-        if tc is None:
-            continue
-        remaining = fire - tc
-        if remaining < -60:
-            continue
-        d = abs((tc % 86400.0) - utc_now)
-        d = min(d, 86400.0 - d)                     # circular UTC-tod distance
-        w = np.exp(-0.5 * (d / (h_hours * 3600.0)) ** 2)
-        preds.append(now_epoch + max(remaining, 0.0))
-        wts.append(w)
-    if not preds:
-        return None
-    preds = np.array(preds)
-    wts = np.array(wts)
-    unif = np.ones(len(wts)) / len(wts)
-    wc = wts / wts.sum() if wts.sum() > 0 else unif
-    w = alpha * wc + (1 - alpha) * unif
-    w /= w.sum()
-    return {"preds": preds, "w": w}
-
-
-def wquantile(vals, w, qs):
-    o = np.argsort(vals)
-    v, ww = vals[o], w[o]
-    cw = np.cumsum(ww)
-    cw /= cw[-1]
-    return np.interp(qs, cw, v)
+                     tight_cycle_indices, fmt_ts, make_ctx, MODELS,
+                     time_at_collected, analogue_forecast, wquantile)
 
 
 def summarize(fc):

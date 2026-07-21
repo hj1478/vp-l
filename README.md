@@ -115,23 +115,26 @@ models late.
 Out-of-sample testing at the current sample size (a handful of cycles) exposed
 real limits, and the system is deliberately conservative as a result:
 
-- **The reported prediction is the single best model (`diurnal`), not the
-  ensemble.** Causally out-of-sample, `diurnal` alone (~50 min overall MAE)
-  *beats* the 8-model ensemble (~85 min) — the ensemble dilutes the one good
-  model everywhere except the final ~10%. The ensemble is kept only as a
-  diagnostic until it can prove it clears that baseline OOS.
-- **The uncertainty is an *empirical error estimate*, not a calibrated band.**
-  Calibration (an 80% interval covering truth 80% of the time) cannot be
-  established at this n. The estimate is derived from a tiny, tightly-labeled
-  sample and is reported with its `n`; when no tightly-labeled cycle covers the
-  current stage, uncertainty is reported as **unknown**.
+- **The reported prediction is the `analogue` curve-library, for both the point
+  (its median) and the interval (its quantiles).** We checked whether `diurnal`'s
+  point beats the analogue median: it does *not* by more than noise (paired
+  |error| difference 14 min but sd 57 min; diurnal wins only 54% of stage-points,
+  driven by one cycle), and the diurnal-vs-analogue offset is large and unstable
+  (+38 min, sd 74 min). Grafting a diurnal point inside an analogue interval would
+  mis-centre a calibrated width around a wrong centre, so we use **one coherent
+  distribution** instead. `diurnal`, `diurnal_dow`, the ensemble, `nhpp`, etc.
+  remain as diagnostics.
+- **The interval is measured to be ~calibrated** (~75% coverage at 80% nominal
+  on tight cycles), because its spread is the *real* historical spread of past
+  cycles' remaining trajectories — not a process assumption (the NHPP's
+  parametric interval was overconfident at ~19% and is shelved).
 - **Ensemble weights are unstable.** Dropping a single cycle can swing the top
   model's weight by ±0.4, so weight movements are not yet evidence of "learning."
 - **Firing-time labels are uncertain.** A cycle's true firing time is only known
   to within the gap between its last pre-reset sample and first post-reset
   sample — tens to hundreds of minutes for loosely-sampled cycles. Only
-  tightly-bracketed cycles are used for error estimates; the rest are flagged
-  and excluded. Tightening these labels (endgame fast-polling, reliable
+  tightly-bracketed cycles are used for error/coverage measurement; the rest are
+  flagged. Tightening these labels (endgame fast-polling, self-chaining
   collection) is the current top priority.
 
 ```bash
