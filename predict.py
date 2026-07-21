@@ -226,6 +226,58 @@ def diurnal_profile(train_cycles, nbins=24, smooth=1):
     return prof, mean_rate
 
 
+def day_type(epoch):
+    """UTC weekday vs weekend — a coarse (2-way) split that's estimable with
+    only a few days of data, unlike a full 7-way day-of-week split."""
+    return "weekend" if datetime.fromtimestamp(epoch, tz=timezone.utc).weekday() >= 5 else "weekday"
+
+
+def diurnal_profile_grouped(train_cycles, nbins=24):
+    """Vote-rate profile conditioned on (day_type, UTC hour), plus the pooled
+    time-of-day profile and per-bin sample weights, so a model can blend the two
+    hierarchically. Returns a dict or None.
+
+    NOTE on timezones: everything is UTC. The vote rate is a global-playerbase
+    phenomenon whose peaks/lulls sit at fixed UTC hours, so UTC hour-of-day is
+    the correct shared frame — no per-user timezone conversion is meaningful.
+    """
+    binsecs = 86400.0 / nbins
+    groups = ["weekday", "weekend"]
+    num = {g: np.zeros(nbins) for g in groups}
+    den = {g: np.zeros(nbins) for g in groups}
+    gnum = np.zeros(nbins)
+    gden = np.zeros(nbins)
+    all_rates = []
+    for c in train_cycles or []:
+        for a, b in zip(c[:-1], c[1:]):
+            dt = b["_t"] - a["_t"]
+            if dt <= 0 or b["collected"] < a["collected"]:
+                continue
+            rate = (b["collected"] - a["collected"]) / dt
+            all_rates.append((rate, dt))
+            tcur, remaining = a["_t"], dt
+            while remaining > 1e-6:
+                sod = tcur % 86400.0
+                bi = int(sod // binsecs) % nbins
+                seg = min((bi + 1) * binsecs - sod, remaining)
+                g = day_type(tcur)
+                num[g][bi] += rate * seg
+                den[g][bi] += seg
+                gnum[bi] += rate * seg
+                gden[bi] += seg
+                tcur += seg
+                remaining -= seg
+    if gden.sum() <= 0:
+        return None
+    mean_rate = float(np.average([r for r, _ in all_rates],
+                                 weights=[w for _, w in all_rates]))
+    gprof = np.where(gden > 0, gnum / np.maximum(gden, 1e-9), mean_rate)
+    profs = {g: np.where(den[g] > 0, num[g] / np.maximum(den[g], 1e-9), gprof)
+             for g in groups}
+    counts = {g: den[g] / 3600.0 for g in groups}  # bin sample weight in hours
+    return {"groups": profs, "counts": counts, "global": gprof, "mean": mean_rate}
+
+
 def shrink_rate(t, y, target, ctx, w_prior=None):
     """Precision-weighted blend of historical prior and observed rate.
 
@@ -345,55 +397,73 @@ def model_shrinkage(t, y, target, ctx=None):
     return t[-1] + (target - y[-1]) / rate
 
 
-def model_diurnal(t, y, target, ctx=None, nbins=24):
-    """Integrate the historical time-of-day rate profile forward from the
-    current point until it reaches target — predicting each stage with its own
-    time-of-day rate instead of one flat rate. Scaled so the profile matches
-    this cycle's recently observed level."""
-    if ctx is None or len(t) < 2:
-        return None
-    prof, mean_rate = diurnal_profile(ctx.get("train_cycles"), nbins=nbins)
-    if prof is None or mean_rate is None or mean_rate <= 1e-9:
-        return None
-    t0 = ctx["t0"]
+def _integrate_profile(rate_at, t, y, target, t0, nbins=24):
+    """Forward-integrate a time-varying rate function `rate_at(epoch)` from the
+    current point to target, scaled so the profile matches this cycle's recently
+    observed level. Shared by the diurnal models. Returns t_cross or None."""
     binsecs = 86400.0 / nbins
-
-    def prof_rate(epoch):
-        return prof[int((epoch % 86400.0) // binsecs) % nbins]
-
-    # Level scale: recent observed rate ÷ profile's average rate over the same
-    # recent window (blended toward 1 so a short noisy window can't dominate).
     k = min(6, len(t))
     obs = robust_slope(t[-k:], y[-k:])
     scale = 1.0
     if obs is not None and obs > 1e-9:
         span0, span1 = t0 + t[-k], t0 + t[-1]
         samples = max(2, int((span1 - span0) // binsecs) + 1)
-        prof_recent = np.mean([prof_rate(span0 + i * (span1 - span0) / (samples - 1))
-                               for i in range(samples)]) if span1 > span0 else prof_rate(span1)
+        prof_recent = np.mean([rate_at(span0 + i * (span1 - span0) / (samples - 1))
+                               for i in range(samples)]) if span1 > span0 else rate_at(span1)
         if prof_recent > 1e-9:
             raw = obs / prof_recent
             frac = min(max(float(y[-1]) / target, 0.0), 1.0)
             scale = (1.0 + frac * raw) / (1.0 + frac)  # shrink toward 1 early
-
-    # Integrate forward.
-    epoch = t0 + t[-1]
-    collected = float(y[-1])
+    epoch, collected, guard = t0 + t[-1], float(y[-1]), 0
     step = 300.0
-    guard = 0
     while collected < target and guard < int(4 * 86400 / step):
-        rate = prof_rate(epoch) * scale
-        collected += rate * step
+        collected += rate_at(epoch) * scale * step
         epoch += step
         guard += 1
-    if collected < target:
+    return (epoch - t0) if collected >= target else None
+
+
+def model_diurnal(t, y, target, ctx=None, nbins=24):
+    """Integrate the historical UTC time-of-day rate profile forward to target —
+    predicting each stage with its own time-of-day rate, not one flat rate."""
+    if ctx is None or len(t) < 2:
         return None
-    return epoch - t0
+    prof, mean_rate = diurnal_profile(ctx.get("train_cycles"), nbins=nbins)
+    if prof is None or mean_rate is None or mean_rate <= 1e-9:
+        return None
+    binsecs = 86400.0 / nbins
+    rate_at = lambda e: prof[int((e % 86400.0) // binsecs) % nbins]
+    return _integrate_profile(rate_at, t, y, target, ctx["t0"], nbins)
+
+
+def model_diurnal_dow(t, y, target, ctx=None, nbins=24, bin_prior_hours=2.0):
+    """Like `diurnal`, but the rate is conditioned on weekday vs weekend as well
+    as UTC hour — with **hierarchical shrinkage**: each (day_type, hour) bin is
+    blended toward the pooled time-of-day rate in proportion to how much data
+    that bin has. With little history the day split barely moves anything (so it
+    can't overfit); as weeks accumulate the weekend/weekday effect emerges. This
+    is why it's a separate candidate model rather than a change to `diurnal`."""
+    if ctx is None or len(t) < 2:
+        return None
+    gp = diurnal_profile_grouped(ctx.get("train_cycles"), nbins=nbins)
+    if gp is None or gp["mean"] <= 1e-9:
+        return None
+    binsecs = 86400.0 / nbins
+
+    def rate_at(epoch):
+        bi = int((epoch % 86400.0) // binsecs) % nbins
+        g = day_type(epoch)
+        c = gp["counts"][g][bi]
+        k = c / (c + bin_prior_hours)  # trust the group bin ∝ its sample weight
+        return k * gp["groups"][g][bi] + (1.0 - k) * gp["global"][bi]
+
+    return _integrate_profile(rate_at, t, y, target, ctx["t0"], nbins)
 
 
 MODELS = {
     "shrinkage": model_shrinkage,
     "diurnal": model_diurnal,
+    "diurnal_dow": model_diurnal_dow,
     "linear": model_linear,
     "recent": model_recent,
     "ewma": model_ewma,
