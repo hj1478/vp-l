@@ -85,6 +85,7 @@ It runs **eight independent models** and **ensembles** them:
 | Model | Idea |
 |-------|------|
 | `diurnal` | **Predict each stage separately** — learns the vote rate as a function of UTC time-of-day and integrates that profile forward to target (budgets for the overnight lull and evening peak instead of assuming one flat rate) |
+| `diurnal_dow` | Same, but conditioned on **weekday vs weekend** as well as UTC hour, with per-bin hierarchical shrinkage toward the pooled profile so it can't overfit thin data. A candidate model — earns weight as multi-week data accumulates. **Timezones:** everything is UTC hour-of-day, the correct frame for a global playerbase whose peaks sit at fixed UTC hours. |
 | `shrinkage` | Bayesian blend of the historical rate prior and the observed rate — leans on history early, on live data late |
 | `linear` | OLS regression over the whole cycle |
 | `recent` | slope of the last k points (short-term rate) |
