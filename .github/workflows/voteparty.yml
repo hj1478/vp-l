@@ -103,6 +103,9 @@ jobs:
       - name: Update all-cycles overview graph
         run: python3 cycles_graph.py -i data/voteparty.jsonl -o data/cycles.png || true
 
+      - name: Update experimental NHPP diagnostic
+        run: python3 nhpp.py -i data/voteparty.jsonl -o data || true
+
       - name: Commit snapshots
         run: |
           git config user.name "github-actions[bot]"
@@ -113,7 +116,8 @@ jobs:
             data/model_report.png data/model_report.json data/model_report.md \
             data/replay.png \
             data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md \
-            data/cycles.png
+            data/cycles.png \
+            data/nhpp.png data/nhpp.json
           if git diff --cached --quiet; then
             echo "No new data to commit."
             exit 0
