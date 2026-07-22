@@ -78,18 +78,20 @@
   },
   "ensemble": {
     "eta": "2026-07-22T06:55:50Z",
-    "eta_epoch": 1784703350.8017213,
+    "eta_epoch": 1784703350.801721,
     "range_low": "2026-07-22T06:05:52Z",
     "range_high": "2026-07-22T08:02:04Z"
   },
   "model_selection": {
-    "stable_winner": "diurnal_dow",
+    "stable_winner": null,
+    "n_voting_cycles": 4,
+    "min_required": 8,
     "fold_winners": {
       "4": "diurnal_dow",
       "6": "diurnal_dow",
       "7": "diurnal_dow",
       "8": "diurnal_dow"
     },
-    "note": "Stable winner: 'diurnal_dow' wins every leave-one-cycle-out fold. Still few cycles \u2014 keep watching."
+    "note": "No stable winner \u2014 only 4 well-labeled voting cycles (< 8 required by the pre-registered criterion), current fold-leaders ['diurnal_dow']. Weights shrunk toward uniform; naming a leader now would be noise."
   }
 }

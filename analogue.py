@@ -27,7 +27,8 @@ import numpy as np
 
 from predict import (load_points, split_cycles, cycle_arrays, cycle_fire_time,
                      tight_cycle_indices, fmt_ts,
-                     time_at_collected, analogue_forecast, wquantile)
+                     time_at_collected, analogue_forecast, wquantile,
+                     analogue_quantiles)
 
 
 def summarize(fc):
@@ -74,11 +75,12 @@ def main(argv=None):
         t, yy = cycle_arrays(cycles[ci])
         aerr, covd = [], []
         for i in range(3, len(t) + 1):
-            f2 = analogue_forecast(cycles, prior, target,
-                                   cycles[ci][i - 1]["_t"], yy[i - 1])
-            if f2 is None:
+            # CAUSAL: library = prior cycles only. SAME construction (endpoint-
+            # sigma MC) as the live interval, so coverage describes what we report.
+            qq = analogue_quantiles(cycles, prior, target,
+                                    cycles[ci][i - 1]["_t"], yy[i - 1], [0.1, 0.5, 0.9])
+            if qq is None:
                 continue
-            qq = wquantile(f2["preds"], f2["w"], [0.1, 0.5, 0.9])
             aerr.append(abs(qq[1] - fire) / 60)
             covd.append(int(qq[0] <= fire <= qq[2]))
         if aerr:

@@ -15,7 +15,7 @@ _Diagnostic ensemble ETA: `2026-07-22T06:55:50Z`._
 
 ## Model diagnostics (not the prediction)
 
-**Stable winner:** `diurnal_dow` wins every leave-one-cycle-out fold (still few cycles).
+**No stable winner** — the lowest-error model differs across leave-one-cycle-out folds, so we name none and keep the (diagnostic) weights shrunk toward uniform.
 
 | Model | Predicted ETA | Weight (shrunk) |
 |-------|---------------|-----------------|

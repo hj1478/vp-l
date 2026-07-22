@@ -663,14 +663,23 @@ def weights_for_progress(staged, progress, blend=0.5):
     return {n: v / s for n, v in mixed.items()} if s > 0 else gw
 
 
-def stable_winner(cycles, target, min_fit=3, min_label_weight=0.25):
-    """The model with the lowest MAE in EVERY leave-one-cycle-out fold, or None
-    if no single model wins unanimously. A "winner" that changes fold to fold is
-    sampling noise, not evidence — so we only ever name one that is stable.
-    Only well-labeled cycles (label weight >= threshold) get a vote, so a
-    loosely-timed cycle can't crown a spurious winner. `cycles` is the full list
-    (so the last completed cycle can see its successor for labeling).
-    Returns (winner_or_None, {cycle_index: fold_winner})."""
+# PRE-REGISTERED stable-winner criterion (see PREREGISTRATION.md). Fixed BEFORE
+# any model qualifies, so we can't move goalposts later. A model is the "stable
+# winner" iff ALL of: (a) it has the lowest label-weighted MAE in every
+# leave-one-cycle-out fold, (b) over at least STABLE_WINNER_MIN_CYCLES
+# well-labeled cycles (label weight >= 0.25). Anything short of this is reported
+# as "no stable winner".
+STABLE_WINNER_MIN_CYCLES = 8
+STABLE_WINNER_MIN_LABEL_WEIGHT = 0.25
+
+
+def stable_winner(cycles, target, min_fit=3, min_label_weight=STABLE_WINNER_MIN_LABEL_WEIGHT):
+    """Pre-registered stable-winner test (see PREREGISTRATION.md). Returns
+    (winner_or_None, {cycle_index: fold_winner}). Names a winner only if one
+    model wins every well-labeled LOO fold AND there are at least
+    STABLE_WINNER_MIN_CYCLES such folds — so a 4-cycle fluke can't crown one.
+    `cycles` is the full list (so the last completed cycle can see its successor
+    for labeling)."""
     completed = cycles[:-1]
     fold_winners, per_cycle = [], {}
     for ci, cyc in enumerate(completed):
@@ -698,7 +707,9 @@ def stable_winner(cycles, target, min_fit=3, min_label_weight=0.25):
             per_cycle[ci] = w
     if not fold_winners:
         return None, {}
-    winner = fold_winners[0] if len(set(fold_winners)) == 1 else None
+    unanimous = len(set(fold_winners)) == 1
+    enough = len(fold_winners) >= STABLE_WINNER_MIN_CYCLES
+    winner = fold_winners[0] if (unanimous and enough) else None
     return winner, per_cycle
 
 
@@ -777,22 +788,28 @@ def wquantile(vals, w, qs):
     return np.interp(qs, cw, v)
 
 
-def analogue_interval(cycles, target, now_epoch, collected, nsim=6000):
-    """Predictive quantile interval for the current cycle's firing time.
-
-    Monte-Carlo so we can carry each borrowed endpoint's *label uncertainty*
-    (sigma) into the interval instead of treating it as exact: sample an analogue
-    by weight, then jitter by that analogue's firing-time sigma. Deterministic
-    (seeded)."""
-    fc = analogue_forecast(cycles, list(range(len(cycles) - 1)), target,
-                           now_epoch, collected)
+def analogue_quantiles(cycles, lib_indices, target, now_epoch, collected,
+                       qs, nsim=6000, seed=1234):
+    """Predictive firing-time quantiles from the analogue library, with each
+    borrowed endpoint's label sigma Monte-Carlo'd into the spread (not treated as
+    exact). THE single construction used both live and in OOS evaluation, so the
+    measured coverage describes the interval we actually report. Deterministic."""
+    fc = analogue_forecast(cycles, lib_indices, target, now_epoch, collected)
     if fc is None:
         return None
-    rng = np.random.default_rng(1234)
+    rng = np.random.default_rng(seed)
     idx = rng.choice(len(fc["preds"]), size=nsim, p=fc["w"])
     samples = fc["preds"][idx] + rng.normal(0.0, 1.0, nsim) * fc["sigma"][idx]
-    p = np.percentile(samples, [5, 10, 50, 90, 95])
-    return {"p05": p[0], "p10": p[1], "p50": p[2], "p90": p[3], "p95": p[4]}
+    return np.percentile(samples, [q * 100 for q in qs])
+
+
+def analogue_interval(cycles, target, now_epoch, collected):
+    """Live predictive interval (full library) for the current cycle."""
+    q = analogue_quantiles(cycles, list(range(len(cycles) - 1)), target,
+                           now_epoch, collected, [0.05, 0.1, 0.5, 0.9, 0.95])
+    if q is None:
+        return None
+    return {"p05": q[0], "p10": q[1], "p50": q[2], "p90": q[3], "p95": q[4]}
 
 
 # ----------------------------------------------------------------------------
@@ -904,15 +921,19 @@ def predict(cycles, target):
             "range_high": fmt_ts(hi) if hi else None,
         },
         "model_selection": {
-            "stable_winner": winner,  # None until a model wins every LOO fold
+            "stable_winner": winner,  # None until the pre-registered criterion is met
+            "n_voting_cycles": len(fold_winners),
+            "min_required": STABLE_WINNER_MIN_CYCLES,
             "fold_winners": {str(k): v for k, v in fold_winners.items()},
-            "note": (f"No stable winner: fold winners differ "
-                     f"({sorted(set(fold_winners.values()))}); weights are shrunk "
-                     "toward uniform. Reporting a 'leading model' at this sample "
-                     "size would be sampling noise."
-                     if winner is None else
-                     f"Stable winner: '{winner}' wins every leave-one-cycle-out "
-                     "fold. Still few cycles — keep watching."),
+            "note": ((
+                f"No stable winner — only {len(fold_winners)} well-labeled voting "
+                f"cycles (< {STABLE_WINNER_MIN_CYCLES} required by the pre-registered "
+                f"criterion), current fold-leaders {sorted(set(fold_winners.values()))}. "
+                "Weights shrunk toward uniform; naming a leader now would be noise."
+                if winner is None else
+                f"Stable winner: '{winner}' meets the pre-registered criterion "
+                f"(wins every one of {len(fold_winners)} well-labeled LOO folds)."
+            ) if fold_winners else "No well-labeled cycles yet."),
         },
         "_per_model_epoch": {n: m["eta_epoch"] for n, m in per_model.items()},
         "_cycles": cycles,
