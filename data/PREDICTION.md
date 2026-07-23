@@ -1,17 +1,17 @@
 # Vote Party Prediction
 
-_Generated 2026-07-23T10:58:33Z — recomputed every data update._
+_Generated 2026-07-23T12:53:43Z — recomputed every data update._
 
-**Progress:** 1679 / 5000.0 (33.6%) — 3321 remaining
-**Players online:** 458  |  **Cycle started:** 2026-07-23T07:36:43Z  |  **Data points this cycle:** 35
+**Progress:** 2522 / 5000.0 (50.4%) — 2478 remaining
+**Players online:** 512  |  **Cycle started:** 2026-07-23T07:36:43Z  |  **Data points this cycle:** 47
 
 ## 🎯 Prediction
 
-**Vote party fires ≈ `2026-07-23 19:00Z`**  (model: `analogue`, rounded to interval resolution)
-**80% window:** `2026-07-23 14:00Z` → `2026-07-23 22:00Z`
+**Vote party fires ≈ `2026-07-23 18:30Z`**  (model: `analogue`, rounded to interval resolution)
+**80% window:** `2026-07-23 18:00Z` → `2026-07-23 21:00Z`
 _Interval from the analogue curve-library (measured ~73% coverage OOS, endpoint label-uncertainty propagated) over 12 cycles (7 tightly labeled). Point rounded to match interval width; wide early by design._
 
-_Diagnostic ensemble ETA: `2026-07-23T19:22:12Z`._
+_Diagnostic ensemble ETA: `2026-07-23T18:37:06Z`._
 
 ## Model diagnostics (not the prediction)
 
@@ -19,14 +19,14 @@ _Diagnostic ensemble ETA: `2026-07-23T19:22:12Z`._
 
 | Model | Predicted ETA | Weight (shrunk) |
 |-------|---------------|-----------------|
-| diurnal_dow | 2026-07-23T19:38:33Z | 0.298 |
-| diurnal | 2026-07-23T19:43:33Z | 0.266 |
-| shrinkage | 2026-07-23T19:27:46Z | 0.107 |
-| wls | 2026-07-23T18:31:44Z | 0.059 |
-| linear | 2026-07-23T18:32:34Z | 0.058 |
-| theilsen | 2026-07-23T18:34:16Z | 0.057 |
-| ewma | 2026-07-23T18:51:59Z | 0.054 |
-| recent | 2026-07-23T20:30:22Z | 0.052 |
-| quadratic | 2026-07-23T17:51:21Z | 0.049 |
+| diurnal_dow | 2026-07-23T18:33:43Z | 0.266 |
+| diurnal | 2026-07-23T18:43:43Z | 0.244 |
+| shrinkage | 2026-07-23T19:10:11Z | 0.111 |
+| wls | 2026-07-23T18:39:31Z | 0.077 |
+| linear | 2026-07-23T18:41:48Z | 0.069 |
+| theilsen | 2026-07-23T18:40:32Z | 0.062 |
+| ewma | 2026-07-23T17:45:11Z | 0.060 |
+| quadratic | 2026-07-23T19:01:29Z | 0.057 |
+| recent | 2026-07-23T17:33:39Z | 0.054 |
 
 **Weights are shrunk toward uniform** by an Occam prior (λ = n/(n+6) in cycles): near-equal now, differentiating only when many cycles give strong, stable evidence. A shifting 'leader' at this sample size is sampling noise, not a finding. The reported prediction (above) is the `analogue` model, independent of these weights. See `prediction_track.png`.
