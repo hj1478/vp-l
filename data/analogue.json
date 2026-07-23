@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-07-23T17:41:33Z",
-  "progress_pct": 89.7,
-  "median_eta": "2026-07-23T18:46:02Z",
+  "generated_at": "2026-07-23T20:35:19Z",
+  "progress_pct": 11.0,
+  "median_eta": "2026-07-24T08:18:11Z",
   "interval_80": [
-    "2026-07-23T18:31:12Z",
-    "2026-07-23T19:33:20Z"
+    "2026-07-24T06:23:57Z",
+    "2026-07-24T09:51:47Z"
   ],
   "interval_90": [
-    "2026-07-23T18:27:48Z",
-    "2026-07-23T19:35:07Z"
+    "2026-07-24T03:42:30Z",
+    "2026-07-24T10:26:25Z"
   ],
-  "effective_analogues": 8.3,
-  "n_library_cycles": 12,
+  "effective_analogues": 8.2,
+  "n_library_cycles": 13,
   "oos_verdict": {
     "analogue_median_mae_min": 35.2,
     "analogue_mae_95ci_min": [

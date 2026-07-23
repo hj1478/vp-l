@@ -7,7 +7,7 @@ Causal reconstruction — each prediction used only cycles that finished *before
 **Tight-label OOS MAE:** 56.1 min (n=343 predictions, 6 cycle(s))
 **Tight-label MAE by stage:** 0-25%=81.9m  ·  25-50%=87.3m  ·  50-75%=48.7m  ·  75-90%=36.9m  ·  90-100%=13.4m
 
-_All-cycle (contaminated) MAE: 64.9 min over 761 predictions — do not trust._
+_All-cycle (contaminated) MAE: 62.0 min over 841 predictions — do not trust._
 
 ## Per-cycle snapshots
 
@@ -24,5 +24,6 @@ _All-cycle (contaminated) MAE: 64.9 min over 761 predictions — do not trust._
 | 10 | 2026-07-22T06:24:38Z | tight | +90m | +103m | +31m |
 | 11 | 2026-07-22T18:49:31Z | ±19m | -25m | -42m | -36m |
 | 12 | 2026-07-23T07:37:32Z | ±17m | +37m | +52m | +18m |
+| 13 | 2026-07-23T19:22:02Z | ±17m | -38m | -35m | -20m |
 
 Values are primary-model error (predicted − actual firing), minutes; + = predicted too late. See `prediction_track.png`.
