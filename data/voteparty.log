@@ -1056,3 +1056,17 @@
 [2026-07-23T22:17:49Z] vote party 961/5000 (19.2%) | 4039 remaining | players 495/800 | moon NEW_MOON | next poll ~60s
 [2026-07-23T22:18:47Z] vote party 975/5000 (19.5%) | 4025 remaining | players 495/800 | moon NEW_MOON | next poll ~60s
 [2026-07-23T22:18:47Z] === tracker duration reached ===
+[2026-07-23T22:33:56Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-07-23T22:33:57Z] vote party 1028/5000 (20.6%) | 3972 remaining | players 488/800 | moon NEW_MOON | next poll ~300s
+[2026-07-23T22:38:57Z] vote party 1040/5000 (20.8%) | 3960 remaining | players 474/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-07-23T22:43:57Z] vote party 1063/5000 (21.3%) | 3937 remaining | players 463/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-07-23T22:48:57Z] vote party 1077/5000 (21.5%) | 3923 remaining | players 471/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-07-23T22:53:57Z] vote party 1107/5000 (22.1%) | 3893 remaining | players 459/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-07-23T22:58:58Z] vote party 1115/5000 (22.3%) | 3885 remaining | players 455/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-07-23T23:03:58Z] vote party 1129/5000 (22.6%) | 3871 remaining | players 454/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-07-23T23:08:58Z] vote party 1143/5000 (22.9%) | 3857 remaining | players 445/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-07-23T23:13:58Z] vote party 1171/5000 (23.4%) | 3829 remaining | players 453/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-07-23T23:18:58Z] vote party 1180/5000 (23.6%) | 3820 remaining | players 462/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-07-23T23:23:58Z] vote party 1197/5000 (23.9%) | 3803 remaining | players 454/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-07-23T23:28:57Z] vote party 1222/5000 (24.4%) | 3778 remaining | players 467/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-07-23T23:28:57Z] === tracker duration reached ===
