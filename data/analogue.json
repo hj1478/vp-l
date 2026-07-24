@@ -1,30 +1,30 @@
 {
-  "generated_at": "2026-07-24T19:49:34Z",
-  "progress_pct": 90.6,
-  "median_eta": "2026-07-24T21:07:34Z",
+  "generated_at": "2026-07-24T21:46:29Z",
+  "progress_pct": 4.6,
+  "median_eta": "2026-07-25T10:05:35Z",
   "interval_80": [
-    "2026-07-24T20:38:02Z",
-    "2026-07-24T21:31:55Z"
+    "2026-07-25T08:31:51Z",
+    "2026-07-25T11:12:20Z"
   ],
   "interval_90": [
-    "2026-07-24T20:37:27Z",
-    "2026-07-24T21:35:50Z"
+    "2026-07-25T04:18:43Z",
+    "2026-07-25T11:50:52Z"
   ],
-  "effective_analogues": 9.7,
-  "n_library_cycles": 14,
+  "effective_analogues": 9.8,
+  "n_library_cycles": 15,
   "oos_verdict": {
-    "analogue_median_mae_min": 30.6,
+    "analogue_median_mae_min": 29.0,
     "analogue_mae_95ci_min": [
-      14.1,
-      46.7
+      16.4,
+      43.6
     ],
-    "interval_80_measured_coverage_pct": 94,
+    "interval_80_measured_coverage_pct": 95,
     "coverage_95ci_pct": [
       90,
       100
     ],
-    "n_tight_cycles": 7,
-    "n_tight_stage_predictions": 452
+    "n_tight_cycles": 8,
+    "n_tight_stage_predictions": 548
   },
-  "note": "Nonparametric. Every OOS metric carries a cluster-bootstrap 95% CI over the 7 tight cycles \u2014 it is deliberately wide, because a point-metric from a handful of cycles is not precise."
+  "note": "Nonparametric. Every OOS metric carries a cluster-bootstrap 95% CI over the 8 tight cycles \u2014 it is deliberately wide, because a point-metric from a handful of cycles is not precise."
 }
