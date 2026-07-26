@@ -1,35 +1,35 @@
 # Model Performance Report
 
-Leave-one-cycle-out backtest over **17 completed cycles**. Error = |predicted firing time − actual firing time|, in minutes.
+Leave-one-cycle-out backtest over **18 completed cycles**. Error = |predicted firing time − actual firing time|, in minutes.
 
 ## Overall metrics (ranked by MAE)
 
 | Model | Weight | MAE | RMSE | Median | P90 | Bias | Coverage | n |
 |-------|-------:|----:|-----:|-------:|----:|-----:|---------:|--:|
-| diurnal_dow | 0.272 | 28.7 | 36.8 | 23.8 | 62.0 | +5.4 | 113% | 1272 |
-| diurnal | 0.243 | 31.0 | 39.7 | 25.1 | 69.9 | +5.6 | 113% | 1272 |
-| **ensemble** | — | 48.2 | 63.1 | 35.8 | 104.2 | +8.3 | 113% | 1272 |
-| shrinkage | 0.112 | 57.8 | 73.0 | 45.0 | 121.9 | -5.4 | 113% | 1272 |
-| quadratic | 0.069 | 86.3 | 180.9 | 31.7 | 223.5 | -2.0 | 73% | 822 |
-| wls | 0.087 | 100.1 | 148.8 | 57.1 | 244.8 | +16.3 | 113% | 1272 |
-| ewma | 0.070 | 111.2 | 176.8 | 65.6 | 271.3 | +28.3 | 113% | 1272 |
-| linear | 0.055 | 115.8 | 155.8 | 79.7 | 249.3 | +9.9 | 113% | 1272 |
-| recent | 0.039 | 121.7 | 208.6 | 64.0 | 293.5 | +38.8 | 113% | 1272 |
-| theilsen | 0.052 | 122.0 | 162.2 | 92.2 | 258.9 | +13.8 | 113% | 1272 |
+| diurnal_dow | 0.345 | 29.9 | 38.5 | 24.3 | 65.0 | +6.5 | 114% | 1341 |
+| diurnal | 0.296 | 32.3 | 41.6 | 25.5 | 72.4 | +7.6 | 114% | 1341 |
+| **ensemble** | — | 49.6 | 64.3 | 37.4 | 106.5 | +10.7 | 114% | 1341 |
+| shrinkage | 0.104 | 60.6 | 76.2 | 47.2 | 127.8 | -0.9 | 114% | 1341 |
+| quadratic | 0.038 | 87.3 | 181.7 | 31.0 | 236.3 | -4.2 | 73% | 864 |
+| wls | 0.046 | 101.6 | 149.6 | 57.9 | 250.3 | +19.9 | 114% | 1341 |
+| ewma | 0.041 | 112.8 | 177.3 | 66.6 | 276.3 | +32.3 | 114% | 1341 |
+| linear | 0.045 | 116.7 | 155.5 | 82.9 | 244.6 | +14.1 | 114% | 1341 |
+| theilsen | 0.044 | 122.8 | 161.8 | 94.0 | 253.4 | +18.7 | 114% | 1341 |
+| recent | 0.038 | 123.5 | 208.4 | 66.1 | 300.7 | +42.9 | 114% | 1341 |
 
 ## Mean |ETA error| by cycle stage (minutes)
 
 | Model | 0-25% | 25-50% | 50-75% | 75-90% | 90-100% |
 |-------|----:|----:|----:|----:|----:|
-| diurnal_dow | 31.1 | 36.8 | 32.1 | 23.4 | 13.5 |
-| diurnal | 36.1 | 39.9 | 33.8 | 24.9 | 12.9 |
-| ensemble | 82.8 | 59.5 | 40.7 | 28.5 | 14.8 |
-| shrinkage | 68.0 | 82.7 | 60.9 | 40.7 | 18.3 |
-| quadratic | 465.8 | 100.1 | 56.7 | 32.9 | 18.5 |
-| wls | 228.3 | 118.1 | 64.1 | 32.8 | 16.0 |
-| ewma | 234.2 | 143.3 | 79.7 | 30.2 | 16.8 |
-| linear | 224.5 | 137.6 | 84.2 | 60.7 | 35.6 |
-| recent | 254.4 | 144.7 | 91.4 | 32.4 | 31.7 |
-| theilsen | 223.3 | 150.3 | 95.7 | 64.4 | 36.3 |
+| diurnal_dow | 32.9 | 38.2 | 33.5 | 24.2 | 12.9 |
+| diurnal | 37.0 | 41.7 | 35.6 | 25.5 | 12.8 |
+| ensemble | 81.7 | 62.1 | 42.9 | 29.3 | 14.6 |
+| shrinkage | 71.4 | 85.8 | 64.3 | 42.0 | 18.3 |
+| quadratic | 465.3 | 100.1 | 55.6 | 32.0 | 18.5 |
+| wls | 224.3 | 124.0 | 63.7 | 32.9 | 16.0 |
+| ewma | 229.1 | 150.0 | 80.3 | 29.8 | 16.8 |
+| linear | 218.4 | 139.1 | 87.1 | 62.4 | 35.6 |
+| theilsen | 217.1 | 151.8 | 98.3 | 65.7 | 36.3 |
+| recent | 252.6 | 151.8 | 89.4 | 31.8 | 31.7 |
 
 **Bias** > 0 means the model tends to predict the party *later* than it actually fires; < 0 means *earlier*. **Coverage** is the share of stages where the model produced a prediction (some need ≥3 points or history). See `model_report.png`.

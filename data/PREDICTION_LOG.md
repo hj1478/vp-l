@@ -2,12 +2,12 @@
 
 Causal reconstruction — each prediction used only cycles that finished *before* its cycle began. Predictions are the **analogue** model.
 
-⚠️ **Label caveat:** **10 cycle(s)** have a firing time known (by extrapolation to target) to within 15 min. The **tight-label** row is the trustworthy one; looser cycles carry larger label error.
+⚠️ **Label caveat:** **11 cycle(s)** have a firing time known (by extrapolation to target) to within 15 min. The **tight-label** row is the trustworthy one; looser cycles carry larger label error.
 
-**Tight-label OOS MAE:** 53.1 min (n=774 predictions, 10 cycle(s))
-**Tight-label MAE by stage:** 0-25%=94.0m  ·  25-50%=71.8m  ·  50-75%=49.3m  ·  75-90%=31.6m  ·  90-100%=14.9m
+**Tight-label OOS MAE:** 55.4 min (n=843 predictions, 11 cycle(s))
+**Tight-label MAE by stage:** 0-25%=91.9m  ·  25-50%=76.5m  ·  50-75%=52.2m  ·  75-90%=32.6m  ·  90-100%=14.9m
 
-_All-cycle (contaminated) MAE: 58.2 min over 1272 predictions — do not trust._
+_All-cycle (contaminated) MAE: 59.4 min over 1341 predictions — do not trust._
 
 ## Per-cycle snapshots
 
@@ -29,5 +29,6 @@ _All-cycle (contaminated) MAE: 58.2 min over 1272 predictions — do not trust._
 | 15 | 2026-07-24T21:04:43Z | tight | +11m | +11m | -6m |
 | 16 | 2026-07-25T09:47:42Z | tight | +96m | +34m | +24m |
 | 17 | 2026-07-25T23:39:48Z | tight | -85m | -57m | -8m |
+| 18 | 2026-07-26T10:26:52Z | tight | +119m | +48m | +24m |
 
 Values are primary-model error (predicted − actual firing), minutes; + = predicted too late. See `prediction_track.png`.
