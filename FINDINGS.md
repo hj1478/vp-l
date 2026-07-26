@@ -20,6 +20,20 @@ Per-tight-cycle OOS MAE vs number of prior cycles: pattern looks like improvemen
 claim data helps until the slope CI excludes zero. Suggestive, not established;
 one outlier cycle (43 min at 7 priors) breaks monotonicity.
 
+## Update at 11 tight cycles (2026-07-26)
+- **Learning trend still unproven, effect shrank.** Per-cycle OOS MAE vs n_prior:
+  slope −3.35 min/cycle, CI [−9.2, +3.2] (was −17 on 5 cycles — inflated by one
+  outlier). Doubling the data flattened it toward zero. "Wait for data" is **not**
+  the lever for point accuracy; the analogue plateaus after a few cycles.
+- **Frontrunner but no stable winner.** Over 8 well-labeled folds `diurnal_dow`
+  wins 6/8 (shrinkage 1, diurnal 1) — a real frontrunner, but not unanimous, so
+  the pre-registered criterion correctly withholds the title.
+- **Shape modeling is the lever, nearly proven.** LOO shape oracle 20.3 min
+  [15,28] vs constant-rate oracle 30.4 min [21,38]; paired improvement +9.9 min,
+  CI [−1.5, +19.7] — just barely crosses zero. ~10 min of mid-cycle headroom from
+  modeling the rate's diurnal shape, on the threshold of significance. This is
+  where to invest (not more data, not model-picking).
+
 ## Label extrapolation is minimal; tight-threshold is not fragile
 - **Extrapolation fraction:** median cycle is sampled to ~98–99.8% of target, so
   the firing label rests on ≈**1.8%** extrapolation (σ = sampling floor). Only
