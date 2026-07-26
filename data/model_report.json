@@ -1,15 +1,15 @@
 {
   "n_completed_cycles": 18,
   "weights": {
-    "shrinkage": 0.1039,
-    "diurnal": 0.2965,
-    "diurnal_dow": 0.345,
-    "linear": 0.0455,
-    "recent": 0.0384,
-    "ewma": 0.0414,
-    "theilsen": 0.0444,
-    "wls": 0.0463,
-    "quadratic": 0.0385
+    "shrinkage": 0.1041,
+    "diurnal": 0.2604,
+    "diurnal_dow": 0.2955,
+    "linear": 0.0573,
+    "recent": 0.0462,
+    "ewma": 0.0542,
+    "theilsen": 0.0523,
+    "wls": 0.0708,
+    "quadratic": 0.0593
   },
   "stats": {
     "shrinkage": {
