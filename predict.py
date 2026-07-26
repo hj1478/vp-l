@@ -813,6 +813,126 @@ def analogue_interval(cycles, target, now_epoch, collected):
 
 
 # ----------------------------------------------------------------------------
+# Shape-aware analogue — the plain analogue borrows each library cycle's
+# ABSOLUTE remaining duration from the matching-progress point. If the library
+# cycles fired during a different diurnal phase than the current cycle must
+# cross to reach target, every borrowed duration is mis-timed by the diurnal
+# "shape" error the LOO oracle identified (~10 min mid-cycle). This variant
+# re-times each analogue: it forward-integrates the pooled diurnal rate profile
+# from the CURRENT phase for the exactly-known remaining votes, borrowing only
+# each analogue's pace *deviation* from that profile (heavily shrunk toward 1 —
+# a near-inert safety valve; the paired win is flat whether or not it is used,
+# so the improvement is the re-timing, not the pace-borrowing). Validated
+# causally in shape_analogue.py: paired point improvement -11 min, 95% CI
+# [-17, -4] over the plain analogue on tight cycles, with 80% interval coverage
+# ~79% (better calibrated than the plain analogue's over-wide ~92%). See
+# FINDINGS.md and PREREGISTRATION.md §2.
+# ----------------------------------------------------------------------------
+PACE_SHRINK_VOTES = 400.0   # trust an analogue's pace deviation ∝ votes of its
+                            # remaining segment we actually observed; heavy shrink
+
+
+def _dur_for_votes(rate_at, start_epoch, votes, step=300.0, max_days=4):
+    """Seconds to accumulate `votes` from start_epoch under rate_at (votes/sec)."""
+    if votes <= 0:
+        return 0.0
+    acc, epoch, guard = 0.0, start_epoch, 0
+    lim = int(max_days * 86400 / step)
+    while acc < votes and guard < lim:
+        acc += rate_at(epoch) * step
+        epoch += step
+        guard += 1
+    if acc < votes:
+        return None
+    over = acc - votes
+    r = rate_at(epoch - step)
+    frac_back = (over / (r * step)) if r > 1e-9 else 0.0
+    return (epoch - start_epoch) - frac_back * step
+
+
+def shape_analogue_forecast(cycles, lib_indices, target, now_epoch, collected,
+                            h_hours=ANALOGUE_H_HOURS, alpha=ANALOGUE_ALPHA,
+                            pace_shrink=PACE_SHRINK_VOTES):
+    """Similarity-weighted predictive firing epochs, re-timed through the current
+    diurnal phase. Returns {preds, w, sigma} like analogue_forecast, or None if
+    the library can't build a diurnal profile (needs a couple of prior cycles)."""
+    lib_cycles = [cycles[i] for i in lib_indices]
+    prof, mean_rate = diurnal_profile(lib_cycles)
+    if prof is None or mean_rate is None or mean_rate <= 1e-9:
+        return None
+    nbins = len(prof)
+    binsecs = 86400.0 / nbins
+    rate_at = lambda e: prof[int((e % 86400.0) // binsecs) % nbins]
+
+    R = target - collected            # remaining votes — known exactly
+    if R <= 0:
+        return None
+    utc_now = now_epoch % 86400.0
+
+    preds, wts, sig = [], [], []
+    for li in lib_indices:
+        L = cycles[li]
+        fire, _ = cycle_fire_time(L, target)
+        if fire is None:
+            continue
+        tc = time_at_collected(L, collected, target, fire)
+        if tc is None:
+            continue
+        dur_L = fire - tc             # analogue's actual remaining duration
+        if dur_L < 60:
+            continue
+        dur_exp = _dur_for_votes(rate_at, tc, R)   # diurnal-expected, same phase
+        if dur_exp is None or dur_exp < 60:
+            continue
+        m_raw = dur_L / dur_exp       # >1 slower than diurnal, <1 faster
+        seen = min(R, max(0.0, L[-1]["collected"] - collected))
+        denom = seen + pace_shrink
+        k = (seen / denom) if denom > 0 else 0.0
+        m = k * m_raw + (1.0 - k) * 1.0
+        scaled = lambda e, m=m: rate_at(e) / m
+        dur_fore = _dur_for_votes(scaled, now_epoch, R)   # re-timed to CURRENT phase
+        if dur_fore is None:
+            continue
+        d = abs((tc % 86400.0) - utc_now)
+        d = min(d, 86400.0 - d)
+        w = np.exp(-0.5 * (d / (h_hours * 3600.0)) ** 2)
+        preds.append(now_epoch + dur_fore)
+        wts.append(w)
+        sig.append((label_sigma_min(cycles, li, target) or SAMPLING_FLOOR_MIN) * 60.0)
+    if not preds:
+        return None
+    preds = np.array(preds)
+    wts = np.array(wts)
+    unif = np.ones(len(wts)) / len(wts)
+    wc = wts / wts.sum() if wts.sum() > 0 else unif
+    w = alpha * wc + (1 - alpha) * unif
+    w /= w.sum()
+    return {"preds": preds, "w": w, "sigma": np.array(sig)}
+
+
+def shape_analogue_quantiles(cycles, lib_indices, target, now_epoch, collected,
+                             qs, nsim=6000, seed=1234):
+    """Predictive firing-time quantiles from the shape-aware analogue, label-sigma
+    Monte-Carlo'd into the spread. THE construction used both live and in OOS."""
+    fc = shape_analogue_forecast(cycles, lib_indices, target, now_epoch, collected)
+    if fc is None:
+        return None
+    rng = np.random.default_rng(seed)
+    idx = rng.choice(len(fc["preds"]), size=nsim, p=fc["w"])
+    samples = fc["preds"][idx] + rng.normal(0.0, 1.0, nsim) * fc["sigma"][idx]
+    return np.percentile(samples, [q * 100 for q in qs])
+
+
+def shape_analogue_interval(cycles, target, now_epoch, collected):
+    """Live shape-aware predictive interval (full library) for the current cycle."""
+    q = shape_analogue_quantiles(cycles, list(range(len(cycles) - 1)), target,
+                                 now_epoch, collected, [0.05, 0.1, 0.5, 0.9, 0.95])
+    if q is None:
+        return None
+    return {"p05": q[0], "p10": q[1], "p50": q[2], "p90": q[3], "p95": q[4]}
+
+
+# ----------------------------------------------------------------------------
 # Prediction
 # ----------------------------------------------------------------------------
 
@@ -848,19 +968,23 @@ def predict(cycles, target):
     else:
         ensemble_eta = lo = hi = None
 
-    # PRIMARY = the analogue curve-library, used for BOTH point (its median) and
-    # interval (its quantiles). We checked: diurnal's point does NOT beat the
-    # analogue median by more than noise (paired |err| diff 14min but sd 57min;
-    # diurnal wins only 54% of stage-points, driven by one cycle), and the
-    # diurnal-vs-analogue offset is large and unstable (+38min, sd 74min). So a
-    # diurnal-point + analogue-interval graft would mis-centre the calibrated
-    # interval. Using one coherent distribution keeps point and interval
-    # consistent, and the ~75% OOS coverage is measured around this very median.
-    # (diurnal remains in the models table as a diagnostic.)
+    # PRIMARY = the SHAPE-AWARE analogue, used for BOTH point (its median) and
+    # interval (its quantiles) — one coherent distribution, no grafting. It
+    # re-times each borrowed analogue through the current diurnal phase; validated
+    # causally to beat the plain analogue's point by -11 min (95% CI [-17, -4])
+    # while being better-calibrated (~79% vs the plain analogue's over-wide ~92%
+    # at nominal 80%). The gain is the diurnal re-timing, banking the LOO shape
+    # oracle's headroom (see FINDINGS.md, PREREGISTRATION.md §2). Falls back to the
+    # plain analogue when there aren't yet enough cycles to build a diurnal profile.
+    # (diurnal / plain analogue remain in the table as diagnostics.)
     n_tight = len(tight_cycle_indices(cycles, target))
-    interval = analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
+    interval = shape_analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
+    primary_name = "shape_analogue"
+    if interval is None:  # too few cycles for a diurnal profile → plain analogue
+        interval = analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
+        primary_name = "analogue"
     if interval:
-        primary_name, primary_eta = "analogue", interval["p50"]
+        primary_eta = interval["p50"]
     else:  # no completed cycles yet → fall back to diurnal, else ensemble
         primary_name = "diurnal" if per_model.get("diurnal", {}).get("eta_epoch") else "ensemble"
         primary_eta = (per_model["diurnal"]["eta_epoch"] if primary_name == "diurnal"
@@ -900,11 +1024,12 @@ def predict(cycles, target):
                 if interval else None,
             "n_library_cycles": len(completed),
             "n_tight_labeled_cycles": n_tight,
-            "note": ("Point and interval are both the analogue curve-library "
-                     f"(measured ~75% coverage OOS), over {len(completed)} library "
-                     f"cycles ({n_tight} tightly labeled). Sample is small — treat "
-                     "the width as approximate. Wide early by design; tightens as "
-                     "the cycle fills."
+            "note": (f"Point and interval are both the {primary_name} model "
+                     "(diurnal-re-timed curve library; ~79% measured 80%-interval "
+                     f"coverage OOS), over {len(completed)} library cycles "
+                     f"({n_tight} tightly labeled). Sample is small — treat the "
+                     "width as approximate. Wide early by design; tightens as the "
+                     "cycle fills."
                      if interval else
                      "No completed cycles yet — point is a bare extrapolation, "
                      "uncertainty UNKNOWN."),

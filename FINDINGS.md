@@ -34,6 +34,27 @@ one outlier cycle (43 min at 7 priors) breaks monotonicity.
   modeling the rate's diurnal shape, on the threshold of significance. This is
   where to invest (not more data, not model-picking).
 
+## Shape-aware analogue banks the oracle headroom (SHIPPED 2026-07-26)
+The LOO shape oracle (~10 min mid-cycle headroom) is now **realized out-of-sample**,
+not just an upper bound. The reported primary switched from the plain analogue to a
+**shape-aware analogue** that re-times each borrowed cycle through the *current*
+diurnal phase instead of copying its absolute remaining duration.
+- **Paired causal OOS (9 tight cycles, 765 stage-predictions), `shape_analogue.py`:**
+  plain analogue MAE 31.6 min → shape-aware **20.3 min**; paired difference
+  **−11.1 min, 95% CI [−17.2, −4.0]** (excludes zero). 80%-interval coverage
+  **79% [70, 90]** — better calibrated than the plain analogue's over-wide 92%.
+  Robust: leave-one-cycle-out never flips the sign (most adverse drop still −8.7).
+- **The gain is the re-timing, not the pace-borrowing.** Sweeping the pace-shrink
+  from 0 to ∞ (∞ = no per-analogue pace, pure current-phase diurnal re-time) moves
+  the paired win only −9.1 → −9.7 min. So per-analogue pace deviation is inert for
+  the point (kept only as a heavily-shrunk safety valve); Occam-simplest form wins.
+- **Why plain `model_diurnal` didn't already get this:** its `_integrate_profile`
+  rescales the pooled profile to the current cycle's *recent observed rate*, which
+  double-counts the current phase and injects lull/peak noise. Same 9 cycles:
+  obs-rescaled diurnal 30.6 min vs pooled-level-no-rescale **21.9 min**. Trusting
+  the historical level and letting the diurnal *shape* carry the time-variation is
+  the whole trick. `model_diurnal`/plain analogue stay in the table as diagnostics.
+
 ## Label extrapolation is minimal; tight-threshold is not fragile
 - **Extrapolation fraction:** median cycle is sampled to ~98–99.8% of target, so
   the firing label rests on ≈**1.8%** extrapolation (σ = sampling floor). Only

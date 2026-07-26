@@ -25,13 +25,21 @@ deliberate: the criterion was set to forbid exactly that premature call.
 
 ## 2. Reported prediction
 
-- The reported **point and interval are one coherent model** (`analogue`).
+- The reported **point and interval are one coherent model** (`shape_analogue`;
+  falls back to plain `analogue` before a diurnal profile is estimable).
 - We switch the reported model only if a challenger's point beats it by **more
   than the bootstrap CI** of the paired difference, AND the point-to-point offset
   is stable (so a calibrated interval isn't grafted around a mis-located point).
 - Interval **coverage is measured causally** (only-prior cycles) on the **exact
   same interval construction** that is reported, and always shown with its
   cluster-bootstrap 95% CI.
+
+**Status (2026-07-26): criterion MET — switched `analogue` → `shape_analogue`.**
+The challenger's point beat the incumbent by −11.1 min, paired 95% CI [−17.2, −4.0]
+(excludes zero), measured causally in `shape_analogue.py`. No grafting risk: point
+and interval are the same distribution. Its 80% coverage is 79% [70, 90] (nominal),
+vs the incumbent's over-wide 92%. The switch banks the LOO shape-oracle headroom
+(FINDINGS.md, "Shape-aware analogue banks the oracle headroom").
 
 ## 3. "Wait for more data" is only a valid plan if data helps
 
