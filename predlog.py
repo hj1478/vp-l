@@ -33,6 +33,7 @@ from predict import (
     MODELS, load_points, split_cycles, cycle_arrays, cycle_fire_time,
     make_ctx, backtest_staged, weights_for_progress, fmt_ts,
     label_sigma_min, TIGHT_LABEL_MIN,
+    shape_analogue_forecast, analogue_forecast, wquantile,
 )
 
 MIN_FIT = 3
@@ -61,27 +62,35 @@ def build_log(points, target):
         t, y = cycle_arrays(cyc)
         t0 = cyc[0]["_t"]
         cyc_id = fmt_ts(t0)
+        lib = list(range(ci))                    # library = prior cycle indices
         for i in range(MIN_FIT, len(t) + 1):
             t_fit, y_fit = t[:i], y[:i]
             prog = float(y_fit[-1]) / target * 100.0
+            now, coll = t0 + t[i - 1], float(y_fit[-1])
+            # REPORTED PRIMARY: shape-aware analogue median, plain-analogue fallback
+            # before a diurnal profile is estimable. Same construction as predict().
+            fc = shape_analogue_forecast(cycles, lib, target, now, coll)
+            if fc is None:
+                fc = analogue_forecast(cycles, lib, target, now, coll)
+            primary = float(wquantile(fc["preds"], fc["w"], [0.5])[0]) if fc else None
+            # ensemble kept as a diagnostic column only
             weights = (weights_for_progress(staged, prog) if staged
                        else {n: 1.0 / len(MODELS) for n in MODELS})
-            etas, ws, diurnal = [], [], None
+            etas, ws = [], []
             for n in MODELS:
                 tc = MODELS[n](t_fit, y_fit, target, ctx)
                 if tc is None:
                     continue
-                eta = t0 + tc
-                if n == "diurnal":
-                    diurnal = eta
-                etas.append(eta)
+                etas.append(t0 + tc)
                 ws.append(weights.get(n, 0.0))
-            if not etas:
+            ens = None
+            if etas:
+                wn = np.array(ws)
+                wn = wn / wn.sum() if wn.sum() > 0 else np.ones(len(wn)) / len(wn)
+                ens = float(np.sum(np.array(etas) * wn))
+            if primary is None:
                 continue
-            wn = np.array(ws)
-            wn = wn / wn.sum() if wn.sum() > 0 else np.ones(len(wn)) / len(wn)
-            ens = float(np.sum(np.array(etas) * wn))
-            err = (ens - fire) / 60.0 if fire is not None else None
+            err = (primary - fire) / 60.0 if fire is not None else None
             entries.append({
                 "cycle": ci + 1,
                 "cycle_id": cyc_id,
@@ -89,8 +98,8 @@ def build_log(points, target):
                 "progress_pct": round(prog, 1),
                 "stage": _stage(prog),
                 "n_prior_cycles": len(prior),
-                "ensemble_eta": fmt_ts(ens),
-                "diurnal_eta": fmt_ts(diurnal) if diurnal else None,
+                "primary_eta": fmt_ts(primary),
+                "ensemble_eta": fmt_ts(ens) if ens is not None else None,
                 "actual_fire": fmt_ts(fire) if fire is not None else None,
                 "error_min": round(err, 1) if err is not None else None,
                 "resolved": fire is not None,
@@ -198,7 +207,9 @@ def make_graph(entries, res, out_png):
 def write_markdown(entries, res, tight, stats, path):
     L = ["# Prediction Track Record (out-of-sample)", "",
          "Causal reconstruction — each prediction used only cycles that finished "
-         "*before* its cycle began. Predictions are the **analogue** model.", "",
+         "*before* its cycle began. Predictions are the reported primary "
+         "(**shape_analogue**, plain-analogue fallback before a diurnal profile "
+         "is estimable) — the exact model shipped in predict.py.", "",
          f"⚠️ **Label caveat:** **{stats.get('n_tight_cycles', 0)} cycle(s)** have a "
          "firing time known (by extrapolation to target) to within "
          f"{int(__import__('predict').TIGHT_LABEL_MIN)} min. The **tight-label** "
