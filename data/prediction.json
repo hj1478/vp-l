@@ -1,86 +1,86 @@
 {
-  "generated_at": "2026-07-27T02:01:03Z",
+  "generated_at": "2026-07-27T04:07:05Z",
   "target": 5000.0,
   "current": {
-    "collected": 1069,
-    "remaining": 3931,
-    "percent": 21.4,
-    "last_ts": "2026-07-27T02:01:03Z",
+    "collected": 1629,
+    "remaining": 3371,
+    "percent": 32.6,
+    "last_ts": "2026-07-27T04:07:05Z",
     "cycle_start_ts": "2026-07-26T23:31:47Z",
-    "num_points": 18,
-    "players_online": 517
+    "num_points": 30,
+    "players_online": 436
   },
   "primary": {
     "model": "shape_analogue",
-    "eta": "2026-07-27T11:10:29Z",
-    "eta_epoch": 1785150629.5354667,
-    "eta_display": "2026-07-27 11:15Z",
-    "display_granularity_min": 15,
+    "eta": "2026-07-27T11:23:51Z",
+    "eta_epoch": 1785151431.8489213,
+    "eta_display": "2026-07-27 11:30Z",
+    "display_granularity_min": 30,
     "interval_80": [
-      "2026-07-27T10:26:15Z",
-      "2026-07-27T11:40:49Z"
+      "2026-07-27T10:24:01Z",
+      "2026-07-27T11:58:09Z"
     ],
     "interval_90": [
-      "2026-07-27T05:43:54Z",
-      "2026-07-27T11:52:19Z"
+      "2026-07-27T07:08:40Z",
+      "2026-07-27T12:08:22Z"
     ],
-    "half_width_80_min": 37,
+    "half_width_80_min": 47,
     "n_library_cycles": 19,
     "n_tight_labeled_cycles": 13,
     "note": "Point and interval are both the shape_analogue model (diurnal-re-timed curve library; ~79% measured 80%-interval coverage OOS), over 19 library cycles (13 tightly labeled). Sample is small \u2014 treat the width as approximate. Wide early by design; tightens as the cycle fills."
   },
   "models": {
     "shrinkage": {
-      "eta": "2026-07-27T12:09:19Z",
+      "eta": "2026-07-27T13:16:10Z",
       "weight": 0.1125,
       "backtest_rmse": 1.22798
     },
     "diurnal": {
-      "eta": "2026-07-27T10:56:03Z",
+      "eta": "2026-07-27T12:12:05Z",
       "weight": 0.3081,
       "backtest_rmse": 0.69322
     },
     "diurnal_dow": {
-      "eta": "2026-07-27T10:56:03Z",
+      "eta": "2026-07-27T12:02:05Z",
       "weight": 0.3238,
       "backtest_rmse": 0.67385
     },
     "linear": {
-      "eta": "2026-07-27T10:57:46Z",
+      "eta": "2026-07-27T13:13:49Z",
       "weight": 0.046,
       "backtest_rmse": 2.53484
     },
     "recent": {
-      "eta": "2026-07-27T10:34:53Z",
+      "eta": "2026-07-27T16:31:53Z",
       "weight": 0.0383,
       "backtest_rmse": 3.36507
     },
     "ewma": {
-      "eta": "2026-07-27T10:51:42Z",
+      "eta": "2026-07-27T17:33:50Z",
       "weight": 0.0417,
       "backtest_rmse": 2.8696
     },
     "theilsen": {
-      "eta": "2026-07-27T11:12:42Z",
+      "eta": "2026-07-27T13:58:26Z",
       "weight": 0.0448,
       "backtest_rmse": 2.63357
     },
     "wls": {
-      "eta": "2026-07-27T10:50:50Z",
+      "eta": "2026-07-27T14:46:43Z",
       "weight": 0.047,
       "backtest_rmse": 2.43391
     },
     "quadratic": {
-      "eta": "2026-07-27T09:19:01Z",
+      "eta": null,
       "weight": 0.0379,
       "backtest_rmse": 3.00724
     }
   },
   "ensemble": {
-    "eta": "2026-07-27T11:00:12Z",
-    "eta_epoch": 1785150012.4195395,
-    "range_low": "2026-07-27T09:19:01Z",
-    "range_high": "2026-07-27T12:09:19Z"
+    "eta": "2026-07-27T12:55:57Z",
+    "eta_epoch": 1785156957.8043046,
+    "range_low": "2026-07-27T12:02:05Z",
+    "range_high": "2026-07-27T17:33:50Z"
   },
   "model_selection": {
     "stable_winner": null,
