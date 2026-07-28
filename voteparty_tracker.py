@@ -166,10 +166,13 @@ def poll_once(url, logfile, jsonfile, prev, interval: "AdaptiveInterval | None")
         hint = f" (Retry-After={exc.retry_after}s)" if exc.retry_after is not None else ""
         log_line(logfile, f"RATE LIMITED (429){hint} — backing off to ~{round(wait or 0)}s")
         return prev, wait
-    except urllib.error.URLError as exc:
+    except OSError as exc:
+        # OSError covers urllib URLError/HTTPError, socket read/connect TimeoutError,
+        # ConnectionResetError, DNS failures — all transient. A single one of these
+        # must never kill the run (it killed the collector mid-endgame at 92% once).
         if interval:
             interval.on_error()
-        log_line(logfile, f"ERROR fetching endpoint: {exc}")
+        log_line(logfile, f"ERROR fetching endpoint: {exc!r}")
         return prev, None
     except (json.JSONDecodeError, ValueError) as exc:
         if interval:
@@ -267,7 +270,12 @@ def main(argv=None) -> int:
 
     prev = None
     while _running:
-        prev, wait_override = poll_once(args.url, args.logfile, args.jsonfile, prev, interval)
+        try:
+            prev, wait_override = poll_once(args.url, args.logfile, args.jsonfile, prev, interval)
+        except Exception as exc:  # last-resort net: never let one poll kill the run
+            interval.on_error()
+            log_line(args.logfile, f"UNEXPECTED ERROR (continuing): {exc!r}")
+            prev, wait_override = prev, None
         if deadline is not None and time.monotonic() >= deadline:
             break
         wait = wait_override if wait_override is not None else interval.current
