@@ -1,29 +1,29 @@
 {
   "__status__": "EXPERIMENTAL \u2014 diagnostic only, NOT the reported prediction",
-  "generated_at": "2026-07-28T03:16:50Z",
-  "progress_pct": 26.1,
-  "median_eta": "2026-07-28T11:52:38Z",
+  "generated_at": "2026-07-28T05:25:29Z",
+  "progress_pct": 42.2,
+  "median_eta": "2026-07-28T11:53:53Z",
   "interval_80": [
-    "2026-07-28T11:29:20Z",
-    "2026-07-28T12:17:21Z"
+    "2026-07-28T11:37:32Z",
+    "2026-07-28T12:11:27Z"
   ],
   "interval_90": [
-    "2026-07-28T11:23:33Z",
-    "2026-07-28T12:24:28Z"
+    "2026-07-28T11:32:50Z",
+    "2026-07-28T12:16:29Z"
   ],
   "level_posterior": {
     "mean": 0.971,
-    "sd": 0.025,
+    "sd": 0.02,
     "global_mean": 1.002,
     "global_sd": 0.05,
-    "observed": 0.961,
+    "observed": 0.965,
     "n_prior_cycles": 21
   },
   "oos_verdict": {
-    "nhpp_median_mae_min": 31.3,
+    "nhpp_median_mae_min": 31.2,
     "diurnal_median_mae_min": 32.1,
-    "interval_80_measured_coverage_pct": 23,
+    "interval_80_measured_coverage_pct": 22,
     "n_tight_stage_predictions": 1055,
-    "verdict": "Intervals are OVERCONFIDENT \u2014 measured coverage 23% vs 80% nominal; median no better than diurnal. Dominant uncertainty is structural/within-cycle, which this process model does not capture. Do not trust the intervals; revisit with conformal calibration once more tight cycles exist."
+    "verdict": "Intervals are OVERCONFIDENT \u2014 measured coverage 22% vs 80% nominal; median no better than diurnal. Dominant uncertainty is structural/within-cycle, which this process model does not capture. Do not trust the intervals; revisit with conformal calibration once more tight cycles exist."
   }
 }
