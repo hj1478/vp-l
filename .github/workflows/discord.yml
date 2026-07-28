@@ -1,0 +1,45 @@
+name: Discord Prediction Notifier
+
+# Posts the current vote-party firing prediction (median + 80%/90% margins) to a
+# Discord webhook once an hour. Reads the live vote count from the EarthMC API and
+# uses the committed cycle history as the model's library, so it does not depend
+# on the collector having just run. GitHub's scheduler is best-effort, so the
+# hourly cadence can drift by a few minutes; that is fine for an hourly digest.
+#
+# SETUP: add a repository secret named DISCORD_WEBHOOK_URL (Settings → Secrets and
+# variables → Actions → New repository secret) holding your Discord channel's
+# webhook URL. Without it the job runs but posts nothing (it just logs the
+# payload), so it never fails loudly.
+
+on:
+  schedule:
+    - cron: "0 * * * *"      # top of every hour (best-effort)
+  workflow_dispatch:
+
+concurrency:
+  group: discord-notify
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post prediction to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python3 discord_notify.py
