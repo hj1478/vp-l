@@ -90,36 +90,31 @@ def build_payload(now=None):
         return None
 
     p05, p10, p50, p90, p95 = (float(x) for x in q)
-    pct = round(100 * collected / target, 1)
+    pct = 100 * collected / target
+    margin80 = _fmt_dur((p90 - p10) / 2)              # symmetric ± of the 80% window
+    players_txt = "" if players is None else f" · {int(players)} online"
 
-    # All times are Discord dynamic timestamps → auto-rendered in each reader's
-    # own local timezone. Median is shown full + relative; the margin of error is
-    # the (asymmetric) 80% spread around the median.
-    med_line = f"{dts(p50, 'F')}  ({dts(p50, 'R')})"
-    margin = (f"**−{_fmt_dur(p50 - p10)} / +{_fmt_dur(p90 - p50)}** (80%)  ·  "
-              f"−{_fmt_dur(p50 - p05)} / +{_fmt_dur(p95 - p50)} (90%)")
-    w80 = f"{dts(p10, 'f')}  →  {dts(p90, 'f')}"
-    w90 = f"{dts(p05, 'f')}  →  {dts(p95, 'f')}"
+    # Compact single-block layout. Every time is a Discord dynamic timestamp, so
+    # it renders in each reader's own timezone (:f short date+time, :R relative,
+    # :t time-only). Backticked lines stay literal — no timestamps inside them.
+    bar_n = 18
+    filled = max(0, min(bar_n, round(pct / 100 * bar_n)))
+    bar = "█" * filled + "░" * (bar_n - filled)
+    desc = (
+        f"🗳️ **Vote party** — fires {dts(p50, 'f')}  ({dts(p50, 'R')})\n"
+        f"`{bar}`  {pct:.1f}%\n"
+        f"**Window** {dts(p10, 't')} → {dts(p90, 't')} · **±{margin80}** (80%)\n"
+        f"`{int(collected):,} / {int(target):,}{players_txt} · {model}`"
+    )
+    if stale_note:
+        desc = f"{stale_note}\n{desc}"
 
     color = (0xF1C40F if stale_note else            # amber when running on stale data
              0xE74C3C if pct >= 90 else 0x3498DB)    # red in the endgame, else blue
-    fields = [
-        {"name": "Progress", "value": f"{int(collected)} / {int(target)}  "
-         f"(**{pct}%**){'' if players is None else f' · {players} online'}",
-         "inline": False},
-        {"name": "Median firing (your local time)", "value": med_line, "inline": False},
-        {"name": "Margin of error", "value": margin, "inline": False},
-        {"name": "80% window", "value": w80, "inline": False},
-        {"name": "90% window", "value": w90, "inline": False},
-    ]
-    if stale_note:
-        fields.insert(0, {"name": "Data freshness", "value": stale_note, "inline": False})
     embed = {
-        "title": "🗳️ EarthMC Vote Party — firing prediction",
+        "description": desc,
         "color": color,
-        "fields": fields,
-        "footer": {"text": f"model: {model} · {len(lib)} library cycles · "
-                           "times shown in your local timezone"},
+        "footer": {"text": "times shown in your local timezone"},
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now)),
     }
     return {"embeds": [embed]}
