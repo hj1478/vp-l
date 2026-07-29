@@ -14,7 +14,7 @@
   "stats": {
     "shrinkage": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 57.7,
       "rmse_min": 72.3,
       "median_min": 46.1,
@@ -30,7 +30,7 @@
     },
     "diurnal": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 31.4,
       "rmse_min": 40.8,
       "median_min": 25.0,
@@ -46,7 +46,7 @@
     },
     "diurnal_dow": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 30.9,
       "rmse_min": 39.6,
       "median_min": 24.9,
@@ -62,7 +62,7 @@
     },
     "linear": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 109.1,
       "rmse_min": 148.5,
       "median_min": 78.2,
@@ -78,7 +78,7 @@
     },
     "recent": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 115.1,
       "rmse_min": 195.1,
       "median_min": 59.9,
@@ -94,7 +94,7 @@
     },
     "ewma": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 107.2,
       "rmse_min": 171.6,
       "median_min": 61.1,
@@ -110,7 +110,7 @@
     },
     "theilsen": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 114.8,
       "rmse_min": 158.9,
       "median_min": 87.4,
@@ -126,7 +126,7 @@
     },
     "wls": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 95.2,
       "rmse_min": 145.0,
       "median_min": 55.0,
@@ -142,7 +142,7 @@
     },
     "quadratic": {
       "n": 1221,
-      "coverage_pct": 81.0,
+      "coverage_pct": 67.0,
       "mae_min": 84.5,
       "rmse_min": 171.6,
       "median_min": 30.0,
@@ -158,7 +158,7 @@
     },
     "ensemble": {
       "n": 1813,
-      "coverage_pct": 121.0,
+      "coverage_pct": 100.0,
       "mae_min": 45.0,
       "rmse_min": 59.6,
       "median_min": 33.6,
