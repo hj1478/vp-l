@@ -12,9 +12,15 @@ name: Discord Prediction Notifier
 # payload), so it never fails loudly.
 
 on:
-  schedule:
-    - cron: "0 * * * *"      # top of every hour (best-effort)
+  # Post whenever a collection or analysis run finishes — i.e. every time a new
+  # workflow runs — plus a manual button. (workflow_run fires on completion of
+  # the named workflows from the default branch, regardless of success.)
+  workflow_run:
+    workflows: ["Vote Party Tracker", "Vote Party Analysis"]
+    types: [completed]
   workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"      # heartbeat fallback if a run's completion is missed
 
 concurrency:
   group: discord-notify

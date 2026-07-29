@@ -23,8 +23,7 @@ import urllib.request
 import urllib.error
 
 from predict import (load_points, split_cycles, shape_analogue_quantiles,
-                     analogue_quantiles, fmt_ts, fmt_ts_rounded,
-                     display_granularity_min)
+                     analogue_quantiles, fmt_ts)
 
 API_URL = "https://api.earthmc.net/v4/"
 DATA = "data/voteparty.jsonl"
@@ -42,12 +41,18 @@ def fetch_live():
     return target - remaining, target, remaining, players
 
 
-def _fmt_delta(seconds):
-    """Signed h/m offset from now, e.g. '+11h42m' or '-15m'."""
-    sign = "+" if seconds >= 0 else "-"
+def _fmt_dur(seconds):
+    """Unsigned h/m duration, e.g. '1h42m' or '15m'."""
     s = abs(int(seconds))
     h, m = s // 3600, (s % 3600) // 60
-    return f"{sign}{h}h{m:02d}m" if h else f"{sign}{m}m"
+    return f"{h}h{m:02d}m" if h else f"{m}m"
+
+
+def dts(epoch, style="f"):
+    """Discord dynamic timestamp. Discord renders it in EACH viewer's own local
+    timezone automatically — 'F' full date+time, 'f' short, 't' time, 'R'
+    relative ('in 11 hours')."""
+    return f"<t:{int(epoch)}:{style}>"
 
 
 def build_payload(now=None):
@@ -85,15 +90,16 @@ def build_payload(now=None):
         return None
 
     p05, p10, p50, p90, p95 = (float(x) for x in q)
-    gran = display_granularity_min((p90 - p10) / 120)
     pct = round(100 * collected / target, 1)
 
-    med_line = f"**{fmt_ts_rounded(p50, gran)}**  ({fmt_ts(p50)})"
-    w80 = (f"{fmt_ts(p10)} → {fmt_ts(p90)}\n"
-           f"`{_fmt_delta(p10 - now)} … {_fmt_delta(p90 - now)}` from now "
-           f"(median {_fmt_delta(p10 - p50)} / {_fmt_delta(p90 - p50)})")
-    w90 = (f"{fmt_ts(p05)} → {fmt_ts(p95)}\n"
-           f"`{_fmt_delta(p05 - now)} … {_fmt_delta(p95 - now)}` from now")
+    # All times are Discord dynamic timestamps → auto-rendered in each reader's
+    # own local timezone. Median is shown full + relative; the margin of error is
+    # the (asymmetric) 80% spread around the median.
+    med_line = f"{dts(p50, 'F')}  ({dts(p50, 'R')})"
+    margin = (f"**−{_fmt_dur(p50 - p10)} / +{_fmt_dur(p90 - p50)}** (80%)  ·  "
+              f"−{_fmt_dur(p50 - p05)} / +{_fmt_dur(p95 - p50)} (90%)")
+    w80 = f"{dts(p10, 'f')}  →  {dts(p90, 'f')}"
+    w90 = f"{dts(p05, 'f')}  →  {dts(p95, 'f')}"
 
     color = (0xF1C40F if stale_note else            # amber when running on stale data
              0xE74C3C if pct >= 90 else 0x3498DB)    # red in the endgame, else blue
@@ -101,7 +107,8 @@ def build_payload(now=None):
         {"name": "Progress", "value": f"{int(collected)} / {int(target)}  "
          f"(**{pct}%**){'' if players is None else f' · {players} online'}",
          "inline": False},
-        {"name": "Median firing (ETA)", "value": med_line, "inline": False},
+        {"name": "Median firing (your local time)", "value": med_line, "inline": False},
+        {"name": "Margin of error", "value": margin, "inline": False},
         {"name": "80% window", "value": w80, "inline": False},
         {"name": "90% window", "value": w90, "inline": False},
     ]
@@ -112,7 +119,7 @@ def build_payload(now=None):
         "color": color,
         "fields": fields,
         "footer": {"text": f"model: {model} · {len(lib)} library cycles · "
-                           "times UTC · updates hourly"},
+                           "times shown in your local timezone"},
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now)),
     }
     return {"embeds": [embed]}
