@@ -2130,3 +2130,34 @@
 [2026-07-28T23:30:43Z] vote party 4521/5000 (90.4%) | 479 remaining | players 501/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-07-28T23:31:37Z] vote party 4524/5000 (90.5%) | 476 remaining | players 505/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-07-28T23:31:37Z] === tracker duration reached ===
+[2026-07-28T23:53:17Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-07-28T23:53:24Z] vote party 4601/5000 (92.0%) | 399 remaining | players 489/800 | moon FULL_MOON | next poll ~300s
+[2026-07-28T23:54:24Z] vote party 4605/5000 (92.1%) | 395 remaining | players 483/800 | moon FULL_MOON | next poll ~300s
+[2026-07-28T23:55:24Z] vote party 4608/5000 (92.2%) | 392 remaining | players 480/800 | moon FULL_MOON | next poll ~300s
+[2026-07-28T23:56:25Z] vote party 4610/5000 (92.2%) | 390 remaining | players 476/800 | moon FULL_MOON | next poll ~300s
+[2026-07-28T23:57:25Z] vote party 4610/5000 (92.2%) | 390 remaining | players 482/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-28T23:58:25Z] vote party 4615/5000 (92.3%) | 385 remaining | players 484/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-28T23:59:25Z] vote party 4623/5000 (92.5%) | 377 remaining | players 492/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:00:25Z] vote party 4653/5000 (93.1%) | 347 remaining | players 497/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:01:26Z] vote party 4714/5000 (94.3%) | 286 remaining | players 496/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:02:26Z] vote party 4791/5000 (95.8%) | 209 remaining | players 500/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:03:26Z] vote party 4830/5000 (96.6%) | 170 remaining | players 504/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:04:29Z] vote party 4865/5000 (97.3%) | 135 remaining | players 502/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:05:30Z] vote party 4882/5000 (97.6%) | 118 remaining | players 512/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:06:30Z] vote party 4889/5000 (97.8%) | 111 remaining | players 520/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:07:30Z] vote party 4905/5000 (98.1%) | 95 remaining | players 523/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:08:30Z] vote party 4922/5000 (98.4%) | 78 remaining | players 522/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:09:31Z] vote party 4941/5000 (98.8%) | 59 remaining | players 524/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:10:31Z] vote party 4957/5000 (99.1%) | 43 remaining | players 521/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:11:31Z] vote party 4973/5000 (99.5%) | 27 remaining | players 526/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:12:31Z] *** VOTE PARTY FIRED! remaining reset 27 -> 5000 (+4973) ***
+[2026-07-29T00:12:31Z] vote party 0/5000 (0.0%) | 5000 remaining | players 523/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-07-29T00:17:31Z] vote party 57/5000 (1.1%) | 4943 remaining | players 494/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-29T00:22:32Z] vote party 104/5000 (2.1%) | 4896 remaining | players 503/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-29T00:27:32Z] vote party 125/5000 (2.5%) | 4875 remaining | players 486/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-29T00:32:33Z] vote party 187/5000 (3.7%) | 4813 remaining | players 481/800 | moon LAST_QUARTER | next poll ~300s
+[2026-07-29T00:37:33Z] vote party 221/5000 (4.4%) | 4779 remaining | players 481/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-07-29T00:42:33Z] vote party 252/5000 (5.0%) | 4748 remaining | players 467/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-07-29T00:47:34Z] vote party 280/5000 (5.6%) | 4720 remaining | players 473/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-07-29T00:48:19Z] vote party 286/5000 (5.7%) | 4714 remaining | players 471/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-07-29T00:48:19Z] === tracker duration reached ===
