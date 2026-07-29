@@ -80,7 +80,9 @@ collected, percent, players, towns, nations, residents) for later analysis.
 forecasts when the *next* party will fire. It is recomputed on every data
 update, so the prediction constantly changes as new points arrive.
 
-It runs **eight independent models** and **ensembles** them:
+The **reported point + interval are one coherent model, `shape_analogue`** (see
+"Honest status" below). It also runs **nine independent candidate models** and
+ensembles them, but only as **diagnostics**:
 
 | Model | Idea |
 |-------|------|
@@ -94,16 +96,14 @@ It runs **eight independent models** and **ensembles** them:
 | `wls` | least squares with exponential recency weights |
 | `quadratic` | 2nd-order fit, solves for the target crossing (accel/decel) |
 
-**Why these two lead:** the vote process is nearly stationary across cycles
+**Why shape matters:** the vote process is nearly stationary across cycles
 (historical cycles average ~390–410 votes/hr, player count only weakly predicts
 rate, r≈0.1), so the historical rate is a strong prior — which `shrinkage`
 exploits. But the rate is *not* flat within a cycle: it rises and falls with the
-time of day. `diurnal` captures that shape and, once a few cycles have
-accumulated, becomes the most accurate model at every stage — it predicts each
-remaining portion of the cycle with its own time-of-day rate instead of
-extrapolating one rate across the overnight lull it hasn't reached yet.
+time of day. The **shipped `shape_analogue`** model banks that shape (see below);
+`diurnal` is the candidate-pool member that captures it.
 
-**Weighting:** each model's ETA is weighted by a **rolling-origin backtest** on
+**Weighting (diagnostic ensemble):** each model's ETA is weighted by a **rolling-origin backtest** on
 the completed historical cycles, scored by **inverse mean-squared ETA error**
 (how far its predicted *firing time* lands from the actual firing time) — not
 just next-point accuracy. Weights are **stage-aware**: computed per
@@ -115,19 +115,21 @@ models late.
 Out-of-sample testing at the current sample size (a handful of cycles) exposed
 real limits, and the system is deliberately conservative as a result:
 
-- **The reported prediction is the `analogue` curve-library, for both the point
-  (its median) and the interval (its quantiles).** We checked whether `diurnal`'s
-  point beats the analogue median: it does *not* by more than noise (paired
-  |error| difference 14 min but sd 57 min; diurnal wins only 54% of stage-points,
-  driven by one cycle), and the diurnal-vs-analogue offset is large and unstable
-  (+38 min, sd 74 min). Grafting a diurnal point inside an analogue interval would
-  mis-centre a calibrated width around a wrong centre, so we use **one coherent
-  distribution** instead. `diurnal`, `diurnal_dow`, the ensemble, `nhpp`, etc.
+- **The reported prediction is the `shape_analogue` model, for both the point
+  (its median) and the interval (its quantiles)** — one coherent distribution, no
+  grafting. It borrows past cycles' remaining trajectories like the plain
+  `analogue`, but **re-times each one through the current diurnal phase** instead
+  of copying its absolute remaining duration. Validated causally (paired
+  cluster-bootstrap): it beats the plain analogue's point by **~11 min, 95% CI
+  [−17, −4]** (excludes zero), banking the shape-oracle headroom, while being
+  better-calibrated. It falls back to the plain `analogue` before a diurnal
+  profile is estimable. `diurnal`, `diurnal_dow`, the ensemble, `nhpp`, etc.
   remain as diagnostics.
-- **The interval is measured to be ~calibrated** (~75% coverage at 80% nominal
-  on tight cycles), because its spread is the *real* historical spread of past
-  cycles' remaining trajectories — not a process assumption (the NHPP's
-  parametric interval was overconfident at ~19% and is shelved).
+- **The interval is measured to be ~calibrated** (~79% coverage at 80% nominal
+  on tight cycles, better than the plain analogue's over-wide ~92%), because its
+  spread is the *real* historical spread of past cycles' remaining trajectories —
+  not a process assumption (the NHPP's parametric interval was overconfident at
+  ~19% and is shelved).
 - **Ensemble weights are shrunk toward uniform (Occam prior).** Hard
   inverse-error weights fit on a few cycles swing the top weight by ±0.4 —
   sampling noise, not skill. Weights are pulled toward equal by λ = n/(n+6)
@@ -140,16 +142,16 @@ real limits, and the system is deliberately conservative as a result:
   near target, extrapolating the trajectory to 5000 pins it tightly (a cycle
   last seen at 98% is known to ~2 min even if the collector then went dark for an
   hour). Each cycle gets a continuous **label σ** (extrapolation uncertainty),
-  used to (a) recover cycles the raw-gap gate wrongly discarded (3 → 5 tight),
+  used to (a) recover cycles the raw-gap gate wrongly discarded,
   (b) inverse-variance weight cycles in model selection, and (c) carry each
   borrowed analogue endpoint's uncertainty into the interval. The one genuinely
   loose cycle (last seen at 81%, ~1000 votes out) stays down-weighted.
 - **Display precision = interval resolution.** The point is rounded to match the
   interval width (±2h interval → "~17:00", never a false "17:30").
 - **Every OOS metric carries a cluster-bootstrap 95% CI** over cycles, and it is
-  deliberately wide (e.g. MAE 44 min, CI [28, 86]; coverage 73%, CI [50, 80]) —
-  a point-metric from ~4 cycles is not precise, and we show that rather than hide
-  it.
+  deliberately wide (shape_analogue MAE ~20 min, CI ~[13, 29]; 80% coverage ~79%,
+  CI ~[70, 90] on tight cycles) — a point-metric from ~12 cycles is not precise,
+  and we show that rather than hide it.
 
 ```bash
 pip install -r requirements.txt
@@ -163,8 +165,11 @@ Outputs (under `data/`):
 - **`prediction.json`** — machine-readable per-model + ensemble prediction.
 - **`PREDICTION.md`** — human-readable summary, regenerated every run.
 
-The scheduled workflow runs this after each polling window, so the committed
-prediction always reflects the latest data.
+A separate hourly **analysis** workflow regenerates this (and the diagnostics)
+from the committed data, so the prediction tracks the latest data without
+holding up collection. A **Discord** workflow (`discord_notify.py`) can post the
+current prediction and its margins to a webhook every hour (set the
+`DISCORD_WEBHOOK_URL` repo secret).
 
 ## Accuracy backtest (`accuracy.py`)
 
@@ -187,18 +192,12 @@ python3 accuracy.py                 # reads data/voteparty.jsonl
 Outputs `data/accuracy.png` (|ETA error| vs cycle progress, per cycle and per
 model) and `data/accuracy.json` (raw stage errors + a stage-bucket summary).
 
-Measured mean |ETA error| by stage (current data, 4 completed cycles):
-
-| Stage | Ensemble | Diurnal (best) | Shrinkage |
-|-------|----------|----------------|-----------|
-| 0–25% | ~208 min | **~131 min** | ~184 min |
-| 25–50% | ~94 min | **~63 min** | ~140 min |
-| 50–75% | ~44 min | **~36 min** | ~85 min |
-| 75–100% | ~15 min | **~15 min** | ~45 min |
-
-Error shrinks as the cycle fills. The `diurnal` model is now the standout at
-every stage, which is why the backtest gives it the top weight (~0.4). These
-numbers move as cycles accumulate — the ensemble re-weights automatically.
+> This is a **candidate-model diagnostic** — it profiles the nine candidate
+> models and their ensemble, *not* the shipped `shape_analogue` model. For the
+> shipped model's out-of-sample accuracy (MAE by stage, causal), see
+> **`data/PREDICTION_LOG.md`** (produced by `predlog.py`). As a rule, error
+> shrinks sharply as the cycle fills — tens of minutes early, ~10 min in the
+> final decile — for every model; the live numbers move as cycles accumulate.
 
 ## Model performance report (`model_report.py`)
 
@@ -212,7 +211,8 @@ python3 model_report.py                 # reads data/voteparty.jsonl
 ```
 
 Outputs `data/model_report.png` (MAE heatmap by model × stage, ranked MAE, and
-bias chart) plus `data/model_report.md` / `.json` with the full tables. A
-current finding: every model has a **negative bias** — they all tend to predict
-the party a bit *earlier* than it actually fires — which is a candidate for a
-future bias-correction term.
+bias chart) plus `data/model_report.md` / `.json` with the full tables. Like the
+accuracy backtest, this scores the **candidate models** (a diagnostic), not the
+shipped `shape_analogue`. Bias varies by model and shifts as data accrues (most
+candidates currently run slightly *late*, i.e. positive bias) — see the live
+`model_report.md` for current figures.

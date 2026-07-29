@@ -19,9 +19,12 @@ Until then the output says **"no stable winner"** and diagnostic weights stay
 shrunk toward uniform (Occam prior, λ = n/(n+6) cycles). Enforced in
 `predict.stable_winner` (`STABLE_WINNER_MIN_CYCLES = 8`).
 
-**Status (as of writing):** NOT met — fewer than 8 well-labeled cycles. Even
-though one model currently wins all clean folds, we do not name it. This is
-deliberate: the criterion was set to forbid exactly that premature call.
+**Status (updated 2026-07-26):** still NO stable winner. There are now ≥8
+well-labeled folds, but the criterion is **not** met because the leader is not
+unanimous — `diurnal_dow` wins only 6/8 folds (`shrinkage` and `diurnal` take
+one each). The conclusion holds for a different reason than at first (enough
+folds now, but no clean sweep), so we still name no winner and keep the
+diagnostic weights shrunk toward uniform.
 
 ## 2. Reported prediction
 
