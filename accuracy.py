@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Stage-wise accuracy backtest for the vote-party predictor.
+"""Stage-wise accuracy backtest — CANDIDATE-MODEL DIAGNOSTIC.
+
+NOTE: this measures the nine candidate models and their inverse-error ensemble,
+which are DIAGNOSTICS. It does NOT measure the shipped reported model
+(`shape_analogue`) — for the shipped model's out-of-sample accuracy see
+predlog.py / data/PREDICTION_LOG.md. Kept because the per-model, per-stage error
+profile is a useful diagnostic of the candidate pool.
 
 For every *completed* cycle we replay it point by point. At each stage (each
 successive observation) we fit each model — and the ensemble — using ONLY the
@@ -198,7 +204,7 @@ def make_graph(ev, out_png):
     ax2.legend(fontsize=8, ncol=2)
     ax2.grid(alpha=0.3)
 
-    fig.suptitle("Vote-party predictor — stage-wise accuracy backtest "
+    fig.suptitle("Candidate-model diagnostic — stage-wise accuracy backtest "
                  f"({ev['num_completed_cycles']} completed cycles)", fontsize=12)
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     fig.savefig(out_png, dpi=110, bbox_inches="tight")

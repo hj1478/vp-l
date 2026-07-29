@@ -1,24 +1,36 @@
 #!/usr/bin/env python3
-"""EarthMC vote party — ensemble ETA predictor + grapher.
+"""EarthMC vote party — firing-time predictor + grapher.
 
 Reads the collected time series (data/voteparty.jsonl), splits it into vote
-party *cycles* (a cycle ends when the counter resets after a party fires),
-fits several independent forecasting models to the current cycle, weights them
-by how well they extrapolated on the *completed* historical cycles
-(rolling-origin backtest), and produces an ensemble estimate of when the next
-vote party will fire.
+party *cycles* (a cycle ends when the counter resets after a party fires), and
+predicts when the next party will fire.
+
+The REPORTED point + interval are one coherent model, `shape_analogue`: a
+diurnal-re-timed curve-library forecaster that borrows past cycles' remaining
+trajectories but re-times them through the current diurnal phase (falls back to
+the plain `analogue` before a diurnal profile is estimable). It was validated
+out-of-sample to beat the plain analogue's point by ~11 min with better-
+calibrated intervals (see FINDINGS.md, PREREGISTRATION.md §2).
+
+A panel of nine simpler candidate models and their inverse-error ensemble are
+ALSO computed, but only as DIAGNOSTICS (shown in the models table / graph); they
+do not set the reported number. The ensemble weights are shrunk toward uniform
+(Occam) and no model is named "best" until it wins every leave-one-cycle-out
+fold (the pre-registered stable-winner gate).
 
 Outputs (all under data/):
-    prediction.png   — graph of the current cycle, model projections, ensemble
-    prediction.json  — machine-readable per-model + ensemble prediction
+    prediction.png   — graph of the current cycle, model projections, interval
+    prediction.json  — machine-readable primary + per-model diagnostics
     PREDICTION.md    — human-readable summary (regenerated every run)
 
 The prediction is recomputed from scratch on every run, so it changes as new
 data arrives.
 
-Models (all forecast the time at which `collected` reaches `target`):
+Diagnostic models (all forecast the time at which `collected` reaches `target`):
     shrinkage   — Bayesian blend of the historical rate prior and the observed
-                  rate; leans on history early, on live data late (best early)
+                  rate; leans on history early, on live data late
+    diurnal     — integrate the UTC time-of-day rate profile forward to target
+    diurnal_dow — diurnal, additionally conditioned on weekday vs weekend
     linear      — ordinary least squares on the whole cycle
     recent      — slope of the last k points (short-term rate)
     ewma        — exponentially weighted average of per-interval rates
@@ -28,8 +40,8 @@ Models (all forecast the time at which `collected` reaches `target`):
 
 The vote process is roughly stationary across cycles (historical cycles all
 average ~390–480 votes/hr with player count only weakly correlated, r≈0.1), so
-the historical rate is a strong prior — which is what the shrinkage model
-exploits to fix the large early-cycle errors the pure-extrapolation models make.
+the historical rate is a strong prior — which the shrinkage/diurnal models
+exploit to fix the large early-cycle errors the pure-extrapolation models make.
 """
 
 import argparse
@@ -234,11 +246,19 @@ def robust_slope(t, y):
     return None
 
 
+_POOLED_CACHE = {}
+
+
 def pooled_rate(train_cycles):
     """Historical prior rate (votes/sec): duration-weighted mean of per-cycle
-    OLS slopes across completed cycles."""
+    OLS slopes across completed cycles. Memoized on training-set content — inside
+    a backtest the same training set recurs at every stage-point of a cycle, so
+    without this the same polyfits are rebuilt tens of times per run."""
     if not train_cycles:
         return None
+    ckey = _cycles_key(train_cycles)
+    if ckey in _POOLED_CACHE:
+        return _POOLED_CACHE[ckey]
     rates, wts = [], []
     for c in train_cycles:
         t, y = cycle_arrays(c)
@@ -247,9 +267,9 @@ def pooled_rate(train_cycles):
             if b > 1e-9:
                 rates.append(b)
                 wts.append(t[-1] - t[0])
-    if not rates:
-        return None
-    return float(np.average(rates, weights=wts))
+    result = float(np.average(rates, weights=wts)) if rates else None
+    _POOLED_CACHE[ckey] = result
+    return result
 
 
 # Content-keyed memo for the profile builders. Inside a backtest the same
@@ -978,13 +998,21 @@ def predict(cycles, target):
     # plain analogue when there aren't yet enough cycles to build a diurnal profile.
     # (diurnal / plain analogue remain in the table as diagnostics.)
     n_tight = len(tight_cycle_indices(cycles, target))
-    interval = shape_analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
+    now_ep = cur[-1]["_t"]
+    lib = list(range(len(cycles) - 1))
+    interval = shape_analogue_interval(cycles, target, now_ep, y[-1])
+    fc = shape_analogue_forecast(cycles, lib, target, now_ep, y[-1])
     primary_name = "shape_analogue"
     if interval is None:  # too few cycles for a diurnal profile → plain analogue
-        interval = analogue_interval(cycles, target, cur[-1]["_t"], y[-1])
+        interval = analogue_interval(cycles, target, now_ep, y[-1])
+        fc = analogue_forecast(cycles, lib, target, now_ep, y[-1])
         primary_name = "analogue"
     if interval:
-        primary_eta = interval["p50"]
+        # Point = the EXACT weighted median of the forecast; the Monte-Carlo is
+        # used only to widen the interval tails with label-sigma, so the reported
+        # point carries no simulation noise.
+        primary_eta = (float(wquantile(fc["preds"], fc["w"], [0.5])[0])
+                       if fc else interval["p50"])
     else:  # no completed cycles yet → fall back to diurnal, else ensemble
         primary_name = "diurnal" if per_model.get("diurnal", {}).get("eta_epoch") else "ensemble"
         primary_eta = (per_model["diurnal"]["eta_epoch"] if primary_name == "diurnal"
@@ -1101,12 +1129,12 @@ def make_graph(result, target, out_png):
     prim = result["primary"]
     if prim["eta_epoch"]:
         p_dt = datetime.fromtimestamp(prim["eta_epoch"], tz=timezone.utc)
-        # Analogue calibrated 80% interval around the primary point.
+        # Calibrated 80% interval around the primary point.
         if prim.get("interval_80"):
             lo = datetime.fromtimestamp(parse_ts(prim["interval_80"][0]), tz=timezone.utc)
             hi = datetime.fromtimestamp(parse_ts(prim["interval_80"][1]), tz=timezone.utc)
             ax.axvspan(lo, hi, color="crimson", alpha=0.12,
-                       label="analogue 80% interval")
+                       label=f"{prim['model']} 80% interval")
         ax.axvline(p_dt, color="crimson", lw=2.5,
                    label=f"PRIMARY = {prim['model']}")
     ens = result["ensemble"]
@@ -1180,9 +1208,9 @@ def write_markdown(result, path):
         lo = fmt_ts_rounded(parse_ts(prim["interval_80"][0]), g)
         hi = fmt_ts_rounded(parse_ts(prim["interval_80"][1]), g)
         lines.append(f"**80% window:** `{lo}` → `{hi}`")
-        lines.append(f"_Interval from the analogue curve-library (measured ~73% "
-                     f"coverage OOS, endpoint label-uncertainty propagated) over "
-                     f"{prim['n_library_cycles']} cycles "
+        lines.append(f"_Interval from the `{prim['model']}` model (~79% measured "
+                     f"80%-interval coverage OOS, endpoint label-uncertainty "
+                     f"propagated) over {prim['n_library_cycles']} cycles "
                      f"({prim['n_tight_labeled_cycles']} tightly labeled). Point "
                      "rounded to match interval width; wide early by design._")
     else:
@@ -1213,8 +1241,9 @@ def write_markdown(result, path):
         "**Weights are shrunk toward uniform** by an Occam prior (λ = n/(n+6) in "
         "cycles): near-equal now, differentiating only when many cycles give "
         "strong, stable evidence. A shifting 'leader' at this sample size is "
-        "sampling noise, not a finding. The reported prediction (above) is the "
-        "`analogue` model, independent of these weights. See `prediction_track.png`.",
+        f"sampling noise, not a finding. The reported prediction (above) is the "
+        f"`{prim['model']}` model, independent of these weights. "
+        "See `prediction_track.png`.",
         "",
     ]
     with open(path, "w", encoding="utf-8") as fh:

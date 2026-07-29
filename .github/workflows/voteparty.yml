@@ -1,12 +1,16 @@
 name: Vote Party Tracker
 
-# Collects EarthMC vote party data and commits it to the repo under data/.
+# Collects EarthMC vote party data and commits ONLY the raw data files under
+# data/ (voteparty.jsonl + voteparty.log). Analysis/graphs are produced by a
+# SEPARATE workflow (analysis.yml) so this collection loop stays lean and hands
+# its concurrency slot to the next poller almost immediately — previously the
+# ~3 min of analysis+commit at the end of every window left polling dark, and a
+# firing in that gap went uncaptured.
 #
 # SELF-CHAINING: GitHub's scheduled cron is best-effort and skips multi-hour
-# stretches (we measured only ~33% time coverage from cron alone). To close the
-# gaps, each run polls for a 55-minute window and then **dispatches the next run
-# itself**, so windows run back-to-back with ~100% coverage instead of waiting
-# on the scheduler.
+# stretches (~33% time coverage from cron alone). To close the gaps, each run
+# polls for a 55-minute window and then dispatches the next run itself, so
+# windows run back-to-back.
 #
 # The default GITHUB_TOKEN is blocked from triggering workflows (GitHub's loop
 # guard), so the self-dispatch needs a Personal Access Token in the repo secret
@@ -16,10 +20,8 @@ name: Vote Party Tracker
 # To STOP the chain: disable the workflow in the Actions tab (or remove the PAT).
 
 on:
-  # Safety-net / bootstrap. The real cadence comes from self-chaining; this
-  # restarts the chain if a run ever dies before dispatching the next.
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 * * * *"      # safety-net / bootstrap; real cadence is the self-chain
   workflow_dispatch:
 
 # Serialize runs: a dispatched/queued run waits for the current one, then starts
@@ -34,7 +36,7 @@ permissions:
 jobs:
   track:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 62
     env:
       WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
     steps:
@@ -44,8 +46,6 @@ jobs:
       - name: Chain next run (self-chaining; needs WORKFLOW_PAT)
         # Dispatch early so the next window is queued even if a later step fails;
         # concurrency makes it wait until THIS run finishes, then start at once.
-        # The PAT check is done in-script (not in `if:`) so the log always shows
-        # exactly what happened.
         if: ${{ always() }}
         env:
           WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
@@ -55,7 +55,7 @@ jobs:
             echo "Fix: add it as an *Actions repository secret* named exactly WORKFLOW_PAT."
             exit 0
           fi
-          echo "WORKFLOW_PAT is present (len=${#WORKFLOW_PAT}); dispatching next run..."
+          echo "WORKFLOW_PAT is present; dispatching next run..."
           code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" -X POST \
             -H "Authorization: Bearer $WORKFLOW_PAT" \
             -H "Accept: application/vnd.github+json" \
@@ -68,68 +68,32 @@ jobs:
             echo "→ 403/404 usually means the PAT lacks 'Actions: read and write' on this repo."
           fi
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Poll vote party endpoint for a 55-minute window
         run: |
           mkdir -p data
           # 55-min window, 5-min polling; tracker auto-drops to 60s above 90%
-          # so a firing inside the window is tightly bracketed.
+          # so a firing inside the window is tightly bracketed. Stdlib only — no
+          # pip install needed, so the collection tail stays short.
           python3 voteparty_tracker.py --duration 3300 -i 300 \
             -f data/voteparty.log \
             --json data/voteparty.jsonl
 
-      - name: Install prediction dependencies
-        run: pip install -r requirements.txt
-
-      - name: Update prediction & graph
-        run: python3 predict.py -i data/voteparty.jsonl -o data
-
-      - name: Update stage-wise accuracy backtest
-        run: python3 accuracy.py -i data/voteparty.jsonl -o data || true
-
-      - name: Update model performance report
-        run: python3 model_report.py -i data/voteparty.jsonl -o data || true
-
-      - name: Update stage-by-stage replay
-        run: python3 replay.py -i data/voteparty.jsonl -o data/replay.png || true
-
-      - name: Update out-of-sample prediction track record
-        run: python3 predlog.py -i data/voteparty.jsonl -o data || true
-
-      - name: Update all-cycles overview graph
-        run: python3 cycles_graph.py -i data/voteparty.jsonl -o data/cycles.png || true
-
-      - name: Update experimental NHPP diagnostic
-        run: python3 nhpp.py -i data/voteparty.jsonl -o data || true
-
-      - name: Update conditional analogue forecaster
-        run: python3 analogue.py -i data/voteparty.jsonl -o data || true
-
-      - name: Commit snapshots
+      - name: Commit raw data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f data/voteparty.log data/voteparty.jsonl \
-            data/prediction.png data/prediction.json data/PREDICTION.md \
-            data/accuracy.png data/accuracy.json \
-            data/model_report.png data/model_report.json data/model_report.md \
-            data/replay.png \
-            data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md \
-            data/cycles.png \
-            data/nhpp.png data/nhpp.json \
-            data/analogue.png data/analogue.json
+          git add -f data/voteparty.log data/voteparty.jsonl
           if git diff --cached --quiet; then
             echo "No new data to commit."
             exit 0
           fi
           git commit -m "chore: vote party data window ending $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          ok=0
           for attempt in 1 2 3 4; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && \
-            git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && \
+               git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
             echo "Push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
             sleep $((attempt * 2))
           done
+          [ "$ok" = 1 ] || { echo "::error::push failed after 4 attempts — data NOT saved"; exit 1; }

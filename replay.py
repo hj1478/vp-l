@@ -20,6 +20,7 @@ import numpy as np
 from predict import (
     MODELS, load_points, split_cycles, cycle_arrays, cycle_fire_time,
     make_ctx, backtest_staged, weights_for_progress,
+    shape_analogue_forecast, analogue_forecast, wquantile,
 )
 
 
@@ -28,15 +29,28 @@ def dt(epoch):
 
 
 def stage_prediction(cyc, others, target, up_to):
-    """Ensemble + diurnal firing epoch using the first `up_to` points."""
-    staged = backtest_staged(others or [cyc], target)
+    """Firing epoch using the first `up_to` points: the shipped `shape_analogue`
+    median (primary), plus the diagnostic ensemble and diurnal for comparison.
+    Returns (primary, ensemble, diurnal); any may be None."""
     ctx = make_ctx(cyc, others)
     t, y = cycle_arrays(cyc)
     t0 = cyc[0]["_t"]
     tf, yf = t[:up_to], y[:up_to]
-    w = weights_for_progress(staged, float(yf[-1]) / target * 100.0)
-    etas, ws = [], []
-    diurnal = None
+    now, coll = t0 + t[up_to - 1], float(yf[-1])
+
+    # PRIMARY: the shipped model, borrowing the OTHER completed cycles as its
+    # library (leave-one-cycle-out), matching predict()/predlog.
+    lib_cycles = others + [cyc]
+    lib_idx = list(range(len(others)))
+    fc = shape_analogue_forecast(lib_cycles, lib_idx, target, now, coll)
+    if fc is None:
+        fc = analogue_forecast(lib_cycles, lib_idx, target, now, coll)
+    primary = float(wquantile(fc["preds"], fc["w"], [0.5])[0]) if fc else None
+
+    # DIAGNOSTIC: candidate-model ensemble + diurnal.
+    staged = backtest_staged(others or [cyc], target)
+    w = weights_for_progress(staged, coll / target * 100.0)
+    etas, ws, diurnal = [], [], None
     for n in MODELS:
         tc = MODELS[n](tf, yf, target, ctx)
         if tc is None:
@@ -45,11 +59,12 @@ def stage_prediction(cyc, others, target, up_to):
             diurnal = t0 + tc
         etas.append(t0 + tc)
         ws.append(w.get(n, 0.0))
-    if not etas:
-        return None, None
-    ws = np.array(ws)
-    ws = ws / ws.sum() if ws.sum() > 0 else np.ones(len(ws)) / len(ws)
-    return float(np.sum(np.array(etas) * ws)), diurnal
+    ens = None
+    if etas:
+        ws = np.array(ws)
+        ws = ws / ws.sum() if ws.sum() > 0 else np.ones(len(ws)) / len(ws)
+        ens = float(np.sum(np.array(etas) * ws))
+    return primary, ens, diurnal
 
 
 def main(argv=None) -> int:
@@ -95,15 +110,15 @@ def main(argv=None) -> int:
     for pct, col in zip(stage_pcts, cmap):
         up_to = int(np.searchsorted(y, target * pct / 100.0)) + 1
         up_to = max(3, min(up_to, len(y)))
-        ens, diur = stage_prediction(cyc, others, target, up_to)
-        if ens is None:
+        primary, ens, diur = stage_prediction(cyc, others, target, up_to)
+        if primary is None:
             continue
         sx, sy = dt(t0 + t[up_to - 1]), y[up_to - 1]
-        axA.plot([sx, dt(ens)], [sy, target], "--", color=col, lw=1.6, alpha=0.9)
+        axA.plot([sx, dt(primary)], [sy, target], "--", color=col, lw=1.6, alpha=0.9)
         axA.scatter([sx], [sy], color=col, s=45, zorder=5)
-        axA.scatter([dt(ens)], [target], color=col, s=70, marker="v", zorder=5,
+        axA.scatter([dt(primary)], [target], color=col, s=70, marker="v", zorder=5,
                     label=f"predict @ {pct:.0f}%")
-        conv.append((y[up_to - 1] / target * 100.0, ens, diur))
+        conv.append((y[up_to - 1] / target * 100.0, primary, ens, diur))
 
     axA.set_title(f"Replay on completed cycle {ci+1} "
                   f"({len(cyc)} pts) — each ray = model projection at that stage",
@@ -116,12 +131,17 @@ def main(argv=None) -> int:
     # --- Panel B: convergence of predicted firing time vs stage ---
     if conv:
         pr = [c[0] for c in conv]
-        ens_dt = [dt(c[1]) for c in conv]
-        diu_dt = [dt(c[2]) for c in conv if c[2] is not None]
-        diu_pr = [c[0] for c in conv if c[2] is not None]
-        axB.plot(pr, ens_dt, "o-", color="crimson", lw=2, label="ensemble prediction")
+        prim_dt = [dt(c[1]) for c in conv]
+        ens_dt = [dt(c[2]) for c in conv if c[2] is not None]
+        ens_pr = [c[0] for c in conv if c[2] is not None]
+        diu_dt = [dt(c[3]) for c in conv if c[3] is not None]
+        diu_pr = [c[0] for c in conv if c[3] is not None]
+        axB.plot(pr, prim_dt, "o-", color="crimson", lw=2.4,
+                 label="shape_analogue (shipped)", zorder=5)
+        if ens_dt:
+            axB.plot(ens_pr, ens_dt, "^:", color="gray", lw=1.2, label="ensemble (diagnostic)")
         if diu_dt:
-            axB.plot(diu_pr, diu_dt, "s--", color="darkorange", lw=1.6, label="diurnal")
+            axB.plot(diu_pr, diu_dt, "s--", color="darkorange", lw=1.2, label="diurnal (diagnostic)")
         axB.axhline(dt(fire), color="green", lw=2, label="ACTUAL firing")
         axB.fill_between(pr, [dt(fire - 900) for _ in pr], [dt(fire + 900) for _ in pr],
                          color="green", alpha=0.08, label="±15 min")
@@ -133,15 +153,16 @@ def main(argv=None) -> int:
         axB.legend(fontsize=8)
         axB.grid(alpha=0.3)
 
-    fig.suptitle("Vote-party predictor — stage-by-stage replay", fontsize=13)
+    fig.suptitle("Vote-party predictor (shape_analogue) — stage-by-stage replay",
+                 fontsize=13)
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     fig.savefig(args.out, dpi=110, bbox_inches="tight")
     plt.close(fig)
 
     print(f"Replayed cycle {ci+1} ({len(cyc)} pts). Actual firing: {dt(fire):%H:%M}Z")
-    for pr, ens, diur in conv:
-        print(f"  @ {pr:4.0f}%  ensemble -> {dt(ens):%H:%M}Z  "
-              f"(err {(ens-fire)/60:+.0f} min)")
+    for pr, primary, ens, diur in conv:
+        print(f"  @ {pr:4.0f}%  shape_analogue -> {dt(primary):%H:%M}Z  "
+              f"(err {(primary-fire)/60:+.0f} min)")
     return 0
 
 

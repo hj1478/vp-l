@@ -55,14 +55,23 @@ def build_payload(now=None):
     if there isn't enough history to predict)."""
     now = now if now is not None else time.time()
     pts = load_points(DATA)
+    if not pts:
+        return None
     cycles = split_cycles(pts)
+    stale_note = None
     try:
         collected, target, remaining, players = fetch_live()
     except Exception:
-        # fall back to the last committed point if the API is unreachable
+        # Live API unreachable — fall back to the last committed point, but anchor
+        # the prediction clock to THAT point's timestamp (not the current wall
+        # clock) so hour-old progress isn't treated as current, and flag it.
         last = pts[-1]
         collected, target = float(last["collected"]), float(last["target"])
         remaining, players = int(target - collected), last.get("players_online")
+        now = float(last["_t"])
+        age_min = round((time.time() - now) / 60)
+        stale_note = (f"⚠️ live API unavailable — using committed data from "
+                      f"{fmt_ts(now)} ({age_min} min ago)")
 
     lib = list(range(len(cycles) - 1))
     q = shape_analogue_quantiles(cycles, lib, target, now, float(collected),
@@ -86,18 +95,22 @@ def build_payload(now=None):
     w90 = (f"{fmt_ts(p05)} → {fmt_ts(p95)}\n"
            f"`{_fmt_delta(p05 - now)} … {_fmt_delta(p95 - now)}` from now")
 
-    color = 0xE74C3C if pct >= 90 else 0x3498DB   # red in the endgame, else blue
+    color = (0xF1C40F if stale_note else            # amber when running on stale data
+             0xE74C3C if pct >= 90 else 0x3498DB)    # red in the endgame, else blue
+    fields = [
+        {"name": "Progress", "value": f"{int(collected)} / {int(target)}  "
+         f"(**{pct}%**){'' if players is None else f' · {players} online'}",
+         "inline": False},
+        {"name": "Median firing (ETA)", "value": med_line, "inline": False},
+        {"name": "80% window", "value": w80, "inline": False},
+        {"name": "90% window", "value": w90, "inline": False},
+    ]
+    if stale_note:
+        fields.insert(0, {"name": "Data freshness", "value": stale_note, "inline": False})
     embed = {
         "title": "🗳️ EarthMC Vote Party — firing prediction",
         "color": color,
-        "fields": [
-            {"name": "Progress", "value": f"{int(collected)} / {int(target)}  "
-             f"(**{pct}%**){'' if players is None else f' · {players} online'}",
-             "inline": False},
-            {"name": "Median firing (ETA)", "value": med_line, "inline": False},
-            {"name": "80% window", "value": w80, "inline": False},
-            {"name": "90% window", "value": w90, "inline": False},
-        ],
+        "fields": fields,
         "footer": {"text": f"model: {model} · {len(lib)} library cycles · "
                            "times UTC · updates hourly"},
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now)),

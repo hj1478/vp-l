@@ -184,6 +184,10 @@ def write_markdown(stats, stage_labels, weights, path, n_cycles):
         f"Leave-one-cycle-out backtest over **{n_cycles} completed cycles**. "
         "Error = |predicted firing time − actual firing time|, in minutes.",
         "",
+        "> ⚠️ **Diagnostic only.** These are the nine candidate models and their "
+        "ensemble — NONE is the shipped reported model (`shape_analogue`). For the "
+        "shipped model's out-of-sample accuracy see `PREDICTION_LOG.md`.",
+        "",
         "## Overall metrics (ranked by MAE)",
         "",
         "| Model | Weight | MAE | RMSE | Median | P90 | Bias | Coverage | n |",
@@ -192,7 +196,8 @@ def write_markdown(stats, stage_labels, weights, path, n_cycles):
     for n in order:
         s = stats[n]
         w = "—" if n == "ensemble" else f"{weights.get(n, 0):.3f}"
-        L.append(f"| {'**'+n+'**' if n=='ensemble' else n} | {w} | {s['mae_min']} | "
+        label = f"{n} _(diag)_" if n == "ensemble" else n
+        L.append(f"| {label} | {w} | {s['mae_min']} | "
                  f"{s['rmse_min']} | {s['median_min']} | {s['p90_min']} | "
                  f"{s['bias_min']:+} | {s['coverage_pct']:.0f}% | {s['n']} |")
     L += ["", "## Mean |ETA error| by cycle stage (minutes)", "",
@@ -225,9 +230,11 @@ def main(argv=None) -> int:
         print("No completed cycles yet — need at least one full cycle.")
         return 1
 
-    # number of distinct (cycle, stage-origin) points, for coverage.
-    n_origins = len({(r["model"] == "ensemble", round(r["progress"], 3)) for r in rows
-                     if r["model"] == "ensemble"})
+    # One ensemble row is emitted per stage-origin, so the ensemble row count IS
+    # the number of origins. (The old code counted distinct progress *values*,
+    # collapsing equal-progress stages across different cycles, which undercounted
+    # the denominator and produced >100% coverage.)
+    n_origins = sum(1 for r in rows if r["model"] == "ensemble")
     stats, stage_labels = summarize(rows, names, n_origins)
 
     # Current live weights.

@@ -1,0 +1,7 @@
+# The collector and the watchdog can both append lines to these files from
+# separate runs. A plain rebase turns two independent EOF appends into an
+# add/add conflict that the push-retry loop cannot resolve (and -X theirs would
+# silently drop the local lines). `merge=union` keeps BOTH sides' appended
+# lines, which is exactly right for append-only logs.
+data/voteparty.jsonl merge=union
+data/voteparty.log    merge=union

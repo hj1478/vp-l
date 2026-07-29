@@ -1,0 +1,77 @@
+name: Vote Party Analysis
+
+# Regenerates the prediction, graphs, and diagnostic reports from the committed
+# raw data, and commits the generated artifacts under data/. Split out from the
+# collector (voteparty.yml) so collection stays continuous — the heavy analysis
+# no longer holds the collector's concurrency slot or stalls polling.
+#
+# It touches only GENERATED files (json/png/md), never the raw voteparty.jsonl/
+# .log, so it can commit concurrently with the collector/watchdog without
+# fighting over the same lines.
+
+on:
+  schedule:
+    - cron: "20 * * * *"     # hourly, offset from the collector's :00
+  workflow_dispatch:
+
+concurrency:
+  group: voteparty-analysis
+  cancel-in-progress: true    # a newer run supersedes a stale in-flight one
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Regenerate prediction, graphs, and reports
+        run: |
+          python3 predict.py      -i data/voteparty.jsonl -o data
+          python3 predlog.py      -i data/voteparty.jsonl -o data          || true
+          python3 analogue.py     -i data/voteparty.jsonl -o data          || true
+          python3 accuracy.py     -i data/voteparty.jsonl -o data          || true
+          python3 model_report.py -i data/voteparty.jsonl -o data          || true
+          python3 replay.py       -i data/voteparty.jsonl -o data/replay.png || true
+          python3 cycles_graph.py -i data/voteparty.jsonl -o data/cycles.png || true
+          python3 nhpp.py         -i data/voteparty.jsonl -o data          || true
+
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/prediction.png data/prediction.json data/PREDICTION.md \
+            data/accuracy.png data/accuracy.json \
+            data/model_report.png data/model_report.json data/model_report.md \
+            data/replay.png \
+            data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md \
+            data/cycles.png \
+            data/nhpp.png data/nhpp.json \
+            data/analogue.png data/analogue.json
+          if git diff --cached --quiet; then
+            echo "No artifact changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: regenerate analysis artifacts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          ok=0
+          for attempt in 1 2 3 4; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && \
+               git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
+            echo "Push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 2))
+          done
+          [ "$ok" = 1 ] || { echo "::error::push failed after 4 attempts"; exit 1; }
