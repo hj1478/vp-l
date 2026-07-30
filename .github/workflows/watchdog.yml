@@ -1,15 +1,15 @@
-name: Vote Party Watchdog
+name: Collector Watchdog
 
-# Independent safety net for the self-chaining collector. If the chain dies
-# (a run errored before dispatching its successor, the PAT lapsed, GitHub
-# dropped the scheduled kick, etc.), collection silently stops and every
-# downstream metric quietly rots. This watchdog runs on its OWN schedule,
-# checks how stale the committed data is, and if the chain looks dead it both
-# (a) revives collection directly (a short window it commits itself, needing no
-# PAT) and (b) re-dispatches the main workflow to restart the chain.
+# Independent safety net for BOTH self-chaining collectors (vote-party data and
+# player activity). If a chain dies (a run errored before dispatching its
+# successor, the PAT lapsed, GitHub dropped the scheduled kick, etc.) collection
+# silently stops and downstream metrics quietly rot. This watchdog runs on its
+# OWN schedule, checks how stale each committed data file is, and for any that
+# look dead it both (a) revives collection directly (a short window it commits
+# itself, needing no PAT) and (b) re-dispatches that workflow to restart the chain.
 #
-# It uses a SEPARATE concurrency group from the main workflow so it can always
-# run to check freshness, even while a healthy 55-min window is mid-flight.
+# It uses a SEPARATE concurrency group so it can always run to check freshness,
+# even while a healthy 55-min window is mid-flight.
 
 on:
   schedule:
@@ -37,10 +37,11 @@ jobs:
       - name: Check data freshness
         id: check
         run: |
-          age=$(python3 - <<'PY'
-          import json, datetime
+          age_of() {
+            python3 - "$1" <<'PY'
+          import json, datetime, sys
           try:
-              with open("data/voteparty.jsonl") as fh:
+              with open(sys.argv[1]) as fh:
                   last = [l for l in fh if l.strip()][-1]
               ts = json.loads(last)["timestamp"]
               t = datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
@@ -49,51 +50,87 @@ jobs:
               age = 99999
           print(int(age))
           PY
-          )
-          echo "age_min=$age" >> "$GITHUB_OUTPUT"
-          echo "Last committed data point is ${age} min old (stale threshold: ${STALE_MIN})."
-          if [ "$age" -lt "$STALE_MIN" ]; then echo "stale=false" >> "$GITHUB_OUTPUT"; echo "Chain healthy."; else echo "stale=true" >> "$GITHUB_OUTPUT"; echo "STALE — chain appears dead, reviving."; fi
+          }
+          # --- vote party ---
+          vage=$(age_of data/voteparty.jsonl)
+          echo "Vote data ${vage} min old (threshold ${STALE_MIN})."
+          if [ "$vage" -lt "$STALE_MIN" ]; then echo "vote_stale=false" >> "$GITHUB_OUTPUT"; else echo "vote_stale=true" >> "$GITHUB_OUTPUT"; echo "Vote chain STALE — reviving."; fi
+          # --- players (only if any are configured) ---
+          pn=$(grep -v '^[[:space:]]*#' players.txt 2>/dev/null | grep -c '[^[:space:]]' || true)
+          if [ "$pn" -gt 0 ]; then
+            page=$(age_of data/players.jsonl)
+            echo "${pn} player(s) configured; player data ${page} min old (threshold ${STALE_MIN})."
+            if [ "$page" -lt "$STALE_MIN" ]; then echo "player_stale=false" >> "$GITHUB_OUTPUT"; else echo "player_stale=true" >> "$GITHUB_OUTPUT"; echo "Player chain STALE — reviving."; fi
+          else
+            echo "player_stale=false" >> "$GITHUB_OUTPUT"; echo "No players configured — skipping player check."
+          fi
 
       - name: Set up Python
-        if: steps.check.outputs.stale == 'true'
+        if: steps.check.outputs.vote_stale == 'true' || steps.check.outputs.player_stale == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Revive collection directly (no PAT needed)
-        if: steps.check.outputs.stale == 'true'
+      - name: Configure git
+        if: steps.check.outputs.vote_stale == 'true' || steps.check.outputs.player_stale == 'true'
         run: |
-          mkdir -p data
-          # short 10-min window so the watchdog itself stays cheap
-          python3 voteparty_tracker.py --duration 600 -i 60 \
-            -f data/voteparty.log --json data/voteparty.jsonl
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Revive vote collection (no PAT needed)
+        if: steps.check.outputs.vote_stale == 'true'
+        run: |
+          mkdir -p data
+          python3 voteparty_tracker.py --duration 600 -i 60 \
+            -f data/voteparty.log --json data/voteparty.jsonl
           git add -f data/voteparty.log data/voteparty.jsonl
           if ! git diff --cached --quiet; then
-            git commit -m "watchdog: revive collection (chain was stale $(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git commit -m "watchdog: revive vote collection (stale $(date -u +%Y-%m-%dT%H:%M:%SZ))"
             ok=0
             for a in 1 2 3 4; do
               if git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
               git rebase --abort 2>/dev/null || true
               sleep $((a * 2))
             done
-            [ "$ok" = 1 ] || { echo "::error::watchdog push failed after retries"; exit 1; }
+            [ "$ok" = 1 ] || { echo "::error::watchdog vote push failed"; exit 1; }
           fi
 
-      - name: Restart the self-chain
-        if: steps.check.outputs.stale == 'true'
+      - name: Revive player collection (no PAT needed)
+        if: steps.check.outputs.player_stale == 'true'
+        run: |
+          mkdir -p data
+          python3 player_tracker.py --duration 600 -i 60 \
+            --players-file players.txt \
+            --json data/players.jsonl --log data/players.log
+          git add -f data/players.jsonl data/players.log
+          if ! git diff --cached --quiet; then
+            git commit -m "watchdog: revive player collection (stale $(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            ok=0
+            for a in 1 2 3 4; do
+              if git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((a * 2))
+            done
+            [ "$ok" = 1 ] || { echo "::error::watchdog player push failed"; exit 1; }
+          fi
+
+      - name: Restart the self-chains
+        if: steps.check.outputs.vote_stale == 'true' || steps.check.outputs.player_stale == 'true'
         env:
           WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
         run: |
           if [ -z "$WORKFLOW_PAT" ]; then
-            echo "No WORKFLOW_PAT — cannot re-dispatch; main cron will pick up. Revival above still ran."
+            echo "No WORKFLOW_PAT — cannot re-dispatch; crons will pick up. Revival above still ran."
             exit 0
           fi
-          code=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
-            -H "Authorization: Bearer $WORKFLOW_PAT" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/voteparty.yml/dispatches" \
-            -d "{\"ref\":\"${GITHUB_REF_NAME}\"}") || true
-          echo "chain restart dispatch HTTP $code (204 = ok)"
+          dispatch() {
+            code=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
+              -H "Authorization: Bearer $WORKFLOW_PAT" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/$1/dispatches" \
+              -d "{\"ref\":\"${GITHUB_REF_NAME}\"}") || true
+            echo "restart $1 -> HTTP $code (204 = ok)"
+          }
+          [ "${{ steps.check.outputs.vote_stale }}" = "true" ] && dispatch voteparty.yml || true
+          [ "${{ steps.check.outputs.player_stale }}" = "true" ] && dispatch player_tracker.yml || true
