@@ -47,14 +47,17 @@ def load_names(players_arg, players_file):
 
 
 def query_players(names, timeout=30):
-    """POST the name list, return {name: detail dict}. Raises on network error."""
+    """POST the name list, return {lowercased name: detail dict}. The API match is
+    case-sensitive, so we key by lowercase and callers look up the same way —
+    players.txt spelling case then doesn't matter. Raises on network error."""
     body = json.dumps({"query": names}).encode("utf-8")
     req = urllib.request.Request(
         API, data=body, method="POST",
         headers={"Content-Type": "application/json", "User-Agent": "player-tracker/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         data = json.load(r)
-    return {d.get("name"): d for d in data if isinstance(d, dict) and d.get("name")}
+    return {d.get("name", "").lower(): d for d in data
+            if isinstance(d, dict) and d.get("name")}
 
 
 def snapshot(detail):
@@ -88,10 +91,11 @@ def poll_once(names, jsonfile, logfile, prev):
         return prev
     ts = _now()
     for name in names:
-        d = found.get(name)
+        d = found.get(name.lower())
         if d is None:
             log_line(logfile, f"WARN player not found: {name}")
             continue
+        name = d.get("name", name)   # record the API's canonical spelling
         snap = snapshot(d)
         was = prev.get(name)
         if was is not None and was != snap["online"]:

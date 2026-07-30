@@ -6,3 +6,11 @@
 #
 # Add names below, commit, and the tracker will start logging their sessions.
 # (Until at least one name is present, the tracker does nothing.)
+# Names are matched case-insensitively.
+
+Vantacrus
+nyahlist
+0xThu6Sh4k3r420
+MP_242354
+# Mikedubois  <- not found on EarthMC (no case variant resolves); fix the spelling and uncomment
+
