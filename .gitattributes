@@ -5,3 +5,5 @@
 # lines, which is exactly right for append-only logs.
 data/voteparty.jsonl merge=union
 data/voteparty.log    merge=union
+data/players.jsonl    merge=union
+data/players.log      merge=union

@@ -1,0 +1,8 @@
+# Players to track (EarthMC online activity).
+# One player name per line. Lines starting with # are ignored.
+# Example:
+#   Fruitloopins
+#   KarlOfDuty
+#
+# Add names below, commit, and the tracker will start logging their sessions.
+# (Until at least one name is present, the tracker does nothing.)

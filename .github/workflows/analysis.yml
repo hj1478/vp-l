@@ -48,19 +48,23 @@ jobs:
           python3 replay.py       -i data/voteparty.jsonl -o data/replay.png || true
           python3 cycles_graph.py -i data/voteparty.jsonl -o data/cycles.png || true
           python3 nhpp.py         -i data/voteparty.jsonl -o data          || true
+          python3 player_activity.py -i data/players.jsonl -o data          || true
 
       - name: Commit generated artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f data/prediction.png data/prediction.json data/PREDICTION.md \
-            data/accuracy.png data/accuracy.json \
-            data/model_report.png data/model_report.json data/model_report.md \
-            data/replay.png \
-            data/prediction_track.png data/predictions_log.jsonl data/PREDICTION_LOG.md \
-            data/cycles.png \
-            data/nhpp.png data/nhpp.json \
-            data/analogue.png data/analogue.json
+          # add only the generated artifacts that exist (player_activity.* is
+          # absent until players are configured)
+          for f in prediction.png prediction.json PREDICTION.md \
+            accuracy.png accuracy.json \
+            model_report.png model_report.json model_report.md \
+            replay.png \
+            prediction_track.png predictions_log.jsonl PREDICTION_LOG.md \
+            cycles.png nhpp.png nhpp.json analogue.png analogue.json \
+            player_activity.png player_activity.json; do
+            [ -f "data/$f" ] && git add -f "data/$f" || true
+          done
           if git diff --cached --quiet; then
             echo "No artifact changes to commit."
             exit 0
