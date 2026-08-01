@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-08-01T03:54:14Z",
+  "window_days": 7,
+  "players": {
+    "Vantacrus": {
+      "num_sessions": 10,
+      "total_playtime_min": 242.6,
+      "avg_session_min": 24.3,
+      "currently_online": false,
+      "last_seen": "2026-07-31T14:28:47Z",
+      "town": "Selfoss",
+      "nation": "Iceland"
+    },
+    "nyahlist": {
+      "num_sessions": 8,
+      "total_playtime_min": 1986.6,
+      "avg_session_min": 248.3,
+      "currently_online": true,
+      "last_seen": "2026-08-01T03:42:07Z",
+      "town": "Idk",
+      "nation": "Iceland"
+    },
+    "0xThu6Sh4k3r420": {
+      "num_sessions": 0,
+      "total_playtime_min": 0.0,
+      "avg_session_min": 0.0,
+      "currently_online": false,
+      "last_seen": "2026-07-26T05:28:28Z",
+      "town": "Yoshi",
+      "nation": null
+    },
+    "MP_242354": {
+      "num_sessions": 3,
+      "total_playtime_min": 182.0,
+      "avg_session_min": 60.7,
+      "currently_online": false,
+      "last_seen": "2026-07-31T10:58:38Z",
+      "town": "MickeyClubhouse",
+      "nation": "Iceland"
+    },
+    "Panomii": {
+      "num_sessions": 0,
+      "total_playtime_min": 0.0,
+      "avg_session_min": 0.0,
+      "currently_online": false,
+      "last_seen": "2026-07-15T10:02:47Z",
+      "town": "MickeyClubhouse",
+      "nation": "Iceland"
+    },
+    "MikeyDuBois": {
+      "num_sessions": 2,
+      "total_playtime_min": 198.3,
+      "avg_session_min": 99.2,
+      "currently_online": false,
+      "last_seen": "2026-07-31T11:07:42Z",
+      "town": "MickeyClubhouse",
+      "nation": "Iceland"
+    }
+  }
+}
