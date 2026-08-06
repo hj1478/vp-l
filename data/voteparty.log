@@ -5861,3 +5861,19 @@
 [2026-08-06T06:52:01Z] vote party 3980/5000 (79.6%) | 1020 remaining | players 386/800 | moon WAXING_CRESCENT | next poll ~300s
 [2026-08-06T06:57:00Z] vote party 4027/5000 (80.5%) | 973 remaining | players 376/800 | moon WAXING_CRESCENT | next poll ~300s
 [2026-08-06T06:57:00Z] === tracker duration reached ===
+[2026-08-06T06:57:12Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-08-06T06:57:13Z] vote party 4028/5000 (80.6%) | 972 remaining | players 376/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-08-06T07:02:13Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-06T07:09:43Z] vote party 4150/5000 (83.0%) | 850 remaining | players 361/800 | moon WAXING_CRESCENT | next poll ~315s
+[2026-08-06T07:14:58Z] vote party 4202/5000 (84.0%) | 798 remaining | players 369/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-08-06T07:19:58Z] vote party 4262/5000 (85.2%) | 738 remaining | players 382/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-08-06T07:24:59Z] vote party 4331/5000 (86.6%) | 669 remaining | players 389/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-08-06T07:29:59Z] vote party 4364/5000 (87.3%) | 636 remaining | players 406/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-08-06T07:34:59Z] vote party 4412/5000 (88.2%) | 588 remaining | players 411/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:39:59Z] vote party 4458/5000 (89.2%) | 542 remaining | players 414/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:44:59Z] vote party 4489/5000 (89.8%) | 511 remaining | players 419/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:49:59Z] vote party 4507/5000 (90.1%) | 493 remaining | players 418/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:50:59Z] vote party 4511/5000 (90.2%) | 489 remaining | players 411/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:52:00Z] vote party 4512/5000 (90.2%) | 488 remaining | players 414/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:52:12Z] vote party 4512/5000 (90.2%) | 488 remaining | players 413/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-08-06T07:52:12Z] === tracker duration reached ===
