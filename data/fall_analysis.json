@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-08-09T19:20:47Z",
+  "total_mayor_changes": 0,
+  "clean_most_active_falls": 0,
+  "inactive_days_threshold": 40.0,
+  "hypotheses": {
+    "last_online": {
+      "scored_events": 0,
+      "heir_ranked_1st": 0,
+      "top1_rate": null,
+      "mean_normalized_rank": null
+    },
+    "tenure": {
+      "scored_events": 0,
+      "heir_ranked_1st": 0,
+      "top1_rate": null,
+      "mean_normalized_rank": null
+    },
+    "acct_oldest": {
+      "scored_events": 0,
+      "heir_ranked_1st": 0,
+      "top1_rate": null,
+      "mean_normalized_rank": null
+    },
+    "acct_newest": {
+      "scored_events": 0,
+      "heir_ranked_1st": 0,
+      "top1_rate": null,
+      "mean_normalized_rank": null
+    }
+  }
+}
