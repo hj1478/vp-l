@@ -55,8 +55,10 @@ jobs:
           vage=$(age_of data/voteparty.jsonl)
           echo "Vote data ${vage} min old (threshold ${STALE_MIN})."
           if [ "$vage" -lt "$STALE_MIN" ]; then echo "vote_stale=false" >> "$GITHUB_OUTPUT"; else echo "vote_stale=true" >> "$GITHUB_OUTPUT"; echo "Vote chain STALE — reviving."; fi
-          # --- players (only if any are configured) ---
+          # --- players (only if any players or towns are configured) ---
           pn=$(grep -v '^[[:space:]]*#' players.txt 2>/dev/null | grep -c '[^[:space:]]' || true)
+          tn=$(grep -v '^[[:space:]]*#' towns.txt 2>/dev/null | grep -c '[^[:space:]]' || true)
+          pn=$((pn + tn))
           if [ "$pn" -gt 0 ]; then
             page=$(age_of data/players.jsonl)
             echo "${pn} player(s) configured; player data ${page} min old (threshold ${STALE_MIN})."
@@ -100,7 +102,7 @@ jobs:
         run: |
           mkdir -p data
           python3 player_tracker.py --duration 600 -i 60 \
-            --players-file players.txt \
+            --players-file players.txt --towns-file towns.txt \
             --json data/players.jsonl --log data/players.log
           git add -f data/players.jsonl data/players.log
           if ! git diff --cached --quiet; then

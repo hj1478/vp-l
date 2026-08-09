@@ -26,6 +26,7 @@ import urllib.request
 import urllib.error
 
 API = "https://api.earthmc.net/v4/players"
+TOWNS_API = "https://api.earthmc.net/v4/towns"
 _running = True
 
 
@@ -44,6 +45,31 @@ def load_names(players_arg, players_file):
                 out.append(line)
         return out
     return []
+
+
+def resolve_town_residents(town_names, timeout=30):
+    """Given town names, return the current resident player names across them.
+    Lets us track 'every player in town X' with the roster kept live. Returns []
+    (and logs nothing) on failure so individual tracking still proceeds."""
+    if not town_names:
+        return []
+    try:
+        body = json.dumps({"query": town_names}).encode("utf-8")
+        req = urllib.request.Request(
+            TOWNS_API, data=body, method="POST",
+            headers={"Content-Type": "application/json", "User-Agent": "player-tracker/1.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            towns = json.load(r)
+    except (OSError, json.JSONDecodeError, ValueError):
+        return []
+    out = []
+    for t in towns:
+        if isinstance(t, dict):
+            for res in (t.get("residents") or []):
+                nm = res.get("name") if isinstance(res, dict) else None
+                if nm:
+                    out.append(nm)
+    return out
 
 
 def query_players(names, timeout=30):
@@ -117,6 +143,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--players", default="", help="comma-separated names (overrides file)")
     ap.add_argument("--players-file", default="players.txt")
+    ap.add_argument("--towns", default="", help="comma-separated town names (overrides file)")
+    ap.add_argument("--towns-file", default="towns.txt")
     ap.add_argument("-i", "--interval", type=float, default=300.0)
     ap.add_argument("--duration", type=float, default=None, help="stop after N seconds")
     ap.add_argument("--once", action="store_true")
@@ -125,9 +153,19 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     names = load_names(args.players, args.players_file)
+    towns = load_names(args.towns, args.towns_file)
+    if towns:
+        residents = resolve_town_residents(towns)
+        # merge, de-duplicating case-insensitively; explicit names win the spelling
+        seen = {n.lower(): n for n in names}
+        for r in residents:
+            seen.setdefault(r.lower(), r)
+        names = list(seen.values())
+        print(f"Towns {towns} -> {len(residents)} residents; "
+              f"tracking {len(names)} unique players total.")
     if not names:
-        print("No players configured — add names to players.txt (one per line) "
-              "or pass --players a,b,c. Nothing to do.")
+        print("No players configured — add names to players.txt or towns to "
+              "towns.txt. Nothing to do.")
         return 0
 
     if args.jsonfile:

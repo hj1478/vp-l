@@ -33,9 +33,10 @@ jobs:
         id: cfg
         run: |
           n=$(grep -v '^[[:space:]]*#' players.txt 2>/dev/null | grep -c '[^[:space:]]' || true)
-          echo "count=$n" >> "$GITHUB_OUTPUT"
-          if [ "$n" -gt 0 ]; then echo "has=1" >> "$GITHUB_OUTPUT"; echo "$n player(s) configured."; \
-          else echo "has=0" >> "$GITHUB_OUTPUT"; echo "No players in players.txt — nothing to do."; fi
+          tn=$(grep -v '^[[:space:]]*#' towns.txt 2>/dev/null | grep -c '[^[:space:]]' || true)
+          echo "count=$n players, $tn towns"
+          if [ "$n" -gt 0 ] || [ "$tn" -gt 0 ]; then echo "has=1" >> "$GITHUB_OUTPUT"; echo "$n player(s) + $tn town(s) configured."; \
+          else echo "has=0" >> "$GITHUB_OUTPUT"; echo "No players or towns configured — nothing to do."; fi
 
       - name: Chain next run (only when players are configured)
         if: ${{ always() && steps.cfg.outputs.has == '1' }}
@@ -59,7 +60,7 @@ jobs:
         run: |
           mkdir -p data
           python3 player_tracker.py --duration 3300 -i 300 \
-            --players-file players.txt \
+            --players-file players.txt --towns-file towns.txt \
             --json data/players.jsonl --log data/players.log
 
       - name: Commit raw player data
