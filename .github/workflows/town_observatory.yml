@@ -1,0 +1,62 @@
+name: Town Fall Observatory
+
+# Server-wide snapshot of every EarthMC town's mayor/councillors/residents to
+# detect mayor-change ("town fall") events and capture the resident activity at
+# the moment of each — the ground truth for reverse-engineering the undisclosed
+# "most active resident" inheritance rule (see town_observatory.py / fall_analysis.py).
+#
+# Sweeps ~5,600 towns in paced batches (stdlib only, no deps). Runs every 6 hours;
+# events are rare, so evidence accrues over weeks. Detection tolerates missed runs
+# (a mayor change persists until the next sweep sees it).
+
+on:
+  schedule:
+    - cron: "30 */6 * * *"   # every 6 hours, offset from the other workflows
+  workflow_dispatch:
+
+concurrency:
+  group: town-observatory
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sweep all towns + detect fall events
+        run: python3 town_observatory.py
+
+      - name: Re-run fall analysis
+        run: python3 fall_analysis.py -i data/town_events.jsonl -o data || true
+
+      - name: Commit observatory data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in town_state.json town_events.jsonl observatory.json fall_analysis.json; do
+            [ -f "data/$f" ] && git add -f "data/$f" || true
+          done
+          if git diff --cached --quiet; then
+            echo "No observatory changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: town observatory sweep $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          ok=0
+          for attempt in 1 2 3 4; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && \
+               git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 2))
+          done
+          [ "$ok" = 1 ] || { echo "::error::observatory push failed"; exit 1; }
