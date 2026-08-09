@@ -1,13 +1,15 @@
 name: Town Fall Observatory
 
-# Server-wide snapshot of every EarthMC town's mayor/councillors/residents to
-# detect mayor-change ("town fall") events and capture the resident activity at
-# the moment of each — the ground truth for reverse-engineering the undisclosed
-# "most active resident" inheritance rule (see town_observatory.py / fall_analysis.py).
+# Focused town-fall observatory. Rather than log all ~5,600 towns, it first scans
+# every town's mayor and builds a WATCHLIST of towns whose mayor is going inactive
+# (approaching the ~42-day fall threshold) — the only towns that can produce a
+# "most active resident" event — then densely sweeps just those to detect the fall
+# and capture resident activity at the moment. Ground truth for reverse-engineering
+# the inheritance rule (town_candidates.py / town_observatory.py / fall_analysis.py).
 #
-# Sweeps ~5,600 towns in paced batches (stdlib only, no deps). Runs every 6 hours;
-# events are rare, so evidence accrues over weeks. Detection tolerates missed runs
-# (a mayor change persists until the next sweep sees it).
+# Stdlib only, paced batches. Runs every 6 hours; a mayor stays inactive for weeks
+# before falling, so the daily-refreshed watchlist always flags a town well before
+# it falls, and missed runs don't lose events.
 
 on:
   schedule:
@@ -34,8 +36,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Sweep all towns + detect fall events
-        run: python3 town_observatory.py
+      - name: Refresh at-risk watchlist (scan every mayor)
+        run: python3 town_candidates.py --min-idle-days 25 -o data/watch_towns.json
+
+      - name: Sweep the watchlist + detect fall events
+        run: python3 town_observatory.py --watchlist data/watch_towns.json
 
       - name: Re-run fall analysis
         run: python3 fall_analysis.py -i data/town_events.jsonl -o data || true
@@ -44,7 +49,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in town_state.json town_events.jsonl observatory.json fall_analysis.json; do
+          for f in watch_towns.json town_state.json town_events.jsonl observatory.json fall_analysis.json; do
             [ -f "data/$f" ] && git add -f "data/$f" || true
           done
           if git diff --cached --quiet; then

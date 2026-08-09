@@ -162,6 +162,8 @@ def build_event(town_uuid, prev, cur, now_iso):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="only first N towns (testing)")
+    ap.add_argument("--watchlist", default="", help="focus on towns in this "
+                    "watch_towns.json (from town_candidates.py) instead of all towns")
     ap.add_argument("--state", default=STATE)
     ap.add_argument("--events", default=EVENTS)
     args = ap.parse_args(argv)
@@ -174,9 +176,14 @@ def main(argv=None):
         except (json.JSONDecodeError, OSError):
             prev = {}
 
-    names = all_town_names()
+    if args.watchlist and os.path.exists(args.watchlist):
+        wl = json.load(open(args.watchlist))
+        names = [t["name"] for t in wl.get("towns", []) if t.get("name")]
+        print(f"Focusing on {len(names)} at-risk towns from {args.watchlist}.")
+    else:
+        names = all_town_names()
     if not names:
-        print("Could not fetch town list (rate-limited?). Aborting without changes.")
+        print("No towns to sweep (rate-limited or empty watchlist). Aborting.")
         return 1
     if args.limit:
         names = names[:args.limit]
