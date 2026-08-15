@@ -9773,3 +9773,17 @@
 [2026-08-15T02:50:46Z] vote party 2976/5000 (59.5%) | 2024 remaining | players 364/800 | moon FULL_MOON | next poll ~300s
 [2026-08-15T02:55:44Z] vote party 3020/5000 (60.4%) | 1980 remaining | players 370/800 | moon FULL_MOON | next poll ~300s
 [2026-08-15T02:55:44Z] === tracker duration reached ===
+[2026-08-15T02:56:00Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-08-15T02:56:01Z] vote party 3022/5000 (60.4%) | 1978 remaining | players 371/800 | moon FULL_MOON | next poll ~300s
+[2026-08-15T03:01:01Z] vote party 3043/5000 (60.9%) | 1957 remaining | players 376/800 | moon FULL_MOON | next poll ~300s
+[2026-08-15T03:06:16Z] ERROR fetching endpoint: TimeoutError('The read operation timed out')
+[2026-08-15T03:13:47Z] vote party 3102/5000 (62.0%) | 1898 remaining | players 372/800 | moon WANING_GIBBOUS | next poll ~315s
+[2026-08-15T03:19:02Z] vote party 3127/5000 (62.5%) | 1873 remaining | players 373/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-15T03:24:02Z] vote party 3149/5000 (63.0%) | 1851 remaining | players 379/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-15T03:29:03Z] vote party 3171/5000 (63.4%) | 1829 remaining | players 374/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-15T03:34:03Z] vote party 3191/5000 (63.8%) | 1809 remaining | players 367/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-15T03:39:03Z] vote party 3203/5000 (64.1%) | 1797 remaining | players 361/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-15T03:44:04Z] vote party 3223/5000 (64.5%) | 1777 remaining | players 362/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-15T03:49:04Z] vote party 3251/5000 (65.0%) | 1749 remaining | players 373/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-15T03:51:01Z] vote party 3254/5000 (65.1%) | 1746 remaining | players 369/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-15T03:51:01Z] === tracker duration reached ===
