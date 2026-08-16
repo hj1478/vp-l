@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-08-16T07:18:20Z",
-  "total_mayor_changes": 18,
-  "clean_most_active_falls": 5,
+  "generated_at": "2026-08-16T13:19:18Z",
+  "total_mayor_changes": 21,
+  "clean_most_active_falls": 7,
   "inactive_days_threshold": 40.0,
   "hypotheses": {
     "last_online": {
-      "scored_events": 5,
-      "heir_ranked_1st": 4,
-      "top1_rate": 0.8,
-      "mean_normalized_rank": 0.533
+      "scored_events": 7,
+      "heir_ranked_1st": 5,
+      "top1_rate": 0.714,
+      "mean_normalized_rank": 0.524
     },
     "tenure": {
-      "scored_events": 5,
+      "scored_events": 7,
       "heir_ranked_1st": 1,
-      "top1_rate": 0.2,
-      "mean_normalized_rank": 0.9
+      "top1_rate": 0.143,
+      "mean_normalized_rank": 0.881
     },
     "acct_oldest": {
-      "scored_events": 5,
+      "scored_events": 7,
       "heir_ranked_1st": 0,
       "top1_rate": 0.0,
-      "mean_normalized_rank": 0.933
+      "mean_normalized_rank": 0.952
     },
     "acct_newest": {
-      "scored_events": 5,
-      "heir_ranked_1st": 4,
-      "top1_rate": 0.8,
-      "mean_normalized_rank": 0.533
+      "scored_events": 7,
+      "heir_ranked_1st": 6,
+      "top1_rate": 0.857,
+      "mean_normalized_rank": 0.476
     }
   }
 }
