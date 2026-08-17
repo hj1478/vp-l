@@ -1,68 +1,8 @@
 {
-  "generated_at": "2026-08-17T13:31:02Z",
-  "scanned": 5714,
-  "snipable_towns": 391,
+  "generated_at": "2026-08-17T19:17:40Z",
+  "scanned": 5730,
+  "snipable_towns": 398,
   "towns": [
-    {
-      "town": "Gold",
-      "balance": 14068.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 1000000.0,
-      "profit_if_bought": -985932.0,
-      "num_residents": 38,
-      "num_town_blocks": 334,
-      "mayor": "Gautomy",
-      "mayor_idle_days": 0.0
-    },
-    {
-      "town": "Luoyang",
-      "balance": 1882.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 19,
-      "num_town_blocks": 784,
-      "mayor": "Pinan233",
-      "mayor_idle_days": 28.2
-    },
-    {
-      "town": "Neo_Osaka",
-      "balance": 1268.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 24,
-      "mayor": "rect6",
-      "mayor_idle_days": 33.2
-    },
-    {
-      "town": "Frostgate",
-      "balance": 754.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 65,
-      "mayor": "Giosu7896",
-      "mayor_idle_days": 28.9
-    },
-    {
-      "town": "Sakar",
-      "balance": 491.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 14,
-      "num_town_blocks": 161,
-      "mayor": "Badoef",
-      "mayor_idle_days": 31.0
-    },
     {
       "town": "Leavemebe_Island",
       "balance": 478.0,
@@ -73,91 +13,21 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "NPC19",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Shepherdsville",
-      "balance": 445.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 45,
-      "mayor": "carterzane",
-      "mayor_idle_days": 27.3
-    },
-    {
-      "town": "Marineford",
-      "balance": 414.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 71,
-      "mayor": "ODXIII",
-      "mayor_idle_days": 30.2
-    },
-    {
-      "town": "Houten",
-      "balance": 412.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 2.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 100,
-      "mayor": "miki8315",
-      "mayor_idle_days": 39.1
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Tsu",
       "balance": 383.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.5,
+      "days_to_fall_est": 11.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 112,
       "mayor": "Bukurow",
-      "mayor_idle_days": 30.5
-    },
-    {
-      "town": "Stuttgart",
-      "balance": 303.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 17.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 15,
-      "mayor": "ArdaLo_",
-      "mayor_idle_days": 25.0
-    },
-    {
-      "town": "Normalsville",
-      "balance": 244.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 112,
-      "mayor": "MagicVI",
-      "mayor_idle_days": 36.8
-    },
-    {
-      "town": "Nagae",
-      "balance": 221.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 15,
-      "mayor": "1_esk",
-      "mayor_idle_days": 33.1
+      "mayor_idle_days": 30.8,
+      "active_competitors": 0
     },
     {
       "town": "Evolt",
@@ -169,7 +39,8 @@
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "NPC4",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Araguari",
@@ -181,55 +52,8 @@
       "num_residents": 1,
       "num_town_blocks": 42,
       "mayor": "NPC98",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Holguin",
-      "balance": 206.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 1.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 6,
-      "mayor": "FPT_Jbaby",
-      "mayor_idle_days": 40.7
-    },
-    {
-      "town": "Mar_Del_Plata",
-      "balance": 203.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 85,
-      "mayor": "Lamarcka",
-      "mayor_idle_days": 27.9
-    },
-    {
-      "town": "Sumba",
-      "balance": 176.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 16,
-      "mayor": "Shorty4Twenty",
-      "mayor_idle_days": 36.9
-    },
-    {
-      "town": "Peking",
-      "balance": 175.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 16.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 18,
-      "num_town_blocks": 286,
-      "mayor": "HoshinoChiba",
-      "mayor_idle_days": 25.2
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Buccees",
@@ -241,67 +65,73 @@
       "num_residents": 1,
       "num_town_blocks": 160,
       "mayor": "NPC22",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Donnacona",
       "balance": 152.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.4,
+      "days_to_fall_est": 7.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 33,
       "mayor": "whatsupdanger",
-      "mayor_idle_days": 34.6
+      "mayor_idle_days": 34.8,
+      "active_competitors": 0
     },
     {
       "town": "St_JeanneDarc",
       "balance": 142.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.3,
+      "days_to_fall_est": 11.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 7,
       "num_town_blocks": 30,
       "mayor": "Kreshnovv",
-      "mayor_idle_days": 30.7
+      "mayor_idle_days": 31.0,
+      "active_competitors": 0
     },
     {
       "town": "Sabirabad",
       "balance": 139.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.8,
+      "days_to_fall_est": 11.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "Goonyagoodting",
-      "mayor_idle_days": 30.2
+      "mayor_idle_days": 30.4,
+      "active_competitors": 0
     },
     {
       "town": "Monte_Arabi",
       "balance": 136.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.1,
+      "days_to_fall_est": 6.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 112,
       "mayor": "Piggybabnk",
-      "mayor_idle_days": 34.9
+      "mayor_idle_days": 35.1,
+      "active_competitors": 0
     },
     {
       "town": "Buuntsagaan",
       "balance": 135.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.7,
+      "days_to_fall_est": 14.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 18,
       "mayor": "Bosniaman1",
-      "mayor_idle_days": 27.3
+      "mayor_idle_days": 27.6,
+      "active_competitors": 0
     },
     {
       "town": "Roscoff",
@@ -313,7 +143,8 @@
       "num_residents": 2,
       "num_town_blocks": 136,
       "mayor": "Hercule5644",
-      "mayor_idle_days": 36.8
+      "mayor_idle_days": 37.0,
+      "active_competitors": 0
     },
     {
       "town": "Guadalupe",
@@ -325,91 +156,86 @@
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "NPC59",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Nevada",
       "balance": 100.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.7,
+      "days_to_fall_est": 4.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 4,
       "num_town_blocks": 18,
       "mayor": "a14NHK22m",
-      "mayor_idle_days": 37.3
+      "mayor_idle_days": 37.5,
+      "active_competitors": 0
     },
     {
       "town": "Bloemfontein",
       "balance": 98.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.4,
+      "days_to_fall_est": 13.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 23,
       "mayor": "ShmunyMC",
-      "mayor_idle_days": 28.6
+      "mayor_idle_days": 28.8,
+      "active_competitors": 0
     },
     {
       "town": "Yajuu_City",
       "balance": 93.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.8,
+      "days_to_fall_est": 5.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 121,
       "mayor": "Mou_huaji",
-      "mayor_idle_days": 36.2
+      "mayor_idle_days": 36.4,
+      "active_competitors": 0
     },
     {
       "town": "Huai_River",
       "balance": 90.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.8,
+      "days_to_fall_est": 9.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "KATCHI789",
-      "mayor_idle_days": 32.2
+      "mayor_idle_days": 32.4,
+      "active_competitors": 0
     },
     {
       "town": "Mafia_Island",
       "balance": 88.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.1,
+      "days_to_fall_est": 4.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 62,
       "mayor": "joaojesus5434",
-      "mayor_idle_days": 36.9
-    },
-    {
-      "town": "Punic_Lebanon",
-      "balance": 87.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.4,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 22,
-      "mayor": "kingfloppyseal",
-      "mayor_idle_days": 35.6
+      "mayor_idle_days": 37.2,
+      "active_competitors": 0
     },
     {
       "town": "Sinai",
       "balance": 85.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.3,
+      "days_to_fall_est": 12.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 148,
       "mayor": "Rafito22",
-      "mayor_idle_days": 29.7
+      "mayor_idle_days": 30.0,
+      "active_competitors": 0
     },
     {
       "town": "Ravnfjord",
@@ -421,19 +247,8 @@
       "num_residents": 1,
       "num_town_blocks": 25,
       "mayor": "NPC24",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Busselton",
-      "balance": 76.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 0.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 46,
-      "mayor": "_frankocean",
-      "mayor_idle_days": 42.0
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Larpture",
@@ -445,91 +260,47 @@
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "NPC30",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Lucerne",
-      "balance": 72.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 10.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 124,
-      "mayor": "Raabukz",
-      "mayor_idle_days": 31.4
-    },
-    {
-      "town": "Larissa",
-      "balance": 69.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 185,
-      "mayor": "Darko_5",
-      "mayor_idle_days": 27.7
-    },
-    {
-      "town": "Hunan",
-      "balance": 67.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 9,
-      "num_town_blocks": 243,
-      "mayor": "biliwind",
-      "mayor_idle_days": 35.1
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Mugitan",
       "balance": 65.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.9,
+      "days_to_fall_est": 14.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 1,
       "mayor": "Lore2009",
-      "mayor_idle_days": 27.1
-    },
-    {
-      "town": "Jaen",
-      "balance": 61.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 16.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 6,
-      "num_town_blocks": 96,
-      "mayor": "_Derroy_",
-      "mayor_idle_days": 25.9
+      "mayor_idle_days": 27.3,
+      "active_competitors": 0
     },
     {
       "town": "Paradise_Beach",
       "balance": 57.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.6,
+      "days_to_fall_est": 15.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 25,
       "mayor": "SockOfSand",
-      "mayor_idle_days": 26.4
+      "mayor_idle_days": 26.7,
+      "active_competitors": 0
     },
     {
       "town": "Iseria",
       "balance": 57.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.4,
+      "days_to_fall_est": 1.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 4,
       "num_town_blocks": 16,
       "mayor": "Sprkey",
-      "mayor_idle_days": 40.6
+      "mayor_idle_days": 40.8,
+      "active_competitors": 0
     },
     {
       "town": "Tirgu_Mures",
@@ -541,31 +312,34 @@
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "NPC2",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "SilentHill",
       "balance": 53.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.5,
+      "days_to_fall_est": 11.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "TheRealUnabomber",
-      "mayor_idle_days": 30.5
+      "mayor_idle_days": 30.7,
+      "active_competitors": 0
     },
     {
       "town": "Piura",
       "balance": 53.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.7,
+      "days_to_fall_est": 16.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "FernandoR_1",
-      "mayor_idle_days": 25.3
+      "mayor_idle_days": 25.6,
+      "active_competitors": 0
     },
     {
       "town": "Aether",
@@ -577,19 +351,21 @@
       "num_residents": 1,
       "num_town_blocks": 11,
       "mayor": "NPC61",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Trialed",
       "balance": 48.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.4,
+      "days_to_fall_est": 11.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 30,
       "mayor": "Alvaro2786",
-      "mayor_idle_days": 30.6
+      "mayor_idle_days": 30.9,
+      "active_competitors": 0
     },
     {
       "town": "Eknk",
@@ -601,43 +377,47 @@
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "NPC25",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Alaskan_Company",
       "balance": 40.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.8,
+      "days_to_fall_est": 16.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "Spartan_117_mc8",
-      "mayor_idle_days": 25.2
+      "mayor_idle_days": 25.4,
+      "active_competitors": 0
     },
     {
       "town": "Vesylia",
       "balance": 40.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.1,
+      "days_to_fall_est": 7.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 17,
       "mayor": "Laila2375",
-      "mayor_idle_days": 33.9
+      "mayor_idle_days": 34.1,
+      "active_competitors": 0
     },
     {
       "town": "Zhangzhou",
       "balance": 40.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.2,
+      "days_to_fall_est": 13.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "Kurushimka",
-      "mayor_idle_days": 27.8
+      "mayor_idle_days": 28.1,
+      "active_competitors": 0
     },
     {
       "town": "SpudFang_Isles",
@@ -649,7 +429,8 @@
       "num_residents": 1,
       "num_town_blocks": 10,
       "mayor": "NPC43",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Gilan",
@@ -661,7 +442,8 @@
       "num_residents": 1,
       "num_town_blocks": 17,
       "mayor": "NPC85",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Fort_Golfi",
@@ -673,31 +455,21 @@
       "num_residents": 2,
       "num_town_blocks": 86,
       "mayor": "Golfistayt",
-      "mayor_idle_days": 5.1
-    },
-    {
-      "town": "Gabagooland",
-      "balance": 37.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 89,
-      "mayor": "MonRbt111",
-      "mayor_idle_days": 30.5
+      "mayor_idle_days": 5.4,
+      "active_competitors": 0
     },
     {
       "town": "Cape_Cod_Homes",
       "balance": 36.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.3,
+      "days_to_fall_est": 10.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 112,
       "mayor": "GaloreTurnip506",
-      "mayor_idle_days": 31.7
+      "mayor_idle_days": 31.9,
+      "active_competitors": 0
     },
     {
       "town": "Willis",
@@ -709,31 +481,47 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC103",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Shoshone",
       "balance": 32.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.4,
+      "days_to_fall_est": 7.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 7,
       "mayor": "QuadrupleU",
-      "mayor_idle_days": 34.6
+      "mayor_idle_days": 34.9,
+      "active_competitors": 0
     },
     {
       "town": "Aetholia",
       "balance": 32.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.4,
+      "days_to_fall_est": 14.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 62,
       "mayor": "grass_miner",
-      "mayor_idle_days": 27.6
+      "mayor_idle_days": 27.8,
+      "active_competitors": 0
+    },
+    {
+      "town": "Crescent_Isle",
+      "balance": 32.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 17.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 15,
+      "mayor": "craftyjackers",
+      "mayor_idle_days": 25.0,
+      "active_competitors": 0
     },
     {
       "town": "Magadan",
@@ -742,34 +530,24 @@
       "days_to_fall_est": null,
       "for_sale_price": 999999999.0,
       "profit_if_bought": -999999968.0,
-      "num_residents": 2,
+      "num_residents": 1,
       "num_town_blocks": 14,
       "mayor": "sigmaslicer777",
-      "mayor_idle_days": 8.4
-    },
-    {
-      "town": "Charleston",
-      "balance": 31.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 1.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 7,
-      "num_town_blocks": 130,
-      "mayor": "_RonaldReagan_",
-      "mayor_idle_days": 40.8
+      "mayor_idle_days": 8.6,
+      "active_competitors": 0
     },
     {
       "town": "Isfahan",
       "balance": 31.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.3,
+      "days_to_fall_est": 7.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "DanielPluto",
-      "mayor_idle_days": 34.7
+      "mayor_idle_days": 34.9,
+      "active_competitors": 0
     },
     {
       "town": "Nicobar",
@@ -781,7 +559,8 @@
       "num_residents": 1,
       "num_town_blocks": 41,
       "mayor": "NPC18",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Ushi_No_Okoku",
@@ -793,43 +572,34 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC1",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Nostra",
       "balance": 28.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.0,
+      "days_to_fall_est": 11.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "GamerRobbie67",
-      "mayor_idle_days": 30.0
-    },
-    {
-      "town": "Ubud",
-      "balance": 26.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 115,
-      "mayor": "Kuskoo",
-      "mayor_idle_days": 34.0
+      "mayor_idle_days": 30.3,
+      "active_competitors": 0
     },
     {
       "town": "Iraq",
       "balance": 26.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.3,
+      "days_to_fall_est": 12.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 5,
       "mayor": "idkmynAMEksowowo",
-      "mayor_idle_days": 29.7
+      "mayor_idle_days": 29.9,
+      "active_competitors": 0
     },
     {
       "town": "Pagan",
@@ -841,91 +611,99 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC76",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Gotham",
       "balance": 20.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.1,
+      "days_to_fall_est": 4.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 5,
       "mayor": "uDank",
-      "mayor_idle_days": 36.9
+      "mayor_idle_days": 37.1,
+      "active_competitors": 0
     },
     {
       "town": "IshowSpeed",
       "balance": 19.0,
-      "status": "for_sale",
+      "status": "ruined",
       "days_to_fall_est": null,
-      "for_sale_price": 250.0,
-      "profit_if_bought": -231.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
-      "mayor": "Taha_AbuObaida",
-      "mayor_idle_days": 0.0
+      "mayor": "NPC88",
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "PLC_SiegeW",
       "balance": 18.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.7,
+      "days_to_fall_est": 9.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 7,
       "mayor": "BogSnorkeler",
-      "mayor_idle_days": 32.3
+      "mayor_idle_days": 32.5,
+      "active_competitors": 0
     },
     {
-      "town": "Jojoland",
-      "balance": 17.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.2,
+      "town": "Viland",
+      "balance": 16.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 117,
-      "mayor": "Tumoshikato_sama",
-      "mayor_idle_days": 27.8
+      "num_residents": 1,
+      "num_town_blocks": 6,
+      "mayor": "NPC91",
+      "mayor_idle_days": null,
+      "active_competitors": 0
+    },
+    {
+      "town": "Toyota",
+      "balance": 16.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 16.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 1,
+      "num_town_blocks": 112,
+      "mayor": "handcream365",
+      "mayor_idle_days": 25.2,
+      "active_competitors": 0
     },
     {
       "town": "Rongcheng",
       "balance": 16.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.9,
+      "days_to_fall_est": 4.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "HololiveCN",
-      "mayor_idle_days": 37.1
-    },
-    {
-      "town": "New_Kharkiv",
-      "balance": 16.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999983.0,
-      "num_residents": 2,
-      "num_town_blocks": 37,
-      "mayor": "maxandarin",
-      "mayor_idle_days": 4.2
+      "mayor_idle_days": 37.4,
+      "active_competitors": 0
     },
     {
       "town": "Dollywood",
       "balance": 16.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.2,
+      "days_to_fall_est": 13.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 122,
       "mayor": "foidkilla67",
-      "mayor_idle_days": 28.8
+      "mayor_idle_days": 29.0,
+      "active_competitors": 0
     },
     {
       "town": "KizilElma",
@@ -937,259 +715,151 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "Poyrito_",
-      "mayor_idle_days": 36.1
+      "mayor_idle_days": 36.4,
+      "active_competitors": 0
     },
     {
       "town": "Lubeck",
       "balance": 15.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.4,
+      "days_to_fall_est": 9.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 6,
       "num_town_blocks": 170,
       "mayor": "LucyyJayy",
-      "mayor_idle_days": 32.6
-    },
-    {
-      "town": "Antalya",
-      "balance": 13.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 10,
-      "num_town_blocks": 208,
-      "mayor": "daannever266",
-      "mayor_idle_days": 28.8
+      "mayor_idle_days": 32.9,
+      "active_competitors": 0
     },
     {
       "town": "KM_Jail",
       "balance": 13.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.7,
+      "days_to_fall_est": 4.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "carychiu812",
-      "mayor_idle_days": 37.3
-    },
-    {
-      "town": "Italia",
-      "balance": 12.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 6,
-      "num_town_blocks": 101,
-      "mayor": "Abexzl",
-      "mayor_idle_days": 36.5
+      "mayor_idle_days": 37.5,
+      "active_competitors": 0
     },
     {
       "town": "Cluj",
       "balance": 12.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.0,
+      "days_to_fall_est": 15.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 10,
       "mayor": "SwiftCristi",
-      "mayor_idle_days": 26.0
-    },
-    {
-      "town": "Middelburg",
-      "balance": 12.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 125,
-      "mayor": "ThePantsWizard",
-      "mayor_idle_days": 30.3
+      "mayor_idle_days": 26.2,
+      "active_competitors": 0
     },
     {
       "town": "Weifang",
       "balance": 12.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.7,
+      "days_to_fall_est": 15.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 10,
       "mayor": "XueYe_UWU",
-      "mayor_idle_days": 26.3
-    },
-    {
-      "town": "Kagoshima",
-      "balance": 11.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 12,
-      "mayor": "WhoWannaTheBin",
-      "mayor_idle_days": 32.2
-    },
-    {
-      "town": "Oklahoma_City",
-      "balance": 11.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 56,
-      "mayor": "SoulSpy",
-      "mayor_idle_days": 28.8
+      "mayor_idle_days": 26.5,
+      "active_competitors": 0
     },
     {
       "town": "Valaam",
       "balance": 11.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.9,
+      "days_to_fall_est": 9.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 13,
       "mayor": "IvannnO6",
-      "mayor_idle_days": 32.1
+      "mayor_idle_days": 32.4,
+      "active_competitors": 0
     },
     {
       "town": "Napoli",
       "balance": 10.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.8,
+      "days_to_fall_est": 8.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 69,
       "mayor": "onatpaas",
-      "mayor_idle_days": 33.2
+      "mayor_idle_days": 33.4,
+      "active_competitors": 0
     },
     {
       "town": "Ataturk",
       "balance": 10.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.3,
+      "days_to_fall_est": 6.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 148,
       "mayor": "felekakiss",
-      "mayor_idle_days": 35.7
-    },
-    {
-      "town": "Pend_Oreille",
-      "balance": 9.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 80,
-      "mayor": "HRN_comics",
-      "mayor_idle_days": 33.7
-    },
-    {
-      "town": "Mini_Fairy_World",
-      "balance": 9.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 20,
-      "mayor": "EliasAH06",
-      "mayor_idle_days": 33.8
-    },
-    {
-      "town": "Thanks_Nostra",
-      "balance": 9.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999990.0,
-      "num_residents": 3,
-      "num_town_blocks": 84,
-      "mayor": "notchickenlover",
-      "mayor_idle_days": 0.8
+      "mayor_idle_days": 35.9,
+      "active_competitors": 0
     },
     {
       "town": "Incheon",
       "balance": 9.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.6,
+      "days_to_fall_est": 12.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 16,
       "mayor": "Sir_Atom",
-      "mayor_idle_days": 29.4
-    },
-    {
-      "town": "Tabriz",
-      "balance": 9.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 13,
-      "mayor": "Darksoulzxxx",
-      "mayor_idle_days": 28.3
+      "mayor_idle_days": 29.6,
+      "active_competitors": 0
     },
     {
       "town": "Lazio",
       "balance": 9.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.2,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 103,
       "mayor": "Opload",
-      "mayor_idle_days": 28.8
-    },
-    {
-      "town": "JeongSeon",
-      "balance": 8.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 6,
-      "mayor": "LeeByeolha",
-      "mayor_idle_days": 30.1
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Bani",
       "balance": 8.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.5,
+      "days_to_fall_est": 8.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 3,
       "mayor": "Kolaidjams12i4",
-      "mayor_idle_days": 33.5
+      "mayor_idle_days": 33.8,
+      "active_competitors": 0
     },
     {
       "town": "Kemijarvi",
       "balance": 8.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.7,
+      "days_to_fall_est": 7.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 1,
       "mayor": "Bananaman2014",
-      "mayor_idle_days": 34.3
+      "mayor_idle_days": 34.6,
+      "active_competitors": 0
     },
     {
       "town": "Nusa_Tenggara",
@@ -1201,7 +871,8 @@
       "num_residents": 1,
       "num_town_blocks": 3,
       "mayor": "NPC27",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Madagaskar_BF",
@@ -1213,7 +884,8 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "NPC81",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Gloucester",
@@ -1225,7 +897,8 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC82",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Muye",
@@ -1237,19 +910,8 @@
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "NPC5",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Fort_Worth",
-      "balance": 7.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 15,
-      "mayor": "Vasily_1",
-      "mayor_idle_days": 32.4
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Upernavik",
@@ -1261,199 +923,151 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "NPC83",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Jining",
       "balance": 7.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.7,
+      "days_to_fall_est": 15.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "vovpish21",
-      "mayor_idle_days": 26.3
+      "mayor_idle_days": 26.5,
+      "active_competitors": 0
     },
     {
       "town": "Tadmur",
       "balance": 6.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.7,
+      "days_to_fall_est": 9.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "P4zteleiro",
-      "mayor_idle_days": 32.3
+      "mayor_idle_days": 32.5,
+      "active_competitors": 0
     },
     {
-      "town": "Bratislava",
+      "town": "Scandinavia",
       "balance": 6.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.9,
+      "days_to_fall_est": 16.8,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 12,
-      "num_town_blocks": 144,
-      "mayor": "Libor2",
-      "mayor_idle_days": 29.1
-    },
-    {
-      "town": "Thermopylae",
-      "balance": 6.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 86,
-      "mayor": "_Tangent",
-      "mayor_idle_days": 36.3
-    },
-    {
-      "town": "Dragon_City",
-      "balance": 6.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 25,
-      "mayor": "Ali17121974",
-      "mayor_idle_days": 35.1
-    },
-    {
-      "town": "Burgas",
-      "balance": 5.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 6,
-      "num_town_blocks": 179,
-      "mayor": "ilypepsi2711",
-      "mayor_idle_days": 33.9
+      "num_residents": 1,
+      "num_town_blocks": 72,
+      "mayor": "WildeBillWontner",
+      "mayor_idle_days": 25.2,
+      "active_competitors": 0
     },
     {
       "town": "Guandalcanal",
       "balance": 5.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.5,
+      "days_to_fall_est": 4.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 13,
       "mayor": "_Augustinus_",
-      "mayor_idle_days": 37.5
+      "mayor_idle_days": 37.8,
+      "active_competitors": 0
     },
     {
       "town": "Torchyn",
       "balance": 5.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.8,
+      "days_to_fall_est": 11.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 35,
       "mayor": "FoamGenix",
-      "mayor_idle_days": 30.2
+      "mayor_idle_days": 30.4,
+      "active_competitors": 0
     },
     {
       "town": "Ruthenia",
       "balance": 5.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.2,
+      "days_to_fall_est": 13.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 23,
       "mayor": "Oleh_D",
-      "mayor_idle_days": 27.8
+      "mayor_idle_days": 28.1,
+      "active_competitors": 0
     },
     {
       "town": "Elkader",
       "balance": 5.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.5,
+      "days_to_fall_est": 4.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 6,
       "num_town_blocks": 35,
       "mayor": "Landoch13",
-      "mayor_idle_days": 37.5
-    },
-    {
-      "town": "Cagliari",
-      "balance": 5.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 30000.0,
-      "profit_if_bought": -29995.0,
-      "num_residents": 11,
-      "num_town_blocks": 171,
-      "mayor": "wirecharger1",
-      "mayor_idle_days": 0.5
+      "mayor_idle_days": 37.8,
+      "active_competitors": 0
     },
     {
       "town": "Fichtenbergen",
       "balance": 5.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.6,
+      "days_to_fall_est": 10.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "Nuni15",
-      "mayor_idle_days": 31.4
+      "mayor_idle_days": 31.6,
+      "active_competitors": 0
     },
     {
       "town": "Muscat",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.9,
+      "days_to_fall_est": 10.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 21,
       "mayor": "Socks91",
-      "mayor_idle_days": 31.1
-    },
-    {
-      "town": "Coquitlam",
-      "balance": 4.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999995.0,
-      "num_residents": 7,
-      "num_town_blocks": 46,
-      "mayor": "Bishop_coquitlam",
-      "mayor_idle_days": 0.2
+      "mayor_idle_days": 31.3,
+      "active_competitors": 0
     },
     {
       "town": "Jerome",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.8,
+      "days_to_fall_est": 7.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "xTwin_",
-      "mayor_idle_days": 34.2
+      "mayor_idle_days": 34.5,
+      "active_competitors": 0
     },
     {
       "town": "Leoben",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.3,
+      "days_to_fall_est": 15.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "DaGOAT4321",
-      "mayor_idle_days": 26.7
+      "mayor_idle_days": 27.0,
+      "active_competitors": 0
     },
     {
       "town": "Capybara",
@@ -1465,43 +1079,47 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC78",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "KVZhD",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.2,
+      "days_to_fall_est": 13.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "xbroxlol",
-      "mayor_idle_days": 28.8
+      "mayor_idle_days": 29.0,
+      "active_competitors": 0
     },
     {
       "town": "Juneau",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.8,
+      "days_to_fall_est": 10.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 10,
       "mayor": "TheNoobMaster123",
-      "mayor_idle_days": 31.2
+      "mayor_idle_days": 31.4,
+      "active_competitors": 0
     },
     {
       "town": "Eden",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.1,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 70,
       "mayor": "Monkemans",
-      "mayor_idle_days": 28.9
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Milano",
@@ -1513,43 +1131,34 @@
       "num_residents": 3,
       "num_town_blocks": 95,
       "mayor": "Batom0",
-      "mayor_idle_days": 10.0
+      "mayor_idle_days": 10.2,
+      "active_competitors": 0
     },
     {
       "town": "Pink_City",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.3,
+      "days_to_fall_est": 5.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 22,
       "mayor": "Goooo_Zero",
-      "mayor_idle_days": 36.7
+      "mayor_idle_days": 36.9,
+      "active_competitors": 0
     },
     {
       "town": "JiangSu",
       "balance": 4.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.6,
+      "days_to_fall_est": 16.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 2,
       "mayor": "xxbbt",
-      "mayor_idle_days": 25.4
-    },
-    {
-      "town": "Vespera",
-      "balance": 4.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.4,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 62,
-      "mayor": "frogsELF",
-      "mayor_idle_days": 28.6
+      "mayor_idle_days": 25.6,
+      "active_competitors": 0
     },
     {
       "town": "Even_Tides_Edge",
@@ -1561,7 +1170,8 @@
       "num_residents": 1,
       "num_town_blocks": 16,
       "mayor": "NPC10",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "FuZhou",
@@ -1573,7 +1183,8 @@
       "num_residents": 1,
       "num_town_blocks": 29,
       "mayor": "NPC17",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Catta_Republic",
@@ -1585,19 +1196,21 @@
       "num_residents": 1,
       "num_town_blocks": 57,
       "mayor": "NPC6",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Astromia",
       "balance": 3.0,
       "status": "falls_soon",
-      "days_to_fall_est": 2.6,
+      "days_to_fall_est": 2.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 2,
       "mayor": "Diddy_donut",
-      "mayor_idle_days": 39.4
+      "mayor_idle_days": 39.6,
+      "active_competitors": 0
     },
     {
       "town": "Mala",
@@ -1609,31 +1222,8 @@
       "num_residents": 1,
       "num_town_blocks": 30,
       "mayor": "NPC23",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Feiqian",
-      "balance": 2.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 36,
-      "mayor": "chujianyue_",
-      "mayor_idle_days": 36.0
-    },
-    {
-      "town": "Oran",
-      "balance": 2.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 16.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 97,
-      "mayor": "F0UR_",
-      "mayor_idle_days": 26.0
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "JabbaBC",
@@ -1645,91 +1235,47 @@
       "num_residents": 1,
       "num_town_blocks": 65,
       "mayor": "NPC7",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Acolyte_Empire",
-      "balance": 2.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 5,
-      "mayor": "PotatoMan2025",
-      "mayor_idle_days": 31.0
-    },
-    {
-      "town": "NA_STORMTROOPERS",
-      "balance": 2.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 16,
-      "mayor": "ItsNotDifficult",
-      "mayor_idle_days": 32.1
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Sulawesi",
       "balance": 2.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.2,
+      "days_to_fall_est": 14.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "FineBiycle2419",
-      "mayor_idle_days": 26.8
-    },
-    {
-      "town": "Shibetsu",
-      "balance": 2.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 7,
-      "num_town_blocks": 241,
-      "mayor": "Charinette",
-      "mayor_idle_days": 30.8
-    },
-    {
-      "town": "Jiyuan",
-      "balance": 1.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 1.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 71,
-      "mayor": "Alya4",
-      "mayor_idle_days": 40.7
+      "mayor_idle_days": 27.1,
+      "active_competitors": 0
     },
     {
       "town": "Mansel_Town",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.4,
+      "days_to_fall_est": 15.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 40,
       "mayor": "RiceFarmer456",
-      "mayor_idle_days": 26.6
+      "mayor_idle_days": 26.8,
+      "active_competitors": 0
     },
     {
       "town": "Running_Man",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.8,
+      "days_to_fall_est": 16.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 51,
       "mayor": "theXiaoYuam",
-      "mayor_idle_days": 25.2
+      "mayor_idle_days": 25.4,
+      "active_competitors": 0
     },
     {
       "town": "Wills_Town",
@@ -1741,31 +1287,21 @@
       "num_residents": 1,
       "num_town_blocks": 24,
       "mayor": "NPC65",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Sofya",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 2.9,
+      "days_to_fall_est": 2.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "KaganYagiz",
-      "mayor_idle_days": 39.1
-    },
-    {
-      "town": "Yummy",
-      "balance": 1.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 4.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 13,
-      "num_town_blocks": 120,
-      "mayor": "pizeieiei_",
-      "mayor_idle_days": 37.1
+      "mayor_idle_days": 39.4,
+      "active_competitors": 0
     },
     {
       "town": "Drolfinnopolis",
@@ -1777,67 +1313,60 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC44",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Caldoria",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.1,
+      "days_to_fall_est": 14.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 7,
       "mayor": "blue_cl0ver",
-      "mayor_idle_days": 26.9
+      "mayor_idle_days": 27.1,
+      "active_competitors": 0
     },
     {
       "town": "Thatcherson",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.5,
+      "days_to_fall_est": 7.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 33,
       "mayor": "Wrathful_Leon",
-      "mayor_idle_days": 34.5
+      "mayor_idle_days": 34.8,
+      "active_competitors": 0
     },
     {
       "town": "Hartland",
       "balance": 1.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.2,
+      "days_to_fall_est": 4.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 5,
       "num_town_blocks": 8,
       "mayor": "Boscopup",
-      "mayor_idle_days": 36.8
-    },
-    {
-      "town": "Fethiye",
-      "balance": 1.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 14,
-      "num_town_blocks": 210,
-      "mayor": "28st",
-      "mayor_idle_days": 38.1
+      "mayor_idle_days": 37.1,
+      "active_competitors": 0
     },
     {
       "town": "Muyua",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.1,
+      "days_to_fall_est": 4.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 7,
       "mayor": "jacqueaux",
-      "mayor_idle_days": 36.9
+      "mayor_idle_days": 37.2,
+      "active_competitors": 0
     },
     {
       "town": "Gigglefartsville",
@@ -1849,7 +1378,8 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC101",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "New_Farstead",
@@ -1861,43 +1391,21 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC99",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Imerinas",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 104,
-      "mayor": "Opluentia",
-      "mayor_idle_days": 38.2
-    },
-    {
-      "town": "Monta_Fortikajo",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 34,
-      "mayor": "NPC95",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Hama",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.2,
+      "days_to_fall_est": 11.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "xxsumozinxx",
-      "mayor_idle_days": 29.8
+      "mayor_idle_days": 30.1,
+      "active_competitors": 0
     },
     {
       "town": "Nova_Valmyria",
@@ -1909,19 +1417,21 @@
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "NPC63",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Asica",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.5,
+      "days_to_fall_est": 6.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 3,
       "mayor": "JPNryo",
-      "mayor_idle_days": 35.5
+      "mayor_idle_days": 35.7,
+      "active_competitors": 0
     },
     {
       "town": "Nowhere",
@@ -1933,7 +1443,8 @@
       "num_residents": 1,
       "num_town_blocks": 21,
       "mayor": "NPC12",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Malacca",
@@ -1945,31 +1456,34 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC102",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Makedon",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.5,
+      "days_to_fall_est": 9.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 92,
       "mayor": "Tudorica_372",
-      "mayor_idle_days": 32.5
+      "mayor_idle_days": 32.8,
+      "active_competitors": 0
     },
     {
       "town": "Olympus",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.1,
+      "days_to_fall_est": 9.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "Raken6316",
-      "mayor_idle_days": 31.9
+      "mayor_idle_days": 32.2,
+      "active_competitors": 0
     },
     {
       "town": "KingsTown",
@@ -1981,67 +1495,47 @@
       "num_residents": 1,
       "num_town_blocks": 49,
       "mayor": "NPC94",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Samarinda",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.2,
+      "days_to_fall_est": 11.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 88,
       "mayor": "TheGamingWall",
-      "mayor_idle_days": 30.8
+      "mayor_idle_days": 31.0,
+      "active_competitors": 0
     },
     {
       "town": "Astoria",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.3,
+      "days_to_fall_est": 15.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 7,
       "mayor": "Zh00Zh00",
-      "mayor_idle_days": 26.7
-    },
-    {
-      "town": "ChickenBurg",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 200.0,
-      "profit_if_bought": -200.0,
-      "num_residents": 3,
-      "num_town_blocks": 24,
-      "mayor": "BlackHole_cpvp",
-      "mayor_idle_days": 9.9
-    },
-    {
-      "town": "Odessa",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 24,
-      "mayor": "MrBobCat_21",
-      "mayor_idle_days": 32.9
+      "mayor_idle_days": 26.9,
+      "active_competitors": 0
     },
     {
       "town": "Potions",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.4,
+      "days_to_fall_est": 16.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "TakeZinzi",
-      "mayor_idle_days": 25.6
+      "mayor_idle_days": 25.8,
+      "active_competitors": 0
     },
     {
       "town": "Fishing_Town",
@@ -2053,19 +1547,21 @@
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "JstTea",
-      "mayor_idle_days": 5.6
+      "mayor_idle_days": 0.2,
+      "active_competitors": 0
     },
     {
       "town": "Alderney",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.9,
+      "days_to_fall_est": 16.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "_EmirhanX_",
-      "mayor_idle_days": 25.1
+      "mayor_idle_days": 25.4,
+      "active_competitors": 0
     },
     {
       "town": "Elaziz",
@@ -2077,115 +1573,60 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "NPC67",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Ostersund",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 16,
-      "mayor": "NPC107",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Tsunami",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.0,
+      "days_to_fall_est": 4.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 82,
       "mayor": "Yahaha_ciallo",
-      "mayor_idle_days": 37.0
-    },
-    {
-      "town": "Tver",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 1300.0,
-      "profit_if_bought": -1300.0,
-      "num_residents": 3,
-      "num_town_blocks": 86,
-      "mayor": "Shark3333",
-      "mayor_idle_days": 15.1
+      "mayor_idle_days": 37.3,
+      "active_competitors": 0
     },
     {
       "town": "Nice_Place",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.1,
+      "days_to_fall_est": 13.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 75,
       "mayor": "Cecil1a_",
-      "mayor_idle_days": 27.9
-    },
-    {
-      "town": "Beijing",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 10.4,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 10,
-      "num_town_blocks": 5,
-      "mayor": "CursedOwl168366",
-      "mayor_idle_days": 31.6
-    },
-    {
-      "town": "Aetyrr",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 4.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 5,
-      "mayor": "EndlessCatz",
-      "mayor_idle_days": 37.3
+      "mayor_idle_days": 28.1,
+      "active_competitors": 0
     },
     {
       "town": "Doha",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.2,
+      "days_to_fall_est": 6.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 39,
       "mayor": "5MasterBuilder",
-      "mayor_idle_days": 35.8
-    },
-    {
-      "town": "Tampa",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 95,
-      "mayor": "jessiesgirl",
-      "mayor_idle_days": 28.5
+      "mayor_idle_days": 36.0,
+      "active_competitors": 0
     },
     {
       "town": "Ricegang",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.6,
+      "days_to_fall_est": 16.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "VandalismKB",
-      "mayor_idle_days": 25.4
+      "mayor_idle_days": 25.6,
+      "active_competitors": 0
     },
     {
       "town": "Zaozhuang",
@@ -2197,55 +1638,34 @@
       "num_residents": 1,
       "num_town_blocks": 18,
       "mayor": "168McChicken",
-      "mayor_idle_days": 12.9
-    },
-    {
-      "town": "Neo_Jersey",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 2200.0,
-      "profit_if_bought": -2200.0,
-      "num_residents": 25,
-      "num_town_blocks": 265,
-      "mayor": "unitypilon_",
-      "mayor_idle_days": 1.0
+      "mayor_idle_days": 13.1,
+      "active_competitors": 0
     },
     {
       "town": "Cochrane",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.6,
+      "days_to_fall_est": 12.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 1,
       "mayor": "SquidofNewMoon",
-      "mayor_idle_days": 29.4
-    },
-    {
-      "town": "Terra_United",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 20000000.0,
-      "profit_if_bought": -20000000.0,
-      "num_residents": 5,
-      "num_town_blocks": 100,
-      "mayor": "swampjedi",
-      "mayor_idle_days": 0.7
+      "mayor_idle_days": 29.6,
+      "active_competitors": 0
     },
     {
       "town": "St_Johns",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.7,
+      "days_to_fall_est": 6.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "SirJohnWinthrop",
-      "mayor_idle_days": 35.3
+      "mayor_idle_days": 35.5,
+      "active_competitors": 0
     },
     {
       "town": "Bunker",
@@ -2257,31 +1677,21 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC71",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Soledad",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.4,
+      "days_to_fall_est": 15.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 12,
       "mayor": "Petrovol01",
-      "mayor_idle_days": 26.6
-    },
-    {
-      "town": "Wheatlandia",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 1,
-      "num_town_blocks": 14,
-      "mayor": "2013Matti",
-      "mayor_idle_days": 32.1
+      "mayor_idle_days": 26.8,
+      "active_competitors": 0
     },
     {
       "town": "Liangshan",
@@ -2293,79 +1703,73 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC72",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Cookie",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.2,
+      "days_to_fall_est": 9.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "CookieMaster_",
-      "mayor_idle_days": 31.8
+      "mayor_idle_days": 32.1,
+      "active_competitors": 0
     },
     {
       "town": "Shinsen",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.9,
+      "days_to_fall_est": 15.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 30,
       "mayor": "kamesan18",
-      "mayor_idle_days": 26.1
+      "mayor_idle_days": 26.4,
+      "active_competitors": 0
     },
     {
-      "town": "Snowdin",
+      "town": "Velikiye_Luki",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.3,
+      "days_to_fall_est": 16.9,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 20,
-      "mayor": "earwigi",
-      "mayor_idle_days": 28.7
+      "num_residents": 1,
+      "num_town_blocks": 31,
+      "mayor": "askate",
+      "mayor_idle_days": 25.1,
+      "active_competitors": 0
     },
     {
       "town": "Owocowo",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.9,
+      "days_to_fall_est": 14.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 112,
       "mayor": "aveirys",
-      "mayor_idle_days": 27.1
+      "mayor_idle_days": 27.4,
+      "active_competitors": 0
     },
     {
       "town": "North_Chicago",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.8,
+      "days_to_fall_est": 9.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 14,
       "mayor": "Protoevangelium",
-      "mayor_idle_days": 32.2
-    },
-    {
-      "town": "Siberia",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 32,
-      "mayor": "Chem0dan_",
-      "mayor_idle_days": 38.1
+      "mayor_idle_days": 32.4,
+      "active_competitors": 0
     },
     {
       "town": "Spruceville",
@@ -2377,55 +1781,21 @@
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "NPC87",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Daveland",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 15.4,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 2,
-      "mayor": "blazerods45",
-      "mayor_idle_days": 26.6
-    },
-    {
-      "town": "Macedon",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 323,
-      "mayor": "Tavitsu",
-      "mayor_idle_days": 33.9
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "An_Island",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.8,
+      "days_to_fall_est": 9.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "BIGHOOKISBACK",
-      "mayor_idle_days": 32.2
-    },
-    {
-      "town": "Jinzhou",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999999.0,
-      "num_residents": 4,
-      "num_town_blocks": 6,
-      "mayor": "realmiryue1",
-      "mayor_idle_days": 6.0
+      "mayor_idle_days": 32.4,
+      "active_competitors": 0
     },
     {
       "town": "Oaksville",
@@ -2437,55 +1807,47 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC96",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Limburg",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.2,
+      "days_to_fall_est": 6.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 21,
       "mayor": "LorenzoLily",
-      "mayor_idle_days": 34.8
+      "mayor_idle_days": 35.1,
+      "active_competitors": 0
     },
     {
       "town": "Grey_City",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.0,
+      "days_to_fall_est": 0.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
-      "num_town_blocks": 21,
+      "num_town_blocks": 12,
       "mayor": "tttttsar",
-      "mayor_idle_days": 41.0
+      "mayor_idle_days": 41.2,
+      "active_competitors": 0
     },
     {
       "town": "Neverwinter",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.9,
+      "days_to_fall_est": 14.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 66,
       "mayor": "msk9667",
-      "mayor_idle_days": 27.1
-    },
-    {
-      "town": "Amethyst",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 12,
-      "mayor": "NPC62",
-      "mayor_idle_days": null
+      "mayor_idle_days": 27.3,
+      "active_competitors": 0
     },
     {
       "town": "Bladeland",
@@ -2497,139 +1859,86 @@
       "num_residents": 7,
       "num_town_blocks": 83,
       "mayor": "LukyTuky",
-      "mayor_idle_days": 0.0
+      "mayor_idle_days": 0.0,
+      "active_competitors": 0
     },
     {
       "town": "Green_City",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.0,
+      "days_to_fall_est": 5.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 91,
       "mayor": "TangYuan_awa",
-      "mayor_idle_days": 36.0
+      "mayor_idle_days": 36.2,
+      "active_competitors": 0
     },
     {
       "town": "Horsely",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 4.2,
+      "days_to_fall_est": 4.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "Kaai_Yuki_",
-      "mayor_idle_days": 37.8
-    },
-    {
-      "town": "Midio",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 300.0,
-      "profit_if_bought": -300.0,
-      "num_residents": 11,
-      "num_town_blocks": 32,
-      "mayor": "LuisDavid_2012",
-      "mayor_idle_days": 0.0
+      "mayor_idle_days": 38.0,
+      "active_competitors": 0
     },
     {
       "town": "Mildura",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.7,
+      "days_to_fall_est": 5.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "POOPYBABY1234",
-      "mayor_idle_days": 36.3
+      "mayor_idle_days": 36.5,
+      "active_competitors": 0
     },
     {
       "town": "St_Peters_Harbor",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.4,
+      "days_to_fall_est": 13.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 40,
       "mayor": "a3thelric",
-      "mayor_idle_days": 28.6
-    },
-    {
-      "town": "Cuprum",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 1,
-      "num_town_blocks": 17,
-      "mayor": "NPC93",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Belle_River",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 17.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 30,
-      "mayor": "CTM0029",
-      "mayor_idle_days": 25.0
+      "mayor_idle_days": 28.8,
+      "active_competitors": 0
     },
     {
       "town": "Folkistan",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.1,
+      "days_to_fall_est": 8.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "Favstar",
-      "mayor_idle_days": 32.9
-    },
-    {
-      "town": "Tzoumerka",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 2.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 47,
-      "mayor": "Astro051",
-      "mayor_idle_days": 39.9
+      "mayor_idle_days": 33.1,
+      "active_competitors": 0
     },
     {
       "town": "Mariestad",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.1,
+      "days_to_fall_est": 0.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "JarleMC",
-      "mayor_idle_days": 40.9
-    },
-    {
-      "town": "Memphis",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 500.0,
-      "profit_if_bought": -500.0,
-      "num_residents": 2,
-      "num_town_blocks": 160,
-      "mayor": "pixeldddd",
-      "mayor_idle_days": 0.1
+      "mayor_idle_days": 41.1,
+      "active_competitors": 0
     },
     {
       "town": "Lacrosse_WI",
@@ -2641,55 +1950,47 @@
       "num_residents": 1,
       "num_town_blocks": 47,
       "mayor": "NPC75",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Kure",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.9,
+      "days_to_fall_est": 11.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 90,
       "mayor": "flyingpig2929",
-      "mayor_idle_days": 30.1
+      "mayor_idle_days": 30.3,
+      "active_competitors": 0
     },
     {
       "town": "Makrinitsa",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.0,
+      "days_to_fall_est": 15.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 7,
       "mayor": "edopro12343",
-      "mayor_idle_days": 26.0
+      "mayor_idle_days": 26.2,
+      "active_competitors": 0
     },
     {
       "town": "Termoli",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.0,
+      "days_to_fall_est": 0.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 15,
       "mayor": "ilgangster",
-      "mayor_idle_days": 41.0
-    },
-    {
-      "town": "Sharjah",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 10.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 72,
-      "mayor": "KnewME",
-      "mayor_idle_days": 31.9
+      "mayor_idle_days": 41.3,
+      "active_competitors": 0
     },
     {
       "town": "Donegal",
@@ -2701,55 +2002,21 @@
       "num_residents": 1,
       "num_town_blocks": 95,
       "mayor": "NPC77",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Belgium",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 15.4,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 7,
-      "num_town_blocks": 111,
-      "mayor": "CuteButEvil",
-      "mayor_idle_days": 26.6
-    },
-    {
-      "town": "Kovel",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 11,
-      "mayor": "Ka1t0_WW",
-      "mayor_idle_days": 35.8
-    },
-    {
-      "town": "Gyros",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 7.0,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 69,
-      "mayor": "kondziuspl",
-      "mayor_idle_days": 35.0
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Nesxville",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 17.0,
+      "days_to_fall_est": 16.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "Felipeprogamer99",
-      "mayor_idle_days": 25.0
+      "mayor_idle_days": 25.3,
+      "active_competitors": 0
     },
     {
       "town": "Mayak",
@@ -2761,67 +2028,47 @@
       "num_residents": 1,
       "num_town_blocks": 36,
       "mayor": "ivanpprost",
-      "mayor_idle_days": 7.0
-    },
-    {
-      "town": "Galia",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 10000.0,
-      "profit_if_bought": -10000.0,
-      "num_residents": 2,
-      "num_town_blocks": 66,
-      "mayor": "QuickMash",
-      "mayor_idle_days": 24.5
+      "mayor_idle_days": 7.2,
+      "active_competitors": 0
     },
     {
       "town": "Miyukaze",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.9,
+      "days_to_fall_est": 8.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 100,
       "mayor": "wiiiiiiiiind",
-      "mayor_idle_days": 33.1
-    },
-    {
-      "town": "Wei",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999999.0,
-      "num_residents": 4,
-      "num_town_blocks": 13,
-      "mayor": "BsidesThat",
-      "mayor_idle_days": 10.8
+      "mayor_idle_days": 33.3,
+      "active_competitors": 0
     },
     {
       "town": "Rize",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.2,
+      "days_to_fall_est": 11.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 36,
       "mayor": "kayo58x",
-      "mayor_idle_days": 30.8
+      "mayor_idle_days": 31.0,
+      "active_competitors": 0
     },
     {
       "town": "Edirne",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.9,
+      "days_to_fall_est": 9.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 4,
       "num_town_blocks": 160,
       "mayor": "M3ntal_",
-      "mayor_idle_days": 32.1
+      "mayor_idle_days": 32.3,
+      "active_competitors": 0
     },
     {
       "town": "Bolivar",
@@ -2833,7 +2080,8 @@
       "num_residents": 2,
       "num_town_blocks": 12,
       "mayor": "ischichan",
-      "mayor_idle_days": 4.8
+      "mayor_idle_days": 5.0,
+      "active_competitors": 0
     },
     {
       "town": "The_High_Temple",
@@ -2845,31 +2093,47 @@
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "NPC26",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
+    },
+    {
+      "town": "Dinant",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 900.0,
+      "profit_if_bought": -900.0,
+      "num_residents": 1,
+      "num_town_blocks": 57,
+      "mayor": "UnironicStapler",
+      "mayor_idle_days": 0.1,
+      "active_competitors": 0
     },
     {
       "town": "Sitka",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.2,
+      "days_to_fall_est": 9.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 36,
       "mayor": "FallenDMA",
-      "mayor_idle_days": 32.8
+      "mayor_idle_days": 33.0,
+      "active_competitors": 0
     },
     {
       "town": "Blenheim",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.9,
+      "days_to_fall_est": 5.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "LukaBoran",
-      "mayor_idle_days": 36.1
+      "mayor_idle_days": 36.3,
+      "active_competitors": 0
     },
     {
       "town": "Magos",
@@ -2881,31 +2145,8 @@
       "num_residents": 1,
       "num_town_blocks": 25,
       "mayor": "NPC51",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Kent",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 400.0,
-      "profit_if_bought": -400.0,
-      "num_residents": 14,
-      "num_town_blocks": 96,
-      "mayor": "usetect",
-      "mayor_idle_days": 20.0
-    },
-    {
-      "town": "India",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 0.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 14,
-      "num_town_blocks": 1,
-      "mayor": "ntonta",
-      "mayor_idle_days": 41.9
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Arsonia",
@@ -2917,19 +2158,8 @@
       "num_residents": 1,
       "num_town_blocks": 27,
       "mayor": "NPC79",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Tinko",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 15,
-      "mayor": "NPC49",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "LD",
@@ -2941,79 +2171,73 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC80",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Orda",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.8,
+      "days_to_fall_est": 15.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "eren_yyq",
-      "mayor_idle_days": 26.2
-    },
-    {
-      "town": "Tagula",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 5,
-      "mayor": "NPC69",
-      "mayor_idle_days": null
+      "mayor_idle_days": 26.4,
+      "active_competitors": 0
     },
     {
       "town": "Mugitann",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.9,
+      "days_to_fall_est": 15.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "ArctisGhost",
-      "mayor_idle_days": 26.1
+      "mayor_idle_days": 26.3,
+      "active_competitors": 0
     },
     {
       "town": "Amazon",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.6,
+      "days_to_fall_est": 10.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 1,
       "mayor": "Slotho101",
-      "mayor_idle_days": 31.4
+      "mayor_idle_days": 31.7,
+      "active_competitors": 0
     },
     {
       "town": "North_Polaris",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.7,
+      "days_to_fall_est": 16.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 4,
       "mayor": "AdequatelyExists",
-      "mayor_idle_days": 25.3
+      "mayor_idle_days": 25.5,
+      "active_competitors": 0
     },
     {
       "town": "Elva",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.1,
+      "days_to_fall_est": 13.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "ltpocius",
-      "mayor_idle_days": 27.9
+      "mayor_idle_days": 28.1,
+      "active_competitors": 0
     },
     {
       "town": "Babylon",
@@ -3025,7 +2249,8 @@
       "num_residents": 1,
       "num_town_blocks": 48,
       "mayor": "SadDon",
-      "mayor_idle_days": 5.5
+      "mayor_idle_days": 5.7,
+      "active_competitors": 0
     },
     {
       "town": "Rigport",
@@ -3037,7 +2262,8 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC39",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Tekirfra",
@@ -3049,7 +2275,8 @@
       "num_residents": 1,
       "num_town_blocks": 72,
       "mayor": "ImaBanna",
-      "mayor_idle_days": 0.8
+      "mayor_idle_days": 0.0,
+      "active_competitors": 0
     },
     {
       "town": "SH",
@@ -3061,31 +2288,34 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC97",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Nihon",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.9,
+      "days_to_fall_est": 13.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 11,
       "mayor": "xzlpv",
-      "mayor_idle_days": 28.1
+      "mayor_idle_days": 28.4,
+      "active_competitors": 0
     },
     {
       "town": "Punn",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 12.5,
+      "days_to_fall_est": 12.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "ArtimusStone",
-      "mayor_idle_days": 29.5
+      "mayor_idle_days": 29.8,
+      "active_competitors": 0
     },
     {
       "town": "Singpo",
@@ -3097,43 +2327,21 @@
       "num_residents": 1,
       "num_town_blocks": 13,
       "mayor": "NPC109",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Rhineland",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.2,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 60,
-      "num_town_blocks": 735,
-      "mayor": "GODSBESTWARRIOR",
-      "mayor_idle_days": 27.8
-    },
-    {
-      "town": "Byzantium",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 9.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 90,
-      "mayor": "StefiTheDuck",
-      "mayor_idle_days": 32.5
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Jukei",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.8,
+      "days_to_fall_est": 14.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 27,
       "mayor": "renny7782",
-      "mayor_idle_days": 27.2
+      "mayor_idle_days": 27.4,
+      "active_competitors": 0
     },
     {
       "town": "Skalvik",
@@ -3145,19 +2353,21 @@
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "NPC54",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Torino",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 6.9,
+      "days_to_fall_est": 6.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 23,
       "mayor": "Ecacex21",
-      "mayor_idle_days": 35.1
+      "mayor_idle_days": 35.4,
+      "active_competitors": 0
     },
     {
       "town": "Liku",
@@ -3169,19 +2379,21 @@
       "num_residents": 1,
       "num_town_blocks": 8,
       "mayor": "x178",
-      "mayor_idle_days": 26.5
+      "mayor_idle_days": 26.8,
+      "active_competitors": 0
     },
     {
       "town": "Sixseven",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.1,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "MonoK_K0",
-      "mayor_idle_days": 28.9
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Stockton",
@@ -3193,55 +2405,34 @@
       "num_residents": 1,
       "num_town_blocks": 21,
       "mayor": "Pist_oril",
-      "mayor_idle_days": 16.3
+      "mayor_idle_days": 16.5,
+      "active_competitors": 0
     },
     {
       "town": "Buda",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.8,
+      "days_to_fall_est": 9.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "Red_sw1107",
-      "mayor_idle_days": 32.2
-    },
-    {
-      "town": "Inazuma",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 6.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 112,
-      "mayor": "Nyaruki_",
-      "mayor_idle_days": 35.1
+      "mayor_idle_days": 32.4,
+      "active_competitors": 0
     },
     {
       "town": "Baldurs_Gate",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.9,
+      "days_to_fall_est": 14.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 62,
       "mayor": "Kokorasa",
-      "mayor_idle_days": 27.1
-    },
-    {
-      "town": "Kobe",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 4.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 172,
-      "mayor": "PepeSotro",
-      "mayor_idle_days": 37.9
+      "mayor_idle_days": 27.4,
+      "active_competitors": 0
     },
     {
       "town": "Heze",
@@ -3253,151 +2444,112 @@
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "NPC68",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
+    },
+    {
+      "town": "Sandrift",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 17.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 75,
+      "mayor": "CaptainFishface8",
+      "mayor_idle_days": 25.0,
+      "active_competitors": 0
     },
     {
       "town": "Medina",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.3,
+      "days_to_fall_est": 10.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 11,
       "num_town_blocks": 262,
       "mayor": "Darkrenheit",
-      "mayor_idle_days": 31.7
+      "mayor_idle_days": 31.9,
+      "active_competitors": 0
     },
     {
       "town": "South_Lake_Tahoe",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.3,
+      "days_to_fall_est": 14.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 29,
       "mayor": "jjgcdjyygdj2",
-      "mayor_idle_days": 27.7
+      "mayor_idle_days": 28.0,
+      "active_competitors": 0
     },
     {
       "town": "Nullabor",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.5,
+      "days_to_fall_est": 9.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "Fiaidren",
-      "mayor_idle_days": 32.5
-    },
-    {
-      "town": "Qatar",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 7.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 69,
-      "mayor": "DadduIqFi",
-      "mayor_idle_days": 34.7
-    },
-    {
-      "town": "Konya",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 42000.0,
-      "profit_if_bought": -42000.0,
-      "num_residents": 16,
-      "num_town_blocks": 155,
-      "mayor": "xTheZemZem0",
-      "mayor_idle_days": 0.5
-    },
-    {
-      "town": "Warehouse",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 1,
-      "mayor": "Noob_Noob390",
-      "mayor_idle_days": 27.2
+      "mayor_idle_days": 32.7,
+      "active_competitors": 0
     },
     {
       "town": "Cape_Scott",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.2,
+      "days_to_fall_est": 11.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 4,
       "num_town_blocks": 36,
       "mayor": "RocketPlays13",
-      "mayor_idle_days": 30.8
+      "mayor_idle_days": 31.0,
+      "active_competitors": 0
     },
     {
-      "town": "Pop",
-      "balance": 0.0,
-      "status": "ruined",
-      "days_to_fall_est": null,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 24,
-      "mayor": "NPC64",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Arta",
+      "town": "Nowogrodek",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 14.0,
+      "days_to_fall_est": 16.9,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 176,
-      "mayor": "nickond1",
-      "mayor_idle_days": 28.0
+      "num_residents": 1,
+      "num_town_blocks": 11,
+      "mayor": "Eleanor____",
+      "mayor_idle_days": 25.1,
+      "active_competitors": 0
     },
     {
       "town": "Carbon",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.4,
+      "days_to_fall_est": 8.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 16,
       "mayor": "DrawnFungus7762",
-      "mayor_idle_days": 33.6
-    },
-    {
-      "town": "Iran",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 3300.0,
-      "profit_if_bought": -3300.0,
-      "num_residents": 14,
-      "num_town_blocks": 108,
-      "mayor": "ForeverShadow1",
-      "mayor_idle_days": 21.8
+      "mayor_idle_days": 33.8,
+      "active_competitors": 0
     },
     {
       "town": "Xuanwumen",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.0,
+      "days_to_fall_est": 4.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 26,
       "mayor": "MLS_LBBH",
-      "mayor_idle_days": 37.0
+      "mayor_idle_days": 37.2,
+      "active_competitors": 0
     },
     {
       "town": "Port_Hudson",
@@ -3409,7 +2561,8 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC84",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Freesatia",
@@ -3421,43 +2574,34 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC50",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Coppervile",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 1.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 25,
-      "mayor": "Brass_Architect",
-      "mayor_idle_days": 40.7
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Old_Home",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.4,
+      "days_to_fall_est": 10.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 30,
       "mayor": "SteelCove",
-      "mayor_idle_days": 31.6
+      "mayor_idle_days": 31.8,
+      "active_competitors": 0
     },
     {
       "town": "Liaocheng",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.7,
+      "days_to_fall_est": 15.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 18,
       "mayor": "jamaican_boiiiii",
-      "mayor_idle_days": 26.3
+      "mayor_idle_days": 26.5,
+      "active_competitors": 0
     },
     {
       "town": "Pylion",
@@ -3469,19 +2613,8 @@
       "num_residents": 1,
       "num_town_blocks": 91,
       "mayor": "NPC55",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Arima",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 8.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 112,
-      "mayor": "ktk5",
-      "mayor_idle_days": 33.2
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Goldhaven",
@@ -3493,19 +2626,21 @@
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "NPC60",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Nikaia",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.1,
+      "days_to_fall_est": 14.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 112,
       "mayor": "yoshinoribaba",
-      "mayor_idle_days": 26.9
+      "mayor_idle_days": 27.2,
+      "active_competitors": 0
     },
     {
       "town": "Kerguelen",
@@ -3517,31 +2652,34 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC40",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Thrace",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.1,
+      "days_to_fall_est": 4.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 70,
       "mayor": "VictoryOG",
-      "mayor_idle_days": 36.9
+      "mayor_idle_days": 37.1,
+      "active_competitors": 0
     },
     {
       "town": "Bunbury",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.7,
+      "days_to_fall_est": 5.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "RacingWolf7",
-      "mayor_idle_days": 36.3
+      "mayor_idle_days": 36.5,
+      "active_competitors": 0
     },
     {
       "town": "Dalaman",
@@ -3553,55 +2691,21 @@
       "num_residents": 1,
       "num_town_blocks": 116,
       "mayor": "NPC41",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Petrograd",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.4,
+      "days_to_fall_est": 13.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 113,
       "mayor": "7chibichippy",
-      "mayor_idle_days": 28.6
-    },
-    {
-      "town": "Luttesburg",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 150.0,
-      "profit_if_bought": -150.0,
-      "num_residents": 2,
-      "num_town_blocks": 36,
-      "mayor": "Apollo_kaka",
-      "mayor_idle_days": 0.5
-    },
-    {
-      "town": "Lapan",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 52,
-      "mayor": "Tu_MII",
-      "mayor_idle_days": 27.4
-    },
-    {
-      "town": "The_Highlands",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999999.0,
-      "num_residents": 2,
-      "num_town_blocks": 65,
-      "mayor": "KingDragoon100",
-      "mayor_idle_days": 0.7
+      "mayor_idle_days": 28.9,
+      "active_competitors": 0
     },
     {
       "town": "Arlava",
@@ -3613,7 +2717,8 @@
       "num_residents": 1,
       "num_town_blocks": 37,
       "mayor": "NPC86",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "New_Braunschweig",
@@ -3625,67 +2730,21 @@
       "num_residents": 1,
       "num_town_blocks": 11,
       "mayor": "MountainMan4200",
-      "mayor_idle_days": 38.1
+      "mayor_idle_days": 38.4,
+      "active_competitors": 0
     },
     {
       "town": "Qing",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.1,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 25,
       "mayor": "ItchyPaladin",
-      "mayor_idle_days": 28.9
-    },
-    {
-      "town": "Hoverla",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 16,
-      "mayor": "Zedromyt",
-      "mayor_idle_days": 36.3
-    },
-    {
-      "town": "Norseman",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 0.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 1,
-      "mayor": "GabDaBoi",
-      "mayor_idle_days": 41.3
-    },
-    {
-      "town": "Ozark_Mountain",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 7,
-      "num_town_blocks": 286,
-      "mayor": "SouthMoSiren",
-      "mayor_idle_days": 38.1
-    },
-    {
-      "town": "Laois",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 13.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 238,
-      "mayor": "ImAbbyy",
-      "mayor_idle_days": 28.9
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Kilis",
@@ -3697,43 +2756,34 @@
       "num_residents": 3,
       "num_town_blocks": 136,
       "mayor": "Ravocy_",
-      "mayor_idle_days": 0.6
+      "mayor_idle_days": 0.2,
+      "active_competitors": 0
     },
     {
       "town": "Moravia",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.3,
+      "days_to_fall_est": 15.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 9,
       "mayor": "stepan201200",
-      "mayor_idle_days": 26.7
+      "mayor_idle_days": 26.9,
+      "active_competitors": 0
     },
     {
       "town": "Haibane_Renmei",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.5,
+      "days_to_fall_est": 8.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 116,
       "mayor": "suansuans",
-      "mayor_idle_days": 33.5
-    },
-    {
-      "town": "Kirsehir",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 999999999.0,
-      "profit_if_bought": -999999999.0,
-      "num_residents": 21,
-      "num_town_blocks": 106,
-      "mayor": "TheBillyTR",
-      "mayor_idle_days": 0.0
+      "mayor_idle_days": 33.8,
+      "active_competitors": 0
     },
     {
       "town": "Darkworld",
@@ -3745,19 +2795,21 @@
       "num_residents": 1,
       "num_town_blocks": 3,
       "mayor": "NPC42",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Linyi",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 3.4,
+      "days_to_fall_est": 3.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 6,
       "num_town_blocks": 167,
       "mayor": "Villager377",
-      "mayor_idle_days": 38.6
+      "mayor_idle_days": 38.8,
+      "active_competitors": 0
     },
     {
       "town": "Kalkachi",
@@ -3769,19 +2821,8 @@
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "NPC56",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Samara",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 2.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 48,
-      "mayor": "Cazmo15",
-      "mayor_idle_days": 39.4
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Ruse",
@@ -3793,19 +2834,8 @@
       "num_residents": 1,
       "num_town_blocks": 49,
       "mayor": "Sigeon_Pex_Bizmo",
-      "mayor_idle_days": 1.7
-    },
-    {
-      "town": "Izumo",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 14.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 112,
-      "mayor": "Matsu0408",
-      "mayor_idle_days": 27.9
+      "mayor_idle_days": 1.9,
+      "active_competitors": 0
     },
     {
       "town": "Raleigh",
@@ -3817,7 +2847,8 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC57",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "CharlesTownWV",
@@ -3829,43 +2860,21 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC52",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Shandong",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.1,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 10,
       "mayor": "lordadr1an",
-      "mayor_idle_days": 28.9
-    },
-    {
-      "town": "Washington",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 1250.0,
-      "profit_if_bought": -1250.0,
-      "num_residents": 12,
-      "num_town_blocks": 88,
-      "mayor": "minecraftgame22",
-      "mayor_idle_days": 0.2
-    },
-    {
-      "town": "Truso",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 34900.0,
-      "profit_if_bought": -34900.0,
-      "num_residents": 21,
-      "num_town_blocks": 254,
-      "mayor": "Tomekirys",
-      "mayor_idle_days": 0.7
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Polar_Port",
@@ -3877,7 +2886,8 @@
       "num_residents": 1,
       "num_town_blocks": 16,
       "mayor": "NPC74",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Khalkidi",
@@ -3889,7 +2899,8 @@
       "num_residents": 1,
       "num_town_blocks": 43,
       "mayor": "NPC45",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Rootown",
@@ -3901,19 +2912,8 @@
       "num_residents": 1,
       "num_town_blocks": 4,
       "mayor": "NPC53",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Yuragi",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 4,
-      "num_town_blocks": 121,
-      "mayor": "JiangHuan666",
-      "mayor_idle_days": 30.7
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Gural",
@@ -3925,19 +2925,21 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC106",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Odemira",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.0,
+      "days_to_fall_est": 14.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 126,
       "mayor": "DNunilious",
-      "mayor_idle_days": 27.0
+      "mayor_idle_days": 27.2,
+      "active_competitors": 0
     },
     {
       "town": "Palm_Springs",
@@ -3949,43 +2951,21 @@
       "num_residents": 1,
       "num_town_blocks": 34,
       "mayor": "NPC46",
-      "mayor_idle_days": null
-    },
-    {
-      "town": "Turkish_Cartel",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 10.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 13,
-      "num_town_blocks": 227,
-      "mayor": "Muhoero",
-      "mayor_idle_days": 31.1
-    },
-    {
-      "town": "RSK",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 188,
-      "mayor": "Zikastotepipa",
-      "mayor_idle_days": 38.9
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "OneHaven",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 11.3,
+      "days_to_fall_est": 11.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 19,
       "mayor": "Remiculus",
-      "mayor_idle_days": 30.7
+      "mayor_idle_days": 30.9,
+      "active_competitors": 0
     },
     {
       "town": "Kursk",
@@ -3997,19 +2977,21 @@
       "num_residents": 1,
       "num_town_blocks": 19,
       "mayor": "0_Drakon_0",
-      "mayor_idle_days": 3.9
+      "mayor_idle_days": 4.2,
+      "active_competitors": 0
     },
     {
       "town": "Ogdensburg",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 2.3,
+      "days_to_fall_est": 2.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 44,
       "mayor": "Ratringer_LSM",
-      "mayor_idle_days": 39.7
+      "mayor_idle_days": 39.9,
+      "active_competitors": 0
     },
     {
       "town": "Plains",
@@ -4021,67 +3003,60 @@
       "num_residents": 3,
       "num_town_blocks": 13,
       "mayor": "Mopugose",
-      "mayor_idle_days": 0.2
-    },
-    {
-      "town": "Sejong",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 0.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 40,
-      "mayor": "SanguineKariudo",
-      "mayor_idle_days": 41.5
+      "mayor_idle_days": 0.4,
+      "active_competitors": 0
     },
     {
       "town": "Quartz_Bay",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.2,
+      "days_to_fall_est": 15.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 23,
       "mayor": "sissier",
-      "mayor_idle_days": 25.8
+      "mayor_idle_days": 26.1,
+      "active_competitors": 0
     },
     {
       "town": "Tiananmen_Tank",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 5.0,
+      "days_to_fall_est": 4.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 88,
       "mayor": "NaN4hBr0",
-      "mayor_idle_days": 37.0
+      "mayor_idle_days": 37.2,
+      "active_competitors": 0
     },
     {
       "town": "Lebanon",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.1,
+      "days_to_fall_est": 14.8,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 16,
       "mayor": "ermez",
-      "mayor_idle_days": 26.9
+      "mayor_idle_days": 27.2,
+      "active_competitors": 0
     },
     {
       "town": "Kind_World",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.9,
+      "days_to_fall_est": 16.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 3,
       "mayor": "IsaacTheMech",
-      "mayor_idle_days": 25.1
+      "mayor_idle_days": 25.4,
+      "active_competitors": 0
     },
     {
       "town": "Rougeist",
@@ -4093,7 +3068,8 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "Mafia_lord_",
-      "mayor_idle_days": 18.7
+      "mayor_idle_days": 19.0,
+      "active_competitors": 0
     },
     {
       "town": "New_Miami",
@@ -4105,19 +3081,21 @@
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "NPC58",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Getz",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 15.2,
+      "days_to_fall_est": 15.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 5,
       "mayor": "ZyvexJynx",
-      "mayor_idle_days": 26.8
+      "mayor_idle_days": 27.0,
+      "active_competitors": 0
     },
     {
       "town": "Iconium",
@@ -4129,103 +3107,60 @@
       "num_residents": 1,
       "num_town_blocks": 112,
       "mayor": "Estal1nak",
-      "mayor_idle_days": 0.1
-    },
-    {
-      "town": "Sapporo",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 5.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 16,
-      "num_town_blocks": 271,
-      "mayor": "sbakita",
-      "mayor_idle_days": 36.4
-    },
-    {
-      "town": "Cherry_Drop",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 120.0,
-      "profit_if_bought": -120.0,
-      "num_residents": 2,
-      "num_town_blocks": 24,
-      "mayor": "LuckyClover1266",
-      "mayor_idle_days": 0.5
+      "mayor_idle_days": 0.0,
+      "active_competitors": 0
     },
     {
       "town": "El_Paso",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.6,
+      "days_to_fall_est": 9.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 42,
       "mayor": "edjukatid",
-      "mayor_idle_days": 32.4
+      "mayor_idle_days": 32.7,
+      "active_competitors": 0
     },
     {
       "town": "Asuncion",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 7.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 1,
+      "num_town_blocks": 2,
+      "mayor": "IamTheOneSnake",
+      "mayor_idle_days": 35.0,
+      "active_competitors": 0
+    },
+    {
+      "town": "Plano",
       "balance": 0.0,
       "status": "falls_soon",
       "days_to_fall_est": 7.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
-      "num_town_blocks": 2,
-      "mayor": "IamTheOneSnake",
-      "mayor_idle_days": 34.7
-    },
-    {
-      "town": "Plano",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 7.5,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 1,
       "num_town_blocks": 7,
       "mayor": "ICECLOUDCAT",
-      "mayor_idle_days": 34.5
+      "mayor_idle_days": 34.7,
+      "active_competitors": 0
     },
     {
       "town": "Neokorinthia",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.9,
+      "days_to_fall_est": 7.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 6,
       "num_town_blocks": 137,
       "mayor": "Staskata_",
-      "mayor_idle_days": 34.1
-    },
-    {
-      "town": "Dubai",
-      "balance": 0.0,
-      "status": "for_sale",
-      "days_to_fall_est": null,
-      "for_sale_price": 2000.0,
-      "profit_if_bought": -2000.0,
-      "num_residents": 9,
-      "num_town_blocks": 16,
-      "mayor": "xoolin",
-      "mayor_idle_days": 0.8
-    },
-    {
-      "town": "Victoria_Falls",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 11.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 52,
-      "mayor": "Periano",
-      "mayor_idle_days": 30.3
+      "mayor_idle_days": 34.3,
+      "active_competitors": 0
     },
     {
       "town": "Tokio",
@@ -4237,31 +3172,34 @@
       "num_residents": 1,
       "num_town_blocks": 2,
       "mayor": "NPC47",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "YJSP",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 13.1,
+      "days_to_fall_est": 12.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 40,
       "mayor": "Anguskatt",
-      "mayor_idle_days": 28.9
+      "mayor_idle_days": 29.1,
+      "active_competitors": 0
     },
     {
       "town": "Seychelles",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 10.2,
+      "days_to_fall_est": 10.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 22,
       "mayor": "tyjlopi",
-      "mayor_idle_days": 31.8
+      "mayor_idle_days": 32.0,
+      "active_competitors": 0
     },
     {
       "town": "PvPShop",
@@ -4273,19 +3211,21 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC70",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Tetoville",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.2,
+      "days_to_fall_est": 15.9,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "Catsane_Teto",
-      "mayor_idle_days": 25.8
+      "mayor_idle_days": 26.1,
+      "active_competitors": 0
     },
     {
       "town": "Diamondville",
@@ -4297,7 +3237,8 @@
       "num_residents": 4,
       "num_town_blocks": 6,
       "mayor": "thatidiot1337",
-      "mayor_idle_days": 29.1
+      "mayor_idle_days": 29.3,
+      "active_competitors": 0
     },
     {
       "town": "HeYuan",
@@ -4309,43 +3250,34 @@
       "num_residents": 1,
       "num_town_blocks": 96,
       "mayor": "C_A_Xi",
-      "mayor_idle_days": 0.0
+      "mayor_idle_days": 0.3,
+      "active_competitors": 0
     },
     {
       "town": "Matrega",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 9.7,
+      "days_to_fall_est": 9.4,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 32,
       "mayor": "Zhander808",
-      "mayor_idle_days": 32.3
+      "mayor_idle_days": 32.6,
+      "active_competitors": 0
     },
     {
       "town": "Plaza",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 16.5,
+      "days_to_fall_est": 16.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 12,
       "mayor": "fruakn",
-      "mayor_idle_days": 25.5
-    },
-    {
-      "town": "Fort_Smith",
-      "balance": 0.0,
-      "status": "falls_soon",
-      "days_to_fall_est": 3.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 49,
-      "mayor": "Rook_Kast",
-      "mayor_idle_days": 38.1
+      "mayor_idle_days": 25.7,
+      "active_competitors": 0
     },
     {
       "town": "Bob",
@@ -4357,19 +3289,21 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC73",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Zakopane",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 8.4,
+      "days_to_fall_est": 8.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 45,
       "mayor": "TOMLEOBLOCKS",
-      "mayor_idle_days": 33.6
+      "mayor_idle_days": 33.9,
+      "active_competitors": 0
     },
     {
       "town": "Boone_Lake",
@@ -4381,7 +3315,8 @@
       "num_residents": 1,
       "num_town_blocks": 1,
       "mayor": "NPC108",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Long_Point",
@@ -4393,7 +3328,8 @@
       "num_residents": 1,
       "num_town_blocks": 6,
       "mayor": "NPC48",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Kingsfield",
@@ -4405,295 +3341,1841 @@
       "num_residents": 1,
       "num_town_blocks": 52,
       "mayor": "NPC66",
-      "mayor_idle_days": null
+      "mayor_idle_days": null,
+      "active_competitors": 0
     },
     {
       "town": "Dar_Es_Salaam",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 7.3,
+      "days_to_fall_est": 7.1,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 9,
       "mayor": "optimalbee",
-      "mayor_idle_days": 34.7
+      "mayor_idle_days": 34.9,
+      "active_competitors": 0
     },
     {
       "town": "Winterfell",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.3,
+      "days_to_fall_est": 1.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 11,
       "mayor": "Dodogamerbtw",
-      "mayor_idle_days": 40.7
+      "mayor_idle_days": 41.0,
+      "active_competitors": 0
+    },
+    {
+      "town": "Neo_Osaka",
+      "balance": 1268.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 24,
+      "mayor": "rect6",
+      "mayor_idle_days": 33.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Frostgate",
+      "balance": 754.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 12.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 65,
+      "mayor": "Giosu7896",
+      "mayor_idle_days": 29.1,
+      "active_competitors": 1
+    },
+    {
+      "town": "Shepherdsville",
+      "balance": 445.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 45,
+      "mayor": "carterzane",
+      "mayor_idle_days": 27.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Marineford",
+      "balance": 414.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 71,
+      "mayor": "ODXIII",
+      "mayor_idle_days": 30.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Nagae",
+      "balance": 221.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 15,
+      "mayor": "1_esk",
+      "mayor_idle_days": 33.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "Holguin",
+      "balance": 206.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 1.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 6,
+      "mayor": "FPT_Jbaby",
+      "mayor_idle_days": 41.0,
+      "active_competitors": 1
+    },
+    {
+      "town": "Mar_Del_Plata",
+      "balance": 203.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 85,
+      "mayor": "Lamarcka",
+      "mayor_idle_days": 28.1,
+      "active_competitors": 1
+    },
+    {
+      "town": "Sumba",
+      "balance": 176.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 4.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 16,
+      "mayor": "Shorty4Twenty",
+      "mayor_idle_days": 37.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Thalberg",
+      "balance": 99.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 3,
+      "mayor": "NPC90",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Punic_Lebanon",
+      "balance": 87.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 6.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 22,
+      "mayor": "kingfloppyseal",
+      "mayor_idle_days": 35.9,
+      "active_competitors": 1
+    },
+    {
+      "town": "Lucerne",
+      "balance": 72.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 10.4,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 124,
+      "mayor": "Raabukz",
+      "mayor_idle_days": 31.6,
+      "active_competitors": 1
+    },
+    {
+      "town": "Jaen",
+      "balance": 61.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 15.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 96,
+      "mayor": "_Derroy_",
+      "mayor_idle_days": 26.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Gabagooland",
+      "balance": 37.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 89,
+      "mayor": "MonRbt111",
+      "mayor_idle_days": 30.8,
+      "active_competitors": 1
+    },
+    {
+      "town": "Charleston",
+      "balance": 31.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 0.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 130,
+      "mayor": "_RonaldReagan_",
+      "mayor_idle_days": 41.1,
+      "active_competitors": 1
+    },
+    {
+      "town": "Ubud",
+      "balance": 26.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 7.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 115,
+      "mayor": "Kuskoo",
+      "mayor_idle_days": 34.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "New_Kharkiv",
+      "balance": 16.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999983.0,
+      "num_residents": 2,
+      "num_town_blocks": 37,
+      "mayor": "maxandarin",
+      "mayor_idle_days": 4.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Middelburg",
+      "balance": 12.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 125,
+      "mayor": "ThePantsWizard",
+      "mayor_idle_days": 30.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Kagoshima",
+      "balance": 11.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 12,
+      "mayor": "WhoWannaTheBin",
+      "mayor_idle_days": 32.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Mini_Fairy_World",
+      "balance": 9.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 20,
+      "mayor": "EliasAH06",
+      "mayor_idle_days": 34.0,
+      "active_competitors": 1
+    },
+    {
+      "town": "Thanks_Nostra",
+      "balance": 9.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999990.0,
+      "num_residents": 3,
+      "num_town_blocks": 84,
+      "mayor": "notchickenlover",
+      "mayor_idle_days": 1.0,
+      "active_competitors": 1
+    },
+    {
+      "town": "JeongSeon",
+      "balance": 8.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 6,
+      "mayor": "LeeByeolha",
+      "mayor_idle_days": 30.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "Fort_Worth",
+      "balance": 7.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.4,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 15,
+      "mayor": "Vasily_1",
+      "mayor_idle_days": 32.6,
+      "active_competitors": 1
+    },
+    {
+      "town": "Thermopylae",
+      "balance": 6.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 86,
+      "mayor": "_Tangent",
+      "mayor_idle_days": 36.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Dragon_City",
+      "balance": 6.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 6.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 25,
+      "mayor": "Ali17121974",
+      "mayor_idle_days": 35.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "Vespera",
+      "balance": 4.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 62,
+      "mayor": "frogsELF",
+      "mayor_idle_days": 28.8,
+      "active_competitors": 1
+    },
+    {
+      "town": "Feiqian",
+      "balance": 2.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 36,
+      "mayor": "chujianyue_",
+      "mayor_idle_days": 36.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Oran",
+      "balance": 2.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 15.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 97,
+      "mayor": "F0UR_",
+      "mayor_idle_days": 26.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "Acolyte_Empire",
+      "balance": 2.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 10.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 5,
+      "mayor": "PotatoMan2025",
+      "mayor_idle_days": 31.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "NA_STORMTROOPERS",
+      "balance": 2.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 16,
+      "mayor": "ItsNotDifficult",
+      "mayor_idle_days": 32.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Monta_Fortikajo",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 34,
+      "mayor": "NPC95",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Odessa",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 24,
+      "mayor": "MrBobCat_21",
+      "mayor_idle_days": 33.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Aetyrr",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 4.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 5,
+      "mayor": "EndlessCatz",
+      "mayor_idle_days": 37.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Neo_Jersey",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 2200.0,
+      "profit_if_bought": -2200.0,
+      "num_residents": 25,
+      "num_town_blocks": 265,
+      "mayor": "unitypilon_",
+      "mayor_idle_days": 1.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Wheatlandia",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 14,
+      "mayor": "2013Matti",
+      "mayor_idle_days": 32.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Daveland",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 15.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 2,
+      "mayor": "blazerods45",
+      "mayor_idle_days": 26.8,
+      "active_competitors": 1
+    },
+    {
+      "town": "Jinzhou",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999999.0,
+      "num_residents": 4,
+      "num_town_blocks": 6,
+      "mayor": "realmiryue1",
+      "mayor_idle_days": 6.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Amethyst",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 12,
+      "mayor": "NPC62",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Tzoumerka",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 1.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 47,
+      "mayor": "Astro051",
+      "mayor_idle_days": 40.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Sharjah",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 72,
+      "mayor": "KnewME",
+      "mayor_idle_days": 32.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Galia",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 10000.0,
+      "profit_if_bought": -10000.0,
+      "num_residents": 2,
+      "num_town_blocks": 66,
+      "mayor": "QuickMash",
+      "mayor_idle_days": 24.7,
+      "active_competitors": 1
+    },
+    {
+      "town": "Tinko",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 15,
+      "mayor": "NPC49",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Tagula",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 5,
+      "mayor": "NPC69",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Byzantium",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 9.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 90,
+      "mayor": "StefiTheDuck",
+      "mayor_idle_days": 32.8,
+      "active_competitors": 1
+    },
+    {
+      "town": "Inazuma",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 6.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 112,
+      "mayor": "Nyaruki_",
+      "mayor_idle_days": 35.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Qatar",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 7.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 69,
+      "mayor": "DadduIqFi",
+      "mayor_idle_days": 34.9,
+      "active_competitors": 1
+    },
+    {
+      "town": "Warehouse",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 1,
+      "mayor": "Noob_Noob390",
+      "mayor_idle_days": 27.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Pop",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 24,
+      "mayor": "NPC64",
+      "mayor_idle_days": null,
+      "active_competitors": 1
+    },
+    {
+      "town": "Arta",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 176,
+      "mayor": "nickond1",
+      "mayor_idle_days": 28.3,
+      "active_competitors": 1
+    },
+    {
+      "town": "Coppervile",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 1.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 25,
+      "mayor": "Brass_Architect",
+      "mayor_idle_days": 41.0,
+      "active_competitors": 1
+    },
+    {
+      "town": "Arima",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 112,
+      "mayor": "ktk5",
+      "mayor_idle_days": 33.4,
+      "active_competitors": 1
+    },
+    {
+      "town": "Luttesburg",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 150.0,
+      "profit_if_bought": -150.0,
+      "num_residents": 2,
+      "num_town_blocks": 36,
+      "mayor": "Apollo_kaka",
+      "mayor_idle_days": 0.7,
+      "active_competitors": 1
+    },
+    {
+      "town": "Lapan",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.3,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 52,
+      "mayor": "Tu_MII",
+      "mayor_idle_days": 27.7,
+      "active_competitors": 1
+    },
+    {
+      "town": "The_Highlands",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999999.0,
+      "num_residents": 2,
+      "num_town_blocks": 65,
+      "mayor": "KingDragoon100",
+      "mayor_idle_days": 0.9,
+      "active_competitors": 1
+    },
+    {
+      "town": "Hoverla",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 16,
+      "mayor": "Zedromyt",
+      "mayor_idle_days": 36.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Norseman",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 0.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 1,
+      "mayor": "GabDaBoi",
+      "mayor_idle_days": 41.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Laois",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 12.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 238,
+      "mayor": "ImAbbyy",
+      "mayor_idle_days": 29.1,
+      "active_competitors": 1
+    },
+    {
+      "town": "Sejong",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 0.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 40,
+      "mayor": "SanguineKariudo",
+      "mayor_idle_days": 41.8,
+      "active_competitors": 1
+    },
+    {
+      "town": "Cherry_Drop",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 120.0,
+      "profit_if_bought": -120.0,
+      "num_residents": 2,
+      "num_town_blocks": 24,
+      "mayor": "LuckyClover1266",
+      "mayor_idle_days": 0.7,
+      "active_competitors": 1
+    },
+    {
+      "town": "Victoria_Falls",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 52,
+      "mayor": "Periano",
+      "mayor_idle_days": 30.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Fort_Smith",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 3.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 49,
+      "mayor": "Rook_Kast",
+      "mayor_idle_days": 38.4,
+      "active_competitors": 1
     },
     {
       "town": "Gyula",
       "balance": 0.0,
       "status": "falls_soon",
-      "days_to_fall_est": 1.5,
+      "days_to_fall_est": 1.3,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 9,
       "mayor": "adam091209",
-      "mayor_idle_days": 40.5
+      "mayor_idle_days": 40.7,
+      "active_competitors": 1
     },
     {
-      "town": "Atlantica",
-      "balance": 0.0,
+      "town": "Luoyang",
+      "balance": 1882.0,
       "status": "falls_soon",
-      "days_to_fall_est": 0.1,
+      "days_to_fall_est": 13.5,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 25,
-      "mayor": "Untitled_Users",
-      "mayor_idle_days": 41.9
+      "num_residents": 19,
+      "num_town_blocks": 784,
+      "mayor": "Pinan233",
+      "mayor_idle_days": 28.5,
+      "active_competitors": 2
     },
     {
-      "town": "Vlore",
-      "balance": 659.0,
-      "status": "likely_premium",
-      "days_to_fall_est": -47.0,
+      "town": "Larissa",
+      "balance": 69.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 185,
+      "mayor": "Darko_5",
+      "mayor_idle_days": 27.9,
+      "active_competitors": 2
+    },
+    {
+      "town": "Jojoland",
+      "balance": 17.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
+      "num_town_blocks": 117,
+      "mayor": "Tumoshikato_sama",
+      "mayor_idle_days": 28.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Oklahoma_City",
+      "balance": 11.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 56,
+      "mayor": "SoulSpy",
+      "mayor_idle_days": 29.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Bratislava",
+      "balance": 6.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 12.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 12,
+      "num_town_blocks": 144,
+      "mayor": "Libor2",
+      "mayor_idle_days": 29.3,
+      "active_competitors": 2
+    },
+    {
+      "town": "Coquitlam",
+      "balance": 4.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999995.0,
+      "num_residents": 7,
+      "num_town_blocks": 46,
+      "mayor": "Bishop_coquitlam",
+      "mayor_idle_days": 0.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Jiyuan",
+      "balance": 1.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 1.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 71,
+      "mayor": "Alya4",
+      "mayor_idle_days": 40.9,
+      "active_competitors": 2
+    },
+    {
+      "town": "ChickenBurg",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 200.0,
+      "profit_if_bought": -200.0,
+      "num_residents": 3,
+      "num_town_blocks": 24,
+      "mayor": "BlackHole_cpvp",
+      "mayor_idle_days": 10.1,
+      "active_competitors": 2
+    },
+    {
+      "town": "Eire",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 17.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 111,
+      "mayor": "Wither255",
+      "mayor_idle_days": 25.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Tver",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 1300.0,
+      "profit_if_bought": -1300.0,
+      "num_residents": 3,
+      "num_town_blocks": 86,
+      "mayor": "Shark3333",
+      "mayor_idle_days": 15.3,
+      "active_competitors": 2
+    },
+    {
+      "town": "Beijing",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 10.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 10,
+      "num_town_blocks": 5,
+      "mayor": "CursedOwl168366",
+      "mayor_idle_days": 31.9,
+      "active_competitors": 2
+    },
+    {
+      "town": "Terra_United",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 20000000.0,
+      "profit_if_bought": -20000000.0,
+      "num_residents": 5,
+      "num_town_blocks": 100,
+      "mayor": "swampjedi",
+      "mayor_idle_days": 0.9,
+      "active_competitors": 2
+    },
+    {
+      "town": "Snowdin",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 20,
+      "mayor": "earwigi",
+      "mayor_idle_days": 29.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Macedon",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 7.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 323,
+      "mayor": "Tavitsu",
+      "mayor_idle_days": 34.2,
+      "active_competitors": 2
+    },
+    {
+      "town": "Belle_River",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 16.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 30,
+      "mayor": "CTM0029",
+      "mayor_idle_days": 25.2,
+      "active_competitors": 2
+    },
+    {
+      "town": "Kovel",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 11,
+      "mayor": "Ka1t0_WW",
+      "mayor_idle_days": 36.1,
+      "active_competitors": 2
+    },
+    {
+      "town": "Wei",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999999.0,
+      "num_residents": 4,
+      "num_town_blocks": 13,
+      "mayor": "BsidesThat",
+      "mayor_idle_days": 11.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Kobe",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 3.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 172,
+      "mayor": "PepeSotro",
+      "mayor_idle_days": 38.2,
+      "active_competitors": 2
+    },
+    {
+      "town": "Ozark_Mountain",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 3.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 286,
+      "mayor": "SouthMoSiren",
+      "mayor_idle_days": 38.4,
+      "active_competitors": 2
+    },
+    {
+      "town": "Samara",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 2.3,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 48,
+      "mayor": "Cazmo15",
+      "mayor_idle_days": 39.7,
+      "active_competitors": 2
+    },
+    {
+      "town": "Sapporo",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.4,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 16,
+      "num_town_blocks": 271,
+      "mayor": "sbakita",
+      "mayor_idle_days": 36.6,
+      "active_competitors": 2
+    },
+    {
+      "town": "Dubai",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 2000.0,
+      "profit_if_bought": -2000.0,
+      "num_residents": 9,
+      "num_town_blocks": 16,
+      "mayor": "xoolin",
+      "mayor_idle_days": 1.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Houten",
+      "balance": 412.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 2.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 100,
+      "mayor": "miki8315",
+      "mayor_idle_days": 39.4,
+      "active_competitors": 3
+    },
+    {
+      "town": "Pend_Oreille",
+      "balance": 9.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 8.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 80,
+      "mayor": "HRN_comics",
+      "mayor_idle_days": 33.9,
+      "active_competitors": 3
+    },
+    {
+      "town": "Burgas",
+      "balance": 5.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 7.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 179,
+      "mayor": "ilypepsi2711",
+      "mayor_idle_days": 34.1,
+      "active_competitors": 3
+    },
+    {
+      "town": "Cagliari",
+      "balance": 5.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 30000.0,
+      "profit_if_bought": -29995.0,
+      "num_residents": 11,
+      "num_town_blocks": 171,
+      "mayor": "wirecharger1",
+      "mayor_idle_days": 0.0,
+      "active_competitors": 3
+    },
+    {
+      "town": "Shibetsu",
+      "balance": 2.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 241,
+      "mayor": "Charinette",
+      "mayor_idle_days": 31.0,
+      "active_competitors": 3
+    },
+    {
+      "town": "Gyros",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 6.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 69,
+      "mayor": "kondziuspl",
+      "mayor_idle_days": 35.2,
+      "active_competitors": 3
+    },
+    {
+      "town": "Kent",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 400.0,
+      "profit_if_bought": -400.0,
+      "num_residents": 14,
+      "num_town_blocks": 96,
+      "mayor": "usetect",
+      "mayor_idle_days": 20.2,
+      "active_competitors": 3
+    },
+    {
+      "town": "Yuragi",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 11.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 121,
+      "mayor": "JiangHuan666",
+      "mayor_idle_days": 31.0,
+      "active_competitors": 3
+    },
+    {
+      "town": "Turkish_Cartel",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 10.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 13,
+      "num_town_blocks": 227,
+      "mayor": "Muhoero",
+      "mayor_idle_days": 31.4,
+      "active_competitors": 3
+    },
+    {
+      "town": "Normalsville",
+      "balance": 244.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 4.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 112,
+      "mayor": "MagicVI",
+      "mayor_idle_days": 37.1,
+      "active_competitors": 4
+    },
+    {
+      "town": "Peking",
+      "balance": 175.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 16.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 18,
+      "num_town_blocks": 286,
+      "mayor": "HoshinoChiba",
+      "mayor_idle_days": 25.4,
+      "active_competitors": 4
+    },
+    {
+      "town": "Italia",
+      "balance": 12.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 5.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 101,
+      "mayor": "Abexzl",
+      "mayor_idle_days": 36.8,
+      "active_competitors": 4
+    },
+    {
+      "town": "Merich",
+      "balance": 4.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 17.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 23,
+      "num_town_blocks": 518,
+      "mayor": "HlVE",
+      "mayor_idle_days": 25.0,
+      "active_competitors": 4
+    },
+    {
+      "town": "Ostersund",
+      "balance": 0.0,
+      "status": "ruined",
+      "days_to_fall_est": null,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 16,
+      "mayor": "NPC107",
+      "mayor_idle_days": null,
+      "active_competitors": 4
+    },
+    {
+      "town": "Belgium",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 15.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 111,
+      "mayor": "CuteButEvil",
+      "mayor_idle_days": 26.9,
+      "active_competitors": 4
+    },
+    {
+      "town": "RSK",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 2.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 188,
+      "mayor": "Zikastotepipa",
+      "mayor_idle_days": 39.2,
+      "active_competitors": 4
+    },
+    {
+      "town": "Sakar",
+      "balance": 491.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 10.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 14,
+      "num_town_blocks": 161,
+      "mayor": "Badoef",
+      "mayor_idle_days": 31.2,
+      "active_competitors": 5
+    },
+    {
+      "town": "Stuttgart",
+      "balance": 303.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 16.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 15,
+      "mayor": "ArdaLo_",
+      "mayor_idle_days": 25.2,
+      "active_competitors": 5
+    },
+    {
+      "town": "Antalya",
+      "balance": 13.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 10,
+      "num_town_blocks": 208,
+      "mayor": "daannever266",
+      "mayor_idle_days": 29.0,
+      "active_competitors": 5
+    },
+    {
+      "town": "Tampa",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 13.3,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 95,
+      "mayor": "jessiesgirl",
+      "mayor_idle_days": 28.7,
+      "active_competitors": 5
+    },
+    {
+      "town": "Iran",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 3300.0,
+      "profit_if_bought": -3300.0,
+      "num_residents": 14,
+      "num_town_blocks": 108,
+      "mayor": "ForeverShadow1",
+      "mayor_idle_days": 22.0,
+      "active_competitors": 5
+    },
+    {
+      "town": "Washington",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 1250.0,
+      "profit_if_bought": -1250.0,
+      "num_residents": 12,
+      "num_town_blocks": 88,
+      "mayor": "minecraftgame22",
+      "mayor_idle_days": 0.2,
+      "active_competitors": 5
+    },
+    {
+      "town": "Fethiye",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 3.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 14,
+      "num_town_blocks": 211,
+      "mayor": "28st",
+      "mayor_idle_days": 38.3,
+      "active_competitors": 5
+    },
+    {
+      "town": "Hunan",
+      "balance": 67.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 6.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 9,
+      "num_town_blocks": 243,
+      "mayor": "biliwind",
+      "mayor_idle_days": 35.4,
+      "active_competitors": 6
+    },
+    {
+      "town": "Midio",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 300.0,
+      "profit_if_bought": -300.0,
+      "num_residents": 11,
+      "num_town_blocks": 32,
+      "mayor": "LuisDavid_2012",
+      "mayor_idle_days": 0.0,
+      "active_competitors": 6
+    },
+    {
+      "town": "BestDipi",
+      "balance": 25.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 16.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 47,
+      "num_town_blocks": 30,
+      "mayor": "Mrdipi",
+      "mayor_idle_days": 25.1,
+      "active_competitors": 7
+    },
+    {
+      "town": "Yummy",
+      "balance": 1.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 4.7,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 14,
       "num_town_blocks": 120,
-      "mayor": "LavishNick",
-      "mayor_idle_days": 89.0
+      "mayor": "pizeieiei_",
+      "mayor_idle_days": 37.3,
+      "active_competitors": 8
+    },
+    {
+      "town": "Konya",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 42000.0,
+      "profit_if_bought": -42000.0,
+      "num_residents": 16,
+      "num_town_blocks": 155,
+      "mayor": "xTheZemZem0",
+      "mayor_idle_days": 0.0,
+      "active_competitors": 8
+    },
+    {
+      "town": "Kirsehir",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 999999999.0,
+      "profit_if_bought": -999999999.0,
+      "num_residents": 21,
+      "num_town_blocks": 112,
+      "mayor": "TheBillyTR",
+      "mayor_idle_days": 0.1,
+      "active_competitors": 8
+    },
+    {
+      "town": "Rhineland",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 14.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 59,
+      "num_town_blocks": 735,
+      "mayor": "GODSBESTWARRIOR",
+      "mayor_idle_days": 28.0,
+      "active_competitors": 9
+    },
+    {
+      "town": "Marmara",
+      "balance": 0.0,
+      "status": "falls_soon",
+      "days_to_fall_est": 17.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 13,
+      "num_town_blocks": 256,
+      "mayor": "HeijanMuti",
+      "mayor_idle_days": 25.0,
+      "active_competitors": 9
+    },
+    {
+      "town": "Gold",
+      "balance": 14068.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 1000000.0,
+      "profit_if_bought": -985932.0,
+      "num_residents": 38,
+      "num_town_blocks": 334,
+      "mayor": "Gautomy",
+      "mayor_idle_days": 0.2,
+      "active_competitors": 10
+    },
+    {
+      "town": "Truso",
+      "balance": 0.0,
+      "status": "for_sale",
+      "days_to_fall_est": null,
+      "for_sale_price": 34900.0,
+      "profit_if_bought": -34900.0,
+      "num_residents": 21,
+      "num_town_blocks": 254,
+      "mayor": "Tomekirys",
+      "mayor_idle_days": 0.9,
+      "active_competitors": 16
     },
     {
       "town": "Monkey_Bay",
       "balance": 140.0,
       "status": "likely_premium",
-      "days_to_fall_est": -49.2,
+      "days_to_fall_est": -49.5,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 20,
       "mayor": "zohranmamdani67",
-      "mayor_idle_days": 91.2
+      "mayor_idle_days": 91.5,
+      "active_competitors": 0
     },
     {
       "town": "Cozumel",
       "balance": 116.0,
       "status": "likely_premium",
-      "days_to_fall_est": -30.4,
+      "days_to_fall_est": -30.7,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 17,
       "mayor": "HansTheBoss08",
-      "mayor_idle_days": 72.4
-    },
-    {
-      "town": "SanAgustinLaredo",
-      "balance": 55.0,
-      "status": "overdue",
-      "days_to_fall_est": -12.6,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 14,
-      "mayor": "CruxTenebrae",
-      "mayor_idle_days": 54.6
+      "mayor_idle_days": 72.7,
+      "active_competitors": 0
     },
     {
       "town": "Jounieh",
       "balance": 47.0,
       "status": "likely_premium",
-      "days_to_fall_est": -47.8,
+      "days_to_fall_est": -48.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 4,
       "num_town_blocks": 128,
       "mayor": "albasbous",
-      "mayor_idle_days": 89.8
-    },
-    {
-      "town": "Xalisco",
-      "balance": 20.0,
-      "status": "overdue",
-      "days_to_fall_est": -10.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 30,
-      "mayor": "cchileserrano",
-      "mayor_idle_days": 52.3
-    },
-    {
-      "town": "Bazaar",
-      "balance": 7.0,
-      "status": "overdue",
-      "days_to_fall_est": -3.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 121,
-      "mayor": "unown006",
-      "mayor_idle_days": 45.3
-    },
-    {
-      "town": "West_Virginia",
-      "balance": 7.0,
-      "status": "overdue",
-      "days_to_fall_est": -4.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 7,
-      "num_town_blocks": 61,
-      "mayor": "KingOddCod",
-      "mayor_idle_days": 46.9
-    },
-    {
-      "town": "Boulder",
-      "balance": 5.0,
-      "status": "likely_premium",
-      "days_to_fall_est": -58.3,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 140,
-      "mayor": "Metarally",
-      "mayor_idle_days": 100.3
-    },
-    {
-      "town": "Gaza",
-      "balance": 4.0,
-      "status": "overdue",
-      "days_to_fall_est": -8.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 3,
-      "num_town_blocks": 57,
-      "mayor": "Ibrakash",
-      "mayor_idle_days": 50.7
-    },
-    {
-      "town": "Sandriftabad",
-      "balance": 2.0,
-      "status": "likely_premium",
-      "days_to_fall_est": -23.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 2,
-      "num_town_blocks": 22,
-      "mayor": "MrAideyBoi",
-      "mayor_idle_days": 65.9
-    },
-    {
-      "town": "Tallinn",
-      "balance": 2.0,
-      "status": "overdue",
-      "days_to_fall_est": -10.1,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 210,
-      "mayor": "the_estonian_guy",
-      "mayor_idle_days": 52.1
+      "mayor_idle_days": 90.0,
+      "active_competitors": 0
     },
     {
       "town": "Timbuktu",
       "balance": 1.0,
       "status": "overdue",
-      "days_to_fall_est": -15.8,
+      "days_to_fall_est": -16.0,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 3,
       "num_town_blocks": 103,
       "mayor": "JamesIsTaken",
-      "mayor_idle_days": 57.8
-    },
-    {
-      "town": "Toronto",
-      "balance": 0.0,
-      "status": "likely_premium",
-      "days_to_fall_est": -22.7,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 12,
-      "num_town_blocks": 35,
-      "mayor": "TurboT1919",
-      "mayor_idle_days": 64.7
+      "mayor_idle_days": 58.0,
+      "active_competitors": 0
     },
     {
       "town": "Montezuma",
       "balance": 0.0,
       "status": "overdue",
-      "days_to_fall_est": -0.3,
+      "days_to_fall_est": -0.6,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 1,
       "num_town_blocks": 19,
       "mayor": "lemon401a",
-      "mayor_idle_days": 42.3
+      "mayor_idle_days": 42.6,
+      "active_competitors": 0
     },
     {
-      "town": "Singapore",
-      "balance": 0.0,
+      "town": "Vlore",
+      "balance": 659.0,
       "status": "likely_premium",
-      "days_to_fall_est": -78.2,
+      "days_to_fall_est": -47.2,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 5,
-      "num_town_blocks": 1,
-      "mayor": "nebukaga",
-      "mayor_idle_days": 120.2
+      "num_residents": 3,
+      "num_town_blocks": 120,
+      "mayor": "LavishNick",
+      "mayor_idle_days": 89.2,
+      "active_competitors": 1
     },
     {
-      "town": "Maui",
-      "balance": 0.0,
+      "town": "Bazaar",
+      "balance": 7.0,
+      "status": "overdue",
+      "days_to_fall_est": -3.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 121,
+      "mayor": "unown006",
+      "mayor_idle_days": 45.5,
+      "active_competitors": 1
+    },
+    {
+      "town": "Gaza",
+      "balance": 4.0,
+      "status": "overdue",
+      "days_to_fall_est": -8.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 57,
+      "mayor": "Ibrakash",
+      "mayor_idle_days": 50.9,
+      "active_competitors": 1
+    },
+    {
+      "town": "Sandriftabad",
+      "balance": 2.0,
       "status": "likely_premium",
-      "days_to_fall_est": -46.7,
+      "days_to_fall_est": -24.2,
       "for_sale_price": null,
       "profit_if_bought": null,
-      "num_residents": 8,
-      "num_town_blocks": 142,
-      "mayor": "Wynderia",
-      "mayor_idle_days": 88.7
-    },
-    {
-      "town": "Portland",
-      "balance": 0.0,
-      "status": "overdue",
-      "days_to_fall_est": -7.8,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 6,
-      "num_town_blocks": 52,
-      "mayor": "Schober_Gaming",
-      "mayor_idle_days": 49.8
-    },
-    {
-      "town": "Finlandia",
-      "balance": 0.0,
-      "status": "overdue",
-      "days_to_fall_est": -9.9,
-      "for_sale_price": null,
-      "profit_if_bought": null,
-      "num_residents": 6,
-      "num_town_blocks": 34,
-      "mayor": "NakuPCA",
-      "mayor_idle_days": 51.9
+      "num_residents": 2,
+      "num_town_blocks": 22,
+      "mayor": "MrAideyBoi",
+      "mayor_idle_days": 66.2,
+      "active_competitors": 1
     },
     {
       "town": "Hayfa",
       "balance": 0.0,
       "status": "overdue",
-      "days_to_fall_est": -1.9,
+      "days_to_fall_est": -2.2,
       "for_sale_price": null,
       "profit_if_bought": null,
       "num_residents": 2,
       "num_town_blocks": 72,
       "mayor": "_LVBELC5",
-      "mayor_idle_days": 43.9
+      "mayor_idle_days": 44.2,
+      "active_competitors": 1
+    },
+    {
+      "town": "Atlantica",
+      "balance": 0.0,
+      "status": "overdue",
+      "days_to_fall_est": -0.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 2,
+      "num_town_blocks": 25,
+      "mayor": "Untitled_Users",
+      "mayor_idle_days": 42.1,
+      "active_competitors": 1
+    },
+    {
+      "town": "SanAgustinLaredo",
+      "balance": 55.0,
+      "status": "overdue",
+      "days_to_fall_est": -12.8,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 14,
+      "mayor": "CruxTenebrae",
+      "mayor_idle_days": 54.8,
+      "active_competitors": 2
+    },
+    {
+      "town": "Xalisco",
+      "balance": 20.0,
+      "status": "overdue",
+      "days_to_fall_est": -10.5,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 3,
+      "num_town_blocks": 30,
+      "mayor": "cchileserrano",
+      "mayor_idle_days": 52.5,
+      "active_competitors": 2
+    },
+    {
+      "town": "Boulder",
+      "balance": 5.0,
+      "status": "likely_premium",
+      "days_to_fall_est": -58.6,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 140,
+      "mayor": "Metarally",
+      "mayor_idle_days": 100.6,
+      "active_competitors": 2
+    },
+    {
+      "town": "Tallinn",
+      "balance": 2.0,
+      "status": "overdue",
+      "days_to_fall_est": -10.4,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 210,
+      "mayor": "the_estonian_guy",
+      "mayor_idle_days": 52.4,
+      "active_competitors": 2
+    },
+    {
+      "town": "Maui",
+      "balance": 0.0,
+      "status": "likely_premium",
+      "days_to_fall_est": -47.0,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 8,
+      "num_town_blocks": 142,
+      "mayor": "Wynderia",
+      "mayor_idle_days": 89.0,
+      "active_competitors": 2
+    },
+    {
+      "town": "Portland",
+      "balance": 0.0,
+      "status": "overdue",
+      "days_to_fall_est": -8.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 52,
+      "mayor": "Schober_Gaming",
+      "mayor_idle_days": 50.1,
+      "active_competitors": 2
+    },
+    {
+      "town": "Finlandia",
+      "balance": 0.0,
+      "status": "overdue",
+      "days_to_fall_est": -10.2,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 6,
+      "num_town_blocks": 34,
+      "mayor": "NakuPCA",
+      "mayor_idle_days": 52.2,
+      "active_competitors": 2
+    },
+    {
+      "town": "Busselton",
+      "balance": 76.0,
+      "status": "overdue",
+      "days_to_fall_est": -0.3,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 4,
+      "num_town_blocks": 46,
+      "mayor": "_frankocean",
+      "mayor_idle_days": 42.3,
+      "active_competitors": 3
+    },
+    {
+      "town": "Toronto",
+      "balance": 0.0,
+      "status": "likely_premium",
+      "days_to_fall_est": -22.9,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 12,
+      "num_town_blocks": 35,
+      "mayor": "TurboT1919",
+      "mayor_idle_days": 64.9,
+      "active_competitors": 3
+    },
+    {
+      "town": "Singapore",
+      "balance": 0.0,
+      "status": "likely_premium",
+      "days_to_fall_est": -78.4,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 5,
+      "num_town_blocks": 1,
+      "mayor": "nebukaga",
+      "mayor_idle_days": 120.4,
+      "active_competitors": 3
+    },
+    {
+      "town": "West_Virginia",
+      "balance": 7.0,
+      "status": "overdue",
+      "days_to_fall_est": -5.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 7,
+      "num_town_blocks": 61,
+      "mayor": "KingOddCod",
+      "mayor_idle_days": 47.1,
+      "active_competitors": 5
+    },
+    {
+      "town": "India",
+      "balance": 0.0,
+      "status": "overdue",
+      "days_to_fall_est": -0.1,
+      "for_sale_price": null,
+      "profit_if_bought": null,
+      "num_residents": 14,
+      "num_town_blocks": 1,
+      "mayor": "ntonta",
+      "mayor_idle_days": 42.1,
+      "active_competitors": 9
     }
   ]
 }
