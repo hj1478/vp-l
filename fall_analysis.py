@@ -74,56 +74,78 @@ def heir_rank(e, key, reverse):
     return order.index(heir) + 1, len(vals)
 
 
-def main(argv=None):
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--input", default="data/town_events.jsonl")
-    ap.add_argument("-o", "--outdir", default="data")
-    ap.add_argument("--inactive-days", type=float, default=40.0)
-    args = ap.parse_args(argv)
-
-    events = load(args.input)
-    clean = [e for e in events if is_clean_fall(e, args.inactive_days)]
-
-    result = {"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-              "total_mayor_changes": len(events),
-              "clean_most_active_falls": len(clean),
-              "inactive_days_threshold": args.inactive_days,
-              "hypotheses": {}}
-
+def score(clean):
+    """Per-hypothesis: how often each metric ranked the actual heir #1."""
+    hyp = {}
     for name, (key, rev) in METRICS.items():
-        top1 = 0
-        ranks = []
-        scored = 0
+        top1, ranks, scored = 0, [], 0
         for e in clean:
             rank, n = heir_rank(e, key, rev)
             if rank is None:
                 continue
             scored += 1
-            ranks.append(rank / n)     # normalized rank (0=best)
+            ranks.append(rank / n)
             if rank == 1:
                 top1 += 1
-        result["hypotheses"][name] = {
+        hyp[name] = {
             "scored_events": scored,
             "heir_ranked_1st": top1,
             "top1_rate": round(top1 / scored, 3) if scored else None,
             "mean_normalized_rank": round(sum(ranks) / len(ranks), 3) if ranks else None,
         }
+    return hyp
+
+
+def _print_table(hyp):
+    print(f"{'hypothesis':14s} {'heir #1':>8s} {'of':>4s} {'top-1 rate':>11s} {'mean rank':>10s}")
+    for name in sorted(hyp, key=lambda n: -(hyp[n]["top1_rate"] or 0)):
+        h = hyp[name]
+        print(f"{name:14s} {h['heir_ranked_1st']:>8d} {h['scored_events']:>4d} "
+              f"{(h['top1_rate'] or 0):>11.2f} {(h['mean_normalized_rank'] or 0):>10.2f}")
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--input", default="data/town_events.jsonl")
+    ap.add_argument("-o", "--outdir", default="data")
+    ap.add_argument("--inactive-days", type=float, default=40.0)
+    ap.add_argument("--min-residents", type=int, default=3,
+                    help="a fall only discriminates hypotheses if the town had at "
+                    "least this many residents (<=2 is trivial: one candidate)")
+    args = ap.parse_args(argv)
+
+    events = load(args.input)
+    clean = [e for e in events if is_clean_fall(e, args.inactive_days)]
+    # A 1-2 resident town is a trivial case: with the inactive mayor removed there
+    # is essentially one candidate, so every metric "predicts" the heir. Only
+    # falls with >= min_residents actually test a hypothesis.
+    informative = [e for e in clean if len(e["residents"]) >= args.min_residents]
+
+    result = {"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "total_mayor_changes": len(events),
+              "clean_most_active_falls": len(clean),
+              "trivial_falls_le2_residents": len(clean) - len(informative),
+              "informative_falls_ge_%d_residents" % args.min_residents: len(informative),
+              "inactive_days_threshold": args.inactive_days,
+              "hypotheses_all_clean": score(clean),
+              "hypotheses_informative": score(informative)}
 
     os.makedirs(args.outdir, exist_ok=True)
     json.dump(result, open(os.path.join(args.outdir, "fall_analysis.json"), "w"), indent=2)
 
-    print(f"Mayor changes logged: {len(events)} | clean 'most-active-resident' falls: {len(clean)}")
+    print(f"Mayor changes: {len(events)} | clean falls: {len(clean)} "
+          f"({len(clean)-len(informative)} trivial ≤2-resident, {len(informative)} informative ≥{args.min_residents}-resident)")
     if not clean:
-        print("Not enough clean falls yet — the observatory needs to run for a while.\n"
-              "(Councillor-less inactivity falls are rare; evidence accrues over weeks.)")
+        print("\nNo clean falls yet — the observatory needs to run for a while.")
         return 0
-    print(f"\n{'hypothesis':14s} {'heir #1':>8s} {'of':>4s} {'top-1 rate':>11s} {'mean rank':>10s}")
-    for name in sorted(result["hypotheses"], key=lambda n: -(result["hypotheses"][n]["top1_rate"] or 0)):
-        h = result["hypotheses"][name]
-        print(f"{name:14s} {h['heir_ranked_1st']:>8d} {h['scored_events']:>4d} "
-              f"{(h['top1_rate'] if h['top1_rate'] is not None else 0):>11.2f} "
-              f"{(h['mean_normalized_rank'] if h['mean_normalized_rank'] is not None else 0):>10.2f}")
-    print("\nThe hypothesis with the highest top-1 rate best models the rule.")
+    print("\n── INFORMATIVE falls only (the honest test) ──")
+    if informative:
+        _print_table(result["hypotheses_informative"])
+    else:
+        print("None yet — every clean fall so far was a ≤2-resident town, which "
+              "can't distinguish hypotheses. Need multi-resident falls.")
+    print("\n── all clean falls (inflated by trivial towns, shown for reference) ──")
+    _print_table(result["hypotheses_all_clean"])
     return 0
 
 
