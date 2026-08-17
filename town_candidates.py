@@ -28,19 +28,60 @@ from town_observatory import _req, all_town_names, parse_town, TOWNS, BATCH, PAC
 
 
 def scan(names):
-    """Return per-town: mayor name/uuid, councillor & resident counts."""
+    """Return per-town: mayor, councillor & resident counts, bank gold, and the
+    status flags needed for the snipe list."""
     towns = []
     for i in range(0, len(names), BATCH):
         d = _req(TOWNS, {"query": names[i:i + BATCH]})
         for t in (d or []):
             rec = parse_town(t)
             if rec and rec["mayor_name"]:
+                st = t.get("status") or {}
+                stats = t.get("stats") or {}
                 towns.append({"uuid": t.get("uuid"), "name": rec["name"],
                               "mayor": rec["mayor_name"], "mayor_uuid": rec["mayor_uuid"],
                               "num_councillors": len(rec["councillors"]),
-                              "num_residents": len(rec["residents"])})
+                              "num_residents": len(rec["residents"]),
+                              "balance": float(stats.get("balance") or 0.0),
+                              "is_open": bool(st.get("isOpen")),
+                              "is_for_sale": bool(st.get("isForSale")),
+                              "is_ruined": bool(st.get("isRuined")),
+                              "is_public": bool(st.get("isPublic")),
+                              "for_sale_price": stats.get("forSalePrice"),
+                              "num_town_blocks": stats.get("numTownBlocks")})
         time.sleep(PACE_S)
     return towns
+
+
+def build_snipes(towns, los, now):
+    """Grabbable towns ranked by bank gold. A town is snipable if it's open
+    (joinable — take it over if the mayor lapses), for-sale (buy it), or ruined
+    (reclaim it). Open towns with an inactive mayor + gold are the prime targets."""
+    snipes = []
+    for t in towns:
+        cats = []
+        if t["is_ruined"]:
+            cats.append("ruined")
+        if t["is_for_sale"]:
+            cats.append("for_sale")
+        if t["is_open"]:
+            cats.append("open")
+        if not cats:
+            continue
+        lo = los.get(t["mayor"])
+        idle = round((now - lo / 1000.0) / 86400.0, 1) if lo else None
+        snipes.append({
+            "town": t["name"], "balance": round(t["balance"], 1),
+            "categories": cats,
+            "for_sale_price": t["for_sale_price"],
+            "profit_if_bought": (round(t["balance"] - t["for_sale_price"], 1)
+                                 if t["is_for_sale"] and t["for_sale_price"] is not None else None),
+            "num_residents": t["num_residents"],
+            "num_town_blocks": t["num_town_blocks"],
+            "mayor": t["mayor"], "mayor_idle_days": idle,
+        })
+    snipes.sort(key=lambda x: -x["balance"])
+    return snipes
 
 
 def mayor_last_online(mayor_names):
@@ -95,6 +136,20 @@ def main(argv=None):
                "min_idle_days": args.min_idle_days,
                "scanned": len(names), "at_risk": len(watch),
                "towns": watch}, open(args.out, "w"), indent=2)
+
+    # --- snipe list: grabbable towns ranked by bank gold ---
+    snipes = build_snipes(towns, los, now)
+    snipe_path = os.path.join(os.path.dirname(args.out) or ".", "snipe_list.json")
+    json.dump({"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+               "scanned": len(names), "snipable_towns": len(snipes),
+               "towns": snipes}, open(snipe_path, "w"), indent=2)
+    gold = [s for s in snipes if s["balance"] > 0]
+    print(f"\nSnipe list: {len(snipes)} grabbable towns ({len(gold)} with bank gold) -> {snipe_path}")
+    print(f"{'town':22s} {'gold':>9s} {'type':>18s} {'idle d':>7s} {'res':>4s}")
+    for s in snipes[:20]:
+        idle = f"{s['mayor_idle_days']:.0f}" if s["mayor_idle_days"] is not None else "-"
+        print(f"{s['town'][:22]:22s} {s['balance']:>9.0f} {','.join(s['categories'])[:18]:>18s} "
+              f"{idle:>7s} {s['num_residents']:>4d}")
 
     cl = [w for w in watch if w["councillorless"]]
     print(f"\nAt-risk towns (mayor idle ≥ {args.min_idle_days}d): {len(watch)}  "

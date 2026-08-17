@@ -49,7 +49,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in watch_towns.json town_state.json town_events.jsonl observatory.json fall_analysis.json; do
+          for f in watch_towns.json snipe_list.json town_state.json town_events.jsonl observatory.json fall_analysis.json; do
             [ -f "data/$f" ] && git add -f "data/$f" || true
           done
           if git diff --cached --quiet; then
