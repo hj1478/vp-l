@@ -42,6 +42,7 @@ def scan(names):
                               "mayor": rec["mayor_name"], "mayor_uuid": rec["mayor_uuid"],
                               "num_councillors": len(rec["councillors"]),
                               "num_residents": len(rec["residents"]),
+                              "residents_names": [n for n in rec["res_names"].values() if n],
                               "balance": float(stats.get("balance") or 0.0),
                               "is_open": bool(st.get("isOpen")),
                               "is_for_sale": bool(st.get("isForSale")),
@@ -99,10 +100,34 @@ def build_snipes(towns, los, now):
             "num_residents": t["num_residents"],
             "num_town_blocks": t["num_town_blocks"],
             "mayor": t["mayor"], "mayor_idle_days": idle,
+            "_residents": t.get("residents_names", []),
         })
-    # takeable-now/soon first (for_sale, ruined, falls_soon), then by gold desc
+    return snipes
+
+
+COMPETE_ACTIVE_DAYS = 14.0   # a resident online within this many days can beat you to the town
+
+
+def add_competition(snipes, now, active_days=COMPETE_ACTIVE_DAYS):
+    """For each snipe, count the OTHER residents active enough to inherit instead
+    of a fresh joiner — the competition. On a fall the town goes to the most active
+    *existing* resident, so a snipe only works if that count is ~0. Adds
+    `active_competitors` and re-ranks by (takeable, competition, gold)."""
+    names = sorted({n for s in snipes for n in s["_residents"]})
+    los = mayor_last_online(names)   # generic name->lastOnline lookup
+    for s in snipes:
+        comp = 0
+        for n in s["_residents"]:
+            if n == s["mayor"]:
+                continue             # the inactive mayor being replaced isn't competition
+            lo = los.get(n)
+            if lo and (now - lo / 1000.0) / 86400.0 <= active_days:
+                comp += 1
+        s["active_competitors"] = comp
+        del s["_residents"]
     grab = {"for_sale", "ruined", "falls_soon"}
-    snipes.sort(key=lambda s: (0 if s["status"] in grab else 1, -s["balance"]))
+    snipes.sort(key=lambda s: (0 if s["status"] in grab else 1,
+                               s["active_competitors"], -s["balance"]))
     return snipes
 
 
@@ -159,19 +184,22 @@ def main(argv=None):
                "scanned": len(names), "at_risk": len(watch),
                "towns": watch}, open(args.out, "w"), indent=2)
 
-    # --- snipe list: grabbable towns ranked by bank gold ---
+    # --- snipe list: grabbable towns, vetted by idle AND resident competition ---
     snipes = build_snipes(towns, los, now)
+    add_competition(snipes, now)
     snipe_path = os.path.join(os.path.dirname(args.out) or ".", "snipe_list.json")
     json.dump({"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                "scanned": len(names), "snipable_towns": len(snipes),
                "towns": snipes}, open(snipe_path, "w"), indent=2)
-    gold = [s for s in snipes if s["balance"] > 0]
-    print(f"\nSnipe list (vetted by idle): {len(snipes)} targets ({len(gold)} with bank gold) -> {snipe_path}")
-    print(f"{'town':20s} {'gold':>8s} {'falls in':>9s} {'res':>4s} {'status':16s} mayor")
+    clean = [s for s in snipes if s["status"] in ("falls_soon", "ruined", "for_sale")
+             and s["active_competitors"] == 0]
+    print(f"\nSnipe list (vetted by idle + competition): {len(snipes)} targets; "
+          f"{len(clean)} takeable with ZERO active competitors -> {snipe_path}")
+    print(f"{'town':20s} {'gold':>8s} {'falls in':>9s} {'compet':>6s} {'res':>4s} {'status':12s}")
     for s in snipes[:25]:
         d2f = f"~{s['days_to_fall_est']:.0f}d" if s["days_to_fall_est"] is not None else "-"
-        print(f"{s['town'][:20]:20s} {s['balance']:>7.0f}g {d2f:>9s} {s['num_residents']:>4d} "
-              f"{s['status']:16s} {s['mayor'][:16]}")
+        print(f"{s['town'][:20]:20s} {s['balance']:>7.0f}g {d2f:>9s} "
+              f"{s['active_competitors']:>6d} {s['num_residents']:>4d} {s['status']:12s}")
 
     cl = [w for w in watch if w["councillorless"]]
     print(f"\nAt-risk towns (mayor idle ≥ {args.min_idle_days}d): {len(watch)}  "
