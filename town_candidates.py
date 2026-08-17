@@ -53,26 +53,46 @@ def scan(names):
     return towns
 
 
+FALL_DAYS = 42.0          # inactivity threshold for a mayor's town to fall
+OPEN_MIN_IDLE = 25.0      # an open town is only a real snipe once its mayor lapses
+PREMIUM_IDLE = 60.0       # idle well past 42d without falling => almost certainly premium
+
+
+def _snipe_status(t, idle):
+    """Vet a town's snipability by mayor idle time."""
+    if t["is_for_sale"]:
+        return "for_sale", None
+    if t["is_ruined"]:
+        return "ruined", None
+    if idle is None:               # open but mayor activity unknown
+        return None, None
+    d2f = FALL_DAYS - idle
+    if 0 <= d2f <= (FALL_DAYS - OPEN_MIN_IDLE):
+        return "falls_soon", round(d2f, 1)     # about to fall — the prime snipe
+    if idle > PREMIUM_IDLE:
+        return "likely_premium", round(d2f, 1)  # never falling — skip
+    if d2f < 0:
+        return "overdue", round(d2f, 1)          # past 42d, not premium-confirmed
+    return None, None              # mayor still active enough — not snipable yet
+
+
 def build_snipes(towns, los, now):
-    """Grabbable towns ranked by bank gold. A town is snipable if it's open
-    (joinable — take it over if the mayor lapses), for-sale (buy it), or ruined
-    (reclaim it). Open towns with an inactive mayor + gold are the prime targets."""
+    """Snipable towns VETTED BY IDLE TIME and ranked by bank gold. A town is a
+    real snipe if it's for-sale, ruined, or open with an inactive mayor heading
+    for the ~42-day fall. Open towns whose mayor is still active are NOT listed
+    (you can't take them); ones idle well past 42d are flagged likely-premium."""
     snipes = []
     for t in towns:
-        cats = []
-        if t["is_ruined"]:
-            cats.append("ruined")
-        if t["is_for_sale"]:
-            cats.append("for_sale")
-        if t["is_open"]:
-            cats.append("open")
-        if not cats:
+        if not (t["is_open"] or t["is_for_sale"] or t["is_ruined"]):
             continue
         lo = los.get(t["mayor"])
         idle = round((now - lo / 1000.0) / 86400.0, 1) if lo else None
+        status, d2f = _snipe_status(t, idle)
+        if status is None:
+            continue
         snipes.append({
             "town": t["name"], "balance": round(t["balance"], 1),
-            "categories": cats,
+            "status": status, "days_to_fall_est": d2f,
             "for_sale_price": t["for_sale_price"],
             "profit_if_bought": (round(t["balance"] - t["for_sale_price"], 1)
                                  if t["is_for_sale"] and t["for_sale_price"] is not None else None),
@@ -80,7 +100,9 @@ def build_snipes(towns, los, now):
             "num_town_blocks": t["num_town_blocks"],
             "mayor": t["mayor"], "mayor_idle_days": idle,
         })
-    snipes.sort(key=lambda x: -x["balance"])
+    # takeable-now/soon first (for_sale, ruined, falls_soon), then by gold desc
+    grab = {"for_sale", "ruined", "falls_soon"}
+    snipes.sort(key=lambda s: (0 if s["status"] in grab else 1, -s["balance"]))
     return snipes
 
 
@@ -144,12 +166,12 @@ def main(argv=None):
                "scanned": len(names), "snipable_towns": len(snipes),
                "towns": snipes}, open(snipe_path, "w"), indent=2)
     gold = [s for s in snipes if s["balance"] > 0]
-    print(f"\nSnipe list: {len(snipes)} grabbable towns ({len(gold)} with bank gold) -> {snipe_path}")
-    print(f"{'town':22s} {'gold':>9s} {'type':>18s} {'idle d':>7s} {'res':>4s}")
-    for s in snipes[:20]:
-        idle = f"{s['mayor_idle_days']:.0f}" if s["mayor_idle_days"] is not None else "-"
-        print(f"{s['town'][:22]:22s} {s['balance']:>9.0f} {','.join(s['categories'])[:18]:>18s} "
-              f"{idle:>7s} {s['num_residents']:>4d}")
+    print(f"\nSnipe list (vetted by idle): {len(snipes)} targets ({len(gold)} with bank gold) -> {snipe_path}")
+    print(f"{'town':20s} {'gold':>8s} {'falls in':>9s} {'res':>4s} {'status':16s} mayor")
+    for s in snipes[:25]:
+        d2f = f"~{s['days_to_fall_est']:.0f}d" if s["days_to_fall_est"] is not None else "-"
+        print(f"{s['town'][:20]:20s} {s['balance']:>7.0f}g {d2f:>9s} {s['num_residents']:>4d} "
+              f"{s['status']:16s} {s['mayor'][:16]}")
 
     cl = [w for w in watch if w["councillorless"]]
     print(f"\nAt-risk towns (mayor idle ≥ {args.min_idle_days}d): {len(watch)}  "
