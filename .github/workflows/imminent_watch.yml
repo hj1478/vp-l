@@ -1,0 +1,54 @@
+name: Imminent Fall Watch
+
+# Densely watches towns about to fall (mayor idle ~35-52d, from the observatory
+# watchlist) plus any pinned in imminent_towns.txt — capturing the LIVE roster and
+# every resident's activity each hour. This catches last-second joiners and the
+# run-up activity the 6-hour observatory misses, so when a town flips we have the
+# complete "who was here, how active, and who got it" record. Stdlib only.
+
+on:
+  schedule:
+    - cron: "40 * * * *"     # hourly, offset from the other workflows
+  workflow_dispatch:
+
+concurrency:
+  group: imminent-watch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dense watch of imminent-fall towns
+        run: python3 imminent_watch.py
+
+      - name: Commit watch snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/imminent_watch.jsonl
+          if git diff --cached --quiet; then
+            echo "No new watch snapshots."
+            exit 0
+          fi
+          git commit -m "chore: imminent-fall watch $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          ok=0
+          for attempt in 1 2 3 4; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && \
+               git push origin "HEAD:${GITHUB_REF_NAME}"; then ok=1; break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 2))
+          done
+          [ "$ok" = 1 ] || { echo "::error::imminent-watch push failed"; exit 1; }

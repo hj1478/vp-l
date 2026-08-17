@@ -1,0 +1,6 @@
+# Towns to densely watch through their fall (one per line, # for comments).
+# These are pinned in addition to the auto window (watchlist mayors idle 35-52d).
+# Use this to follow specific snipe targets and learn who actually inherits.
+
+Neo_Osaka
+Tsu

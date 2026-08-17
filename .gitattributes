@@ -8,3 +8,4 @@ data/voteparty.log    merge=union
 data/players.jsonl    merge=union
 data/players.log      merge=union
 data/town_events.jsonl merge=union
+data/imminent_watch.jsonl merge=union
