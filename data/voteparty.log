@@ -11045,3 +11045,41 @@
 [2026-08-17T22:04:43Z] vote party 4395/5000 (87.9%) | 605 remaining | players 516/800 | moon LAST_QUARTER | next poll ~300s
 [2026-08-17T22:09:41Z] vote party 4401/5000 (88.0%) | 599 remaining | players 509/800 | moon LAST_QUARTER | next poll ~300s
 [2026-08-17T22:09:41Z] === tracker duration reached ===
+[2026-08-17T22:09:51Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-08-17T22:09:51Z] vote party 4401/5000 (88.0%) | 599 remaining | players 509/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-17T22:14:51Z] vote party 4415/5000 (88.3%) | 585 remaining | players 513/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-17T22:19:51Z] vote party 4446/5000 (88.9%) | 554 remaining | players 515/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-17T22:24:51Z] vote party 4475/5000 (89.5%) | 525 remaining | players 521/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:29:51Z] vote party 4490/5000 (89.8%) | 510 remaining | players 534/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:34:52Z] vote party 4515/5000 (90.3%) | 485 remaining | players 538/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:35:52Z] vote party 4527/5000 (90.5%) | 473 remaining | players 537/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:36:52Z] vote party 4531/5000 (90.6%) | 469 remaining | players 536/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:37:52Z] vote party 4537/5000 (90.7%) | 463 remaining | players 538/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:38:52Z] vote party 4538/5000 (90.8%) | 462 remaining | players 537/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:39:52Z] vote party 4545/5000 (90.9%) | 455 remaining | players 540/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:40:52Z] vote party 4552/5000 (91.0%) | 448 remaining | players 539/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-17T22:41:52Z] vote party 4554/5000 (91.1%) | 446 remaining | players 544/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:42:52Z] vote party 4565/5000 (91.3%) | 435 remaining | players 550/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:43:53Z] vote party 4586/5000 (91.7%) | 414 remaining | players 545/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:44:53Z] vote party 4596/5000 (91.9%) | 404 remaining | players 542/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:45:53Z] vote party 4601/5000 (92.0%) | 399 remaining | players 554/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:46:53Z] vote party 4608/5000 (92.2%) | 392 remaining | players 553/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:47:53Z] vote party 4611/5000 (92.2%) | 389 remaining | players 552/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:48:53Z] vote party 4616/5000 (92.3%) | 384 remaining | players 554/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:49:53Z] vote party 4623/5000 (92.5%) | 377 remaining | players 551/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:50:54Z] vote party 4640/5000 (92.8%) | 360 remaining | players 551/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:51:54Z] vote party 4647/5000 (92.9%) | 353 remaining | players 558/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:52:54Z] vote party 4651/5000 (93.0%) | 349 remaining | players 556/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:53:54Z] vote party 4658/5000 (93.2%) | 342 remaining | players 548/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:54:54Z] vote party 4666/5000 (93.3%) | 334 remaining | players 542/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:55:54Z] vote party 4667/5000 (93.3%) | 333 remaining | players 544/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:56:54Z] vote party 4668/5000 (93.4%) | 332 remaining | players 541/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:57:54Z] vote party 4673/5000 (93.5%) | 327 remaining | players 545/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:58:54Z] vote party 4681/5000 (93.6%) | 319 remaining | players 548/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T22:59:55Z] vote party 4692/5000 (93.8%) | 308 remaining | players 547/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T23:00:55Z] vote party 4706/5000 (94.1%) | 294 remaining | players 548/800 | moon NEW_MOON | next poll ~300s
+[2026-08-17T23:01:55Z] vote party 4707/5000 (94.1%) | 293 remaining | players 542/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-08-17T23:02:55Z] vote party 4709/5000 (94.2%) | 291 remaining | players 541/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-08-17T23:03:55Z] vote party 4723/5000 (94.5%) | 277 remaining | players 543/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-08-17T23:04:51Z] vote party 4728/5000 (94.6%) | 272 remaining | players 545/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-08-17T23:04:51Z] === tracker duration reached ===
