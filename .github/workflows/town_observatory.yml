@@ -36,8 +36,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Refresh at-risk watchlist (scan every mayor)
+      - name: Refresh at-risk watchlist + snipe list (scan every mayor)
         run: python3 town_candidates.py --min-idle-days 25 -o data/watch_towns.json
+
+      - name: Post snipe list to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python3 discord_snipes.py || true
 
       - name: Sweep the watchlist + detect fall events
         run: python3 town_observatory.py --watchlist data/watch_towns.json
