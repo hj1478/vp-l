@@ -55,6 +55,23 @@ diurnal phase instead of copying its absolute remaining duration.
   the historical level and letting the diurnal *shape* carry the time-variation is
   the whole trick. `model_diurnal`/plain analogue stay in the table as diagnostics.
 
+## Re-validation at 51 tight cycles (2026-08-18): shape_analogue win HOLDS
+Re-ran the paired causal test with ~5x more data (51 tight cycles vs the original
+9, 802 stage-predictions). shape_analogue still beats the plain analogue:
+- plain analogue MAE **21.7 min** [18.1, 25.8]; shape-aware **15.8 min** [13.5, 18.5]
+- paired **−5.9 min, 95% CI [−8.9, −2.9]** — excludes zero, more precisely than the
+  original [−17, −4]. The point effect settled from the small-sample −11 min down
+  to ~−6 min but is now far more robustly significant.
+- **Caveat:** at scale the 80% interval coverage is **74% [70, 80]** — slightly
+  under nominal (the plain analogue over-covers at 94%). The interval may be a
+  touch narrow now; worth widening the label-σ floor if it keeps drifting low.
+- Model selection: still **NO stable winner** (weights ~uniform); 53 tight cycles.
+
+Perf: `backtest_staged`/`stable_winner` and the shape_analogue harness were
+O(points·cycles); they now subsample to ~16–24 evenly-spaced stages per cycle
+(predict.py 120s→~23s, harness →14s). Diagnostic weights only — the reported
+shape_analogue prediction is unchanged.
+
 ## Label extrapolation is minimal; tight-threshold is not fragile
 - **Extrapolation fraction:** median cycle is sampled to ~98–99.8% of target, so
   the firing label rests on ≈**1.8%** extrapolation (σ = sampling floor). Only

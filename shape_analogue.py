@@ -48,7 +48,7 @@ def evaluate(cycles, target):
             continue
         t, yy = cycle_arrays(cycles[ci])
         rec = {"a": [], "s": [], "covc": [], "covs": []}
-        for i in range(3, len(t) + 1):
+        for i in sorted(set(int(x) for x in np.linspace(3, len(t), min(max(len(t)-2,1), 16)))):
             now, coll = cycles[ci][i - 1]["_t"], yy[i - 1]
             qc = analogue_quantiles(cycles, prior, target, now, coll, [0.1, 0.5, 0.9])
             qs = shape_quantiles(cycles, prior, target, now, coll, [0.1, 0.5, 0.9])
@@ -157,7 +157,7 @@ def main(argv=None):
                 continue
             t, yy = cycle_arrays(cycles[ci])
             aa, ss = [], []
-            for i in range(3, len(t) + 1):
+            for i in sorted(set(int(x) for x in np.linspace(3, len(t), min(max(len(t)-2,1), 16)))):
                 now, coll = cycles[ci][i - 1]["_t"], yy[i - 1]
                 qc = analogue_quantiles(cycles, prior, target, now, coll, [0.5])
                 fc = shape_analogue_forecast(cycles, prior, target, now, coll, pace_shrink=ps)

@@ -627,6 +627,18 @@ def _errs_to_weights(errs, n_cycles=0):
     return _shrink_to_uniform(weights, n_cycles), rmse
 
 
+def _stage_indices(n, min_fit, max_stages=24):
+    """Evenly-spaced prefix lengths in [min_fit, n]. The backtest weights are
+    bucketed into a few coarse progress bands, so scoring every single point is
+    wasteful on long cycles — ~24 stages give the same coverage at a fraction of
+    the cost. Short cycles keep every point."""
+    if n < min_fit:
+        return []
+    if n - min_fit + 1 <= max_stages:
+        return list(range(min_fit, n + 1))
+    return sorted(set(int(round(x)) for x in np.linspace(min_fit, n, max_stages)))
+
+
 def backtest_staged(cycles: list[list[dict]], target: float, min_fit=3):
     """Rolling-origin backtest producing global and per-progress-bucket weights.
 
@@ -656,7 +668,7 @@ def backtest_staged(cycles: list[list[dict]], target: float, min_fit=3):
         ctx = make_ctx(cyc, others)
         t, y = cycle_arrays(cyc)
         t0 = cyc[0]["_t"]
-        for i in range(min_fit, len(t) + 1):
+        for i in _stage_indices(len(t), min_fit):
             t_fit, y_fit = t[:i], y[:i]
             b = _bucket(float(y_fit[-1]) / target * 100.0)
             for name in MODELS:
@@ -715,7 +727,7 @@ def stable_winner(cycles, target, min_fit=3, min_label_weight=STABLE_WINNER_MIN_
         t, y = cycle_arrays(cyc)
         t0 = cyc[0]["_t"]
         errs = {n: [] for n in MODELS}
-        for i in range(min_fit, len(t) + 1):
+        for i in _stage_indices(len(t), min_fit):
             for n in MODELS:
                 tc = MODELS[n](t[:i], y[:i], target, ctx)
                 if tc is not None:
