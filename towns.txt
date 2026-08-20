@@ -4,3 +4,4 @@
 # Matched case-insensitively; spaces or underscores both work.
 
 Mount_Denali
+Neo_Osaka
