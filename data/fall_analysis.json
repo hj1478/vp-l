@@ -1,60 +1,60 @@
 {
-  "generated_at": "2026-08-22T07:20:24Z",
-  "total_mayor_changes": 38,
-  "clean_most_active_falls": 12,
+  "generated_at": "2026-08-22T13:20:11Z",
+  "total_mayor_changes": 41,
+  "clean_most_active_falls": 13,
   "trivial_falls_le2_residents": 9,
-  "informative_falls_ge_3_residents": 3,
+  "informative_falls_ge_3_residents": 4,
   "inactive_days_threshold": 40.0,
   "hypotheses_all_clean": {
     "last_online": {
-      "scored_events": 12,
+      "scored_events": 13,
       "heir_ranked_1st": 10,
-      "top1_rate": 0.833,
+      "top1_rate": 0.769,
       "mean_normalized_rank": 0.5
     },
     "tenure": {
-      "scored_events": 12,
-      "heir_ranked_1st": 1,
-      "top1_rate": 0.083,
-      "mean_normalized_rank": 0.903
+      "scored_events": 13,
+      "heir_ranked_1st": 2,
+      "top1_rate": 0.154,
+      "mean_normalized_rank": 0.859
     },
     "acct_oldest": {
-      "scored_events": 12,
+      "scored_events": 13,
       "heir_ranked_1st": 1,
-      "top1_rate": 0.083,
-      "mean_normalized_rank": 0.931
+      "top1_rate": 0.077,
+      "mean_normalized_rank": 0.936
     },
     "acct_newest": {
-      "scored_events": 12,
-      "heir_ranked_1st": 10,
-      "top1_rate": 0.833,
-      "mean_normalized_rank": 0.514
+      "scored_events": 13,
+      "heir_ranked_1st": 11,
+      "top1_rate": 0.846,
+      "mean_normalized_rank": 0.494
     }
   },
   "hypotheses_informative": {
     "last_online": {
-      "scored_events": 3,
+      "scored_events": 4,
       "heir_ranked_1st": 1,
-      "top1_rate": 0.333,
+      "top1_rate": 0.25,
       "mean_normalized_rank": 0.5
     },
     "tenure": {
-      "scored_events": 3,
-      "heir_ranked_1st": 0,
-      "top1_rate": 0.0,
-      "mean_normalized_rank": 0.778
+      "scored_events": 4,
+      "heir_ranked_1st": 1,
+      "top1_rate": 0.25,
+      "mean_normalized_rank": 0.667
     },
     "acct_oldest": {
-      "scored_events": 3,
+      "scored_events": 4,
       "heir_ranked_1st": 0,
       "top1_rate": 0.0,
-      "mean_normalized_rank": 0.889
+      "mean_normalized_rank": 0.917
     },
     "acct_newest": {
-      "scored_events": 3,
-      "heir_ranked_1st": 2,
-      "top1_rate": 0.667,
-      "mean_normalized_rank": 0.389
+      "scored_events": 4,
+      "heir_ranked_1st": 3,
+      "top1_rate": 0.75,
+      "mean_normalized_rank": 0.354
     }
   }
 }
