@@ -1,18 +1,6 @@
 # Players to track (EarthMC online activity).
 # One player name per line. Lines starting with # are ignored.
-# Example:
-#   Fruitloopins
-#   KarlOfDuty
-#
-# Add names below, commit, and the tracker will start logging their sessions.
-# (Until at least one name is present, the tracker does nothing.)
 # Names are matched case-insensitively.
 
-Vantacrus
-nyahlist
-0xThu6Sh4k3r420
-MP_242354
-Panomii
-mikeydubois
-joshuah14782
-
+# Focused watch: the active sniper competing for Neo_Osaka.
+johnzinnnn

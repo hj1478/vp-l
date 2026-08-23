@@ -1,7 +1,5 @@
-# Towns to track — every current resident of each town listed here is tracked
-# for online activity, with the roster kept live (people who join/leave the town
-# are auto-added/dropped). One town name per line; # for comments.
-# Matched case-insensitively; spaces or underscores both work.
-
-Mount_Denali
-Neo_Osaka
+# Towns to track — every current resident of each town listed here is tracked.
+# One town name per line; # for comments. Matched case-insensitively.
+#
+# Cleared to focus on a single player (see players.txt). Re-add a town name to
+# track its whole roster again.
