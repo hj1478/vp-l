@@ -16772,3 +16772,41 @@
 [2026-08-30T12:58:55Z] vote party 4249/5000 (85.0%) | 751 remaining | players 581/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-08-30T13:03:52Z] vote party 4287/5000 (85.7%) | 713 remaining | players 585/800 | moon FULL_MOON | next poll ~300s
 [2026-08-30T13:03:52Z] === tracker duration reached ===
+[2026-08-30T13:04:06Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-08-30T13:04:06Z] vote party 4287/5000 (85.7%) | 713 remaining | players 585/800 | moon FULL_MOON | next poll ~300s
+[2026-08-30T13:09:06Z] vote party 4320/5000 (86.4%) | 680 remaining | players 580/800 | moon FULL_MOON | next poll ~300s
+[2026-08-30T13:14:07Z] vote party 4359/5000 (87.2%) | 641 remaining | players 594/800 | moon FULL_MOON | next poll ~300s
+[2026-08-30T13:19:07Z] vote party 4399/5000 (88.0%) | 601 remaining | players 589/800 | moon FULL_MOON | next poll ~300s
+[2026-08-30T13:24:07Z] vote party 4479/5000 (89.6%) | 521 remaining | players 616/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:29:07Z] vote party 4543/5000 (90.9%) | 457 remaining | players 621/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:30:07Z] vote party 4551/5000 (91.0%) | 449 remaining | players 623/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:31:07Z] vote party 4552/5000 (91.0%) | 448 remaining | players 619/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:32:08Z] vote party 4556/5000 (91.1%) | 444 remaining | players 624/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:33:08Z] vote party 4559/5000 (91.2%) | 441 remaining | players 623/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:34:08Z] vote party 4571/5000 (91.4%) | 429 remaining | players 621/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:35:08Z] vote party 4575/5000 (91.5%) | 425 remaining | players 612/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:36:08Z] vote party 4576/5000 (91.5%) | 424 remaining | players 616/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:37:08Z] vote party 4584/5000 (91.7%) | 416 remaining | players 613/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:38:08Z] vote party 4584/5000 (91.7%) | 416 remaining | players 613/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:39:09Z] vote party 4589/5000 (91.8%) | 411 remaining | players 618/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:40:09Z] vote party 4593/5000 (91.9%) | 407 remaining | players 607/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:41:09Z] vote party 4597/5000 (91.9%) | 403 remaining | players 602/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:42:09Z] vote party 4608/5000 (92.2%) | 392 remaining | players 585/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-08-30T13:43:09Z] vote party 4620/5000 (92.4%) | 380 remaining | players 584/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T13:44:09Z] vote party 4648/5000 (93.0%) | 352 remaining | players 578/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T13:45:09Z] vote party 4653/5000 (93.1%) | 347 remaining | players 14/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T13:46:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:47:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:48:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:49:10Z] vote party 4656/5000 (93.1%) | 344 remaining | players 131/800 | moon LAST_QUARTER | next poll ~709s
+[2026-08-30T13:50:10Z] vote party 4658/5000 (93.2%) | 342 remaining | players 193/800 | moon LAST_QUARTER | next poll ~496s
+[2026-08-30T13:51:10Z] vote party 4659/5000 (93.2%) | 341 remaining | players 2/800 | moon LAST_QUARTER | next poll ~347s
+[2026-08-30T13:52:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:53:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:54:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:55:11Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:56:11Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:57:11Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T13:58:11Z] vote party 4659/5000 (93.2%) | 341 remaining | players 61/800 | moon LAST_QUARTER | next poll ~2520s
+[2026-08-30T13:59:06Z] vote party 4659/5000 (93.2%) | 341 remaining | players 191/800 | moon LAST_QUARTER | next poll ~1764s
+[2026-08-30T13:59:06Z] === tracker duration reached ===
