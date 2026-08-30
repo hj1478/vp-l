@@ -16810,3 +16810,61 @@
 [2026-08-30T13:58:11Z] vote party 4659/5000 (93.2%) | 341 remaining | players 61/800 | moon LAST_QUARTER | next poll ~2520s
 [2026-08-30T13:59:06Z] vote party 4659/5000 (93.2%) | 341 remaining | players 191/800 | moon LAST_QUARTER | next poll ~1764s
 [2026-08-30T13:59:06Z] === tracker duration reached ===
+[2026-08-30T13:59:18Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-08-30T13:59:19Z] vote party 4659/5000 (93.2%) | 341 remaining | players 221/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:00:19Z] vote party 4659/5000 (93.2%) | 341 remaining | players 0/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:01:19Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:02:19Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:03:19Z] vote party 4659/5000 (93.2%) | 341 remaining | players 107/800 | moon LAST_QUARTER | next poll ~472s
+[2026-08-30T14:04:20Z] vote party 4659/5000 (93.2%) | 341 remaining | players 192/800 | moon LAST_QUARTER | next poll ~331s
+[2026-08-30T14:05:20Z] vote party 4659/5000 (93.2%) | 341 remaining | players 191/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:06:20Z] vote party 4659/5000 (93.2%) | 341 remaining | players 0/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:07:20Z] vote party 4659/5000 (93.2%) | 341 remaining | players 0/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:08:20Z] vote party 4659/5000 (93.2%) | 341 remaining | players 2/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:09:21Z] vote party 4659/5000 (93.2%) | 341 remaining | players 2/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:10:21Z] vote party 4659/5000 (93.2%) | 341 remaining | players 3/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:11:21Z] vote party 4659/5000 (93.2%) | 341 remaining | players 2/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:12:21Z] vote party 4659/5000 (93.2%) | 341 remaining | players 2/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:13:21Z] vote party 4659/5000 (93.2%) | 341 remaining | players 3/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:14:22Z] vote party 4659/5000 (93.2%) | 341 remaining | players 3/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:15:22Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon LAST_QUARTER | next poll ~300s
+[2026-08-30T14:16:22Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:17:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:18:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:19:22Z] vote party 4659/5000 (93.2%) | 341 remaining | players 1/800 | moon WANING_CRESCENT | next poll ~472s
+[2026-08-30T14:20:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:21:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:22:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:23:23Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-08-30T14:24:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 1/800 | moon WANING_CRESCENT | next poll ~1674s
+[2026-08-30T14:25:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~1172s
+[2026-08-30T14:26:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~820s
+[2026-08-30T14:27:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~574s
+[2026-08-30T14:28:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~402s
+[2026-08-30T14:29:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:30:23Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:31:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:32:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:33:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:34:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:35:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:36:24Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:37:25Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:38:25Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:39:25Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:40:25Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:41:25Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-08-30T14:42:26Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:43:26Z] vote party 4659/5000 (93.2%) | 341 remaining | players 3/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:44:26Z] vote party 4659/5000 (93.2%) | 341 remaining | players 3/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:45:26Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:46:26Z] vote party 4659/5000 (93.2%) | 341 remaining | players 4/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:47:27Z] vote party 4662/5000 (93.2%) | 338 remaining | players 50/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:48:27Z] vote party 4667/5000 (93.3%) | 333 remaining | players 109/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:49:27Z] vote party 4676/5000 (93.5%) | 324 remaining | players 164/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:50:27Z] vote party 4680/5000 (93.6%) | 320 remaining | players 223/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:51:28Z] vote party 4691/5000 (93.8%) | 309 remaining | players 280/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:52:28Z] vote party 4715/5000 (94.3%) | 285 remaining | players 332/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:53:28Z] vote party 4730/5000 (94.6%) | 270 remaining | players 388/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:54:18Z] vote party 4749/5000 (95.0%) | 251 remaining | players 431/800 | moon NEW_MOON | next poll ~300s
+[2026-08-30T14:54:18Z] === tracker duration reached ===
