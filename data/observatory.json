@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-02T05:06:50Z",
-  "towns_in_state": 2088,
-  "towns_fetched_this_run": 841,
-  "events_this_run": 0,
-  "total_towns_available": 841
+  "generated_at": "2026-09-02T11:47:58Z",
+  "towns_in_state": 2104,
+  "towns_fetched_this_run": 826,
+  "events_this_run": 5,
+  "total_towns_available": 826
 }
