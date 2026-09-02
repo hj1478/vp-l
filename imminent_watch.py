@@ -35,7 +35,10 @@ def resident_details(names):
     out = {}
     uniq = sorted({n for n in names if n})
     for i in range(0, len(uniq), BATCH):
-        d = _req(PLAYERS, {"query": uniq[i:i + BATCH]})
+        try:
+            d = _req(PLAYERS, {"query": uniq[i:i + BATCH]})
+        except Exception:
+            d = None
         for p in (d or []):
             if isinstance(p, dict) and p.get("name"):
                 ts = p.get("timestamps") or {}
@@ -109,7 +112,13 @@ def main(argv=None):
         ts_iso = _now_iso()
         idle_by_town = {}
         for name in names:
-            d = _req(TOWNS, {"query": [name]})
+            # A pinned town can fall and be deleted (Neo_Osaka after its snipe),
+            # so the API 404s on it. One dead town must not abort the whole watch.
+            try:
+                d = _req(TOWNS, {"query": [name]})
+            except Exception as e:
+                print(f"    (skip {name}: {e})")
+                continue
             if not d or not isinstance(d[0], dict) or not d[0].get("name"):
                 continue
             t = d[0]
