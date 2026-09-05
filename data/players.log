@@ -9636,3 +9636,7 @@
 [2026-09-05T16:02:06Z] === player tracker stopped ===
 [2026-09-05T16:02:20Z] === player tracker started: johnzinnnn, Harmonisation ===
 [2026-09-05T16:57:20Z] === player tracker stopped ===
+[2026-09-05T16:57:33Z] === player tracker started: johnzinnnn, Harmonisation ===
+[2026-09-05T17:22:34Z] ERROR querying players: <HTTPError 502: 'Bad Gateway'>
+[2026-09-05T17:27:34Z] ERROR querying players: <HTTPError 502: 'Bad Gateway'>
+[2026-09-05T17:52:33Z] === player tracker stopped ===
