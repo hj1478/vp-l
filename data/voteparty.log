@@ -19831,3 +19831,10 @@
 [2026-09-06T00:52:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
 [2026-09-06T00:55:14Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
 [2026-09-06T00:55:14Z] === tracker duration reached ===
+[2026-09-06T00:39:59Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-06T00:39:59Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T00:47:29Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T00:58:45Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T01:15:37Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T01:34:59Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T01:34:59Z] === tracker duration reached ===
