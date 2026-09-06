@@ -19852,3 +19852,17 @@
 [2026-09-06T03:06:01Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
 [2026-09-06T03:25:22Z] vote party 938/5000 (18.8%) | 4062 remaining | players 264/800 | moon WAXING_CRESCENT | next poll ~1063s
 [2026-09-06T03:25:22Z] === tracker duration reached ===
+[2026-09-06T03:25:36Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-06T03:25:36Z] vote party 938/5000 (18.8%) | 4062 remaining | players 268/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-06T03:30:36Z] vote party 965/5000 (19.3%) | 4035 remaining | players 281/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-06T03:35:37Z] vote party 1000/5000 (20.0%) | 4000 remaining | players 301/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-09-06T03:40:37Z] vote party 1041/5000 (20.8%) | 3959 remaining | players 319/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-09-06T03:45:37Z] vote party 1084/5000 (21.7%) | 3916 remaining | players 331/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-09-06T03:50:38Z] vote party 1093/5000 (21.9%) | 3907 remaining | players 109/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-09-06T03:55:38Z] vote party 1118/5000 (22.4%) | 3882 remaining | players 215/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-09-06T04:00:38Z] vote party 1146/5000 (22.9%) | 3854 remaining | players 229/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-09-06T04:05:38Z] vote party 1176/5000 (23.5%) | 3824 remaining | players 252/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-09-06T04:10:39Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T04:18:09Z] vote party 1217/5000 (24.3%) | 3783 remaining | players 217/800 | moon FULL_MOON | next poll ~315s
+[2026-09-06T04:20:36Z] vote party 1227/5000 (24.5%) | 3773 remaining | players 240/800 | moon FULL_MOON | next poll ~300s
+[2026-09-06T04:20:36Z] === tracker duration reached ===
