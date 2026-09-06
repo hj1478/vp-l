@@ -19845,3 +19845,10 @@
 [2026-09-06T02:10:49Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
 [2026-09-06T02:30:10Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
 [2026-09-06T02:30:10Z] === tracker duration reached ===
+[2026-09-06T02:30:22Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-06T02:30:22Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T02:37:52Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T02:49:08Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T03:06:01Z] ERROR fetching endpoint: <HTTPError 502: 'Bad Gateway'>
+[2026-09-06T03:25:22Z] vote party 938/5000 (18.8%) | 4062 remaining | players 264/800 | moon WAXING_CRESCENT | next poll ~1063s
+[2026-09-06T03:25:22Z] === tracker duration reached ===
