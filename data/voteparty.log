@@ -22572,3 +22572,17 @@
 [2026-09-12T02:06:13Z] vote party 760/5000 (15.2%) | 4240 remaining | players 425/800 | moon WANING_GIBBOUS | next poll ~300s
 [2026-09-12T02:11:12Z] vote party 785/5000 (15.7%) | 4215 remaining | players 427/800 | moon WANING_GIBBOUS | next poll ~300s
 [2026-09-12T02:11:12Z] === tracker duration reached ===
+[2026-09-12T02:11:25Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-12T02:11:25Z] vote party 788/5000 (15.8%) | 4212 remaining | players 429/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-09-12T02:16:25Z] vote party 796/5000 (15.9%) | 4204 remaining | players 419/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-09-12T02:21:25Z] vote party 810/5000 (16.2%) | 4190 remaining | players 414/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-09-12T02:26:25Z] vote party 846/5000 (16.9%) | 4154 remaining | players 411/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-12T02:31:26Z] vote party 867/5000 (17.3%) | 4133 remaining | players 406/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-12T02:36:26Z] vote party 893/5000 (17.9%) | 4107 remaining | players 396/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-12T02:41:26Z] vote party 912/5000 (18.2%) | 4088 remaining | players 395/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-12T02:46:26Z] vote party 931/5000 (18.6%) | 4069 remaining | players 401/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-12T02:51:27Z] vote party 950/5000 (19.0%) | 4050 remaining | players 415/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-12T02:56:27Z] vote party 975/5000 (19.5%) | 4025 remaining | players 407/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-12T03:01:27Z] vote party 995/5000 (19.9%) | 4005 remaining | players 406/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-12T03:06:25Z] vote party 1015/5000 (20.3%) | 3985 remaining | players 394/800 | moon NEW_MOON | next poll ~300s
+[2026-09-12T03:06:25Z] === tracker duration reached ===
