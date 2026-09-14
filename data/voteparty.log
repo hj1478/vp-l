@@ -23607,3 +23607,17 @@
 [2026-09-14T10:16:42Z] vote party 1185/5000 (23.7%) | 3815 remaining | players 330/800 | moon WANING_GIBBOUS | next poll ~300s
 [2026-09-14T10:21:39Z] ERROR fetching endpoint: URLError(ConnectionResetError(104, 'Connection reset by peer'))
 [2026-09-14T10:21:39Z] === tracker duration reached ===
+[2026-09-14T10:21:53Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-14T10:21:53Z] vote party 1217/5000 (24.3%) | 3783 remaining | players 335/800 | moon WANING_GIBBOUS | next poll ~300s
+[2026-09-14T10:26:53Z] vote party 1228/5000 (24.6%) | 3772 remaining | players 324/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-14T10:31:53Z] vote party 1265/5000 (25.3%) | 3735 remaining | players 332/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-14T10:36:54Z] vote party 1297/5000 (25.9%) | 3703 remaining | players 329/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-14T10:41:54Z] vote party 1339/5000 (26.8%) | 3661 remaining | players 337/800 | moon LAST_QUARTER | next poll ~300s
+[2026-09-14T10:46:54Z] vote party 1351/5000 (27.0%) | 3649 remaining | players 321/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-14T10:51:54Z] vote party 1379/5000 (27.6%) | 3621 remaining | players 325/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-14T10:56:55Z] vote party 1407/5000 (28.1%) | 3593 remaining | players 325/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-14T11:01:55Z] vote party 1439/5000 (28.8%) | 3561 remaining | players 331/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-14T11:06:55Z] vote party 1462/5000 (29.2%) | 3538 remaining | players 337/800 | moon NEW_MOON | next poll ~300s
+[2026-09-14T11:11:55Z] vote party 1473/5000 (29.5%) | 3527 remaining | players 336/800 | moon NEW_MOON | next poll ~300s
+[2026-09-14T11:16:53Z] vote party 1520/5000 (30.4%) | 3480 remaining | players 343/800 | moon NEW_MOON | next poll ~300s
+[2026-09-14T11:16:53Z] === tracker duration reached ===
