@@ -185,6 +185,8 @@ def main(argv=None):
             prev = poll_once(names, args.jsonfile, args.logfile, prev)
         except Exception as exc:  # never let one poll kill the run
             log_line(args.logfile, f"UNEXPECTED ERROR (continuing): {exc!r}")
+        if args.once:
+            break
         if deadline is not None and time.monotonic() >= deadline:
             break
         wait = args.interval

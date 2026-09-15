@@ -9,7 +9,7 @@ name: Critical Fall Watch
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # frequent check; only fast-watches when something is critical
+    - cron: "*/30 * * * *"   # cheap check; only fast-watches when something is critical (42-day fall clock leaves a full day of margin to notice)
   workflow_dispatch:
 
 concurrency:
