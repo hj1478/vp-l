@@ -2,3 +2,4 @@
 # One town name per line; # for comments. Matched case-insensitively.
 
 Cherbourg
+DuJiangYan
