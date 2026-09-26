@@ -25500,3 +25500,19 @@
 [2026-09-26T05:43:07Z] === tracker duration reached ===
 [2026-09-26T05:43:19Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-09-26T05:43:19Z] vote party 4984/5000 (99.7%) | 16 remaining | players 418/800 | moon WANING_CRESCENT | next poll ~0s
+[2026-09-26T05:43:24Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-09-26T05:43:24Z] vote party 4986/5000 (99.7%) | 14 remaining | players 418/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-26T05:44:24Z] *** VOTE PARTY FIRED! remaining reset 14 -> 4999 (+4985) ***
+[2026-09-26T05:44:24Z] vote party 1/5000 (0.0%) | 4999 remaining | players 418/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-26T05:49:24Z] vote party 53/5000 (1.1%) | 4947 remaining | players 388/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-26T05:54:24Z] vote party 63/5000 (1.3%) | 4937 remaining | players 374/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-26T05:59:24Z] vote party 80/5000 (1.6%) | 4920 remaining | players 368/800 | moon WANING_CRESCENT | next poll ~300s
+[2026-09-26T06:04:25Z] vote party 104/5000 (2.1%) | 4896 remaining | players 372/800 | moon NEW_MOON | next poll ~300s
+[2026-09-26T06:09:25Z] vote party 120/5000 (2.4%) | 4880 remaining | players 368/800 | moon NEW_MOON | next poll ~300s
+[2026-09-26T06:14:25Z] vote party 128/5000 (2.6%) | 4872 remaining | players 367/800 | moon NEW_MOON | next poll ~300s
+[2026-09-26T06:19:25Z] vote party 155/5000 (3.1%) | 4845 remaining | players 362/800 | moon NEW_MOON | next poll ~300s
+[2026-09-26T06:24:26Z] vote party 193/5000 (3.9%) | 4807 remaining | players 373/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-26T06:29:26Z] vote party 216/5000 (4.3%) | 4784 remaining | players 371/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-26T06:34:26Z] vote party 264/5000 (5.3%) | 4736 remaining | players 363/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-26T06:38:24Z] vote party 297/5000 (5.9%) | 4703 remaining | players 368/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-09-26T06:38:24Z] === tracker duration reached ===
