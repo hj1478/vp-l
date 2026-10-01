@@ -26568,3 +26568,19 @@
 [2026-10-01T19:59:42Z] === tracker duration reached ===
 [2026-10-01T19:59:55Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-10-01T19:59:55Z] vote party 4992/5000 (99.8%) | 8 remaining | players 546/800 | moon WAXING_CRESCENT | next poll ~0s
+[2026-10-01T20:00:06Z] === tracker started (adaptive 300.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-10-01T20:00:06Z] vote party 4996/5000 (99.9%) | 4 remaining | players 546/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-10-01T20:01:07Z] *** VOTE PARTY FIRED! remaining reset 4 -> 4997 (+4993) ***
+[2026-10-01T20:01:07Z] vote party 3/5000 (0.1%) | 4997 remaining | players 551/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-10-01T20:06:07Z] vote party 32/5000 (0.6%) | 4968 remaining | players 479/800 | moon WAXING_CRESCENT | next poll ~300s
+[2026-10-01T20:11:07Z] vote party 41/5000 (0.8%) | 4959 remaining | players 456/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-10-01T20:16:07Z] vote party 61/5000 (1.2%) | 4939 remaining | players 448/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-10-01T20:21:08Z] vote party 70/5000 (1.4%) | 4930 remaining | players 442/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-10-01T20:26:08Z] vote party 85/5000 (1.7%) | 4915 remaining | players 429/800 | moon FIRST_QUARTER | next poll ~300s
+[2026-10-01T20:31:08Z] vote party 110/5000 (2.2%) | 4890 remaining | players 428/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-10-01T20:36:08Z] vote party 128/5000 (2.6%) | 4872 remaining | players 416/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-10-01T20:41:09Z] vote party 135/5000 (2.7%) | 4865 remaining | players 413/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-10-01T20:46:09Z] vote party 143/5000 (2.9%) | 4857 remaining | players 412/800 | moon WAXING_GIBBOUS | next poll ~300s
+[2026-10-01T20:51:09Z] vote party 179/5000 (3.6%) | 4821 remaining | players 429/800 | moon FULL_MOON | next poll ~300s
+[2026-10-01T20:55:06Z] vote party 193/5000 (3.9%) | 4807 remaining | players 417/800 | moon FULL_MOON | next poll ~300s
+[2026-10-01T20:55:06Z] === tracker duration reached ===
