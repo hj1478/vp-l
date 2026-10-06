@@ -27220,3 +27220,5 @@
 [2026-10-06T00:08:42Z] === tracker duration reached ===
 [2026-10-06T00:08:54Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-10-06T00:08:54Z] vote party 13/5000 (0.3%) | 4987 remaining | players 429/800 | moon LAST_QUARTER | next poll ~0s
+[2026-10-06T02:20:33Z] === single poll (url=https://api.earthmc.net/v4/) ===
+[2026-10-06T02:20:33Z] vote party 551/5000 (11.0%) | 4449 remaining | players 349/800 | moon FULL_MOON | next poll ~0s
