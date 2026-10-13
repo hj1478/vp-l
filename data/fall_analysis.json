@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-13T14:40:38Z",
-  "total_mayor_changes": 399,
-  "clean_most_active_falls": 145,
+  "generated_at": "2026-10-13T23:12:17Z",
+  "total_mayor_changes": 401,
+  "clean_most_active_falls": 146,
   "trivial_falls_le2_residents": 96,
-  "informative_falls_ge_3_residents": 49,
+  "informative_falls_ge_3_residents": 50,
   "inactive_days_threshold": 40.0,
   "hypotheses_all_clean": {
     "last_online": {
