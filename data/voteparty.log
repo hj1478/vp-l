@@ -29013,3 +29013,5 @@
 [2026-10-20T12:52:57Z] vote party 4362/5000 (87.2%) | 638 remaining | players 383/800 | moon WAXING_GIBBOUS | next poll ~300s
 [2026-10-20T12:57:54Z] vote party 4384/5000 (87.7%) | 616 remaining | players 389/800 | moon FULL_MOON | next poll ~300s
 [2026-10-20T12:57:54Z] === tracker duration reached ===
+[2026-10-20T12:58:08Z] === single poll (url=https://api.earthmc.net/v4/) ===
+[2026-10-20T12:58:08Z] vote party 4384/5000 (87.7%) | 616 remaining | players 387/800 | moon FULL_MOON | next poll ~0s
