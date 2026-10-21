@@ -29315,3 +29315,16 @@
 [2026-10-21T20:24:03Z] === tracker duration reached ===
 [2026-10-21T20:41:19Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-10-21T20:41:20Z] vote party 1768/5000 (35.4%) | 3232 remaining | players 399/800 | moon WAXING_GIBBOUS | next poll ~0s
+[2026-10-21T23:26:52Z] === tracker started (adaptive 60.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-10-21T23:26:52Z] vote party 2212/5000 (44.2%) | 2788 remaining | players 352/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:27:53Z] vote party 2212/5000 (44.2%) | 2788 remaining | players 354/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:28:53Z] vote party 2221/5000 (44.4%) | 2779 remaining | players 357/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:29:53Z] vote party 2226/5000 (44.5%) | 2774 remaining | players 355/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:30:53Z] vote party 2233/5000 (44.7%) | 2767 remaining | players 348/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:31:54Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 344/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:32:54Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 339/800 | moon WAXING_GIBBOUS | next poll ~60s
+[2026-10-21T23:33:54Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 340/800 | moon FULL_MOON | next poll ~60s
+[2026-10-21T23:34:54Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 338/800 | moon FULL_MOON | next poll ~60s
+[2026-10-21T23:35:54Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 334/800 | moon FULL_MOON | next poll ~60s
+[2026-10-21T23:36:52Z] vote party 2238/5000 (44.8%) | 2762 remaining | players 336/800 | moon FULL_MOON | next poll ~60s
+[2026-10-21T23:36:52Z] === tracker duration reached ===
