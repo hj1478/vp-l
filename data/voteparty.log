@@ -31058,3 +31058,5 @@
 [2026-11-04T11:20:23Z] vote party 3904/5000 (78.1%) | 1096 remaining | players 275/800 | moon LAST_QUARTER | next poll ~60s
 [2026-11-04T11:21:21Z] vote party 3904/5000 (78.1%) | 1096 remaining | players 276/800 | moon WANING_CRESCENT | next poll ~60s
 [2026-11-04T11:21:21Z] === tracker duration reached ===
+[2026-11-04T15:47:01Z] === single poll (url=https://api.earthmc.net/v4/) ===
+[2026-11-04T15:47:01Z] vote party 236/5000 (4.7%) | 4764 remaining | players 379/800 | moon FULL_MOON | next poll ~0s
