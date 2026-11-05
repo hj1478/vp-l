@@ -1,82 +1,82 @@
 {
-  "generated_at": "2026-11-05T07:24:58Z",
-  "total_mayor_changes": 596,
-  "clean_most_active_falls": 217,
+  "generated_at": "2026-11-05T20:23:24Z",
+  "total_mayor_changes": 601,
+  "clean_most_active_falls": 218,
   "trivial_falls_le2_residents": 151,
-  "informative_falls_ge_3_residents": 66,
+  "informative_falls_ge_3_residents": 67,
   "inactive_days_threshold": 40.0,
   "hypotheses_all_clean": {
     "last_online": {
-      "scored_events": 216,
-      "heir_ranked_1st": 171,
-      "top1_rate": 0.792,
-      "mean_normalized_rank": 0.51
+      "scored_events": 217,
+      "heir_ranked_1st": 172,
+      "top1_rate": 0.793,
+      "mean_normalized_rank": 0.509
     },
     "tenure": {
-      "scored_events": 216,
+      "scored_events": 217,
       "heir_ranked_1st": 33,
-      "top1_rate": 0.153,
-      "mean_normalized_rank": 0.838
+      "top1_rate": 0.152,
+      "mean_normalized_rank": 0.839
     },
     "acct_oldest": {
-      "scored_events": 216,
+      "scored_events": 217,
       "heir_ranked_1st": 57,
-      "top1_rate": 0.264,
-      "mean_normalized_rank": 0.809
+      "top1_rate": 0.263,
+      "mean_normalized_rank": 0.808
     },
     "acct_newest": {
-      "scored_events": 216,
+      "scored_events": 217,
       "heir_ranked_1st": 134,
-      "top1_rate": 0.62,
+      "top1_rate": 0.618,
       "mean_normalized_rank": 0.627
     }
   },
   "hypotheses_informative": {
     "last_online": {
-      "scored_events": 65,
-      "heir_ranked_1st": 20,
-      "top1_rate": 0.308,
-      "mean_normalized_rank": 0.534
+      "scored_events": 66,
+      "heir_ranked_1st": 21,
+      "top1_rate": 0.318,
+      "mean_normalized_rank": 0.531
     },
     "tenure": {
-      "scored_events": 65,
+      "scored_events": 66,
       "heir_ranked_1st": 10,
-      "top1_rate": 0.154,
-      "mean_normalized_rank": 0.638
+      "top1_rate": 0.152,
+      "mean_normalized_rank": 0.644
     },
     "acct_oldest": {
-      "scored_events": 65,
+      "scored_events": 66,
       "heir_ranked_1st": 13,
-      "top1_rate": 0.2,
+      "top1_rate": 0.197,
       "mean_normalized_rank": 0.703
     },
     "acct_newest": {
-      "scored_events": 65,
+      "scored_events": 66,
       "heir_ranked_1st": 27,
-      "top1_rate": 0.415,
-      "mean_normalized_rank": 0.584
+      "top1_rate": 0.409,
+      "mean_normalized_rank": 0.585
     }
   },
   "working_model_eligibility_tenure_activity": {
     "tenure_eligible": {
-      "scored_events": 64,
+      "scored_events": 65,
       "heir_ok": 48,
-      "rate": 0.75
+      "rate": 0.738
     },
     "recency_eligible": {
-      "scored_events": 64,
-      "heir_ok": 19,
-      "rate": 0.297
+      "scored_events": 65,
+      "heir_ok": 20,
+      "rate": 0.308
     },
     "combined_eligible": {
-      "scored_events": 64,
-      "heir_ok": 55,
-      "rate": 0.859
+      "scored_events": 65,
+      "heir_ok": 56,
+      "rate": 0.862
     },
     "pareto_frontier": {
-      "scored_events": 64,
-      "heir_ok": 56,
-      "rate": 0.875
+      "scored_events": 65,
+      "heir_ok": 57,
+      "rate": 0.877
     }
   }
 }
