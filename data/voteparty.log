@@ -32204,3 +32204,16 @@
 [2026-11-15T07:54:34Z] === tracker duration reached ===
 [2026-11-15T11:33:14Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-11-15T11:33:14Z] vote party 633/5000 (12.7%) | 4367 remaining | players 354/800 | moon FULL_MOON | next poll ~0s
+[2026-11-15T15:31:09Z] === tracker started (adaptive 60.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-11-15T15:31:09Z] vote party 1716/5000 (34.3%) | 3284 remaining | players 458/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:32:09Z] vote party 1720/5000 (34.4%) | 3280 remaining | players 459/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:33:09Z] vote party 1727/5000 (34.5%) | 3273 remaining | players 462/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:34:10Z] vote party 1729/5000 (34.6%) | 3271 remaining | players 465/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:35:10Z] vote party 1734/5000 (34.7%) | 3266 remaining | players 464/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:36:10Z] vote party 1741/5000 (34.8%) | 3259 remaining | players 470/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:37:10Z] vote party 1756/5000 (35.1%) | 3244 remaining | players 474/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:38:10Z] vote party 1756/5000 (35.1%) | 3244 remaining | players 479/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:39:10Z] vote party 1763/5000 (35.3%) | 3237 remaining | players 478/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:40:10Z] vote party 1779/5000 (35.6%) | 3221 remaining | players 476/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:41:09Z] vote party 1788/5000 (35.8%) | 3212 remaining | players 476/800 | moon NEW_MOON | next poll ~60s
+[2026-11-15T15:41:09Z] === tracker duration reached ===
