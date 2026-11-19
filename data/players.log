@@ -10847,3 +10847,5 @@
 [2026-11-18T09:11:54Z] === player tracker started: johnzinnnn, Harmonisation, MapleFLS, Cndroidsmusk ===
 [2026-11-18T18:06:03Z] === player tracker started: johnzinnnn, Harmonisation, MapleFLS, Cndroidsmusk ===
 [2026-11-19T00:16:05Z] === player tracker started: johnzinnnn, Harmonisation, MapleFLS, Cndroidsmusk ===
+[2026-11-19T07:30:12Z] === player tracker started: johnzinnnn ===
+[2026-11-19T07:30:13Z] ERROR querying players: <HTTPError 401: 'Unauthorized'>
