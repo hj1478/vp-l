@@ -32757,3 +32757,5 @@
 [2026-11-19T04:39:12Z] vote party 486/5000 (9.7%) | 4514 remaining | players 285/800 | moon WANING_CRESCENT | next poll ~60s
 [2026-11-19T04:40:10Z] vote party 486/5000 (9.7%) | 4514 remaining | players 282/800 | moon WANING_CRESCENT | next poll ~60s
 [2026-11-19T04:40:10Z] === tracker duration reached ===
+[2026-11-19T07:52:13Z] === single poll (url=https://api.earthmc.net/v4/) ===
+[2026-11-19T07:52:14Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
