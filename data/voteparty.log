@@ -32806,3 +32806,10 @@
 [2026-11-20T20:44:57Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
 [2026-11-21T01:46:11Z] === single poll (url=https://api.earthmc.net/v4/) ===
 [2026-11-21T01:46:11Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:43:53Z] === tracker started (adaptive 60.0s..3600s, url=https://api.earthmc.net/v4/) ===
+[2026-11-21T01:43:53Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:45:24Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:47:39Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:51:02Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:53:53Z] ERROR fetching endpoint: <HTTPError 401: 'Unauthorized'>
+[2026-11-21T01:53:53Z] === tracker duration reached ===
